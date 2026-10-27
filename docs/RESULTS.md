@@ -4,6 +4,8 @@ Each row is ONE run (k=1). The task count is in the table: a 15-task sample has 
 
 **Degenerate-baseline note (GST).** On the public GST standard set the built-in `careless` baseline (it reads everything but leaves freight untaxed and ignores the turnover-tiered late-fee cap: two built-in slips) scores 80%. The "every non-oracle baseline solves under 25%" gate therefore holds only for the private held-out sets (where `careless` scores 23%), not for the public GST set.
 
+**Degenerate-baseline note (support).** In the support env the reply language is a hard rule only for the Hindi and Hinglish core (50 tasks). On the 26 experimental Tamil, Bengali and Marathi tasks the language is a soft score and a task is solved on state alone, so the built-in `english` baseline (right actions, English reply) solves 33% of the full 76-task split but 0% of the core. The "under 25%" gate holds for the core and for the private held-out support set (core only), not for the experimental tasks. Experimental support rows should be read with that in mind.
+
 **Note on est. USD.** The estimate is only computed for Anthropic and OpenAI, whose per-token prices are in our price table. Gemini and Groq runs used free tiers (0.00). Sarvam's price is not in our price table, so the 0.00 on Sarvam rows means *not estimated*, not that the run was free. The Claude Sonnet 5.5 form and GST rows were first priced at the lower Haiku-level default; their est. USD was multiplied by 2.5 (the Sonnet-to-default price ratio, the same for input and output tokens) to the Sonnet rate.
 
 **Verify it.** The grading code is identified by the git tree id of `navital_gym/` at the release tag v1.0.0. Check with `git rev-parse v1.0.0:navital_gym`: it must start with the id in the `graded` column.
