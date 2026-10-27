@@ -5,7 +5,7 @@ unless you pass --yes. Needs `pip install huggingface_hub` and HF_TOKEN in the e
   HF_TOKEN=... python3 scripts/publish_hf.py --yes   # upload (launch day, after the owner's OK)
 Layout: <repo>/<env>/tasks.jsonl for every env that has one, plus LICENSE-DATA and a generated dataset card (CC BY 4.0, with the same non-affiliation and
 simplified-rules notes as the READMEs). Tasks carry their hidden fields (expected feasibility, binding rules, gold answers): publishing them is the
-owner's decision, see docs/PUBLISH-PLAN.md section 'Decisions needed'."""
+owner's decision."""
 import argparse, glob, json, os, sys, tempfile
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

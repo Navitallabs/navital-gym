@@ -11,7 +11,7 @@ Per env, drop case files in `cases/<env>/*.json` (format in navital_qa/conforman
 Case files for every env (trip, upi, gst, form, form_multidoc, support, and their easy sets) are in `cases/<env>/`.
 
 ## GST Desk (env #3, qa owns world + grader) — status 2026-10-25
-Code: ~/navital-gym/navital_gym/envs/gst/ (oracle.py independent reference solver, rules.py one rule per answer field, world.py tools get_documents/get_policy/lookup_rate/validate_gstin/calendar_info).
+Code: `navital_gym/envs/gst/` (oracle.py independent reference solver, rules.py one rule per answer field, world.py tools get_documents/get_policy/lookup_rate/validate_gstin/calendar_info).
 - `python3 -I build_gst_cases.py` writes cases/gst/ (9 tasks, answers HAND-computed, asserted equal to the stored gold; one single-field violation per rule).
 - `./run.sh gst_adapter:grade --path adapters --env gst` -> cheating 99/99, correctness 167/167, determinism 111/111.
 - `python3 -I gst_checks.py` -> all 50 gold answers score 1.0 and oracle == gold; every single-field perturbation fails exactly one rule; no gold/meta/designer note in anything the agent sees; world fingerprints deterministic; a grader that ignores blocked ITC categories is caught.
