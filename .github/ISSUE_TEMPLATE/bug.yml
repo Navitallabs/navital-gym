@@ -1,0 +1,32 @@
+name: Bug
+description: Something in the code, a script or the docs does not work as described.
+title: "Bug: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: The exact command and the full error message.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Release tag, or `git rev-parse HEAD`.
+    validations:
+      required: true
+  - type: input
+    id: env
+    attributes:
+      label: Python and OS
+      placeholder: "Python 3.12, macOS 14"
+    validations:
+      required: true

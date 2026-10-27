@@ -24,7 +24,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Install with the optional extras
-        run: pip install -e ".[inspect,verifiers,openenv]"
+      - name: Install with the optional extras (verifiers pinned to 0.4.0, the API the adapter targets)
+        run: pip install -e ".[inspect,openenv]" "verifiers==0.4.0"
       - name: Adapter tests (offline, scripted models)
         run: python -m unittest tests.test_adapter_inspect tests.test_adapter_verifiers tests.test_adapter_openenv -v

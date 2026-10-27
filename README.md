@@ -1,6 +1,12 @@
 # Navital Gym
 
+[![License: Apache-2.0](https://img.shields.io/badge/code-Apache--2.0-blue)](LICENSE) [![Data: CC BY 4.0](https://img.shields.io/badge/data-CC%20BY%204.0-lightgrey)](LICENSE-DATA) [![Release v1.0.0](https://img.shields.io/github/v/release/Navitallabs/navital-gym?label=release)](https://github.com/Navitallabs/navital-gym/releases) [![Leaderboard](https://img.shields.io/badge/leaderboard-navitallabs.com-orange)](https://navitallabs.com/labs/navital-gym)
+
 Deterministic, auto-graded environments for AI agents doing tasks set in India: planning a trip around rail quotas and waitlists, GST invoicing, filling forms, answering customers in Hindi and other Indian languages. By [Navital Labs](https://navitallabs.com). Navital Gym is public and in active development: results are added as runs finish (see docs/RESULTS.md).
+
+- **What:** six sets of sandboxed tasks (trip planning, UPI, GST, forms, multi-document forms, customer support in Hindi and Hinglish), each graded by written rules, never by an AI judge.
+- **Why:** to measure whether an agent gets Indian-reality tasks right, with results anyone can reproduce and verify.
+- **Try it:** `pip install -e . && navital-gym run --env trip --agent oracle` (prints 1.00), then see the [live leaderboard](https://navitallabs.com/labs/navital-gym) or [docs/RESULTS.md](docs/RESULTS.md).
 
 > **Read this first.** Every environment uses a *simplified, documented* version of Indian practice and **synthetic data**. These are tests for AI agents, not statements about current law, railway, bank or tax rules. Not affiliated with or endorsed by NPCI, RBI, GSTN / CBIC, IRCTC / Indian Railways, any bank or any government body; names are used only to describe the workflow. Not financial or tax advice. Each env README states its own rules and an "as of" date.
 
@@ -17,6 +23,7 @@ Deterministic, auto-graded environments for AI agents doing tasks set in India: 
 | `gst` | GST Desk: invoicing and return computations from documents under written, simplified rules | 50 |
 | `form` | Form Desk: filling and checking forms (KYC-style fields, addresses, numbers) | 50 |
 | `support` | Bhasha Support Desk: e-commerce returns, refunds and privacy requests in Hindi / Hinglish; Tamil, Bengali and Marathi as a labelled experimental split | 50 core + 26 experimental |
+| `form_multidoc` | Form Desk, multi-document: cross-checking identity documents and records (multi-document, PAN-name, record conflicts, OCR repair, batch) and reporting what disagrees | 40 |
 | `upi` | UPI Desk: payment attempts and disputes under written, simplified rules | 50 |
 
 Every env README carries its simplified rules and the sources of any real-world figure.

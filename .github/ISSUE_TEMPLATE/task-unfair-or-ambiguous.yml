@@ -1,0 +1,36 @@
+name: Task is unfair or ambiguous
+description: A task prompt, policy or world is unclear, has two reasonable readings, or cannot be solved the way it is written.
+title: "Task issue: <task id>"
+labels: ["task"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Every environment uses a simplified, documented version of Indian practice and synthetic data. A task can still be badly worded. Tell us where.
+  - type: input
+    id: task
+    attributes:
+      label: Task id
+      description: For example `IN-TRIP-002`.
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What is wrong?
+      options:
+        - The prompt can be read two ways
+        - The policy text does not say what the rule needs
+        - The task has no valid answer but is not marked infeasible
+        - A tool returns something confusing or wrong
+        - The language (Hindi, Hinglish, Tamil, Bengali, Marathi) is unnatural or wrong
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: Quote the sentence in the prompt or policy, and say what you think it should say or what you would have answered.
+    validations:
+      required: true

@@ -1,0 +1,44 @@
+name: Score looks wrong
+description: A task was graded in a way you think is incorrect (a rule fired when it should not have, or did not fire when it should have).
+title: "Score looks wrong: <task id>"
+labels: ["grader"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for checking. Every verdict is recomputed by a written rule, so a wrong score is either a bug in a rule or a rule that does not say what we meant. Both are worth fixing.
+        Do not paste API keys. Do not paste private (held-out) tasks.
+  - type: input
+    id: task
+    attributes:
+      label: Task id
+      description: For example `IN-GST-017`.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: Output of `git rev-parse HEAD:navital_gym` (the grader id), or the release tag you used.
+      placeholder: "123c1450dab5 or v1.0.0"
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected, and why
+      description: Which rule (for example `R-OPEN`) and what the written policy or the task prompt says.
+    validations:
+      required: true
+  - type: textarea
+    id: got
+    attributes:
+      label: What the grader said
+      description: The verdict line or the rule detail, and the answer that was graded (paste the JSON answer, not a whole transcript).
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: How to reproduce
+      description: The command, or a run file name from `runs/` plus the task id.

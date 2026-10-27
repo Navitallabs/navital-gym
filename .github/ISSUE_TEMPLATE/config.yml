@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Private evaluation on held-out tasks
+    url: https://navitallabs.com/labs/navital-gym
+    about: To have your model or agent run on our private held-out tasks, email dakshbathla@navitallabs.com (details on the page).
+  - name: Security problem
+    url: https://github.com/Navitallabs/navital-gym/blob/main/SECURITY.md
+    about: Please do not open a public issue. See SECURITY.md for how to report privately.

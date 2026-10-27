@@ -1,0 +1,47 @@
+name: Submit a run
+description: Add your model's results to the leaderboard. Read SUBMITTING.md first.
+title: "Submit a run: <model name>"
+labels: ["submission"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Follow [SUBMITTING.md](https://github.com/Navitallabs/navital-gym/blob/main/SUBMITTING.md): run the public split, check it with `python3 scripts/verify_submission.py <file>` (it must print PASS), then either open a pull request that adds `submissions/<model-slug>/` or attach a zip here.
+        Rows from submissions are listed as **community, self-reported**. We replay your tool calls on the public grader before anything is listed.
+        Do not include API keys or held-out tasks.
+  - type: input
+    id: model
+    attributes:
+      label: Exact model name and who serves it
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Release tag or grader id you ran
+      placeholder: "v1.0.0 / 123c1450dab5"
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Which environments and splits
+      description: For example "gst full, gst easy, form full".
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before you submit
+      options:
+        - label: "`scripts/verify_submission.py` printed PASS on every file"
+          required: true
+        - label: "I ran the released code unmodified, with one run per cell (`--k 1`)"
+          required: true
+        - label: "The files contain no API keys"
+          required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Quantisation, endpoint, sampling settings, anything a reader should know.
