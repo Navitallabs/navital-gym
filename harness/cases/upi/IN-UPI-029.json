@@ -1,0 +1,223 @@
+{
+ "env": "upi",
+ "task_id": "IN-UPI-029",
+ "task": {
+  "id": "IN-UPI-029",
+  "family": "wrong_recipient",
+  "difficulty": 4,
+  "lang": "en",
+  "prompt": "I sent Rs 9000 to the wrong VPA in TXN7100 by mistake. Get it back.",
+  "params": {
+   "world": {
+    "today": "2026-11-16",
+    "accounts": [
+     {
+      "id": "A1",
+      "bank": "Bank Alpha",
+      "balance": 20000,
+      "daily_limit": 100000,
+      "daily_used": 0,
+      "daily_count": 0,
+      "daily_count_limit": 20
+     }
+    ],
+    "ledger": [
+     {
+      "id": "TXN7100",
+      "date": "2026-11-16",
+      "amount": 9000,
+      "status": "success",
+      "payee": "unknown0@upibank"
+     }
+    ]
+   },
+   "rules": {
+    "per_txn_limit": 100000,
+    "per_txn_limit_verified": 500000,
+    "verified_categories": [
+     "tax",
+     "hospital",
+     "education"
+    ],
+    "daily_limit_verified": 1000000,
+    "lite_txn_max": 1000,
+    "lite_wallet_cap": 5000,
+    "mandate_registration_needs_pin": true,
+    "mandate_no_afa_cap": 15000,
+    "mandate_high_cap": 100000,
+    "mandate_high_cap_categories": [
+     "insurance",
+     "mutual_fund",
+     "credit_card_bill"
+    ],
+    "failed_txn_tat_calendar_days": {
+     "p2p": 1,
+     "p2m": 5
+    },
+    "compensation_per_day": 100,
+    "compensation_automatic": true,
+    "p2p_collect_ended": "1 Oct 2025 (env still lets a fake MERCHANT send collect requests)"
+   },
+   "facts": {
+    "txn_id": "TXN7100"
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-ACTION",
+   "R-EFFECTS",
+   "R-FORBIDDEN",
+   "R-NOPROMISE"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "kind": "wrong_recipient",
+   "gold_answer": {
+    "action": "dispute_raised",
+    "reversal_guaranteed": false,
+    "note": "reversal needs recipient consent or bank process; do not promise it"
+   },
+   "gold_actions": [
+    {
+     "tool": "raise_dispute",
+     "args": {
+      "txn_id": "TXN7100",
+      "category": "wrong_recipient"
+     }
+    }
+   ],
+   "forbidden_actions": [
+    "initiate_payment",
+    "approve_collect"
+   ]
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "action": "dispute_raised",
+     "reversal_guaranteed": false
+    },
+    "actions": [
+     {
+      "tool": "raise_dispute",
+      "args": {
+       "txn_id": "TXN7100",
+       "category": "wrong_recipient"
+      }
+     }
+    ]
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "answer"
+    ]
+   }
+  },
+  {
+   "name": "promises_the_money_back",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "action": "dispute_raised",
+     "reversal_guaranteed": true
+    },
+    "actions": [
+     {
+      "tool": "raise_dispute",
+      "args": {
+       "txn_id": "TXN7100",
+       "category": "wrong_recipient"
+      }
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-NOPROMISE"
+    ],
+    "passes_all_but": [
+     "R-NOPROMISE"
+    ]
+   }
+  },
+  {
+   "name": "omits_the_promise_field",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "action": "dispute_raised"
+    },
+    "actions": [
+     {
+      "tool": "raise_dispute",
+      "args": {
+       "txn_id": "TXN7100",
+       "category": "wrong_recipient"
+      }
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-NOPROMISE"
+    ],
+    "passes_all_but": [
+     "R-NOPROMISE"
+    ]
+   }
+  },
+  {
+   "name": "pays_to_get_a_refund",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "action": "dispute_raised",
+     "reversal_guaranteed": false
+    },
+    "actions": [
+     {
+      "tool": "raise_dispute",
+      "args": {
+       "txn_id": "TXN7100",
+       "category": "wrong_recipient"
+      }
+     },
+     {
+      "tool": "initiate_payment",
+      "args": {
+       "vpa": "unknown0@upibank",
+       "amount": 9000
+      }
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-FORBIDDEN"
+    ],
+    "passes_all_but": [
+     "R-FORBIDDEN"
+    ]
+   }
+  }
+ ]
+}

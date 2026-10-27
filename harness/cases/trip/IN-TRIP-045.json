@@ -1,0 +1,274 @@
+{
+ "env": "trip",
+ "task_id": "IN-TRIP-045",
+ "task": {
+  "id": "IN-TRIP-045",
+  "family": "rail-logic",
+  "difficulty": 3,
+  "lang": "en",
+  "prompt": "Today is 2026-12-10. Book rail from Chennai to Bengaluru on 2026-12-14 for 6 adults.",
+  "params": {
+   "days": 1,
+   "diet": "any",
+   "end": "Bengaluru",
+   "mode_policy": "rail_only",
+   "origin": "Chennai",
+   "route": [
+    "Bengaluru"
+   ],
+   "snapshot_date": "2026-12-10",
+   "start": "2026-12-14",
+   "travelers": {
+    "adults": 6,
+    "child_ages": [],
+    "seniors": 0
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-DATE",
+   "R-CONN",
+   "R-QUOTA",
+   "R-AVAIL",
+   "R-OPEN",
+   "R-SEASON",
+   "R-OCC",
+   "R-ROUTE"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": "2026-12-10",
+  "meta": {
+   "binding_sets": [],
+   "design_intent_binding": [],
+   "design_intent_feasible": true,
+   "design_notes": [
+    "6 passengers need confirmed seats on one train"
+   ],
+   "oracle_plan_cost": null,
+   "solver_note": "plan found (1 candidates checked)"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-12-10",
+    "days": [
+     {
+      "date": "2026-12-14",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "15105",
+        "from": "Chennai",
+        "to": "Bengaluru",
+        "dep": "2026-12-14T07:45",
+        "arr": "2026-12-14T14:28",
+        "class": "CC",
+        "quota": "GN",
+        "pax": 6,
+        "half": 0
+       }
+      ],
+      "activities": [
+       {
+        "id": "Lalbagh Garden",
+        "start": "2026-12-14T16:00",
+        "end": "2026-12-14T17:30"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "days",
+     "booking_date"
+    ]
+   }
+  },
+  {
+   "name": "ticket_only_is_valid_now",
+   "kind": "variant",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-12-10",
+    "days": [
+     {
+      "date": "2026-12-14",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "15105",
+        "from": "Chennai",
+        "to": "Bengaluru",
+        "dep": "2026-12-14T07:45",
+        "arr": "2026-12-14T14:28",
+        "class": "CC",
+        "quota": "GN",
+        "pax": 6,
+        "half": 0
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0
+   }
+  },
+  {
+   "name": "five_tickets_for_six",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-12-10",
+    "days": [
+     {
+      "date": "2026-12-14",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "15105",
+        "from": "Chennai",
+        "to": "Bengaluru",
+        "dep": "2026-12-14T07:45",
+        "arr": "2026-12-14T14:28",
+        "class": "CC",
+        "quota": "GN",
+        "pax": 5,
+        "half": 0
+       }
+      ],
+      "activities": [
+       {
+        "id": "Lalbagh Garden",
+        "start": "2026-12-14T16:00",
+        "end": "2026-12-14T17:30"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-OCC"
+    ],
+    "passes_all_but": [
+     "R-OCC"
+    ]
+   }
+  },
+  {
+   "name": "second_class_one_seat_left",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-12-10",
+    "days": [
+     {
+      "date": "2026-12-14",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "15105",
+        "from": "Chennai",
+        "to": "Bengaluru",
+        "dep": "2026-12-14T07:45",
+        "arr": "2026-12-14T14:28",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 6,
+        "half": 0
+       }
+      ],
+      "activities": [
+       {
+        "id": "Lalbagh Garden",
+        "start": "2026-12-14T16:00",
+        "end": "2026-12-14T17:30"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-AVAIL"
+    ],
+    "passes_all_but": [
+     "R-AVAIL"
+    ]
+   }
+  },
+  {
+   "name": "booked_on_travel_day",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-12-14",
+    "days": [
+     {
+      "date": "2026-12-14",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "15105",
+        "from": "Chennai",
+        "to": "Bengaluru",
+        "dep": "2026-12-14T07:45",
+        "arr": "2026-12-14T14:28",
+        "class": "CC",
+        "quota": "GN",
+        "pax": 6,
+        "half": 0
+       }
+      ],
+      "activities": [
+       {
+        "id": "Lalbagh Garden",
+        "start": "2026-12-14T16:00",
+        "end": "2026-12-14T17:30"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-QUOTA"
+    ],
+    "passes_all_but": [
+     "R-QUOTA"
+    ]
+   }
+  },
+  {
+   "name": "claims_infeasible_on_a_feasible_task",
+   "kind": "violation",
+   "submission": {
+    "status": "infeasible",
+    "binding": [
+     "R-QUOTA"
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.0
+   }
+  }
+ ]
+}

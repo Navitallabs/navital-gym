@@ -1,0 +1,75 @@
+{
+ "env": "gst_easy",
+ "task_id": "IN-GST-E03",
+ "task": {
+  "id": "IN-GST-E03",
+  "family": "threshold",
+  "difficulty": 1,
+  "lang": "en",
+  "prompt": "A consignment of goods worth Rs 62,000 will move by road. Is an e-way bill required? Answer field: required = true or false.",
+  "params": {
+   "world": {
+    "consignment_value": 62000
+   },
+   "rules": {
+    "eway_bill_value_threshold": 50000,
+    "rule": "An e-way bill is required when the value of the goods being moved is more than Rs 50,000."
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-REQUIRED"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "kind": "threshold",
+   "gold_answer": {
+    "required": true
+   },
+   "forbidden_actions": [],
+   "split": "easy"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "required": true
+    }
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "answer"
+    ]
+   }
+  },
+  {
+   "name": "only_R-REQUIRED",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "required": false
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-REQUIRED"
+    ],
+    "passes_all_but": [
+     "R-REQUIRED"
+    ]
+   }
+  }
+ ]
+}

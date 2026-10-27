@@ -1,0 +1,104 @@
+{
+ "env": "form",
+ "task_id": "IN-FORM-017",
+ "task": {
+  "id": "IN-FORM-017",
+  "family": "address_parse",
+  "difficulty": 3,
+  "lang": "en",
+  "prompt": "Parse this address into house, city, state (full name) and PIN. house = the first part of the address, up to the first comma or semicolon, as written, without surrounding spaces (for \"Shop 12, Rose Apartments, Pune\" it is \"Shop 12\"). city = the city named in the address, in normal capitalisation. state = the full state name. The PIN must be exactly 6 digits; use null if the text has no valid 6-digit PIN: \"House 9; Sector 15; MG Road; JAIPUR; RJ; PIN 302001\"\n\nAnswer fields: house, city, state, pin.",
+  "params": {
+   "world": {
+    "raw_address": "House 9; Sector 15; MG Road; JAIPUR; RJ; PIN 302001"
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-HOUSE",
+   "R-CITY",
+   "R-STATE",
+   "R-PIN"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "gold_answer": {
+    "city": "Jaipur",
+    "house": "House 9",
+    "pin": "302001",
+    "state": "Rajasthan"
+   },
+   "kind": "address_parse"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "house": "House 9",
+     "city": "Jaipur",
+     "state": "Rajasthan",
+     "pin": "302001"
+    }
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "answer"
+    ]
+   }
+  },
+  {
+   "name": "only_R-STATE",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "house": "House 9",
+     "city": "Jaipur",
+     "state": "RJ",
+     "pin": "302001"
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-STATE"
+    ],
+    "passes_all_but": [
+     "R-STATE"
+    ]
+   }
+  },
+  {
+   "name": "only_R-PIN",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "house": "House 9",
+     "city": "Jaipur",
+     "state": "Rajasthan",
+     "pin": "PIN 302001"
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-PIN"
+    ],
+    "passes_all_but": [
+     "R-PIN"
+    ]
+   }
+  }
+ ]
+}

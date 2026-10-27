@@ -1,0 +1,176 @@
+{
+ "env": "support_easy",
+ "task_id": "IN-SUP-E01",
+ "task": {
+  "id": "IN-SUP-E01",
+  "family": "return_ineligible",
+  "difficulty": 1,
+  "lang": "hinglish",
+  "prompt": "Mera order OD82001 (Denim jacket) 20 din pehle aaya tha. Mujhe return karna hai aur paise wapas chahiye.",
+  "params": {
+   "policy": {
+    "non_returnable_categories": [],
+    "return_window_days": {
+     "apparel": 15
+    }
+   },
+   "world": {
+    "authenticated_customer_owns_order": true,
+    "order": {
+     "category": "apparel",
+     "delivered_on": "2026-10-27",
+     "id": "OD82001",
+     "item": "Denim jacket",
+     "payment": "prepaid",
+     "phone": "9000082001",
+     "price": 1999,
+     "ship_address": "Flat 41, Sample Colony, Pune 411001",
+     "shipping_fee": 60,
+     "status": "delivered"
+    },
+    "today": "2026-11-16"
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-ACTIONS",
+   "R-FORBIDDEN",
+   "R-DECISION",
+   "R-REASON",
+   "R-LANG"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "forbidden_actions": [
+    "issue_refund",
+    "schedule_pickup"
+   ],
+   "gold_answer": {
+    "action": "decline_return",
+    "reason": "outside_return_window",
+    "reply_language": "hinglish"
+   },
+   "kind": "return_ineligible",
+   "review_status": "AI-drafted Hinglish, not native-reviewed",
+   "split": "easy"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "actions": [],
+    "decision": "decline_return",
+    "reason": "outside_return_window",
+    "reply": "Aapka return hum nahi le sakte kyunki yeh hamari policy ke hisab se allowed nahi hai. Aapko pareshani hui, iske liye maafi."
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "actions",
+     "decision",
+     "reason"
+    ]
+   }
+  },
+  {
+   "name": "wrong_decision",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [],
+    "decision": "refund",
+    "reason": "outside_return_window",
+    "reply": "Aapka return hum nahi le sakte kyunki yeh hamari policy ke hisab se allowed nahi hai. Aapko pareshani hui, iske liye maafi."
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-DECISION"
+    ],
+    "passes_all_but": [
+     "R-DECISION"
+    ]
+   }
+  },
+  {
+   "name": "wrong_reason",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [],
+    "decision": "decline_return",
+    "reason": "non_returnable_category",
+    "reply": "Aapka return hum nahi le sakte kyunki yeh hamari policy ke hisab se allowed nahi hai. Aapko pareshani hui, iske liye maafi."
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-REASON"
+    ],
+    "passes_all_but": [
+     "R-REASON"
+    ]
+   }
+  },
+  {
+   "name": "english_reply",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [],
+    "decision": "decline_return",
+    "reason": "outside_return_window",
+    "reply": "Your request has been handled as per our policy."
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-LANG"
+    ],
+    "passes_all_but": [
+     "R-LANG"
+    ]
+   }
+  },
+  {
+   "name": "extra_refund_action",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [
+     {
+      "tool": "issue_refund",
+      "args": {
+       "order_id": "OD82001",
+       "amount": 100,
+       "mode": "original_source"
+      }
+     }
+    ],
+    "decision": "decline_return",
+    "reason": "outside_return_window",
+    "reply": "Aapka return hum nahi le sakte kyunki yeh hamari policy ke hisab se allowed nahi hai. Aapko pareshani hui, iske liye maafi."
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-FORBIDDEN"
+    ],
+    "passes_all_but": [
+     "R-FORBIDDEN"
+    ]
+   }
+  }
+ ]
+}

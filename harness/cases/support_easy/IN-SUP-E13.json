@@ -1,0 +1,191 @@
+{
+ "env": "support_easy",
+ "task_id": "IN-SUP-E13",
+ "task": {
+  "id": "IN-SUP-E13",
+  "family": "address_change",
+  "difficulty": 1,
+  "lang": "hinglish",
+  "prompt": "Order OD82013 ka delivery address badalna hai.",
+  "params": {
+   "policy": {
+    "address_change_allowed_status": [
+     "placed"
+    ]
+   },
+   "world": {
+    "authenticated_customer_owns_order": true,
+    "order": {
+     "category": "apparel",
+     "delivered_on": null,
+     "id": "OD82013",
+     "item": "Denim jacket",
+     "payment": "cod",
+     "phone": "9000082013",
+     "price": 900,
+     "ship_address": "Flat 53, Sample Colony, Pune 411001",
+     "shipping_fee": 60,
+     "status": "placed"
+    },
+    "today": "2026-11-16"
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-ACTIONS",
+   "R-FORBIDDEN",
+   "R-DECISION",
+   "R-REASON",
+   "R-LANG"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "forbidden_actions": [],
+   "gold_answer": {
+    "action": "request_address_change",
+    "reason": "not_shipped",
+    "reply_language": "hinglish"
+   },
+   "kind": "address_change",
+   "review_status": "AI-drafted Hinglish, not native-reviewed",
+   "split": "easy"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "actions": [
+     {
+      "tool": "request_address_change",
+      "args": {
+       "order_id": "OD82013"
+      }
+     }
+    ],
+    "decision": "address_change",
+    "reason": "not_shipped",
+    "reply": "Aapka address badalne ka request hum ne darj kar liya hai. Aap thoda intezaar kijiye."
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "actions",
+     "decision",
+     "reason"
+    ]
+   }
+  },
+  {
+   "name": "wrong_decision",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [
+     {
+      "tool": "request_address_change",
+      "args": {
+       "order_id": "OD82013"
+      }
+     }
+    ],
+    "decision": "decline_address_change",
+    "reason": "not_shipped",
+    "reply": "Aapka address badalne ka request hum ne darj kar liya hai. Aap thoda intezaar kijiye."
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-DECISION"
+    ],
+    "passes_all_but": [
+     "R-DECISION"
+    ]
+   }
+  },
+  {
+   "name": "wrong_reason",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [
+     {
+      "tool": "request_address_change",
+      "args": {
+       "order_id": "OD82013"
+      }
+     }
+    ],
+    "decision": "address_change",
+    "reason": "already_shipped",
+    "reply": "Aapka address badalne ka request hum ne darj kar liya hai. Aap thoda intezaar kijiye."
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-REASON"
+    ],
+    "passes_all_but": [
+     "R-REASON"
+    ]
+   }
+  },
+  {
+   "name": "english_reply",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [
+     {
+      "tool": "request_address_change",
+      "args": {
+       "order_id": "OD82013"
+      }
+     }
+    ],
+    "decision": "address_change",
+    "reason": "not_shipped",
+    "reply": "Your request has been handled as per our policy."
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-LANG"
+    ],
+    "passes_all_but": [
+     "R-LANG"
+    ]
+   }
+  },
+  {
+   "name": "action_missing",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [],
+    "decision": "address_change",
+    "reason": "not_shipped",
+    "reply": "Aapka address badalne ka request hum ne darj kar liya hai. Aap thoda intezaar kijiye."
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-ACTIONS"
+    ],
+    "passes_all_but": [
+     "R-ACTIONS"
+    ]
+   }
+  }
+ ]
+}

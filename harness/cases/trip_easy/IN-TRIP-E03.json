@@ -1,0 +1,211 @@
+{
+ "env": "trip_easy",
+ "task_id": "IN-TRIP-E03",
+ "task": {
+  "id": "IN-TRIP-E03",
+  "family": "easy-rail-booking",
+  "difficulty": 1,
+  "lang": "en",
+  "prompt": "Book a train from Mumbai to Pune on 2026-12-01 for 3 adults.",
+  "params": {
+   "days": 1,
+   "diet": "any",
+   "end": "Pune",
+   "mode_policy": "rail_only",
+   "origin": "Mumbai",
+   "route": [
+    "Mumbai",
+    "Pune"
+   ],
+   "start": "2026-12-01",
+   "travelers": {
+    "adults": 3,
+    "child_ages": [],
+    "seniors": 0
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-DATE",
+   "R-CONN",
+   "R-QUOTA",
+   "R-AVAIL",
+   "R-OPEN",
+   "R-SEASON",
+   "R-OCC",
+   "R-ROUTE"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "binding_sets": [],
+   "solver_note": "plan found (1 candidates checked)",
+   "split": "easy"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2026-12-01",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "14895",
+        "from": "Mumbai",
+        "to": "Pune",
+        "dep": "2026-12-01T16:30",
+        "arr": "2026-12-01T19:14",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 3,
+        "half": 0
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "days",
+     "booking_date"
+    ]
+   }
+  },
+  {
+   "name": "two_tickets_for_three",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2026-12-01",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "14895",
+        "from": "Mumbai",
+        "to": "Pune",
+        "dep": "2026-12-01T16:30",
+        "arr": "2026-12-01T19:14",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-OCC"
+    ],
+    "passes_all_but": [
+     "R-OCC"
+    ]
+   }
+  },
+  {
+   "name": "waitlisted_cc_12260",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2026-12-01",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "12260",
+        "from": "Mumbai",
+        "to": "Pune",
+        "dep": "2026-12-01T06:15",
+        "arr": "2026-12-01T09:05",
+        "class": "CC",
+        "quota": "GN",
+        "pax": 3,
+        "half": 0
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-AVAIL"
+    ],
+    "passes_all_but": [
+     "R-AVAIL"
+    ]
+   }
+  },
+  {
+   "name": "tatkal_three_weeks_early",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2026-12-01",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "14895",
+        "from": "Mumbai",
+        "to": "Pune",
+        "dep": "2026-12-01T16:30",
+        "arr": "2026-12-01T19:14",
+        "class": "2S",
+        "quota": "TQ",
+        "pax": 3,
+        "half": 0,
+        "book_at": "11:00"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-QUOTA"
+    ],
+    "passes_all_but": [
+     "R-QUOTA"
+    ]
+   }
+  },
+  {
+   "name": "claims_infeasible_on_a_feasible_task",
+   "kind": "violation",
+   "submission": {
+    "status": "infeasible",
+    "binding": [
+     "R-QUOTA"
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.0
+   }
+  }
+ ]
+}

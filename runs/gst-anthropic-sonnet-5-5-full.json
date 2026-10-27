@@ -1,0 +1,1630 @@
+{
+ "anthropic:claude-sonnet-5-5": {
+  "graded_with": "123c1450dab5",
+  "k": 1,
+  "navital_gym_commit": "0b6a64f313ec",
+  "settings": {
+   "json_mode_on_final": true,
+   "max_tokens": 4096,
+   "max_turns": 40,
+   "model": "claude-sonnet-5-5",
+   "provider": "anthropic",
+   "repair_retry": true,
+   "temperature": 0.0
+  },
+  "summary": {
+   "answered": 50,
+   "by_kind": {
+    "invoice": {
+     "answered": 15,
+     "errors": 0.0,
+     "format_fail": 0.0,
+     "k": 1,
+     "mean_score": 1.0,
+     "not_run": 0,
+     "pass@1": 1.0,
+     "pass^k": 1.0,
+     "rule_failures": {},
+     "strict_pass@1": 1.0,
+     "tasks": 15,
+     "turns_exhausted": 0.0
+    },
+    "itc_reconciliation": {
+     "answered": 10,
+     "errors": 0.0,
+     "format_fail": 0.0,
+     "k": 1,
+     "mean_score": 1.0,
+     "not_run": 0,
+     "pass@1": 1.0,
+     "pass^k": 1.0,
+     "rule_failures": {},
+     "strict_pass@1": 1.0,
+     "tasks": 10,
+     "turns_exhausted": 0.0
+    },
+    "late_filing": {
+     "answered": 10,
+     "errors": 0.0,
+     "format_fail": 0.0,
+     "k": 1,
+     "mean_score": 1.0,
+     "not_run": 0,
+     "pass@1": 1.0,
+     "pass^k": 1.0,
+     "rule_failures": {},
+     "strict_pass@1": 1.0,
+     "tasks": 10,
+     "turns_exhausted": 0.0
+    },
+    "place_of_supply": {
+     "answered": 8,
+     "errors": 0.0,
+     "format_fail": 0.0,
+     "k": 1,
+     "mean_score": 1.0,
+     "not_run": 0,
+     "pass@1": 1.0,
+     "pass^k": 1.0,
+     "rule_failures": {},
+     "strict_pass@1": 1.0,
+     "tasks": 8,
+     "turns_exhausted": 0.0
+    },
+    "threshold": {
+     "answered": 7,
+     "errors": 0.0,
+     "format_fail": 0.0,
+     "k": 1,
+     "mean_score": 1.0,
+     "not_run": 0,
+     "pass@1": 1.0,
+     "pass^k": 1.0,
+     "rule_failures": {},
+     "strict_pass@1": 1.0,
+     "tasks": 7,
+     "turns_exhausted": 0.0
+    }
+   },
+   "by_split": {
+    "core": {
+     "answered": 50,
+     "errors": 0.0,
+     "format_fail": 0.0,
+     "k": 1,
+     "mean_score": 1.0,
+     "not_run": 0,
+     "pass@1": 1.0,
+     "pass^k": 1.0,
+     "rule_failures": {},
+     "strict_pass@1": 1.0,
+     "tasks": 50,
+     "turns_exhausted": 0.0
+    }
+   },
+   "errors": 0.0,
+   "format_fail": 0.0,
+   "k": 1,
+   "mean_score": 1.0,
+   "not_run": 0,
+   "pass@1": 1.0,
+   "pass^k": 1.0,
+   "rule_failures": {},
+   "strict_pass@1": 1.0,
+   "tasks": 50,
+   "turns_exhausted": 0.0
+  },
+  "tasks": {
+   "IN-GST-001": [
+    {
+     "details": {
+      "R-CGST": "cgst",
+      "R-FMT": "answer must be an object",
+      "R-IGST": "igst",
+      "R-ROUNDOFF": "round_off",
+      "R-SGST": "sgst",
+      "R-TAXABLE": "taxable_value",
+      "R-TAXTYPE": "tax_type",
+      "R-TOTAL": "invoice_total"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 5365,
+      "turns": 3,
+      "turns_exhausted": false,
+      "usd": 0.038685
+     },
+     "rules": {
+      "R-CGST": true,
+      "R-FMT": true,
+      "R-IGST": true,
+      "R-ROUNDOFF": true,
+      "R-SGST": true,
+      "R-TAXABLE": true,
+      "R-TAXTYPE": true,
+      "R-TOTAL": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-002": [
+    {
+     "details": {
+      "R-CGST": "cgst",
+      "R-FMT": "answer must be an object",
+      "R-IGST": "igst",
+      "R-ROUNDOFF": "round_off",
+      "R-SGST": "sgst",
+      "R-TAXABLE": "taxable_value",
+      "R-TAXTYPE": "tax_type",
+      "R-TOTAL": "invoice_total"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 3225,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.023025
+     },
+     "rules": {
+      "R-CGST": true,
+      "R-FMT": true,
+      "R-IGST": true,
+      "R-ROUNDOFF": true,
+      "R-SGST": true,
+      "R-TAXABLE": true,
+      "R-TAXTYPE": true,
+      "R-TOTAL": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-003": [
+    {
+     "details": {
+      "R-CGST": "cgst",
+      "R-FMT": "answer must be an object",
+      "R-IGST": "igst",
+      "R-ROUNDOFF": "round_off",
+      "R-SGST": "sgst",
+      "R-TAXABLE": "taxable_value",
+      "R-TAXTYPE": "tax_type",
+      "R-TOTAL": "invoice_total"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 5826,
+      "turns": 3,
+      "turns_exhausted": false,
+      "usd": 0.04657
+     },
+     "rules": {
+      "R-CGST": true,
+      "R-FMT": true,
+      "R-IGST": true,
+      "R-ROUNDOFF": true,
+      "R-SGST": true,
+      "R-TAXABLE": true,
+      "R-TAXTYPE": true,
+      "R-TOTAL": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-004": [
+    {
+     "details": {
+      "R-CGST": "cgst",
+      "R-FMT": "answer must be an object",
+      "R-IGST": "igst",
+      "R-ROUNDOFF": "round_off",
+      "R-SGST": "sgst",
+      "R-TAXABLE": "taxable_value",
+      "R-TAXTYPE": "tax_type",
+      "R-TOTAL": "invoice_total"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 5740,
+      "turns": 3,
+      "turns_exhausted": false,
+      "usd": 0.04474
+     },
+     "rules": {
+      "R-CGST": true,
+      "R-FMT": true,
+      "R-IGST": true,
+      "R-ROUNDOFF": true,
+      "R-SGST": true,
+      "R-TAXABLE": true,
+      "R-TAXTYPE": true,
+      "R-TOTAL": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-005": [
+    {
+     "details": {
+      "R-CGST": "cgst",
+      "R-FMT": "answer must be an object",
+      "R-IGST": "igst",
+      "R-ROUNDOFF": "round_off",
+      "R-SGST": "sgst",
+      "R-TAXABLE": "taxable_value",
+      "R-TAXTYPE": "tax_type",
+      "R-TOTAL": "invoice_total"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 5059,
+      "turns": 3,
+      "turns_exhausted": false,
+      "usd": 0.031215
+     },
+     "rules": {
+      "R-CGST": true,
+      "R-FMT": true,
+      "R-IGST": true,
+      "R-ROUNDOFF": true,
+      "R-SGST": true,
+      "R-TAXABLE": true,
+      "R-TAXTYPE": true,
+      "R-TOTAL": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-006": [
+    {
+     "details": {
+      "R-CGST": "cgst",
+      "R-FMT": "answer must be an object",
+      "R-IGST": "igst",
+      "R-ROUNDOFF": "round_off",
+      "R-SGST": "sgst",
+      "R-TAXABLE": "taxable_value",
+      "R-TAXTYPE": "tax_type",
+      "R-TOTAL": "invoice_total"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 3251,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.023915
+     },
+     "rules": {
+      "R-CGST": true,
+      "R-FMT": true,
+      "R-IGST": true,
+      "R-ROUNDOFF": true,
+      "R-SGST": true,
+      "R-TAXABLE": true,
+      "R-TAXTYPE": true,
+      "R-TOTAL": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-007": [
+    {
+     "details": {
+      "R-CGST": "cgst",
+      "R-FMT": "answer must be an object",
+      "R-IGST": "igst",
+      "R-ROUNDOFF": "round_off",
+      "R-SGST": "sgst",
+      "R-TAXABLE": "taxable_value",
+      "R-TAXTYPE": "tax_type",
+      "R-TOTAL": "invoice_total"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 3260,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.02322
+     },
+     "rules": {
+      "R-CGST": true,
+      "R-FMT": true,
+      "R-IGST": true,
+      "R-ROUNDOFF": true,
+      "R-SGST": true,
+      "R-TAXABLE": true,
+      "R-TAXTYPE": true,
+      "R-TOTAL": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-008": [
+    {
+     "details": {
+      "R-CGST": "cgst",
+      "R-FMT": "answer must be an object",
+      "R-IGST": "igst",
+      "R-ROUNDOFF": "round_off",
+      "R-SGST": "sgst",
+      "R-TAXABLE": "taxable_value",
+      "R-TAXTYPE": "tax_type",
+      "R-TOTAL": "invoice_total"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 3112,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.01962
+     },
+     "rules": {
+      "R-CGST": true,
+      "R-FMT": true,
+      "R-IGST": true,
+      "R-ROUNDOFF": true,
+      "R-SGST": true,
+      "R-TAXABLE": true,
+      "R-TAXTYPE": true,
+      "R-TOTAL": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-009": [
+    {
+     "details": {
+      "R-CGST": "cgst",
+      "R-FMT": "answer must be an object",
+      "R-IGST": "igst",
+      "R-ROUNDOFF": "round_off",
+      "R-SGST": "sgst",
+      "R-TAXABLE": "taxable_value",
+      "R-TAXTYPE": "tax_type",
+      "R-TOTAL": "invoice_total"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 10860,
+      "turns": 5,
+      "turns_exhausted": false,
+      "usd": 0.07832
+     },
+     "rules": {
+      "R-CGST": true,
+      "R-FMT": true,
+      "R-IGST": true,
+      "R-ROUNDOFF": true,
+      "R-SGST": true,
+      "R-TAXABLE": true,
+      "R-TAXTYPE": true,
+      "R-TOTAL": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-010": [
+    {
+     "details": {
+      "R-CGST": "cgst",
+      "R-FMT": "answer must be an object",
+      "R-IGST": "igst",
+      "R-ROUNDOFF": "round_off",
+      "R-SGST": "sgst",
+      "R-TAXABLE": "taxable_value",
+      "R-TAXTYPE": "tax_type",
+      "R-TOTAL": "invoice_total"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 3675,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.032755
+     },
+     "rules": {
+      "R-CGST": true,
+      "R-FMT": true,
+      "R-IGST": true,
+      "R-ROUNDOFF": true,
+      "R-SGST": true,
+      "R-TAXABLE": true,
+      "R-TAXTYPE": true,
+      "R-TOTAL": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-011": [
+    {
+     "details": {
+      "R-CGST": "cgst",
+      "R-FMT": "answer must be an object",
+      "R-IGST": "igst",
+      "R-ROUNDOFF": "round_off",
+      "R-SGST": "sgst",
+      "R-TAXABLE": "taxable_value",
+      "R-TAXTYPE": "tax_type",
+      "R-TOTAL": "invoice_total"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 3569,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.030325
+     },
+     "rules": {
+      "R-CGST": true,
+      "R-FMT": true,
+      "R-IGST": true,
+      "R-ROUNDOFF": true,
+      "R-SGST": true,
+      "R-TAXABLE": true,
+      "R-TAXTYPE": true,
+      "R-TOTAL": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-012": [
+    {
+     "details": {
+      "R-CGST": "cgst",
+      "R-FMT": "answer must be an object",
+      "R-IGST": "igst",
+      "R-ROUNDOFF": "round_off",
+      "R-SGST": "sgst",
+      "R-TAXABLE": "taxable_value",
+      "R-TAXTYPE": "tax_type",
+      "R-TOTAL": "invoice_total"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 8056,
+      "turns": 4,
+      "turns_exhausted": false,
+      "usd": 0.06088
+     },
+     "rules": {
+      "R-CGST": true,
+      "R-FMT": true,
+      "R-IGST": true,
+      "R-ROUNDOFF": true,
+      "R-SGST": true,
+      "R-TAXABLE": true,
+      "R-TAXTYPE": true,
+      "R-TOTAL": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-013": [
+    {
+     "details": {
+      "R-CGST": "cgst",
+      "R-FMT": "answer must be an object",
+      "R-IGST": "igst",
+      "R-ROUNDOFF": "round_off",
+      "R-SGST": "sgst",
+      "R-TAXABLE": "taxable_value",
+      "R-TAXTYPE": "tax_type",
+      "R-TOTAL": "invoice_total"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 6133,
+      "turns": 3,
+      "turns_exhausted": false,
+      "usd": 0.054565
+     },
+     "rules": {
+      "R-CGST": true,
+      "R-FMT": true,
+      "R-IGST": true,
+      "R-ROUNDOFF": true,
+      "R-SGST": true,
+      "R-TAXABLE": true,
+      "R-TAXTYPE": true,
+      "R-TOTAL": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-014": [
+    {
+     "details": {
+      "R-CGST": "cgst",
+      "R-FMT": "answer must be an object",
+      "R-IGST": "igst",
+      "R-ROUNDOFF": "round_off",
+      "R-SGST": "sgst",
+      "R-TAXABLE": "taxable_value",
+      "R-TAXTYPE": "tax_type",
+      "R-TOTAL": "invoice_total"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 5669,
+      "turns": 3,
+      "turns_exhausted": false,
+      "usd": 0.043005
+     },
+     "rules": {
+      "R-CGST": true,
+      "R-FMT": true,
+      "R-IGST": true,
+      "R-ROUNDOFF": true,
+      "R-SGST": true,
+      "R-TAXABLE": true,
+      "R-TAXTYPE": true,
+      "R-TOTAL": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-015": [
+    {
+     "details": {
+      "R-CGST": "cgst",
+      "R-FMT": "answer must be an object",
+      "R-IGST": "igst",
+      "R-ROUNDOFF": "round_off",
+      "R-SGST": "sgst",
+      "R-TAXABLE": "taxable_value",
+      "R-TAXTYPE": "tax_type",
+      "R-TOTAL": "invoice_total"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 16580,
+      "turns": 7,
+      "turns_exhausted": false,
+      "usd": 0.10988
+     },
+     "rules": {
+      "R-CGST": true,
+      "R-FMT": true,
+      "R-IGST": true,
+      "R-ROUNDOFF": true,
+      "R-SGST": true,
+      "R-TAXABLE": true,
+      "R-TAXTYPE": true,
+      "R-TOTAL": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-016": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-TAXTYPE": "tax_type"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 3129,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.024825
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-TAXTYPE": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-017": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-TAXTYPE": "tax_type"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 2828,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.01712
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-TAXTYPE": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-018": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-TAXTYPE": "tax_type"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 3003,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.021495
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-TAXTYPE": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-019": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-TAXTYPE": "tax_type"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 2805,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.016605
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-TAXTYPE": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-020": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-TAXTYPE": "tax_type"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 3079,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.023155
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-TAXTYPE": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-021": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-TAXTYPE": "tax_type"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 2845,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.017245
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-TAXTYPE": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-022": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-TAXTYPE": "tax_type"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 2952,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.02022
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-TAXTYPE": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-023": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-TAXTYPE": "tax_type"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 2817,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.017025
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-TAXTYPE": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-024": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-ITC-AMOUNT": "eligible_itc",
+      "R-ITC-INVOICES": "eligible_invoices"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 6420,
+      "turns": 3,
+      "turns_exhausted": false,
+      "usd": 0.04822
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-ITC-AMOUNT": true,
+      "R-ITC-INVOICES": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-025": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-ITC-AMOUNT": "eligible_itc",
+      "R-ITC-INVOICES": "eligible_invoices"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 5744,
+      "turns": 3,
+      "turns_exhausted": false,
+      "usd": 0.03966
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-ITC-AMOUNT": true,
+      "R-ITC-INVOICES": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-026": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-ITC-AMOUNT": "eligible_itc",
+      "R-ITC-INVOICES": "eligible_invoices"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 5515,
+      "turns": 3,
+      "turns_exhausted": false,
+      "usd": 0.036675
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-ITC-AMOUNT": true,
+      "R-ITC-INVOICES": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-027": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-ITC-AMOUNT": "eligible_itc",
+      "R-ITC-INVOICES": "eligible_invoices"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 3720,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.0305
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-ITC-AMOUNT": true,
+      "R-ITC-INVOICES": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-028": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-ITC-AMOUNT": "eligible_itc",
+      "R-ITC-INVOICES": "eligible_invoices"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 3288,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.02246
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-ITC-AMOUNT": true,
+      "R-ITC-INVOICES": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-029": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-ITC-AMOUNT": "eligible_itc",
+      "R-ITC-INVOICES": "eligible_invoices"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 5878,
+      "turns": 3,
+      "turns_exhausted": false,
+      "usd": 0.03761
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-ITC-AMOUNT": true,
+      "R-ITC-INVOICES": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-030": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-ITC-AMOUNT": "eligible_itc",
+      "R-ITC-INVOICES": "eligible_invoices"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 5630,
+      "turns": 3,
+      "turns_exhausted": false,
+      "usd": 0.04017
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-ITC-AMOUNT": true,
+      "R-ITC-INVOICES": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-031": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-ITC-AMOUNT": "eligible_itc",
+      "R-ITC-INVOICES": "eligible_invoices"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 5537,
+      "turns": 3,
+      "turns_exhausted": false,
+      "usd": 0.037525
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-ITC-AMOUNT": true,
+      "R-ITC-INVOICES": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-032": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-ITC-AMOUNT": "eligible_itc",
+      "R-ITC-INVOICES": "eligible_invoices"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 3084,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.01754
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-ITC-AMOUNT": true,
+      "R-ITC-INVOICES": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-033": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-ITC-AMOUNT": "eligible_itc",
+      "R-ITC-INVOICES": "eligible_invoices"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 3239,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.018655
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-ITC-AMOUNT": true,
+      "R-ITC-INVOICES": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-034": [
+    {
+     "details": {
+      "R-DAYS": "days_late",
+      "R-DUE": "due_date",
+      "R-FEE": "late_fee",
+      "R-FMT": "answer must be an object",
+      "R-INTEREST": "interest"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 4829,
+      "turns": 3,
+      "turns_exhausted": false,
+      "usd": 0.028865
+     },
+     "rules": {
+      "R-DAYS": true,
+      "R-DUE": true,
+      "R-FEE": true,
+      "R-FMT": true,
+      "R-INTEREST": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-035": [
+    {
+     "details": {
+      "R-DAYS": "days_late",
+      "R-DUE": "due_date",
+      "R-FEE": "late_fee",
+      "R-FMT": "answer must be an object",
+      "R-INTEREST": "interest"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 3092,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.02148
+     },
+     "rules": {
+      "R-DAYS": true,
+      "R-DUE": true,
+      "R-FEE": true,
+      "R-FMT": true,
+      "R-INTEREST": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-036": [
+    {
+     "details": {
+      "R-DAYS": "days_late",
+      "R-DUE": "due_date",
+      "R-FEE": "late_fee",
+      "R-FMT": "answer must be an object",
+      "R-INTEREST": "interest"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 3080,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.02118
+     },
+     "rules": {
+      "R-DAYS": true,
+      "R-DUE": true,
+      "R-FEE": true,
+      "R-FMT": true,
+      "R-INTEREST": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-037": [
+    {
+     "details": {
+      "R-DAYS": "days_late",
+      "R-DUE": "due_date",
+      "R-FEE": "late_fee",
+      "R-FMT": "answer must be an object",
+      "R-INTEREST": "interest"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 3287,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.026355
+     },
+     "rules": {
+      "R-DAYS": true,
+      "R-DUE": true,
+      "R-FEE": true,
+      "R-FMT": true,
+      "R-INTEREST": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-038": [
+    {
+     "details": {
+      "R-DAYS": "days_late",
+      "R-DUE": "due_date",
+      "R-FEE": "late_fee",
+      "R-FMT": "answer must be an object",
+      "R-INTEREST": "interest"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 3185,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.024385
+     },
+     "rules": {
+      "R-DAYS": true,
+      "R-DUE": true,
+      "R-FEE": true,
+      "R-FMT": true,
+      "R-INTEREST": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-039": [
+    {
+     "details": {
+      "R-DAYS": "days_late",
+      "R-DUE": "due_date",
+      "R-FEE": "late_fee",
+      "R-FMT": "answer must be an object",
+      "R-INTEREST": "interest"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 3351,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.027955
+     },
+     "rules": {
+      "R-DAYS": true,
+      "R-DUE": true,
+      "R-FEE": true,
+      "R-FMT": true,
+      "R-INTEREST": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-040": [
+    {
+     "details": {
+      "R-DAYS": "days_late",
+      "R-DUE": "due_date",
+      "R-FEE": "late_fee",
+      "R-FMT": "answer must be an object",
+      "R-INTEREST": "interest"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 5181,
+      "turns": 3,
+      "turns_exhausted": false,
+      "usd": 0.036785
+     },
+     "rules": {
+      "R-DAYS": true,
+      "R-DUE": true,
+      "R-FEE": true,
+      "R-FMT": true,
+      "R-INTEREST": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-041": [
+    {
+     "details": {
+      "R-DAYS": "days_late",
+      "R-DUE": "due_date",
+      "R-FEE": "late_fee",
+      "R-FMT": "answer must be an object",
+      "R-INTEREST": "interest"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 3447,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.030355
+     },
+     "rules": {
+      "R-DAYS": true,
+      "R-DUE": true,
+      "R-FEE": true,
+      "R-FMT": true,
+      "R-INTEREST": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-042": [
+    {
+     "details": {
+      "R-DAYS": "days_late",
+      "R-DUE": "due_date",
+      "R-FEE": "late_fee",
+      "R-FMT": "answer must be an object",
+      "R-INTEREST": "interest"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 3164,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.02386
+     },
+     "rules": {
+      "R-DAYS": true,
+      "R-DUE": true,
+      "R-FEE": true,
+      "R-FMT": true,
+      "R-INTEREST": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-043": [
+    {
+     "details": {
+      "R-DAYS": "days_late",
+      "R-DUE": "due_date",
+      "R-FEE": "late_fee",
+      "R-FMT": "answer must be an object",
+      "R-INTEREST": "interest"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 3388,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.02888
+     },
+     "rules": {
+      "R-DAYS": true,
+      "R-DUE": true,
+      "R-FEE": true,
+      "R-FMT": true,
+      "R-INTEREST": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-044": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-REQUIRED": "required"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 2675,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.015415
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-REQUIRED": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-045": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-REQUIRED": "required"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 2676,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.01544
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-REQUIRED": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-046": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-REQUIRED": "required"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 2940,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.02204
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-REQUIRED": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-047": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-REQUIRED": "required"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 2672,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.01544
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-REQUIRED": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-048": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-REQUIRED": "required"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 2703,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.016135
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-REQUIRED": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-049": [
+    {
+     "details": {
+      "R-ELIGIBLE": "eligible",
+      "R-FMT": "answer must be an object"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 2725,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.016185
+     },
+     "rules": {
+      "R-ELIGIBLE": true,
+      "R-FMT": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-050": [
+    {
+     "details": {
+      "R-ELIGIBLE": "eligible",
+      "R-FMT": "answer must be an object"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 2735,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.016435
+     },
+     "rules": {
+      "R-ELIGIBLE": true,
+      "R-FMT": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ]
+  }
+ }
+}

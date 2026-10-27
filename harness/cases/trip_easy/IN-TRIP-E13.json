@@ -1,0 +1,305 @@
+{
+ "env": "trip_easy",
+ "task_id": "IN-TRIP-E13",
+ "task": {
+  "id": "IN-TRIP-E13",
+  "family": "easy-two-days",
+  "difficulty": 1,
+  "lang": "en",
+  "prompt": "Plan 2 days in Jaipur from Delhi, starting 2026-12-14, for 2 adults. Budget Rs 14,000.",
+  "params": {
+   "budget_inr": 14000,
+   "days": 2,
+   "diet": "any",
+   "end": "Delhi",
+   "origin": "Delhi",
+   "route": [
+    "Delhi",
+    "Jaipur"
+   ],
+   "start": "2026-12-14",
+   "travelers": {
+    "adults": 2,
+    "child_ages": [],
+    "seniors": 0
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-DATE",
+   "R-CONN",
+   "R-QUOTA",
+   "R-AVAIL",
+   "R-OPEN",
+   "R-SEASON",
+   "R-OCC",
+   "R-ROUTE",
+   "R-BUD"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "binding_sets": [],
+   "solver_note": "plan found (1 candidates checked)",
+   "split": "easy"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2026-12-14",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "16208",
+        "from": "Delhi",
+        "to": "Jaipur",
+        "dep": "2026-12-14T05:30",
+        "arr": "2026-12-14T10:49",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "stay": {
+       "hotel_id": "H-JAIP-1",
+       "rooms": [
+        {
+         "guests": 2
+        }
+       ]
+      }
+     },
+     {
+      "date": "2026-12-15",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "13404",
+        "from": "Jaipur",
+        "to": "Delhi",
+        "dep": "2026-12-15T09:30",
+        "arr": "2026-12-15T14:28",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "days",
+     "booking_date"
+    ]
+   }
+  },
+  {
+   "name": "one_guest_in_the_room",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2026-12-14",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "16208",
+        "from": "Delhi",
+        "to": "Jaipur",
+        "dep": "2026-12-14T05:30",
+        "arr": "2026-12-14T10:49",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "stay": {
+       "hotel_id": "H-JAIP-1",
+       "rooms": [
+        {
+         "guests": 1
+        }
+       ]
+      }
+     },
+     {
+      "date": "2026-12-15",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "13404",
+        "from": "Jaipur",
+        "to": "Delhi",
+        "dep": "2026-12-15T09:30",
+        "arr": "2026-12-15T14:28",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-OCC"
+    ],
+    "passes_all_but": [
+     "R-OCC"
+    ]
+   }
+  },
+  {
+   "name": "no_night_in_jaipur_so_never_seen",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2026-12-14",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "16208",
+        "from": "Delhi",
+        "to": "Jaipur",
+        "dep": "2026-12-14T05:30",
+        "arr": "2026-12-14T10:49",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ]
+     },
+     {
+      "date": "2026-12-15",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "13404",
+        "from": "Jaipur",
+        "to": "Delhi",
+        "dep": "2026-12-15T09:30",
+        "arr": "2026-12-15T14:28",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-CONN",
+     "R-ROUTE"
+    ],
+    "passes_all_but": [
+     "R-CONN",
+     "R-ROUTE"
+    ]
+   }
+  },
+  {
+   "name": "unknown_hotel_id_fails_the_format_gate",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2026-12-14",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "16208",
+        "from": "Delhi",
+        "to": "Jaipur",
+        "dep": "2026-12-14T05:30",
+        "arr": "2026-12-14T10:49",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "stay": {
+       "hotel_id": "H-NOWHERE-1",
+       "rooms": [
+        {
+         "guests": 2
+        }
+       ]
+      }
+     },
+     {
+      "date": "2026-12-15",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "13404",
+        "from": "Jaipur",
+        "to": "Delhi",
+        "dep": "2026-12-15T09:30",
+        "arr": "2026-12-15T14:28",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-FMT"
+    ],
+    "passes_all_but": [
+     "R-FMT"
+    ]
+   }
+  },
+  {
+   "name": "claims_infeasible_on_a_feasible_task",
+   "kind": "violation",
+   "submission": {
+    "status": "infeasible",
+    "binding": [
+     "R-QUOTA"
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.0
+   }
+  }
+ ]
+}

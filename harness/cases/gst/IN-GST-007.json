@@ -1,0 +1,237 @@
+{
+ "env": "gst",
+ "task_id": "IN-GST-007",
+ "task": {
+  "id": "IN-GST-007",
+  "family": "invoice",
+  "difficulty": 3,
+  "lang": "en",
+  "prompt": "Prepare the tax split for this invoice: supplier in Gujarat, goods delivered to Gujarat, 2 line(s), freight Rs 0. Give taxable value, CGST, SGST, IGST, round-off and invoice total.",
+  "params": {
+   "world": {
+    "supplier": {
+     "gstin": "24AAAPA1111A1Z7",
+     "state": "Gujarat"
+    },
+    "buyer": {
+     "billing_state": "Gujarat"
+    },
+    "place_of_supply": "Gujarat",
+    "lines": [
+     {
+      "hsn": "G-ELEC",
+      "qty": 10,
+      "unit_price": 2400,
+      "disc_pct": 10
+     },
+     {
+      "hsn": "G-ELEC",
+      "qty": 2,
+      "unit_price": 999,
+      "disc_pct": 5
+     }
+    ],
+    "freight": 0
+   },
+   "rules": {
+    "rates": {
+     "G-FAB": "5",
+     "G-ELEC": "18",
+     "G-FOOD": "0",
+     "G-LUX": "40",
+     "G-TOY": "5",
+     "S-CONS": "18"
+    },
+    "freight_rule": "ENV RULE: freight and packing on the invoice are taxed at the highest rate among its lines (mixed-supply style; real treatment is usually the principal supply's rate)",
+    "blocked_itc_categories": [
+     "motor_vehicle_personal",
+     "food_beverage",
+     "club_membership"
+    ],
+    "gstr1_due_day": 11,
+    "gstr3b_due_day": 20,
+    "late_fee_per_day": 50,
+    "late_fee_per_day_nil": 20,
+    "late_fee_cap_by_turnover": [
+     [
+      15000000,
+      2000
+     ],
+     [
+      50000000,
+      5000
+     ],
+     [
+      null,
+      10000
+     ]
+    ],
+    "late_fee_cap_nil": 500,
+    "interest_pct_pa": 18,
+    "einvoice_turnover_threshold": 50000000,
+    "eway_bill_value_threshold": 50000,
+    "composition_turnover_max": 15000000,
+    "due_date_shift_on_holiday": false,
+    "rate_regime": "0/5/18/40 (GST 2.0, from 22 Sep 2025); 12% and 28% slabs no longer exist",
+    "bill_to_ship_to_rule": "goods delivered to a third person on the billed party's direction: place of supply = the BILLED party's state (IGST s.10(1)(b))",
+    "rounding": "each tax line to 2 decimals half-up; invoice total to nearest rupee with a round_off line"
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-TAXABLE",
+   "R-CGST",
+   "R-SGST",
+   "R-IGST",
+   "R-ROUNDOFF",
+   "R-TOTAL",
+   "R-TAXTYPE"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "kind": "invoice",
+   "gold_answer": {
+    "taxable_value": "23498.10",
+    "cgst": "2114.83",
+    "sgst": "2114.83",
+    "igst": "0",
+    "round_off": "0.24",
+    "invoice_total": "27728",
+    "tax_type": "CGST+SGST"
+   },
+   "forbidden_actions": []
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "taxable_value": "23498.10",
+     "cgst": "2114.83",
+     "sgst": "2114.83",
+     "igst": "0",
+     "round_off": "0.24",
+     "invoice_total": "27728",
+     "tax_type": "CGST+SGST"
+    }
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "answer"
+    ]
+   }
+  },
+  {
+   "name": "only_R-CGST",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "taxable_value": "23498.10",
+     "cgst": "2114.82",
+     "sgst": "2114.83",
+     "igst": "0",
+     "round_off": "0.24",
+     "invoice_total": "27728",
+     "tax_type": "CGST+SGST"
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-CGST"
+    ],
+    "passes_all_but": [
+     "R-CGST"
+    ]
+   }
+  },
+  {
+   "name": "only_R-SGST",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "taxable_value": "23498.10",
+     "cgst": "2114.83",
+     "sgst": "2114.84",
+     "igst": "0",
+     "round_off": "0.24",
+     "invoice_total": "27728",
+     "tax_type": "CGST+SGST"
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-SGST"
+    ],
+    "passes_all_but": [
+     "R-SGST"
+    ]
+   }
+  },
+  {
+   "name": "only_R-ROUNDOFF",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "taxable_value": "23498.10",
+     "cgst": "2114.83",
+     "sgst": "2114.83",
+     "igst": "0",
+     "round_off": "-0.24",
+     "invoice_total": "27728",
+     "tax_type": "CGST+SGST"
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-ROUNDOFF"
+    ],
+    "passes_all_but": [
+     "R-ROUNDOFF"
+    ]
+   }
+  },
+  {
+   "name": "only_R-TOTAL",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "taxable_value": "23498.10",
+     "cgst": "2114.83",
+     "sgst": "2114.83",
+     "igst": "0",
+     "round_off": "0.24",
+     "invoice_total": "27727",
+     "tax_type": "CGST+SGST"
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-TOTAL"
+    ],
+    "passes_all_but": [
+     "R-TOTAL"
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,171 @@
+{
+ "env": "trip",
+ "task_id": "IN-TRIP-049",
+ "task": {
+  "id": "IN-TRIP-049",
+  "family": "indic-prompts",
+  "difficulty": 3,
+  "lang": "hinglish",
+  "prompt": "Agra ek din mein ghoomna hai Delhi se, Friday ko, Taj Mahal dekhna hai, budget ₹6,000 do logon ke liye.",
+  "params": {
+   "budget_inr": 6000,
+   "day_visit": [
+    {
+     "day": 1,
+     "name": "Taj Mahal"
+    }
+   ],
+   "days": 1,
+   "diet": "any",
+   "end": "Delhi",
+   "origin": "Delhi",
+   "route": [
+    "Agra"
+   ],
+   "start": "2026-12-11",
+   "travelers": {
+    "adults": 2,
+    "child_ages": [],
+    "seniors": 0
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-DATE",
+   "R-CONN",
+   "R-QUOTA",
+   "R-AVAIL",
+   "R-OPEN",
+   "R-SEASON",
+   "R-OCC",
+   "R-ROUTE",
+   "R-BUD"
+  ],
+  "expected_feasible": false,
+  "binding": [
+   "R-OPEN"
+  ],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "binding_sets": [
+    [
+     "R-OPEN"
+    ]
+   ],
+   "design_intent_binding": [
+    "R-OPEN"
+   ],
+   "design_intent_feasible": false,
+   "design_notes": [
+    "prompt language",
+    "code-mixed numbers/dates"
+   ],
+   "solver_note": "no plan in the search space"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_infeasible_claim",
+   "kind": "solved",
+   "submission": {
+    "status": "infeasible",
+    "binding": [
+     "R-OPEN"
+    ]
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0
+   }
+  },
+  {
+   "name": "wrong_rule_named",
+   "kind": "violation",
+   "submission": {
+    "status": "infeasible",
+    "binding": [
+     "R-AVAIL"
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.0,
+    "fails": [
+     "R-INFEASIBLE"
+    ]
+   }
+  },
+  {
+   "name": "padded_with_an_unrelated_rule",
+   "kind": "violation",
+   "submission": {
+    "status": "infeasible",
+    "binding": [
+     "R-OPEN",
+     "R-AVAIL"
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.0,
+    "fails": [
+     "R-INFEASIBLE"
+    ]
+   }
+  },
+  {
+   "name": "empty_binding",
+   "kind": "violation",
+   "submission": {
+    "status": "infeasible",
+    "binding": []
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.0,
+    "fails": [
+     "R-INFEASIBLE"
+    ]
+   }
+  },
+  {
+   "name": "a_plan_for_an_infeasible_task",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2027-01-10",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "16208",
+        "from": "Delhi",
+        "to": "Jaipur",
+        "dep": "2027-01-10T05:30",
+        "arr": "2027-01-10T10:49",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "activities": [
+       {
+        "id": "City Palace",
+        "start": "2027-01-10T12:00",
+        "end": "2027-01-10T14:00"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.0
+   }
+  }
+ ]
+}

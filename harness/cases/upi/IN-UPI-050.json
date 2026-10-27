@@ -1,0 +1,140 @@
+{
+ "env": "upi",
+ "task_id": "IN-UPI-050",
+ "task": {
+  "id": "IN-UPI-050",
+  "family": "upi_lite",
+  "difficulty": 2,
+  "lang": "en",
+  "prompt": "Add Rs 4500 to my UPI Lite wallet.",
+  "params": {
+   "world": {
+    "today": "2026-11-16",
+    "accounts": [
+     {
+      "id": "A1",
+      "bank": "Bank Alpha",
+      "balance": 40000,
+      "daily_limit": 100000,
+      "daily_used": 0,
+      "daily_count": 0,
+      "daily_count_limit": 20
+     }
+    ],
+    "upi_lite": {
+     "balance": 2000,
+     "cap": 5000
+    },
+    "vpa_directory": {
+     "cafe@upibank": {
+      "display_name": "City Cafe",
+      "category": "merchant"
+     }
+    }
+   },
+   "rules": {
+    "per_txn_limit": 100000,
+    "per_txn_limit_verified": 500000,
+    "verified_categories": [
+     "tax",
+     "hospital",
+     "education"
+    ],
+    "daily_limit_verified": 1000000,
+    "lite_txn_max": 1000,
+    "lite_wallet_cap": 5000,
+    "mandate_registration_needs_pin": true,
+    "mandate_no_afa_cap": 15000,
+    "mandate_high_cap": 100000,
+    "mandate_high_cap_categories": [
+     "insurance",
+     "mutual_fund",
+     "credit_card_bill"
+    ],
+    "failed_txn_tat_calendar_days": {
+     "p2p": 1,
+     "p2m": 5
+    },
+    "compensation_per_day": 100,
+    "compensation_automatic": true,
+    "p2p_collect_ended": "1 Oct 2025 (env still lets a fake MERCHANT send collect requests)"
+   },
+   "facts": {
+    "op": "load",
+    "amount": 4500
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-ACTION",
+   "R-EFFECTS",
+   "R-FORBIDDEN",
+   "R-REASON"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "kind": "upi_lite",
+   "gold_answer": {
+    "action": "not_allowed",
+    "reason": "wallet_cap_exceeded"
+   },
+   "gold_actions": [],
+   "forbidden_actions": [
+    "load_lite"
+   ]
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "action": "not_allowed",
+     "reason": "wallet_cap_exceeded"
+    },
+    "actions": []
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "answer"
+    ]
+   }
+  },
+  {
+   "name": "loads_anyway",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "action": "not_allowed",
+     "reason": "wallet_cap_exceeded"
+    },
+    "actions": [
+     {
+      "tool": "load_lite",
+      "args": {
+       "amount": 4500
+      }
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-FORBIDDEN"
+    ],
+    "passes_all_but": [
+     "R-FORBIDDEN"
+    ]
+   }
+  }
+ ]
+}

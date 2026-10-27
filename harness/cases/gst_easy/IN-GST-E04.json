@@ -1,0 +1,75 @@
+{
+ "env": "gst_easy",
+ "task_id": "IN-GST-E04",
+ "task": {
+  "id": "IN-GST-E04",
+  "family": "threshold",
+  "difficulty": 1,
+  "lang": "en",
+  "prompt": "Aggregate turnover last year was Rs 2,50,00,000. Must this business issue e-invoices? Answer field: required = true or false.",
+  "params": {
+   "world": {
+    "turnover": 25000000
+   },
+   "rules": {
+    "einvoice_turnover_threshold": 50000000,
+    "rule": "E-invoices are required when the business's aggregate turnover in the last year was more than Rs 5 crore (Rs 5,00,00,000)."
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-REQUIRED"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "kind": "threshold",
+   "gold_answer": {
+    "required": false
+   },
+   "forbidden_actions": [],
+   "split": "easy"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "required": false
+    }
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "answer"
+    ]
+   }
+  },
+  {
+   "name": "only_R-REQUIRED",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "required": true
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-REQUIRED"
+    ],
+    "passes_all_but": [
+     "R-REQUIRED"
+    ]
+   }
+  }
+ ]
+}

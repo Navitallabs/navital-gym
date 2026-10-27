@@ -1,0 +1,191 @@
+{
+ "env": "support_easy",
+ "task_id": "IN-SUP-E05",
+ "task": {
+  "id": "IN-SUP-E05",
+  "family": "cancel_before_ship",
+  "difficulty": 1,
+  "lang": "hinglish",
+  "prompt": "Please mera order OD82005 (Cotton kurta) cancel kar do.",
+  "params": {
+   "policy": {
+    "cancel_allowed_status": [
+     "placed"
+    ]
+   },
+   "world": {
+    "authenticated_customer_owns_order": true,
+    "order": {
+     "category": "apparel",
+     "delivered_on": null,
+     "id": "OD82005",
+     "item": "Cotton kurta",
+     "payment": "cod",
+     "phone": "9000082005",
+     "price": 900,
+     "ship_address": "Flat 45, Sample Colony, Pune 411001",
+     "shipping_fee": 60,
+     "status": "placed"
+    },
+    "today": "2026-11-16"
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-ACTIONS",
+   "R-FORBIDDEN",
+   "R-DECISION",
+   "R-REASON",
+   "R-LANG"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "forbidden_actions": [],
+   "gold_answer": {
+    "action": "cancel",
+    "reason": "not_shipped",
+    "reply_language": "hinglish"
+   },
+   "kind": "cancel_before_ship",
+   "review_status": "AI-drafted Hinglish, not native-reviewed",
+   "split": "easy"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "actions": [
+     {
+      "tool": "cancel_order",
+      "args": {
+       "order_id": "OD82005"
+      }
+     }
+    ],
+    "decision": "cancel",
+    "reason": "not_shipped",
+    "reply": "Aapka order cancel kar diya gaya hai. Yeh cash on delivery order tha, isliye koi refund nahi hai."
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "actions",
+     "decision",
+     "reason"
+    ]
+   }
+  },
+  {
+   "name": "wrong_decision",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [
+     {
+      "tool": "cancel_order",
+      "args": {
+       "order_id": "OD82005"
+      }
+     }
+    ],
+    "decision": "decline_cancel",
+    "reason": "not_shipped",
+    "reply": "Aapka order cancel kar diya gaya hai. Yeh cash on delivery order tha, isliye koi refund nahi hai."
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-DECISION"
+    ],
+    "passes_all_but": [
+     "R-DECISION"
+    ]
+   }
+  },
+  {
+   "name": "wrong_reason",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [
+     {
+      "tool": "cancel_order",
+      "args": {
+       "order_id": "OD82005"
+      }
+     }
+    ],
+    "decision": "cancel",
+    "reason": "already_shipped",
+    "reply": "Aapka order cancel kar diya gaya hai. Yeh cash on delivery order tha, isliye koi refund nahi hai."
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-REASON"
+    ],
+    "passes_all_but": [
+     "R-REASON"
+    ]
+   }
+  },
+  {
+   "name": "english_reply",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [
+     {
+      "tool": "cancel_order",
+      "args": {
+       "order_id": "OD82005"
+      }
+     }
+    ],
+    "decision": "cancel",
+    "reason": "not_shipped",
+    "reply": "Your request has been handled as per our policy."
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-LANG"
+    ],
+    "passes_all_but": [
+     "R-LANG"
+    ]
+   }
+  },
+  {
+   "name": "action_missing",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [],
+    "decision": "cancel",
+    "reason": "not_shipped",
+    "reply": "Aapka order cancel kar diya gaya hai. Yeh cash on delivery order tha, isliye koi refund nahi hai."
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-ACTIONS"
+    ],
+    "passes_all_but": [
+     "R-ACTIONS"
+    ]
+   }
+  }
+ ]
+}

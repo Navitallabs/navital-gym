@@ -1,0 +1,76 @@
+{
+ "env": "gst_easy",
+ "task_id": "IN-GST-E15",
+ "task": {
+  "id": "IN-GST-E15",
+  "family": "easy_days_late",
+  "difficulty": 1,
+  "lang": "en",
+  "prompt": "The GSTR-3B return for August 2026 was filed on 2026-10-02. How many days late was it (0 if it was on time)? Answer field: days_late = a whole number.",
+  "params": {
+   "world": {
+    "filed_on": "2026-10-02",
+    "period": "2026-08"
+   },
+   "rules": {
+    "gstr3b_due_day": 20,
+    "rule": "The GSTR-3B return for a month is due on the 20th of the next month, even if that day is a weekend or a holiday. Days late = the number of days after the due date; 0 if it was filed on or before the due date."
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-DAYS"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "kind": "easy_days_late",
+   "gold_answer": {
+    "days_late": 12
+   },
+   "forbidden_actions": [],
+   "split": "easy"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "days_late": 12
+    }
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "answer"
+    ]
+   }
+  },
+  {
+   "name": "only_R-DAYS",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "days_late": 13
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-DAYS"
+    ],
+    "passes_all_but": [
+     "R-DAYS"
+    ]
+   }
+  }
+ ]
+}

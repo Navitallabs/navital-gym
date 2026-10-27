@@ -1,0 +1,281 @@
+{
+ "env": "trip",
+ "task_id": "IN-TRIP-044",
+ "task": {
+  "id": "IN-TRIP-044",
+  "family": "rail-logic",
+  "difficulty": 2,
+  "lang": "en",
+  "prompt": "Today is 2026-12-05. Book rail from Delhi to Agra on 2026-12-05 for 2 adults. same-day morning train needed, class CC only.",
+  "params": {
+   "classes_only": [
+    "CC"
+   ],
+   "days": 1,
+   "diet": "any",
+   "end": "Agra",
+   "mode_policy": "rail_only",
+   "origin": "Delhi",
+   "rail_dep_before": "12:00",
+   "route": [
+    "Agra"
+   ],
+   "snapshot_date": "2026-12-05",
+   "start": "2026-12-05",
+   "travelers": {
+    "adults": 2,
+    "child_ages": [],
+    "seniors": 0
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-DATE",
+   "R-CONN",
+   "R-QUOTA",
+   "R-AVAIL",
+   "R-OPEN",
+   "R-SEASON",
+   "R-OCC",
+   "R-ROUTE"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": "2026-12-05",
+  "meta": {
+   "binding_sets": [],
+   "design_intent_binding": [],
+   "design_intent_feasible": true,
+   "design_notes": [
+    "same-day morning train needed, class CC only"
+   ],
+   "oracle_plan_cost": null,
+   "solver_note": "plan found (1 candidates checked)"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-12-05",
+    "days": [
+     {
+      "date": "2026-12-05",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "17946",
+        "from": "Delhi",
+        "to": "Agra",
+        "dep": "2026-12-05T09:30",
+        "arr": "2026-12-05T12:52",
+        "class": "CC",
+        "quota": "CUR",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "activities": [
+       {
+        "id": "Agra Fort",
+        "start": "2026-12-05T14:00",
+        "end": "2026-12-05T16:00"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "days",
+     "booking_date"
+    ]
+   }
+  },
+  {
+   "name": "ticket_only_is_valid_now",
+   "kind": "variant",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-12-05",
+    "days": [
+     {
+      "date": "2026-12-05",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "17946",
+        "from": "Delhi",
+        "to": "Agra",
+        "dep": "2026-12-05T09:30",
+        "arr": "2026-12-05T12:52",
+        "class": "CC",
+        "quota": "CUR",
+        "pax": 2,
+        "half": 0
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0
+   }
+  },
+  {
+   "name": "waitlisted_cc_train",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-12-05",
+    "days": [
+     {
+      "date": "2026-12-05",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "13207",
+        "from": "Delhi",
+        "to": "Agra",
+        "dep": "2026-12-05T07:45",
+        "arr": "2026-12-05T11:40",
+        "class": "CC",
+        "quota": "CUR",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "activities": [
+       {
+        "id": "Agra Fort",
+        "start": "2026-12-05T14:00",
+        "end": "2026-12-05T16:00"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-AVAIL"
+    ],
+    "passes_all_but": [
+     "R-AVAIL"
+    ]
+   }
+  },
+  {
+   "name": "tatkal_instead_of_current",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-12-05",
+    "days": [
+     {
+      "date": "2026-12-05",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "17946",
+        "from": "Delhi",
+        "to": "Agra",
+        "dep": "2026-12-05T09:30",
+        "arr": "2026-12-05T12:52",
+        "class": "CC",
+        "quota": "TQ",
+        "pax": 2,
+        "half": 0,
+        "book_at": "10:00"
+       }
+      ],
+      "activities": [
+       {
+        "id": "Agra Fort",
+        "start": "2026-12-05T14:00",
+        "end": "2026-12-05T16:00"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-QUOTA"
+    ],
+    "passes_all_but": [
+     "R-QUOTA"
+    ]
+   }
+  },
+  {
+   "name": "second_class_where_cc_only",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-12-05",
+    "days": [
+     {
+      "date": "2026-12-05",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "17946",
+        "from": "Delhi",
+        "to": "Agra",
+        "dep": "2026-12-05T09:30",
+        "arr": "2026-12-05T12:52",
+        "class": "2S",
+        "quota": "CUR",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "activities": [
+       {
+        "id": "Agra Fort",
+        "start": "2026-12-05T14:00",
+        "end": "2026-12-05T16:00"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-ROUTE",
+     "R-AVAIL"
+    ],
+    "passes_all_but": [
+     "R-ROUTE",
+     "R-AVAIL"
+    ]
+   }
+  },
+  {
+   "name": "claims_infeasible_on_a_feasible_task",
+   "kind": "violation",
+   "submission": {
+    "status": "infeasible",
+    "binding": [
+     "R-QUOTA"
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.0
+   }
+  }
+ ]
+}

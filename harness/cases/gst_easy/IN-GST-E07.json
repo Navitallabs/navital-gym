@@ -1,0 +1,77 @@
+{
+ "env": "gst_easy",
+ "task_id": "IN-GST-E07",
+ "task": {
+  "id": "IN-GST-E07",
+  "family": "easy_tax",
+  "difficulty": 1,
+  "lang": "en",
+  "prompt": "A shop sells 2 mixers at Rs 3,500 each. GST on them is 18%. How much GST is charged on the whole sale, in rupees? Answer field: tax = a number (rupees, up to 2 decimals).",
+  "params": {
+   "world": {
+    "item": "mixers",
+    "qty": 2,
+    "rate_pct": 18,
+    "unit_price": 3500
+   },
+   "rules": {
+    "rule": "GST on a sale = quantity x unit price x GST rate / 100. Give the amount in rupees, up to 2 decimals."
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-TAX"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "kind": "easy_tax",
+   "gold_answer": {
+    "tax": "1260.00"
+   },
+   "forbidden_actions": [],
+   "split": "easy"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "tax": "1260.00"
+    }
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "answer"
+    ]
+   }
+  },
+  {
+   "name": "only_R-TAX",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "tax": "1261.00"
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-TAX"
+    ],
+    "passes_all_but": [
+     "R-TAX"
+    ]
+   }
+  }
+ ]
+}

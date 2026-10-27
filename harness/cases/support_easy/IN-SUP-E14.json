@@ -1,0 +1,174 @@
+{
+ "env": "support_easy",
+ "task_id": "IN-SUP-E14",
+ "task": {
+  "id": "IN-SUP-E14",
+  "family": "address_change",
+  "difficulty": 1,
+  "lang": "hinglish",
+  "prompt": "OD82014 ka address change karna hai, galat likh diya tha.",
+  "params": {
+   "policy": {
+    "address_change_allowed_status": [
+     "placed"
+    ]
+   },
+   "world": {
+    "authenticated_customer_owns_order": true,
+    "order": {
+     "category": "electronics",
+     "delivered_on": null,
+     "id": "OD82014",
+     "item": "Bluetooth speaker",
+     "payment": "cod",
+     "phone": "9000082014",
+     "price": 900,
+     "ship_address": "Flat 54, Sample Colony, Pune 411001",
+     "shipping_fee": 60,
+     "status": "shipped"
+    },
+    "today": "2026-11-16"
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-ACTIONS",
+   "R-FORBIDDEN",
+   "R-DECISION",
+   "R-REASON",
+   "R-LANG"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "forbidden_actions": [
+    "request_address_change"
+   ],
+   "gold_answer": {
+    "action": "decline_address_change",
+    "reason": "already_shipped",
+    "reply_language": "hinglish"
+   },
+   "kind": "address_change",
+   "review_status": "AI-drafted Hinglish, not native-reviewed",
+   "split": "easy"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "actions": [],
+    "decision": "decline_address_change",
+    "reason": "already_shipped",
+    "reply": "Aapka order ship ho chuka hai, isliye hum address nahi badal sakte hain."
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "actions",
+     "decision",
+     "reason"
+    ]
+   }
+  },
+  {
+   "name": "wrong_decision",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [],
+    "decision": "address_change",
+    "reason": "already_shipped",
+    "reply": "Aapka order ship ho chuka hai, isliye hum address nahi badal sakte hain."
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-DECISION"
+    ],
+    "passes_all_but": [
+     "R-DECISION"
+    ]
+   }
+  },
+  {
+   "name": "wrong_reason",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [],
+    "decision": "decline_address_change",
+    "reason": "not_shipped",
+    "reply": "Aapka order ship ho chuka hai, isliye hum address nahi badal sakte hain."
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-REASON"
+    ],
+    "passes_all_but": [
+     "R-REASON"
+    ]
+   }
+  },
+  {
+   "name": "english_reply",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [],
+    "decision": "decline_address_change",
+    "reason": "already_shipped",
+    "reply": "Your request has been handled as per our policy."
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-LANG"
+    ],
+    "passes_all_but": [
+     "R-LANG"
+    ]
+   }
+  },
+  {
+   "name": "extra_refund_action",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [
+     {
+      "tool": "issue_refund",
+      "args": {
+       "order_id": "OD82014",
+       "amount": 100,
+       "mode": "original_source"
+      }
+     }
+    ],
+    "decision": "decline_address_change",
+    "reason": "already_shipped",
+    "reply": "Aapka order ship ho chuka hai, isliye hum address nahi badal sakte hain."
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-FORBIDDEN"
+    ],
+    "passes_all_but": [
+     "R-FORBIDDEN"
+    ]
+   }
+  }
+ ]
+}

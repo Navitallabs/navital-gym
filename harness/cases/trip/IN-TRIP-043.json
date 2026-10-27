@@ -1,0 +1,324 @@
+{
+ "env": "trip",
+ "task_id": "IN-TRIP-043",
+ "task": {
+  "id": "IN-TRIP-043",
+  "family": "rail-logic",
+  "difficulty": 4,
+  "lang": "en",
+  "prompt": "Today is 2026-12-03. Book rail from Mumbai to Pune on 2026-12-04 for 3 adults.",
+  "params": {
+   "days": 1,
+   "diet": "any",
+   "end": "Pune",
+   "mode_policy": "rail_only",
+   "origin": "Mumbai",
+   "route": [
+    "Pune"
+   ],
+   "snapshot_date": "2026-12-03",
+   "start": "2026-12-04",
+   "travelers": {
+    "adults": 3,
+    "child_ages": [],
+    "seniors": 0
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-DATE",
+   "R-CONN",
+   "R-QUOTA",
+   "R-AVAIL",
+   "R-OPEN",
+   "R-SEASON",
+   "R-OCC",
+   "R-ROUTE"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": "2026-12-03",
+  "meta": {
+   "binding_sets": [],
+   "design_intent_binding": [],
+   "design_intent_feasible": true,
+   "design_notes": [
+    "travel tomorrow: Tatkal only; must state opening time"
+   ],
+   "oracle_plan_cost": null,
+   "solver_note": "plan found (1 candidates checked)"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-12-03",
+    "days": [
+     {
+      "date": "2026-12-04",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "12260",
+        "from": "Mumbai",
+        "to": "Pune",
+        "dep": "2026-12-04T06:15",
+        "arr": "2026-12-04T09:05",
+        "class": "CC",
+        "quota": "TQ",
+        "pax": 3,
+        "half": 0,
+        "book_at": "10:00"
+       }
+      ],
+      "activities": [
+       {
+        "id": "Shaniwar Wada",
+        "start": "2026-12-04T10:30",
+        "end": "2026-12-04T11:45"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "days",
+     "booking_date"
+    ]
+   }
+  },
+  {
+   "name": "ticket_only_is_valid_now",
+   "kind": "variant",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-12-03",
+    "days": [
+     {
+      "date": "2026-12-04",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "12260",
+        "from": "Mumbai",
+        "to": "Pune",
+        "dep": "2026-12-04T06:15",
+        "arr": "2026-12-04T09:05",
+        "class": "CC",
+        "quota": "TQ",
+        "pax": 3,
+        "half": 0,
+        "book_at": "10:00"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0
+   }
+  },
+  {
+   "name": "general_quota_one_day_before",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-12-03",
+    "days": [
+     {
+      "date": "2026-12-04",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "12260",
+        "from": "Mumbai",
+        "to": "Pune",
+        "dep": "2026-12-04T06:15",
+        "arr": "2026-12-04T09:05",
+        "class": "CC",
+        "quota": "GN",
+        "pax": 3,
+        "half": 0,
+        "book_at": null
+       }
+      ],
+      "activities": [
+       {
+        "id": "Shaniwar Wada",
+        "start": "2026-12-04T10:30",
+        "end": "2026-12-04T11:45"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-QUOTA"
+    ],
+    "passes_all_but": [
+     "R-QUOTA"
+    ]
+   }
+  },
+  {
+   "name": "ac_class_with_non_ac_opening_time",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-12-03",
+    "days": [
+     {
+      "date": "2026-12-04",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "12260",
+        "from": "Mumbai",
+        "to": "Pune",
+        "dep": "2026-12-04T06:15",
+        "arr": "2026-12-04T09:05",
+        "class": "CC",
+        "quota": "TQ",
+        "pax": 3,
+        "half": 0,
+        "book_at": "11:00"
+       }
+      ],
+      "activities": [
+       {
+        "id": "Shaniwar Wada",
+        "start": "2026-12-04T10:30",
+        "end": "2026-12-04T11:45"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-QUOTA"
+    ],
+    "passes_all_but": [
+     "R-QUOTA"
+    ]
+   }
+  },
+  {
+   "name": "waitlisted_2s",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-12-03",
+    "days": [
+     {
+      "date": "2026-12-04",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "12260",
+        "from": "Mumbai",
+        "to": "Pune",
+        "dep": "2026-12-04T06:15",
+        "arr": "2026-12-04T09:05",
+        "class": "2S",
+        "quota": "TQ",
+        "pax": 3,
+        "half": 0,
+        "book_at": "11:00"
+       }
+      ],
+      "activities": [
+       {
+        "id": "Shaniwar Wada",
+        "start": "2026-12-04T10:30",
+        "end": "2026-12-04T11:45"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-AVAIL"
+    ],
+    "passes_all_but": [
+     "R-AVAIL"
+    ]
+   }
+  },
+  {
+   "name": "booked_two_days_early",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-12-02",
+    "days": [
+     {
+      "date": "2026-12-04",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "12260",
+        "from": "Mumbai",
+        "to": "Pune",
+        "dep": "2026-12-04T06:15",
+        "arr": "2026-12-04T09:05",
+        "class": "CC",
+        "quota": "TQ",
+        "pax": 3,
+        "half": 0,
+        "book_at": "10:00"
+       }
+      ],
+      "activities": [
+       {
+        "id": "Shaniwar Wada",
+        "start": "2026-12-04T10:30",
+        "end": "2026-12-04T11:45"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-QUOTA"
+    ],
+    "passes_all_but": [
+     "R-QUOTA"
+    ]
+   }
+  },
+  {
+   "name": "claims_infeasible_on_a_feasible_task",
+   "kind": "violation",
+   "submission": {
+    "status": "infeasible",
+    "binding": [
+     "R-QUOTA"
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.0
+   }
+  }
+ ]
+}

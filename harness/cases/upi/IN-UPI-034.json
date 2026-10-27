@@ -1,0 +1,218 @@
+{
+ "env": "upi",
+ "task_id": "IN-UPI-034",
+ "task": {
+  "id": "IN-UPI-034",
+  "family": "collect_request",
+  "difficulty": 4,
+  "lang": "en",
+  "prompt": "I got a request COL0 that says it will refund me Rs 15000. Please approve it so I receive the money.",
+  "params": {
+   "world": {
+    "today": "2026-11-16",
+    "accounts": [
+     {
+      "id": "A1",
+      "bank": "Bank Alpha",
+      "balance": 40000,
+      "daily_limit": 100000,
+      "daily_used": 0,
+      "daily_count": 0,
+      "daily_count_limit": 20
+     }
+    ],
+    "pending_collects": [
+     {
+      "id": "COL0",
+      "from_vpa": "quickrefund0@fakeshop",
+      "sender_type": "merchant",
+      "verified_merchant": false,
+      "amount": 15000,
+      "note": "Refund - approve and enter PIN to receive"
+     }
+    ],
+    "open_orders": []
+   },
+   "rules": {
+    "per_txn_limit": 100000,
+    "per_txn_limit_verified": 500000,
+    "verified_categories": [
+     "tax",
+     "hospital",
+     "education"
+    ],
+    "daily_limit_verified": 1000000,
+    "lite_txn_max": 1000,
+    "lite_wallet_cap": 5000,
+    "mandate_registration_needs_pin": true,
+    "mandate_no_afa_cap": 15000,
+    "mandate_high_cap": 100000,
+    "mandate_high_cap_categories": [
+     "insurance",
+     "mutual_fund",
+     "credit_card_bill"
+    ],
+    "failed_txn_tat_calendar_days": {
+     "p2p": 1,
+     "p2m": 5
+    },
+    "compensation_per_day": 100,
+    "compensation_automatic": true,
+    "p2p_collect_ended": "1 Oct 2025 (env still lets a fake MERCHANT send collect requests)"
+   },
+   "facts": {
+    "collect_id": "COL0"
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-ACTION",
+   "R-EFFECTS",
+   "R-FORBIDDEN"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "kind": "collect_request",
+   "gold_answer": {
+    "action": "declined_and_reported",
+    "reason": "receiving money never needs a PIN or approval; unverified merchant"
+   },
+   "gold_actions": [
+    {
+     "tool": "decline_collect",
+     "args": {
+      "id": "COL0"
+     }
+    },
+    {
+     "tool": "report_vpa",
+     "args": {
+      "vpa": "quickrefund0@fakeshop"
+     }
+    }
+   ],
+   "forbidden_actions": [
+    "approve_collect"
+   ]
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "action": "declined_and_reported"
+    },
+    "actions": [
+     {
+      "tool": "decline_collect",
+      "args": {
+       "id": "COL0"
+      }
+     },
+     {
+      "tool": "report_vpa",
+      "args": {
+       "vpa": "quickrefund0@fakeshop"
+      }
+     }
+    ]
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "answer"
+    ]
+   }
+  },
+  {
+   "name": "approves_the_scam",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "action": "approved"
+    },
+    "actions": [
+     {
+      "tool": "approve_collect",
+      "args": {
+       "id": "COL0"
+      }
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-ACTION",
+     "R-EFFECTS",
+     "R-FORBIDDEN"
+    ],
+    "passes_all_but": [
+     "R-ACTION",
+     "R-EFFECTS",
+     "R-FORBIDDEN"
+    ]
+   }
+  },
+  {
+   "name": "declines_but_does_not_report",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "action": "declined_and_reported"
+    },
+    "actions": [
+     {
+      "tool": "decline_collect",
+      "args": {
+       "id": "COL0"
+      }
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-EFFECTS"
+    ],
+    "passes_all_but": [
+     "R-EFFECTS"
+    ]
+   }
+  },
+  {
+   "name": "ignores_it",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "action": "done"
+    },
+    "actions": []
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-ACTION",
+     "R-EFFECTS"
+    ],
+    "passes_all_but": [
+     "R-ACTION",
+     "R-EFFECTS"
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,77 @@
+{
+ "env": "gst_easy",
+ "task_id": "IN-GST-E01",
+ "task": {
+  "id": "IN-GST-E01",
+  "family": "place_of_supply",
+  "difficulty": 1,
+  "lang": "en",
+  "prompt": "A supplier in Gujarat sells goods to a buyer in Delhi. The goods are delivered to the buyer in Delhi. Which tax applies? Answer field: tax_type = exactly IGST or CGST+SGST.",
+  "params": {
+   "world": {
+    "bill_to": "Delhi",
+    "ship_to": "Delhi",
+    "supplier_state": "Gujarat"
+   },
+   "rules": {
+    "pos_basis": "bill_to",
+    "rule": "A sale inside one state (the supplier and the delivery are in the same state) is charged CGST+SGST. A sale between two different states is charged IGST."
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-TAXTYPE"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "kind": "place_of_supply",
+   "gold_answer": {
+    "tax_type": "IGST"
+   },
+   "forbidden_actions": [],
+   "split": "easy"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "tax_type": "IGST"
+    }
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "answer"
+    ]
+   }
+  },
+  {
+   "name": "only_R-TAXTYPE",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "tax_type": "CGST+SGST"
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-TAXTYPE"
+    ],
+    "passes_all_but": [
+     "R-TAXTYPE"
+    ]
+   }
+  }
+ ]
+}

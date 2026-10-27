@@ -1,0 +1,262 @@
+{
+ "env": "support",
+ "task_id": "IN-SUP-030",
+ "task": {
+  "id": "IN-SUP-030",
+  "family": "damaged",
+  "difficulty": 4,
+  "lang": "hi",
+  "prompt": "मेरा ऑर्डर OD81401 (Cotton kurta) टूटा हुआ आया है। पैसे वापस कीजिए।",
+  "params": {
+   "policy": {
+    "address_change_allowed_status": [
+     "placed"
+    ],
+    "cancel_allowed_status": [
+     "placed"
+    ],
+    "cod_refund_requires_valid_ifsc": true,
+    "damaged_report_window_days": 7,
+    "damaged_requires_photo": true,
+    "marker_words": {
+     "hi": [
+      "है",
+      "आपका",
+      "नहीं",
+      "कृपया"
+     ],
+     "mr": [
+      "आहे",
+      "तुमचा",
+      "नाही",
+      "कृपया"
+     ]
+    },
+    "non_returnable_categories": [
+     "personal_care",
+     "grocery"
+    ],
+    "refund_eta_workdays": 5,
+    "refund_includes_shipping_if_seller_fault": true,
+    "reply_language_rule": "reply in the customer's language; Hinglish gets Latin-script Hinglish",
+    "return_window_days": {
+     "apparel": 15,
+     "books": 7,
+     "electronics": 10,
+     "grocery": 0,
+     "personal_care": 0
+    },
+    "script_check": {
+     "bn": "Bengali",
+     "hi": "Devanagari",
+     "hinglish": "Latin",
+     "mr": "Devanagari",
+     "ta": "Tamil"
+    }
+   },
+   "world": {
+    "authenticated_customer_owns_order": true,
+    "order": {
+     "category": "apparel",
+     "delivered_on": "2026-11-11",
+     "id": "OD81401",
+     "item": "Cotton kurta",
+     "payment": "prepaid",
+     "phone": "9000010401",
+     "price": 799,
+     "ship_address": "Flat 11, Sample Colony, Pune 411001",
+     "shipping_fee": 60,
+     "status": "delivered"
+    },
+    "photo_uploaded": false,
+    "today": "2026-11-16"
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-ACTIONS",
+   "R-FORBIDDEN",
+   "R-DECISION",
+   "R-REASON",
+   "R-LANG"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "forbidden_actions": [
+    "issue_refund"
+   ],
+   "gold_answer": {
+    "action": "request_photo",
+    "reply_language": "hi"
+   },
+   "kind": "damaged",
+   "split": "core"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "actions": [
+     {
+      "tool": "request_photo",
+      "args": {
+       "order_id": "OD81401"
+      }
+     }
+    ],
+    "reply": "आपका ऑर्डर टूटा हुआ है, हम आपसे एक फ़ोटो भेजने की प्रार्थना करते हैं ताकि हम आपके पैसे वापस कर सकें। कृपया फ़ोटो भेजें।",
+    "decision": "request_photo",
+    "reason": "no_photo"
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "actions",
+     "decision",
+     "reason"
+    ]
+   }
+  },
+  {
+   "name": "refund_without_photo",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [
+     {
+      "tool": "request_photo",
+      "args": {
+       "order_id": "OD81401"
+      }
+     },
+     {
+      "tool": "issue_refund",
+      "args": {
+       "order_id": "OD81401",
+       "amount": 859,
+       "mode": "original_source"
+      }
+     }
+    ],
+    "reply": "आपका ऑर्डर टूटा हुआ है, हम आपसे एक फ़ोटो भेजने की प्रार्थना करते हैं ताकि हम आपके पैसे वापस कर सकें। कृपया फ़ोटो भेजें।",
+    "decision": "request_photo",
+    "reason": "no_photo"
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-FORBIDDEN"
+    ],
+    "passes_all_but": [
+     "R-FORBIDDEN"
+    ]
+   }
+  },
+  {
+   "name": "no_photo_request",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [],
+    "reply": "आपका ऑर्डर टूटा हुआ है, हम आपसे एक फ़ोटो भेजने की प्रार्थना करते हैं ताकि हम आपके पैसे वापस कर सकें। कृपया फ़ोटो भेजें।",
+    "decision": "request_photo",
+    "reason": "no_photo"
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-ACTIONS"
+    ],
+    "passes_all_but": [
+     "R-ACTIONS"
+    ]
+   }
+  },
+  {
+   "name": "wrong_decision",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [
+     {
+      "tool": "request_photo",
+      "args": {
+       "order_id": "OD81401"
+      }
+     }
+    ],
+    "reply": "आपका ऑर्डर टूटा हुआ है, हम आपसे एक फ़ोटो भेजने की प्रार्थना करते हैं ताकि हम आपके पैसे वापस कर सकें। कृपया फ़ोटो भेजें।",
+    "decision": "refund",
+    "reason": "no_photo"
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-DECISION"
+    ],
+    "passes_all_but": [
+     "R-DECISION"
+    ]
+   }
+  },
+  {
+   "name": "wrong_reason",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [
+     {
+      "tool": "request_photo",
+      "args": {
+       "order_id": "OD81401"
+      }
+     }
+    ],
+    "reply": "आपका ऑर्डर टूटा हुआ है, हम आपसे एक फ़ोटो भेजने की प्रार्थना करते हैं ताकि हम आपके पैसे वापस कर सकें। कृपया फ़ोटो भेजें।",
+    "decision": "request_photo",
+    "reason": "damaged_with_photo"
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-REASON"
+    ],
+    "passes_all_but": [
+     "R-REASON"
+    ]
+   }
+  },
+  {
+   "name": "missing_reason_is_format_gate",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [
+     {
+      "tool": "request_photo",
+      "args": {
+       "order_id": "OD81401"
+      }
+     }
+    ],
+    "reply": "आपका ऑर्डर टूटा हुआ है, हम आपसे एक फ़ोटो भेजने की प्रार्थना करते हैं ताकि हम आपके पैसे वापस कर सकें। कृपया फ़ोटो भेजें।",
+    "decision": "request_photo"
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.0
+   }
+  }
+ ]
+}

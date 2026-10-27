@@ -1,0 +1,205 @@
+{
+ "env": "form_multidoc",
+ "task_id": "IN-FORMMD-027",
+ "task": {
+  "id": "IN-FORMMD-027",
+  "family": "ocr_repair",
+  "difficulty": 5,
+  "lang": "en",
+  "prompt": "The text below (get_input) was read by OCR and may contain look-alike mistakes. Apply the repair rule in get_policy to the PAN and the IFSC. Give: pan = the PAN after repair, or null if it cannot be repaired; ifsc = the IFSC after repair, or null if it cannot be repaired; repaired = the list of fields among pan and ifsc that you actually changed (alphabetical order; an empty list [] if none). A field that was already valid is returned unchanged and is not listed in repaired.\n\nAnswer fields: pan, ifsc, repaired.",
+  "params": {
+   "world": {
+    "document_text": "SCANNED FORM (OCR)\nName: Kavita Patel\nPAN: HGNPP8578L\nBank IFSC: UTIBOGVWN92"
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-PAN",
+   "R-IFSC",
+   "R-REPAIRED"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "gold_answer": {
+    "ifsc": "UTIB0GVWN92",
+    "pan": "HGNPP8578L",
+    "repaired": [
+     "ifsc"
+    ]
+   },
+   "kind": "ocr_repair"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "pan": "HGNPP8578L",
+     "ifsc": "UTIB0GVWN92",
+     "repaired": [
+      "ifsc"
+     ]
+    }
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "answer"
+    ]
+   }
+  },
+  {
+   "name": "only_R-PAN",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "pan": "HGNPP8578Lx",
+     "ifsc": "UTIB0GVWN92",
+     "repaired": [
+      "ifsc"
+     ]
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-PAN"
+    ],
+    "passes_all_but": [
+     "R-PAN"
+    ]
+   }
+  },
+  {
+   "name": "only_R-IFSC",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "pan": "HGNPP8578L",
+     "ifsc": "UTIB0GVWN92x",
+     "repaired": [
+      "ifsc"
+     ]
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-IFSC"
+    ],
+    "passes_all_but": [
+     "R-IFSC"
+    ]
+   }
+  },
+  {
+   "name": "only_R-REPAIRED",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "pan": "HGNPP8578L",
+     "ifsc": "UTIB0GVWN92",
+     "repaired": [
+      "ifsc",
+      "ZZ9"
+     ]
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-REPAIRED"
+    ],
+    "passes_all_but": [
+     "R-REPAIRED"
+    ]
+   }
+  },
+  {
+   "name": "duplicate_item_in_repaired",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "pan": "HGNPP8578L",
+     "ifsc": "UTIB0GVWN92",
+     "repaired": [
+      "ifsc",
+      "ifsc"
+     ]
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-REPAIRED"
+    ],
+    "passes_all_but": [
+     "R-REPAIRED"
+    ]
+   }
+  },
+  {
+   "name": "lowercase_pan",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "pan": "hgnpp8578l",
+     "ifsc": "UTIB0GVWN92",
+     "repaired": [
+      "ifsc"
+     ]
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-PAN"
+    ],
+    "passes_all_but": [
+     "R-PAN"
+    ]
+   }
+  },
+  {
+   "name": "lowercase_ifsc",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "pan": "HGNPP8578L",
+     "ifsc": "utib0gvwn92",
+     "repaired": [
+      "ifsc"
+     ]
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-IFSC"
+    ],
+    "passes_all_but": [
+     "R-IFSC"
+    ]
+   }
+  }
+ ]
+}

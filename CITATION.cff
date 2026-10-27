@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use Navital Gym, please cite it as below."
+title: "Navital Gym: deterministic, auto-graded environments for AI agents doing Indian-reality tasks"
+type: software
+authors:
+  - name: "Navital Labs"
+version: "1.0.0"
+license: Apache-2.0
+repository-code: "https://github.com/Navitallabs/navital-gym"
+url: "https://huggingface.co/NavitalLabs"
+keywords: [agents, evaluation, benchmark, reinforcement-learning, India, tool-use]
+abstract: "A suite of sandboxed, deterministic environments with exact graders (no LLM judge) for agents doing tasks set in India: trip planning with rail quotas, GST invoicing, form filling, regional-language customer support and more. Code is Apache-2.0, task data CC BY 4.0."

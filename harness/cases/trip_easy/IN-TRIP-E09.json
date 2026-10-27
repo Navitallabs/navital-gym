@@ -1,0 +1,331 @@
+{
+ "env": "trip_easy",
+ "task_id": "IN-TRIP-E09",
+ "task": {
+  "id": "IN-TRIP-E09",
+  "family": "easy-day-trip",
+  "difficulty": 1,
+  "lang": "en",
+  "prompt": "Plan a one-day trip from Delhi to Agra on 2026-12-05 for 2 adults. Visit the Taj Mahal. Budget Rs 9,000.",
+  "params": {
+   "budget_inr": 9000,
+   "days": 1,
+   "diet": "any",
+   "end": "Delhi",
+   "must_visit": [
+    "Taj Mahal"
+   ],
+   "origin": "Delhi",
+   "route": [
+    "Delhi",
+    "Agra"
+   ],
+   "start": "2026-12-05",
+   "travelers": {
+    "adults": 2,
+    "child_ages": [],
+    "seniors": 0
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-DATE",
+   "R-CONN",
+   "R-QUOTA",
+   "R-AVAIL",
+   "R-OPEN",
+   "R-SEASON",
+   "R-OCC",
+   "R-ROUTE",
+   "R-BUD"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "binding_sets": [],
+   "solver_note": "plan found (5 candidates checked)",
+   "split": "easy"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2026-12-05",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "17946",
+        "from": "Delhi",
+        "to": "Agra",
+        "dep": "2026-12-05T09:30",
+        "arr": "2026-12-05T12:52",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       },
+       {
+        "mode": "road",
+        "id": "TX-AGRA-DELH",
+        "from": "Agra",
+        "to": "Delhi",
+        "dep": "2026-12-05T16:30",
+        "arr": "2026-12-05T20:35",
+        "pax": 2,
+        "vehicles": 1
+       }
+      ],
+      "activities": [
+       {
+        "id": "Taj Mahal",
+        "start": "2026-12-05T13:25",
+        "end": "2026-12-05T15:55"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "days",
+     "booking_date"
+    ]
+   }
+  },
+  {
+   "name": "taj_before_it_opens_and_before_arriving",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2026-12-05",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "17946",
+        "from": "Delhi",
+        "to": "Agra",
+        "dep": "2026-12-05T09:30",
+        "arr": "2026-12-05T12:52",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       },
+       {
+        "mode": "road",
+        "id": "TX-AGRA-DELH",
+        "from": "Agra",
+        "to": "Delhi",
+        "dep": "2026-12-05T16:30",
+        "arr": "2026-12-05T20:35",
+        "pax": 2,
+        "vehicles": 1
+       }
+      ],
+      "activities": [
+       {
+        "id": "Taj Mahal",
+        "start": "2026-12-05T04:00",
+        "end": "2026-12-05T06:30"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-OPEN",
+     "R-CONN"
+    ],
+    "passes_all_but": [
+     "R-OPEN",
+     "R-CONN"
+    ]
+   }
+  },
+  {
+   "name": "no_taj_visit",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2026-12-05",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "17946",
+        "from": "Delhi",
+        "to": "Agra",
+        "dep": "2026-12-05T09:30",
+        "arr": "2026-12-05T12:52",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       },
+       {
+        "mode": "road",
+        "id": "TX-AGRA-DELH",
+        "from": "Agra",
+        "to": "Delhi",
+        "dep": "2026-12-05T16:30",
+        "arr": "2026-12-05T20:35",
+        "pax": 2,
+        "vehicles": 1
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-ROUTE"
+    ],
+    "passes_all_but": [
+     "R-ROUTE"
+    ]
+   }
+  },
+  {
+   "name": "one_ticket_on_the_train",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2026-12-05",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "17946",
+        "from": "Delhi",
+        "to": "Agra",
+        "dep": "2026-12-05T09:30",
+        "arr": "2026-12-05T12:52",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 1,
+        "half": 0
+       },
+       {
+        "mode": "road",
+        "id": "TX-AGRA-DELH",
+        "from": "Agra",
+        "to": "Delhi",
+        "dep": "2026-12-05T16:30",
+        "arr": "2026-12-05T20:35",
+        "pax": 2,
+        "vehicles": 1
+       }
+      ],
+      "activities": [
+       {
+        "id": "Taj Mahal",
+        "start": "2026-12-05T13:25",
+        "end": "2026-12-05T15:55"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-OCC"
+    ],
+    "passes_all_but": [
+     "R-OCC"
+    ]
+   }
+  },
+  {
+   "name": "visit_too_close_to_the_taxi",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2026-12-05",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "17946",
+        "from": "Delhi",
+        "to": "Agra",
+        "dep": "2026-12-05T09:30",
+        "arr": "2026-12-05T12:52",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       },
+       {
+        "mode": "road",
+        "id": "TX-AGRA-DELH",
+        "from": "Agra",
+        "to": "Delhi",
+        "dep": "2026-12-05T16:30",
+        "arr": "2026-12-05T20:35",
+        "pax": 2,
+        "vehicles": 1
+       }
+      ],
+      "activities": [
+       {
+        "id": "Taj Mahal",
+        "start": "2026-12-05T14:00",
+        "end": "2026-12-05T16:30"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-CONN"
+    ],
+    "passes_all_but": [
+     "R-CONN"
+    ]
+   }
+  },
+  {
+   "name": "claims_infeasible_on_a_feasible_task",
+   "kind": "violation",
+   "submission": {
+    "status": "infeasible",
+    "binding": [
+     "R-QUOTA"
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.0
+   }
+  }
+ ]
+}

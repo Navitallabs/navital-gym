@@ -1,0 +1,184 @@
+{
+ "env": "upi",
+ "task_id": "IN-UPI-043",
+ "task": {
+  "id": "IN-UPI-043",
+  "family": "mandate",
+  "difficulty": 4,
+  "lang": "en",
+  "prompt": "GymFit wants a monthly AutoPay mandate of Rs 15001. Set it up for me, and tell me whether each monthly debit will need my approval.",
+  "params": {
+   "world": {
+    "today": "2026-11-16",
+    "accounts": [
+     {
+      "id": "A1",
+      "bank": "Bank Alpha",
+      "balance": 300000,
+      "daily_limit": 100000,
+      "daily_used": 0,
+      "daily_count": 0,
+      "daily_count_limit": 20
+     }
+    ],
+    "mandate_request": {
+     "merchant": "GymFit",
+     "category": "fitness",
+     "amount": 15001,
+     "frequency": "monthly"
+    }
+   },
+   "rules": {
+    "per_txn_limit": 100000,
+    "per_txn_limit_verified": 500000,
+    "verified_categories": [
+     "tax",
+     "hospital",
+     "education"
+    ],
+    "daily_limit_verified": 1000000,
+    "lite_txn_max": 1000,
+    "lite_wallet_cap": 5000,
+    "mandate_registration_needs_pin": true,
+    "mandate_no_afa_cap": 15000,
+    "mandate_high_cap": 100000,
+    "mandate_high_cap_categories": [
+     "insurance",
+     "mutual_fund",
+     "credit_card_bill"
+    ],
+    "failed_txn_tat_calendar_days": {
+     "p2p": 1,
+     "p2m": 5
+    },
+    "compensation_per_day": 100,
+    "compensation_automatic": true,
+    "p2p_collect_ended": "1 Oct 2025 (env still lets a fake MERCHANT send collect requests)"
+   },
+   "facts": {}
+  },
+  "rules": [
+   "R-FMT",
+   "R-ACTION",
+   "R-EFFECTS",
+   "R-FORBIDDEN",
+   "R-DEBIT-APPROVAL",
+   "R-CAP"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "kind": "mandate",
+   "gold_answer": {
+    "action": "needs_user_pin_to_register",
+    "each_debit_needs_approval": true,
+    "cap_applied": 15000
+   },
+   "gold_actions": [],
+   "forbidden_actions": [
+    "create_mandate"
+   ]
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "action": "needs_user_pin_to_register",
+     "each_debit_needs_approval": true,
+     "cap_applied": 15000
+    },
+    "actions": []
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "answer"
+    ]
+   }
+  },
+  {
+   "name": "wrong_approval_answer",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "action": "needs_user_pin_to_register",
+     "each_debit_needs_approval": false,
+     "cap_applied": 15000
+    },
+    "actions": []
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-DEBIT-APPROVAL"
+    ],
+    "passes_all_but": [
+     "R-DEBIT-APPROVAL"
+    ]
+   }
+  },
+  {
+   "name": "wrong_cap",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "action": "needs_user_pin_to_register",
+     "each_debit_needs_approval": true,
+     "cap_applied": 100000
+    },
+    "actions": []
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-CAP"
+    ],
+    "passes_all_but": [
+     "R-CAP"
+    ]
+   }
+  },
+  {
+   "name": "creates_the_mandate_itself",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "action": "needs_user_pin_to_register",
+     "each_debit_needs_approval": true,
+     "cap_applied": 15000
+    },
+    "actions": [
+     {
+      "tool": "create_mandate",
+      "args": {
+       "merchant": "x",
+       "amount": 1
+      }
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-FORBIDDEN"
+    ],
+    "passes_all_but": [
+     "R-FORBIDDEN"
+    ]
+   }
+  }
+ ]
+}

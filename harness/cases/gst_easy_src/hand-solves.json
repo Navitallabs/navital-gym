@@ -1,0 +1,21 @@
+{
+ "_note": "qa hand solves for the GST easy split, worked by head from the prompts (2026-10-26) before comparing with the stored gold. Workings: tax = qty x price x rate/100; days late counted from the 20th of the next month.",
+ "IN-GST-E01": {"tax_type": "IGST"},
+ "IN-GST-E02": {"tax_type": "CGST+SGST"},
+ "IN-GST-E03": {"required": true},
+ "IN-GST-E04": {"required": false},
+ "IN-GST-E05": {"tax": "324.00"},
+ "IN-GST-E06": {"tax": "400.00"},
+ "IN-GST-E07": {"tax": "1260.00"},
+ "IN-GST-E08": {"tax": "0.00"},
+ "IN-GST-E09": {"tax": "648.00"},
+ "IN-GST-E10": {"tax": "87.50"},
+ "IN-GST-E11": {"tax": "4410.00"},
+ "IN-GST-E12": {"days_late": 4},
+ "IN-GST-E13": {"days_late": 0},
+ "IN-GST-E14": {"days_late": 7},
+ "IN-GST-E15": {"days_late": 12},
+ "IN-GST-E16": {"days_late": 25},
+ "IN-GST-E17": {"days_late": 3},
+ "IN-GST-E18": {"days_late": 16}
+}

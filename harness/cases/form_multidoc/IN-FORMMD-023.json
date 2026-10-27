@@ -1,0 +1,167 @@
+{
+ "env": "form_multidoc",
+ "task_id": "IN-FORMMD-023",
+ "task": {
+  "id": "IN-FORMMD-023",
+  "family": "record_conflicts",
+  "difficulty": 4,
+  "lang": "en",
+  "prompt": "One application form (get_input) lists a date of birth, a stated age, a minor box, a PIN, a state, an IFSC and a bank name. Today is the form date shown on the form. Use the checks in get_policy. Give: inconsistent_fields = the list of failing checks among age, minor, pin_state and bank (alphabetical order; an empty list [] if none fail); age = the true age in completed years on the form date, computed from the date of birth; minor = true if that true age is under 18, otherwise false.\n\nAnswer fields: inconsistent_fields, age, minor.",
+  "params": {
+   "world": {
+    "document_text": "APPLICATION FORM (form date 05/12/2026)\nDate of birth: 12/09/1975\nAge (stated): 51\nMinor: Yes\nPIN: 226001\nState: Delhi\nIFSC: PUNB0D04GTW\nBank: Axis Bank"
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-INCONSISTENT",
+   "R-AGE",
+   "R-MINOR"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "gold_answer": {
+    "age": 51,
+    "inconsistent_fields": [
+     "bank",
+     "minor",
+     "pin_state"
+    ],
+    "minor": false
+   },
+   "kind": "record_conflicts"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "inconsistent_fields": [
+      "bank",
+      "minor",
+      "pin_state"
+     ],
+     "age": 51,
+     "minor": false
+    }
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "answer"
+    ]
+   }
+  },
+  {
+   "name": "only_R-INCONSISTENT",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "inconsistent_fields": [
+      "bank",
+      "minor"
+     ],
+     "age": 51,
+     "minor": false
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-INCONSISTENT"
+    ],
+    "passes_all_but": [
+     "R-INCONSISTENT"
+    ]
+   }
+  },
+  {
+   "name": "only_R-AGE",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "inconsistent_fields": [
+      "bank",
+      "minor",
+      "pin_state"
+     ],
+     "age": 52,
+     "minor": false
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-AGE"
+    ],
+    "passes_all_but": [
+     "R-AGE"
+    ]
+   }
+  },
+  {
+   "name": "only_R-MINOR",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "inconsistent_fields": [
+      "bank",
+      "minor",
+      "pin_state"
+     ],
+     "age": 51,
+     "minor": true
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-MINOR"
+    ],
+    "passes_all_but": [
+     "R-MINOR"
+    ]
+   }
+  },
+  {
+   "name": "duplicate_item_in_inconsistent_fields",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "inconsistent_fields": [
+      "bank",
+      "minor",
+      "pin_state",
+      "bank"
+     ],
+     "age": 51,
+     "minor": false
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-INCONSISTENT"
+    ],
+    "passes_all_but": [
+     "R-INCONSISTENT"
+    ]
+   }
+  }
+ ]
+}

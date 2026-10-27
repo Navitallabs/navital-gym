@@ -1,0 +1,164 @@
+{
+ "env": "form_multidoc",
+ "task_id": "IN-FORMMD-038",
+ "task": {
+  "id": "IN-FORMMD-038",
+  "family": "batch",
+  "difficulty": 5,
+  "lang": "en",
+  "prompt": "The text (get_input) lists six applicant records, R1 to R6, and the reference date. Use the rules in get_policy. Give: minors = the number of records whose age on the reference date is under 18; invalid_pans = the record ids whose PAN does not fit the PAN format (sorted by record number, for example [\"R2\", \"R5\"]; an empty list [] if none); current_account_eligible = the record ids that request a current account, are 18 or older on the reference date and have a valid PAN (sorted by record number; an empty list [] if none).\n\nAnswer fields: minors, invalid_pans, current_account_eligible.",
+  "params": {
+   "world": {
+    "document_text": "APPLICATION BATCH (reference date 23/11/2026)\nR1: Pooja Chopra | DOB 13/04/2012 | PAN XTVPC7968J | account requested: savings\nR2: Sanjay Kulkarni | DOB 20/04/2010 | PAN KFUPK3687C | account requested: savings\nR3: Arjun Singh | DOB 15/12/2013 | PAN TFTPS5228X | account requested: current\nR4: Meena Banerjee | DOB 22/11/2001 | PAN QCCPBA894Z | account requested: current\nR5: Meena Joshi | DOB 28/09/2014 | PAN bgfpj3422d | account requested: current\nR6: Suresh Khan | DOB 01/07/2010 | PAN YAVPK2363X | account requested: current"
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-MINORS",
+   "R-INVALID-PANS",
+   "R-ELIGIBLE"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "gold_answer": {
+    "current_account_eligible": [],
+    "invalid_pans": [
+     "R4",
+     "R5"
+    ],
+    "minors": 5
+   },
+   "kind": "batch"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "minors": 5,
+     "invalid_pans": [
+      "R4",
+      "R5"
+     ],
+     "current_account_eligible": []
+    }
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "answer"
+    ]
+   }
+  },
+  {
+   "name": "only_R-MINORS",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "minors": 6,
+     "invalid_pans": [
+      "R4",
+      "R5"
+     ],
+     "current_account_eligible": []
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-MINORS"
+    ],
+    "passes_all_but": [
+     "R-MINORS"
+    ]
+   }
+  },
+  {
+   "name": "only_R-INVALID-PANS",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "minors": 5,
+     "invalid_pans": [
+      "R4",
+      "R5",
+      "ZZ9"
+     ],
+     "current_account_eligible": []
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-INVALID-PANS"
+    ],
+    "passes_all_but": [
+     "R-INVALID-PANS"
+    ]
+   }
+  },
+  {
+   "name": "only_R-ELIGIBLE",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "minors": 5,
+     "invalid_pans": [
+      "R4",
+      "R5"
+     ],
+     "current_account_eligible": [
+      "ZZ9"
+     ]
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-ELIGIBLE"
+    ],
+    "passes_all_but": [
+     "R-ELIGIBLE"
+    ]
+   }
+  },
+  {
+   "name": "lowercase_ids_in_invalid_pans",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "minors": 5,
+     "invalid_pans": [
+      "r4",
+      "r5"
+     ],
+     "current_account_eligible": []
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-INVALID-PANS"
+    ],
+    "passes_all_but": [
+     "R-INVALID-PANS"
+    ]
+   }
+  }
+ ]
+}

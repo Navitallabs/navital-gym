@@ -1,0 +1,193 @@
+{
+ "env": "form_multidoc",
+ "task_id": "IN-FORMMD-005",
+ "task": {
+  "id": "IN-FORMMD-005",
+  "family": "multi_doc",
+  "difficulty": 4,
+  "lang": "en",
+  "prompt": "Three documents describe one applicant: a PAN card, a bank passbook header and an application form (get_input returns their text; get_policy gives the comparison rules). Compare the passbook and the application form with the PAN card. Give: conflicts = the list of fields among name, dob and pan on which the passbook or the application form disagrees with the PAN card (alphabetical order; an empty list [] if there is none); name = the applicant's name as on the PAN card, given names then surname, in Title Case; dob = the date of birth on the PAN card as YYYY-MM-DD; needs_manual_review = true if dob or pan is in conflicts, otherwise false.\n\nAnswer fields: conflicts, name, dob, needs_manual_review.",
+  "params": {
+   "world": {
+    "documents": {
+     "application_form": "ACCOUNT APPLICATION\nApplicant: ANIL SUNITA DAS\nDOB: 09-07-1988\nPAN: JAJPD6346Z",
+     "pan_card": "PERMANENT ACCOUNT NUMBER CARD\nNAME (surname first): DAS ANIL SUNITA\nDATE OF BIRTH: 09/07/1988\nPAN: JAJPD6346Z",
+     "passbook": "BANK PASSBOOK HEADER\nAccount holder: Anil Sunita Das\nDate of birth: 9 Jul 1988\nPAN on record: JAJPD9346Z"
+    }
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-CONFLICTS",
+   "R-NAME",
+   "R-DOB",
+   "R-REVIEW"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "gold_answer": {
+    "conflicts": [
+     "pan"
+    ],
+    "dob": "1988-07-09",
+    "name": "Anil Sunita Das",
+    "needs_manual_review": true
+   },
+   "kind": "multi_doc"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "conflicts": [
+      "pan"
+     ],
+     "name": "Anil Sunita Das",
+     "dob": "1988-07-09",
+     "needs_manual_review": true
+    }
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "answer"
+    ]
+   }
+  },
+  {
+   "name": "only_R-CONFLICTS",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "conflicts": [
+      "pan",
+      "ZZ9"
+     ],
+     "name": "Anil Sunita Das",
+     "dob": "1988-07-09",
+     "needs_manual_review": true
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-CONFLICTS"
+    ],
+    "passes_all_but": [
+     "R-CONFLICTS"
+    ]
+   }
+  },
+  {
+   "name": "only_R-NAME",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "conflicts": [
+      "pan"
+     ],
+     "name": "Anil Sunita Dasx",
+     "dob": "1988-07-09",
+     "needs_manual_review": true
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-NAME"
+    ],
+    "passes_all_but": [
+     "R-NAME"
+    ]
+   }
+  },
+  {
+   "name": "only_R-DOB",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "conflicts": [
+      "pan"
+     ],
+     "name": "Anil Sunita Das",
+     "dob": "1988-07-01",
+     "needs_manual_review": true
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-DOB"
+    ],
+    "passes_all_but": [
+     "R-DOB"
+    ]
+   }
+  },
+  {
+   "name": "only_R-REVIEW",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "conflicts": [
+      "pan"
+     ],
+     "name": "Anil Sunita Das",
+     "dob": "1988-07-09",
+     "needs_manual_review": false
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-REVIEW"
+    ],
+    "passes_all_but": [
+     "R-REVIEW"
+    ]
+   }
+  },
+  {
+   "name": "duplicate_item_in_conflicts",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "conflicts": [
+      "pan",
+      "pan"
+     ],
+     "name": "Anil Sunita Das",
+     "dob": "1988-07-09",
+     "needs_manual_review": true
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-CONFLICTS"
+    ],
+    "passes_all_but": [
+     "R-CONFLICTS"
+    ]
+   }
+  }
+ ]
+}

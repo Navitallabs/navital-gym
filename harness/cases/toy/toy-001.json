@@ -1,0 +1,6 @@
+{"env":"toy","task_id":"TOY-001","task":{"prompt":"2 days from 2026-12-05 under Rs 1000","params":{"budget_inr":1000,"days":2,"start":"2026-12-05"}},
+ "cases":[
+  {"name":"hand_solved","kind":"solved","submission":{"status":"plan","total_cost":900,"days":[{"date":"2026-12-05","legs":[{"id":"t1","fare":400}],"stay_cost":200},{"date":"2026-12-06","legs":[{"id":"t2","fare":300}]}]},"expect":{"solved":true,"min_score":1.0}},
+  {"name":"over_budget_only","kind":"violation","submission":{"status":"plan","total_cost":900,"days":[{"date":"2026-12-05","legs":[{"id":"t1","fare":900}],"stay_cost":200},{"date":"2026-12-06","legs":[]}]},"expect":{"solved":false,"max_score":0.7,"fails":["R-BUD"],"passes_all_but":["R-BUD"]}},
+  {"name":"wrong_dates_only","kind":"violation","submission":{"status":"plan","total_cost":500,"days":[{"date":"2026-12-07","legs":[{"id":"t1","fare":500}]},{"date":"2026-12-08","legs":[]}]},"expect":{"solved":false,"max_score":0.7,"fails":["R-DATE"],"passes_all_but":["R-DATE"]}}
+ ]}

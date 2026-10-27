@@ -1,0 +1,148 @@
+{
+ "env": "upi",
+ "task_id": "IN-UPI-011",
+ "task": {
+  "id": "IN-UPI-011",
+  "family": "limits",
+  "difficulty": 3,
+  "lang": "en",
+  "prompt": "Send Rs 90,000 to Payee 0 (payee0@upibank). They are a private individual.",
+  "params": {
+   "world": {
+    "today": "2026-11-16",
+    "accounts": [
+     {
+      "id": "A1",
+      "bank": "Bank Alpha",
+      "balance": 2000000,
+      "daily_limit": 100000,
+      "daily_used": 0,
+      "daily_count": 0,
+      "daily_count_limit": 20
+     }
+    ],
+    "vpa_directory": {
+     "payee0@upibank": {
+      "display_name": "Payee 0",
+      "category": "person"
+     }
+    }
+   },
+   "rules": {
+    "per_txn_limit": 100000,
+    "per_txn_limit_verified": 500000,
+    "verified_categories": [
+     "tax",
+     "hospital",
+     "education"
+    ],
+    "daily_limit_verified": 1000000,
+    "lite_txn_max": 1000,
+    "lite_wallet_cap": 5000,
+    "mandate_registration_needs_pin": true,
+    "mandate_no_afa_cap": 15000,
+    "mandate_high_cap": 100000,
+    "mandate_high_cap_categories": [
+     "insurance",
+     "mutual_fund",
+     "credit_card_bill"
+    ],
+    "failed_txn_tat_calendar_days": {
+     "p2p": 1,
+     "p2m": 5
+    },
+    "compensation_per_day": 100,
+    "compensation_automatic": true,
+    "p2p_collect_ended": "1 Oct 2025 (env still lets a fake MERCHANT send collect requests)"
+   },
+   "facts": {
+    "amount": 90000,
+    "vpa": "payee0@upibank"
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-ACTION",
+   "R-EFFECTS",
+   "R-FORBIDDEN"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "kind": "limits",
+   "gold_answer": {
+    "action": "paid",
+    "reason": null
+   },
+   "gold_actions": [
+    {
+     "tool": "initiate_payment",
+     "args": {
+      "vpa": "payee0@upibank",
+      "amount": 90000
+     }
+    }
+   ],
+   "forbidden_actions": []
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "action": "paid"
+    },
+    "actions": [
+     {
+      "tool": "initiate_payment",
+      "args": {
+       "vpa": "payee0@upibank",
+       "amount": 90000
+      }
+     }
+    ]
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "answer"
+    ]
+   }
+  },
+  {
+   "name": "pays_less",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "action": "paid"
+    },
+    "actions": [
+     {
+      "tool": "initiate_payment",
+      "args": {
+       "vpa": "payee0@upibank",
+       "amount": 89000
+      }
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-EFFECTS"
+    ],
+    "passes_all_but": [
+     "R-EFFECTS"
+    ]
+   }
+  }
+ ]
+}

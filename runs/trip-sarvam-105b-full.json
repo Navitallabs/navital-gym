@@ -1,0 +1,2160 @@
+{
+ "sarvam:sarvam-105b": {
+  "graded_with": "123c1450dab5",
+  "k": 1,
+  "navital_gym_commit": "35cc6ae10427",
+  "settings": {
+   "base_url": "https://api.sarvam.ai/v1",
+   "json_mode_on_final": true,
+   "max_turns": 40,
+   "model": "sarvam-105b",
+   "provider": "sarvam",
+   "repair_retry": true,
+   "temperature": 0.0
+  },
+  "summary": {
+   "answered": 55,
+   "by_kind": {
+    "feasible": {
+     "answered": 38,
+     "errors": 0.0,
+     "format_fail": 0.13157894736842105,
+     "k": 1,
+     "mean_score": 0.570089048378522,
+     "not_run": 0,
+     "pass@1": 0.07894736842105263,
+     "pass^k": 0.07894736842105263,
+     "rule_failures": {
+      "R-ACC": 1,
+      "R-AVAIL": 4,
+      "R-BUD": 2,
+      "R-CONN": 20,
+      "R-DATE": 16,
+      "R-DIET": 2,
+      "R-FMT": 1,
+      "R-INFEASIBLE": 5,
+      "R-OCC": 5,
+      "R-OPEN": 9,
+      "R-QUOTA": 2,
+      "R-ROUTE": 1
+     },
+     "strict_pass@1": 0.0,
+     "tasks": 38,
+     "turns_exhausted": 0.0
+    },
+    "infeasible": {
+     "answered": 17,
+     "errors": 0.0,
+     "format_fail": 0.11764705882352941,
+     "k": 1,
+     "mean_score": 0.47058823529411764,
+     "not_run": 0,
+     "pass@1": 0.47058823529411764,
+     "pass^k": 0.47058823529411764,
+     "rule_failures": {
+      "R-AVAIL": 1,
+      "R-BUD": 1,
+      "R-CONN": 3,
+      "R-DATE": 3,
+      "R-INFEASIBLE": 3,
+      "R-OPEN": 3,
+      "R-ROUTE": 1,
+      "R-SEASON": 1
+     },
+     "strict_pass@1": 0.47058823529411764,
+     "tasks": 17,
+     "turns_exhausted": 0.0
+    }
+   },
+   "by_split": {
+    "core": {
+     "answered": 55,
+     "errors": 0.0,
+     "format_fail": 0.12727272727272726,
+     "k": 1,
+     "mean_score": 0.5393342516069789,
+     "not_run": 0,
+     "pass@1": 0.2,
+     "pass^k": 0.2,
+     "rule_failures": {
+      "R-ACC": 1,
+      "R-AVAIL": 5,
+      "R-BUD": 3,
+      "R-CONN": 23,
+      "R-DATE": 19,
+      "R-DIET": 2,
+      "R-FMT": 1,
+      "R-INFEASIBLE": 8,
+      "R-OCC": 5,
+      "R-OPEN": 12,
+      "R-QUOTA": 2,
+      "R-ROUTE": 2,
+      "R-SEASON": 1
+     },
+     "strict_pass@1": 0.14545454545454545,
+     "tasks": 55,
+     "turns_exhausted": 0.0
+    }
+   },
+   "errors": 0.0,
+   "format_fail": 0.12727272727272726,
+   "k": 1,
+   "mean_score": 0.5393342516069789,
+   "not_run": 0,
+   "pass@1": 0.2,
+   "pass^k": 0.2,
+   "rule_failures": {
+    "R-ACC": 1,
+    "R-AVAIL": 5,
+    "R-BUD": 3,
+    "R-CONN": 23,
+    "R-DATE": 19,
+    "R-DIET": 2,
+    "R-FMT": 1,
+    "R-INFEASIBLE": 8,
+    "R-OCC": 5,
+    "R-OPEN": 12,
+    "R-QUOTA": 2,
+    "R-ROUTE": 2,
+    "R-SEASON": 1
+   },
+   "strict_pass@1": 0.14545454545454545,
+   "tasks": 55,
+   "turns_exhausted": 0.0
+  },
+  "tasks": {
+   "IN-TRIP-001": [
+    {
+     "details": {
+      "claim": "binding rule(s) named"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 76091,
+      "turns": 11,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-INFEASIBLE": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "correct infeasible claim"
+    }
+   ],
+   "IN-TRIP-002": [
+    {
+     "details": {
+      "R-AVAIL": "",
+      "R-BUD": "cost 15460 vs budget 30000",
+      "R-CONN": "rail 13404: train times do not match the timetable",
+      "R-DATE": "",
+      "R-FMT": "",
+      "R-OCC": "rail 19063: wrong passenger count (rail: pax+half = travellers aged 5+, half only for ages 5-11; air: aged 2+; taxi: vehicles = ceil(everyone/4); bus: aged 5+)",
+      "R-OPEN": "",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 79407,
+      "turns": 8,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": true,
+      "R-BUD": true,
+      "R-CONN": false,
+      "R-DATE": true,
+      "R-FMT": true,
+      "R-OCC": false,
+      "R-OPEN": true,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.777778,
+     "soft": {
+      "budget_slack": 0.485,
+      "cost_inr": 15460,
+      "legs": 3,
+      "rail_share_km": 1.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-CONN, R-OCC"
+    }
+   ],
+   "IN-TRIP-003": [
+    {
+     "details": {
+      "R-AVAIL": "13207 CC GN on 2026-12-19: RAC 1, need 4 confirmed seats",
+      "R-BUD": "cost 29520 vs budget 45000",
+      "R-CONN": "rail 13207: train does not run between these cities on this date",
+      "R-DATE": "plan has 4 days, task needs 5",
+      "R-FMT": "",
+      "R-OCC": "",
+      "R-OPEN": "",
+      "R-QUOTA": "",
+      "R-REST": "1 rest day(s), need 1",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 185318,
+      "turns": 19,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": false,
+      "R-BUD": true,
+      "R-CONN": false,
+      "R-DATE": false,
+      "R-FMT": true,
+      "R-OCC": true,
+      "R-OPEN": true,
+      "R-QUOTA": true,
+      "R-REST": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.7,
+     "soft": {
+      "budget_slack": 0.344,
+      "cost_inr": 29520,
+      "legs": 3,
+      "rail_share_km": 1.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-DATE, R-CONN, R-AVAIL"
+    }
+   ],
+   "IN-TRIP-004": [
+    {
+     "details": {
+      "R-AVAIL": "",
+      "R-BUD": "cost 21382 vs budget 38000",
+      "R-CONN": "Agra Fort is not reachable at that time (you are elsewhere or in transit)",
+      "R-DATE": "",
+      "R-FMT": "",
+      "R-OCC": "",
+      "R-OPEN": "",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 118743,
+      "turns": 7,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": true,
+      "R-BUD": true,
+      "R-CONN": false,
+      "R-DATE": true,
+      "R-FMT": true,
+      "R-OCC": true,
+      "R-OPEN": true,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.888889,
+     "soft": {
+      "budget_slack": 0.437,
+      "cost_inr": 21382,
+      "legs": 3,
+      "rail_share_km": 1.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-CONN"
+    }
+   ],
+   "IN-TRIP-005": [
+    {
+     "details": {
+      "R-AVAIL": "",
+      "R-BUD": "cost 10135 vs budget 12000",
+      "R-CONN": "",
+      "R-DATE": "trip ends in Jaipur, not Delhi",
+      "R-FMT": "",
+      "R-OCC": "",
+      "R-OPEN": "",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 74148,
+      "turns": 9,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": true,
+      "R-BUD": true,
+      "R-CONN": true,
+      "R-DATE": false,
+      "R-FMT": true,
+      "R-OCC": true,
+      "R-OPEN": true,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.888889,
+     "soft": {
+      "budget_slack": 0.155,
+      "cost_inr": 10135,
+      "legs": 2,
+      "rail_share_km": 1.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-DATE"
+    }
+   ],
+   "IN-TRIP-006": [
+    {
+     "details": {},
+     "meta": {
+      "error": null,
+      "repaired": true,
+      "tokens": 283496,
+      "truncated": 2,
+      "turns": 17,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {},
+     "score": 0.0,
+     "soft": {},
+     "solved": false,
+     "valid": false,
+     "verdict": "not a valid submission"
+    }
+   ],
+   "IN-TRIP-007": [
+    {
+     "details": {
+      "claim": "binding rule(s) named"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 201511,
+      "turns": 20,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-INFEASIBLE": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "correct infeasible claim"
+    }
+   ],
+   "IN-TRIP-008": [
+    {
+     "details": {
+      "claim": "the task is feasible"
+     },
+     "meta": {
+      "error": null,
+      "repaired": true,
+      "tokens": 306126,
+      "turns": 21,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-INFEASIBLE": false
+     },
+     "score": 0.0,
+     "soft": {},
+     "solved": false,
+     "valid": true,
+     "verdict": "false infeasible claim: the task is feasible"
+    }
+   ],
+   "IN-TRIP-009": [
+    {
+     "details": {},
+     "meta": {
+      "error": null,
+      "repaired": true,
+      "tokens": 146025,
+      "truncated": 1,
+      "turns": 12,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {},
+     "score": 0.0,
+     "soft": {},
+     "solved": false,
+     "valid": false,
+     "verdict": "not a valid submission"
+    }
+   ],
+   "IN-TRIP-010": [
+    {
+     "details": {
+      "R-AVAIL": "17904 CC GN on 2026-12-29: WL 10, need 2 confirmed seats",
+      "R-BUD": "cost 24775 vs budget 95000",
+      "R-CONN": "leg 17415 leaves Jodhpur but you are in Delhi",
+      "R-DATE": "day 5 should be 2027-01-01",
+      "R-FMT": "",
+      "R-NIGHT": "",
+      "R-OCC": "",
+      "R-OPEN": "",
+      "R-QUOTA": "17415: general quota opens 2 to 60 days before departure; this is -318",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": true,
+      "tokens": 88122,
+      "turns": 11,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": false,
+      "R-BUD": true,
+      "R-CONN": false,
+      "R-DATE": false,
+      "R-FMT": true,
+      "R-NIGHT": true,
+      "R-OCC": true,
+      "R-OPEN": true,
+      "R-QUOTA": false,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.6,
+     "soft": {
+      "budget_slack": 0.739,
+      "cost_inr": 24775,
+      "legs": 6,
+      "rail_share_km": 1.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-DATE, R-CONN, R-QUOTA, R-AVAIL"
+    }
+   ],
+   "IN-TRIP-011": [
+    {
+     "details": {
+      "R-ACC": "",
+      "R-AVAIL": "",
+      "R-BUD": "cost 26355 vs budget 48000",
+      "R-CONN": "road TX-ALLE-KOCH: transfer duration does not match",
+      "R-DATE": "",
+      "R-FMT": "",
+      "R-NIGHT": "",
+      "R-OCC": "",
+      "R-OPEN": "",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 100681,
+      "turns": 10,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-ACC": true,
+      "R-AVAIL": true,
+      "R-BUD": true,
+      "R-CONN": false,
+      "R-DATE": true,
+      "R-FMT": true,
+      "R-NIGHT": true,
+      "R-OCC": true,
+      "R-OPEN": true,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.909091,
+     "soft": {
+      "budget_slack": 0.451,
+      "cost_inr": 26355,
+      "legs": 3,
+      "rail_share_km": 0.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-CONN"
+    }
+   ],
+   "IN-TRIP-012": [
+    {
+     "details": {
+      "R-AVAIL": "",
+      "R-BUD": "cost 73518 vs budget 70000",
+      "R-CONN": "",
+      "R-DATE": "trip ends in Alleppey, not Kochi",
+      "R-FMT": "",
+      "R-NIGHT": "",
+      "R-OCC": "",
+      "R-OPEN": "",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 77669,
+      "turns": 9,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": true,
+      "R-BUD": false,
+      "R-CONN": true,
+      "R-DATE": false,
+      "R-FMT": true,
+      "R-NIGHT": true,
+      "R-OCC": true,
+      "R-OPEN": true,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.8,
+     "soft": {
+      "budget_slack": -0.05,
+      "cost_inr": 73518,
+      "legs": 2,
+      "rail_share_km": 0.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-DATE, R-BUD"
+    }
+   ],
+   "IN-TRIP-013": [
+    {
+     "details": {
+      "claim": "the task is feasible"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 216900,
+      "turns": 16,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-INFEASIBLE": false
+     },
+     "score": 0.0,
+     "soft": {},
+     "solved": false,
+     "valid": true,
+     "verdict": "false infeasible claim: the task is feasible"
+    }
+   ],
+   "IN-TRIP-014": [
+    {
+     "details": {
+      "R-AVAIL": "",
+      "R-BUD": "cost 35895 vs budget 52000",
+      "R-CONN": "Backwater cruise is not reachable at that time (you are elsewhere or in transit)",
+      "R-DATE": "",
+      "R-FMT": "",
+      "R-NIGHT": "",
+      "R-OCC": "",
+      "R-OPEN": "",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": true,
+      "tokens": 64944,
+      "turns": 4,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": true,
+      "R-BUD": true,
+      "R-CONN": false,
+      "R-DATE": true,
+      "R-FMT": true,
+      "R-NIGHT": true,
+      "R-OCC": true,
+      "R-OPEN": true,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.9,
+     "soft": {
+      "budget_slack": 0.31,
+      "cost_inr": 35895,
+      "legs": 3,
+      "rail_share_km": 0.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-CONN"
+    }
+   ],
+   "IN-TRIP-015": [
+    {
+     "details": {},
+     "meta": {
+      "error": null,
+      "repaired": true,
+      "tokens": 144125,
+      "truncated": 1,
+      "turns": 11,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {},
+     "score": 0.0,
+     "soft": {},
+     "solved": false,
+     "valid": false,
+     "verdict": "not a valid submission"
+    }
+   ],
+   "IN-TRIP-016": [
+    {
+     "details": {
+      "R-AVAIL": "",
+      "R-BUD": "cost 15490 vs budget 40000",
+      "R-CONN": "",
+      "R-DATE": "",
+      "R-FMT": "",
+      "R-NIGHT": "",
+      "R-OCC": "",
+      "R-OPEN": "Rohtang Pass needs 360 min",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": "Rohtang Pass is out of season on 2026-12-18"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 97383,
+      "truncated": 1,
+      "turns": 10,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": true,
+      "R-BUD": true,
+      "R-CONN": true,
+      "R-DATE": true,
+      "R-FMT": true,
+      "R-NIGHT": true,
+      "R-OCC": true,
+      "R-OPEN": false,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": false
+     },
+     "score": 0.0,
+     "soft": {
+      "budget_slack": 0.613,
+      "cost_inr": 15490,
+      "legs": 3,
+      "rail_share_km": 0.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "plan given for an infeasible task"
+    }
+   ],
+   "IN-TRIP-017": [
+    {
+     "details": {
+      "R-AVAIL": "",
+      "R-BUD": "cost 30055 vs budget 42000",
+      "R-CONN": "road TX-CHAN-SHIM: transfer duration does not match",
+      "R-DATE": "",
+      "R-FMT": "",
+      "R-NIGHT": "",
+      "R-OCC": "",
+      "R-OPEN": "",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 125712,
+      "turns": 9,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": true,
+      "R-BUD": true,
+      "R-CONN": false,
+      "R-DATE": true,
+      "R-FMT": true,
+      "R-NIGHT": true,
+      "R-OCC": true,
+      "R-OPEN": true,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.9,
+     "soft": {
+      "budget_slack": 0.284,
+      "cost_inr": 30055,
+      "legs": 3,
+      "rail_share_km": 0.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-CONN"
+    }
+   ],
+   "IN-TRIP-018": [
+    {
+     "details": {
+      "R-AVAIL": "",
+      "R-BUD": "cost 22055 vs budget 28000",
+      "R-CONN": "",
+      "R-DATE": "",
+      "R-FMT": "",
+      "R-NIGHT": "",
+      "R-OCC": "",
+      "R-OPEN": "Hadimba Temple is open 08:00 to 17:00",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": true,
+      "tokens": 186923,
+      "turns": 9,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": true,
+      "R-BUD": true,
+      "R-CONN": true,
+      "R-DATE": true,
+      "R-FMT": true,
+      "R-NIGHT": true,
+      "R-OCC": true,
+      "R-OPEN": false,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.9,
+     "soft": {
+      "budget_slack": 0.212,
+      "cost_inr": 22055,
+      "legs": 3,
+      "rail_share_km": 0.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-OPEN"
+    }
+   ],
+   "IN-TRIP-019": [
+    {
+     "details": {
+      "R-AVAIL": "",
+      "R-BUD": "cost 34895 vs budget 60000",
+      "R-CONN": "road TX-SHIM-MANA: transfer duration does not match",
+      "R-DATE": "trip ends in Manali, not Chandigarh",
+      "R-FMT": "",
+      "R-NIGHT": "",
+      "R-OCC": "",
+      "R-OPEN": "Hadimba Temple is open 08:00 to 17:00",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 70431,
+      "turns": 9,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": true,
+      "R-BUD": true,
+      "R-CONN": false,
+      "R-DATE": false,
+      "R-FMT": true,
+      "R-NIGHT": true,
+      "R-OCC": true,
+      "R-OPEN": false,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.7,
+     "soft": {
+      "budget_slack": 0.418,
+      "cost_inr": 34895,
+      "legs": 2,
+      "rail_share_km": 0.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-DATE, R-CONN, R-OPEN"
+    }
+   ],
+   "IN-TRIP-020": [
+    {
+     "details": {
+      "claim": "name only rules that are really part of the reason (a non-empty subset of the true binding rules)"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 138047,
+      "turns": 17,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-INFEASIBLE": false
+     },
+     "score": 0.0,
+     "soft": {},
+     "solved": false,
+     "valid": true,
+     "verdict": "false infeasible claim: name only rules that are really part of the reason (a non-empty subset of the true binding rules)"
+    }
+   ],
+   "IN-TRIP-021": [
+    {
+     "details": {
+      "R-AVAIL": "13259 SL GN on 2026-12-04: AVL 1, need 3 confirmed seats",
+      "R-BUD": "cost 11465 vs budget 18000",
+      "R-CONN": "leg 13878 leaves Goa but you are in Bengaluru",
+      "R-DATE": "plan has 4 days, task needs 3",
+      "R-FMT": "",
+      "R-OCC": "",
+      "R-OPEN": "Beach day Palolem: an activity must start and end on its day",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": true,
+      "tokens": 120597,
+      "turns": 14,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": false,
+      "R-BUD": true,
+      "R-CONN": false,
+      "R-DATE": false,
+      "R-FMT": true,
+      "R-OCC": true,
+      "R-OPEN": false,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.555556,
+     "soft": {
+      "budget_slack": 0.363,
+      "cost_inr": 11465,
+      "legs": 3,
+      "rail_share_km": 1.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-DATE, R-CONN, R-AVAIL, R-OPEN"
+    }
+   ],
+   "IN-TRIP-022": [
+    {
+     "details": {
+      "R-AVAIL": "",
+      "R-BUD": "cost 18740 vs budget 40000",
+      "R-CONN": "",
+      "R-DATE": "",
+      "R-FMT": "",
+      "R-OCC": "",
+      "R-OPEN": "",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": true,
+      "tokens": 101448,
+      "turns": 5,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": true,
+      "R-BUD": true,
+      "R-CONN": true,
+      "R-DATE": true,
+      "R-FMT": true,
+      "R-OCC": true,
+      "R-OPEN": true,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 1.0,
+     "soft": {
+      "budget_slack": 0.531,
+      "cost_inr": 18740,
+      "legs": 2,
+      "rail_share_km": 0.5
+     },
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-TRIP-023": [
+    {
+     "details": {
+      "R-AVAIL": "",
+      "R-BUD": "cost 13870 vs budget 15000",
+      "R-CONN": "",
+      "R-DATE": "",
+      "R-FMT": "",
+      "R-OCC": "",
+      "R-OPEN": "",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": true,
+      "tokens": 179108,
+      "turns": 15,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": true,
+      "R-BUD": true,
+      "R-CONN": true,
+      "R-DATE": true,
+      "R-FMT": true,
+      "R-OCC": true,
+      "R-OPEN": true,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 1.0,
+     "soft": {
+      "budget_slack": 0.075,
+      "cost_inr": 13870,
+      "legs": 2,
+      "rail_share_km": 0.5
+     },
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-TRIP-024": [
+    {
+     "details": {
+      "R-AVAIL": "",
+      "R-BUD": "cost 8115 vs budget 30000",
+      "R-CONN": "leg 13259 leaves Bengaluru but you are in Mumbai",
+      "R-DATE": "day 1 should be 2026-12-31",
+      "R-FMT": "",
+      "R-OCC": "",
+      "R-OPEN": "",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 763542,
+      "turns": 31,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": true,
+      "R-BUD": true,
+      "R-CONN": false,
+      "R-DATE": false,
+      "R-FMT": true,
+      "R-OCC": true,
+      "R-OPEN": true,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.0,
+     "soft": {
+      "budget_slack": 0.73,
+      "cost_inr": 8115,
+      "legs": 2,
+      "rail_share_km": 1.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "plan given for an infeasible task"
+    }
+   ],
+   "IN-TRIP-025": [
+    {
+     "details": {
+      "claim": "binding rule(s) named"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 14874,
+      "turns": 3,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-INFEASIBLE": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "correct infeasible claim"
+    }
+   ],
+   "IN-TRIP-026": [
+    {
+     "details": {
+      "R-ACC": "",
+      "R-AVAIL": "",
+      "R-BUD": "cost 20400 vs budget 30000",
+      "R-CONN": "",
+      "R-DATE": "trip ends in Lucknow, not Delhi",
+      "R-DIET": "",
+      "R-FMT": "",
+      "R-OCC": "",
+      "R-OPEN": "",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 101427,
+      "turns": 9,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-ACC": true,
+      "R-AVAIL": true,
+      "R-BUD": true,
+      "R-CONN": true,
+      "R-DATE": false,
+      "R-DIET": true,
+      "R-FMT": true,
+      "R-OCC": true,
+      "R-OPEN": true,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.909091,
+     "soft": {
+      "budget_slack": 0.32,
+      "cost_inr": 20400,
+      "legs": 3,
+      "rail_share_km": 1.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-DATE"
+    }
+   ],
+   "IN-TRIP-027": [
+    {
+     "details": {
+      "claim": "the task is feasible"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 138439,
+      "turns": 11,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-INFEASIBLE": false
+     },
+     "score": 0.0,
+     "soft": {},
+     "solved": false,
+     "valid": true,
+     "verdict": "false infeasible claim: the task is feasible"
+    }
+   ],
+   "IN-TRIP-028": [
+    {
+     "details": {
+      "R-ACC": "15182 SL: fewer than 2 free lower berths for seniors",
+      "R-AVAIL": "",
+      "R-BUD": "cost 20900 vs budget 26000",
+      "R-CONN": "connection to TX-VARA-AYOD is shorter than the 30 min buffer",
+      "R-DATE": "trip ends in Lucknow, not Delhi",
+      "R-DIET": "2027-01-12: Hotel Heritage Lucknow does not serve satvik",
+      "R-FMT": "",
+      "R-OCC": "2027-01-10: rooms must hold all 4 guests, 1 to 3 per room",
+      "R-OPEN": "Sarnath is open 09:00 to 17:00",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 243713,
+      "turns": 18,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-ACC": false,
+      "R-AVAIL": true,
+      "R-BUD": true,
+      "R-CONN": false,
+      "R-DATE": false,
+      "R-DIET": false,
+      "R-FMT": true,
+      "R-OCC": false,
+      "R-OPEN": false,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.454545,
+     "soft": {
+      "budget_slack": 0.196,
+      "cost_inr": 20900,
+      "legs": 3,
+      "rail_share_km": 0.699
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-DATE, R-CONN, R-OPEN, R-OCC, R-DIET, R-ACC"
+    }
+   ],
+   "IN-TRIP-029": [
+    {
+     "details": {},
+     "meta": {
+      "error": null,
+      "repaired": true,
+      "tokens": 209081,
+      "truncated": 1,
+      "turns": 14,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {},
+     "score": 0.0,
+     "soft": {},
+     "solved": false,
+     "valid": false,
+     "verdict": "not a valid submission"
+    }
+   ],
+   "IN-TRIP-030": [
+    {
+     "details": {
+      "R-AVAIL": "",
+      "R-BUD": "cost 40302 vs budget 45000",
+      "R-CONN": "2026-12-30: no hotel for the night in Lucknow",
+      "R-DATE": "trip ends in Lucknow, not Delhi",
+      "R-DIET": "2026-12-29: Hotel Heritage Lucknow does not serve satvik",
+      "R-FMT": "",
+      "R-OCC": "rail 18184: wrong passenger count (rail: pax+half = travellers aged 5+, half only for ages 5-11; air: aged 2+; taxi: vehicles = ceil(everyone/4); bus: aged 5+)",
+      "R-OPEN": "Ganga Aarti is open 18:30 to 19:45",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": true,
+      "tokens": 519272,
+      "turns": 20,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": true,
+      "R-BUD": true,
+      "R-CONN": false,
+      "R-DATE": false,
+      "R-DIET": false,
+      "R-FMT": true,
+      "R-OCC": false,
+      "R-OPEN": false,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.5,
+     "soft": {
+      "budget_slack": 0.104,
+      "cost_inr": 40302,
+      "legs": 3,
+      "rail_share_km": 0.301
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-DATE, R-CONN, R-OPEN, R-OCC, R-DIET"
+    }
+   ],
+   "IN-TRIP-031": [
+    {
+     "details": {},
+     "meta": {
+      "error": null,
+      "repaired": true,
+      "tokens": 100819,
+      "truncated": 2,
+      "turns": 5,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {},
+     "score": 0.0,
+     "soft": {},
+     "solved": false,
+     "valid": false,
+     "verdict": "not a valid submission"
+    }
+   ],
+   "IN-TRIP-032": [
+    {
+     "details": {
+      "claim": "binding rule(s) named"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 13426,
+      "turns": 1,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-INFEASIBLE": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "correct infeasible claim"
+    }
+   ],
+   "IN-TRIP-033": [
+    {
+     "details": {
+      "claim": "the task is feasible"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 30385,
+      "turns": 3,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-INFEASIBLE": false
+     },
+     "score": 0.0,
+     "soft": {},
+     "solved": false,
+     "valid": true,
+     "verdict": "false infeasible claim: the task is feasible"
+    }
+   ],
+   "IN-TRIP-034": [
+    {
+     "details": {},
+     "meta": {
+      "error": null,
+      "repaired": true,
+      "tokens": 109033,
+      "turns": 6,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {},
+     "score": 0.0,
+     "soft": {},
+     "solved": false,
+     "valid": false,
+     "verdict": "not a valid submission"
+    }
+   ],
+   "IN-TRIP-035": [
+    {
+     "details": {
+      "R-ALT": "",
+      "R-AVAIL": "",
+      "R-BUD": "cost 38255 vs budget 90000",
+      "R-CONN": "no hotel on the last day (there is no night)",
+      "R-DATE": "plan has 6 days, task needs 7",
+      "R-FMT": "",
+      "R-NIGHT": "",
+      "R-OCC": "",
+      "R-OPEN": "",
+      "R-PERMIT": "",
+      "R-QUOTA": "",
+      "R-ROUTE": "never reaches Nubra",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 33581,
+      "turns": 5,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-ALT": true,
+      "R-AVAIL": true,
+      "R-BUD": true,
+      "R-CONN": false,
+      "R-DATE": false,
+      "R-FMT": true,
+      "R-NIGHT": true,
+      "R-OCC": true,
+      "R-OPEN": true,
+      "R-PERMIT": true,
+      "R-QUOTA": true,
+      "R-ROUTE": false,
+      "R-SEASON": true
+     },
+     "score": 0.75,
+     "soft": {
+      "budget_slack": 0.575,
+      "cost_inr": 38255,
+      "legs": 2,
+      "rail_share_km": 0.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-DATE, R-CONN, R-ROUTE"
+    }
+   ],
+   "IN-TRIP-036": [
+    {
+     "details": {
+      "R-AVAIL": "",
+      "R-BUD": "cost 22645 vs budget 42000",
+      "R-CONN": "Umiam Lake is not reachable at that time (you are elsewhere or in transit)",
+      "R-DATE": "trip ends in Kaziranga, not Guwahati",
+      "R-FMT": "",
+      "R-NIGHT": "",
+      "R-OCC": "",
+      "R-OPEN": "",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": true,
+      "tokens": 366508,
+      "turns": 19,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": true,
+      "R-BUD": true,
+      "R-CONN": false,
+      "R-DATE": false,
+      "R-FMT": true,
+      "R-NIGHT": true,
+      "R-OCC": true,
+      "R-OPEN": true,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.8,
+     "soft": {
+      "budget_slack": 0.461,
+      "cost_inr": 22645,
+      "legs": 3,
+      "rail_share_km": 0.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-DATE, R-CONN"
+    }
+   ],
+   "IN-TRIP-037": [
+    {
+     "details": {
+      "claim": "name only rules that are really part of the reason (a non-empty subset of the true binding rules)"
+     },
+     "meta": {
+      "error": null,
+      "repaired": true,
+      "tokens": 89962,
+      "truncated": 1,
+      "turns": 6,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-INFEASIBLE": false
+     },
+     "score": 0.0,
+     "soft": {},
+     "solved": false,
+     "valid": true,
+     "verdict": "false infeasible claim: name only rules that are really part of the reason (a non-empty subset of the true binding rules)"
+    }
+   ],
+   "IN-TRIP-038": [
+    {
+     "details": {
+      "R-AVAIL": "",
+      "R-BUD": "cost 77640 vs budget 60000",
+      "R-CONN": "road TX-SHIL-GUWA: transfer duration does not match",
+      "R-DATE": "trip ends in Kaziranga, not Guwahati",
+      "R-FMT": "",
+      "R-NIGHT": "",
+      "R-OCC": "road TX-GUWA-SHIL: wrong passenger count (rail: pax+half = travellers aged 5+, half only for ages 5-11; air: aged 2+; taxi: vehicles = ceil(everyone/4); bus: aged 5+)",
+      "R-OPEN": "Cherrapunji day trip needs 300 min",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 249760,
+      "turns": 17,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": true,
+      "R-BUD": false,
+      "R-CONN": false,
+      "R-DATE": false,
+      "R-FMT": true,
+      "R-NIGHT": true,
+      "R-OCC": false,
+      "R-OPEN": false,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.5,
+     "soft": {
+      "budget_slack": -0.294,
+      "cost_inr": 77640,
+      "legs": 3,
+      "rail_share_km": 0.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-DATE, R-CONN, R-OPEN, R-OCC, R-BUD"
+    }
+   ],
+   "IN-TRIP-039": [
+    {
+     "details": {
+      "R-AVAIL": "",
+      "R-BUD": "cost 11360 vs budget 25000",
+      "R-CONN": "",
+      "R-DATE": "",
+      "R-FMT": "",
+      "R-NIGHT": "",
+      "R-OCC": "",
+      "R-OPEN": "",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": true,
+      "tokens": 67387,
+      "turns": 5,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": true,
+      "R-BUD": true,
+      "R-CONN": true,
+      "R-DATE": true,
+      "R-FMT": true,
+      "R-NIGHT": true,
+      "R-OCC": true,
+      "R-OPEN": true,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 1.0,
+     "soft": {
+      "budget_slack": 0.546,
+      "cost_inr": 11360,
+      "legs": 2,
+      "rail_share_km": 0.0
+     },
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-TRIP-040": [
+    {
+     "details": {
+      "R-AVAIL": "",
+      "R-BUD": "cost 15900 vs budget 18000",
+      "R-CONN": "",
+      "R-DATE": "",
+      "R-FMT": "",
+      "R-NIGHT": "",
+      "R-OCC": "road TX-GUWA-SHIL: wrong passenger count (rail: pax+half = travellers aged 5+, half only for ages 5-11; air: aged 2+; taxi: vehicles = ceil(everyone/4); bus: aged 5+)",
+      "R-OPEN": "",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 180127,
+      "turns": 13,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": true,
+      "R-BUD": true,
+      "R-CONN": true,
+      "R-DATE": true,
+      "R-FMT": true,
+      "R-NIGHT": true,
+      "R-OCC": false,
+      "R-OPEN": true,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.9,
+     "soft": {
+      "budget_slack": 0.117,
+      "cost_inr": 15900,
+      "legs": 3,
+      "rail_share_km": 0.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-OCC"
+    }
+   ],
+   "IN-TRIP-041": [
+    {
+     "details": {
+      "R-AVAIL": "",
+      "R-CONN": "Amber Fort is not reachable at that time (you are elsewhere or in transit)",
+      "R-DATE": "plan has 2 days, task needs 1",
+      "R-FMT": "",
+      "R-OCC": "",
+      "R-OPEN": "Amber Fort needs 150 min",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 49962,
+      "turns": 6,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": true,
+      "R-CONN": false,
+      "R-DATE": false,
+      "R-FMT": true,
+      "R-OCC": true,
+      "R-OPEN": false,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.625,
+     "soft": {
+      "budget_slack": null,
+      "cost_inr": 7060,
+      "legs": 2,
+      "rail_share_km": 1.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-DATE, R-CONN, R-OPEN"
+    }
+   ],
+   "IN-TRIP-042": [
+    {
+     "details": {
+      "claim": "binding rule(s) named"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 7897,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-INFEASIBLE": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "correct infeasible claim"
+    }
+   ],
+   "IN-TRIP-043": [
+    {
+     "details": {
+      "R-AVAIL": "",
+      "R-CONN": "no hotel on the last day (there is no night)",
+      "R-DATE": "",
+      "R-FMT": "",
+      "R-OCC": "",
+      "R-OPEN": "",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 24437,
+      "turns": 3,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": true,
+      "R-CONN": false,
+      "R-DATE": true,
+      "R-FMT": true,
+      "R-OCC": true,
+      "R-OPEN": true,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.875,
+     "soft": {
+      "budget_slack": null,
+      "cost_inr": 3946,
+      "legs": 1,
+      "rail_share_km": 1.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-CONN"
+    }
+   ],
+   "IN-TRIP-044": [
+    {
+     "details": {
+      "R-AVAIL": "",
+      "R-CONN": "rail 17946: train times do not match the timetable",
+      "R-DATE": "leg 17946 departs on 2026-12-06 but is listed under 2026-12-05",
+      "R-FMT": "",
+      "R-OCC": "",
+      "R-OPEN": "Taj Mahal needs 150 min",
+      "R-QUOTA": "17946: Current booking is only on the day of departure; this is 1",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 30634,
+      "turns": 7,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": true,
+      "R-CONN": false,
+      "R-DATE": false,
+      "R-FMT": true,
+      "R-OCC": true,
+      "R-OPEN": false,
+      "R-QUOTA": false,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.5,
+     "soft": {
+      "budget_slack": null,
+      "cost_inr": 4460,
+      "legs": 1,
+      "rail_share_km": 1.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-DATE, R-CONN, R-QUOTA, R-OPEN"
+    }
+   ],
+   "IN-TRIP-045": [
+    {
+     "details": {
+      "R-AVAIL": "",
+      "R-CONN": "Lalbagh Garden is not reachable at that time (you are elsewhere or in transit)",
+      "R-DATE": "",
+      "R-FMT": "",
+      "R-OCC": "",
+      "R-OPEN": "",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 28083,
+      "turns": 4,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": true,
+      "R-CONN": false,
+      "R-DATE": true,
+      "R-FMT": true,
+      "R-OCC": true,
+      "R-OPEN": true,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.875,
+     "soft": {
+      "budget_slack": null,
+      "cost_inr": 5250,
+      "legs": 1,
+      "rail_share_km": 1.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-CONN"
+    }
+   ],
+   "IN-TRIP-046": [
+    {
+     "details": {
+      "R-AVAIL": "13497 3A GN on 2026-12-16: WL 12, need 4 confirmed seats",
+      "R-BUD": "cost 29730 vs budget 55000",
+      "R-CONN": "Hawa Mahal is not reachable at that time (you are elsewhere or in transit)",
+      "R-DATE": "a leg arrives after the last day",
+      "R-DIET": "",
+      "R-FMT": "",
+      "R-OCC": "",
+      "R-OPEN": "",
+      "R-QUOTA": "",
+      "R-REST": "1 rest day(s), need 1",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 149953,
+      "turns": 10,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": false,
+      "R-BUD": true,
+      "R-CONN": false,
+      "R-DATE": false,
+      "R-DIET": true,
+      "R-FMT": true,
+      "R-OCC": true,
+      "R-OPEN": true,
+      "R-QUOTA": true,
+      "R-REST": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.727273,
+     "soft": {
+      "budget_slack": 0.459,
+      "cost_inr": 29730,
+      "legs": 3,
+      "rail_share_km": 1.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-DATE, R-CONN, R-AVAIL"
+    }
+   ],
+   "IN-TRIP-047": [
+    {
+     "details": {
+      "R-FMT": "days[1].legs[0].half must be an integer from 0 to 100"
+     },
+     "meta": {
+      "error": null,
+      "repaired": true,
+      "tokens": 614581,
+      "truncated": 1,
+      "turns": 31,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-FMT": false
+     },
+     "score": 0.0,
+     "soft": {},
+     "solved": false,
+     "valid": false,
+     "verdict": "invalid format (gate failed)"
+    }
+   ],
+   "IN-TRIP-048": [
+    {
+     "details": {
+      "claim": "the task is feasible"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 63509,
+      "turns": 5,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-INFEASIBLE": false
+     },
+     "score": 0.0,
+     "soft": {},
+     "solved": false,
+     "valid": true,
+     "verdict": "false infeasible claim: the task is feasible"
+    }
+   ],
+   "IN-TRIP-049": [
+    {
+     "details": {
+      "R-AVAIL": "",
+      "R-BUD": "cost 3740 vs budget 6000",
+      "R-CONN": "Taj Mahal is not reachable at that time (you are elsewhere or in transit)",
+      "R-DATE": "day 1 should be 2026-12-11",
+      "R-FMT": "",
+      "R-OCC": "",
+      "R-OPEN": "Taj Mahal is closed on Fri",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": true,
+      "tokens": 349291,
+      "turns": 28,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": true,
+      "R-BUD": true,
+      "R-CONN": false,
+      "R-DATE": false,
+      "R-FMT": true,
+      "R-OCC": true,
+      "R-OPEN": false,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.0,
+     "soft": {
+      "budget_slack": 0.377,
+      "cost_inr": 3740,
+      "legs": 2,
+      "rail_share_km": 1.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "plan given for an infeasible task"
+    }
+   ],
+   "IN-TRIP-050": [
+    {
+     "details": {
+      "R-ACC": "",
+      "R-AVAIL": "",
+      "R-BUD": "cost 16760 vs budget 28000",
+      "R-CONN": "no hotel on the last day (there is no night)",
+      "R-DATE": "trip ends in Varanasi, not Delhi",
+      "R-DIET": "",
+      "R-FMT": "",
+      "R-OCC": "",
+      "R-OPEN": "Ganga Aarti is open 18:30 to 19:45",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": true,
+      "tokens": 220161,
+      "truncated": 1,
+      "turns": 16,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-ACC": true,
+      "R-AVAIL": true,
+      "R-BUD": true,
+      "R-CONN": false,
+      "R-DATE": false,
+      "R-DIET": true,
+      "R-FMT": true,
+      "R-OCC": true,
+      "R-OPEN": false,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.727273,
+     "soft": {
+      "budget_slack": 0.401,
+      "cost_inr": 16760,
+      "legs": 1,
+      "rail_share_km": 1.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-DATE, R-CONN, R-OPEN"
+    }
+   ],
+   "IN-TRIP-051": [
+    {
+     "details": {
+      "claim": "binding rule(s) named"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 25143,
+      "turns": 3,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-INFEASIBLE": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "correct infeasible claim"
+    }
+   ],
+   "IN-TRIP-052": [
+    {
+     "details": {
+      "claim": "binding rule(s) named"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 103445,
+      "turns": 9,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-INFEASIBLE": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "correct infeasible claim"
+    }
+   ],
+   "IN-TRIP-053": [
+    {
+     "details": {
+      "claim": "name only rules that are really part of the reason (a non-empty subset of the true binding rules)"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 59692,
+      "turns": 8,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-INFEASIBLE": false
+     },
+     "score": 0.0,
+     "soft": {},
+     "solved": false,
+     "valid": true,
+     "verdict": "false infeasible claim: name only rules that are really part of the reason (a non-empty subset of the true binding rules)"
+    }
+   ],
+   "IN-TRIP-054": [
+    {
+     "details": {
+      "R-AVAIL": "18851 2S GN on 2026-12-21: RAC 18, need 4 confirmed seats",
+      "R-BUD": "cost 15950 vs budget 3500",
+      "R-CONN": "Red Fort is not reachable at that time (you are elsewhere or in transit)",
+      "R-DATE": "trip ends in Lucknow, not Delhi",
+      "R-DIET": "",
+      "R-FMT": "",
+      "R-OCC": "",
+      "R-OPEN": "Chandni Chowk food walk needs 150 min",
+      "R-QUOTA": "",
+      "R-ROUTE": "passes through Lucknow without a night or a sight there",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 97876,
+      "turns": 11,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": false,
+      "R-BUD": false,
+      "R-CONN": false,
+      "R-DATE": false,
+      "R-DIET": true,
+      "R-FMT": true,
+      "R-OCC": true,
+      "R-OPEN": false,
+      "R-QUOTA": true,
+      "R-ROUTE": false,
+      "R-SEASON": true
+     },
+     "score": 0.0,
+     "soft": {
+      "budget_slack": -3.557,
+      "cost_inr": 15950,
+      "legs": 3,
+      "rail_share_km": 1.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "plan given for an infeasible task"
+    }
+   ],
+   "IN-TRIP-055": [
+    {
+     "details": {
+      "claim": "binding rule(s) named"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 51000,
+      "turns": 6,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-INFEASIBLE": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "correct infeasible claim"
+    }
+   ]
+  }
+ }
+}

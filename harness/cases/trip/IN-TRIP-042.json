@@ -1,0 +1,164 @@
+{
+ "env": "trip",
+ "task_id": "IN-TRIP-042",
+ "task": {
+  "id": "IN-TRIP-042",
+  "family": "rail-logic",
+  "difficulty": 3,
+  "lang": "en",
+  "prompt": "Today is 2026-11-15. Book rail from Delhi to Jaipur on 2027-01-20 for 2 adults.",
+  "params": {
+   "days": 1,
+   "diet": "any",
+   "end": "Jaipur",
+   "mode_policy": "rail_only",
+   "origin": "Delhi",
+   "route": [
+    "Jaipur"
+   ],
+   "snapshot_date": "2026-11-15",
+   "start": "2027-01-20",
+   "travelers": {
+    "adults": 2,
+    "child_ages": [],
+    "seniors": 0
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-DATE",
+   "R-CONN",
+   "R-QUOTA",
+   "R-AVAIL",
+   "R-OPEN",
+   "R-SEASON",
+   "R-OCC",
+   "R-ROUTE"
+  ],
+  "expected_feasible": false,
+  "binding": [
+   "R-QUOTA"
+  ],
+  "traps": [],
+  "snapshot_date": "2026-11-15",
+  "meta": {
+   "binding_sets": [
+    [
+     "R-QUOTA"
+    ]
+   ],
+   "design_intent_binding": [
+    "R-QUOTA"
+   ],
+   "design_intent_feasible": false,
+   "design_notes": [
+    "travel is 66 days away (beyond 60-day window)"
+   ],
+   "solver_note": "no plan in the search space"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_infeasible_claim",
+   "kind": "solved",
+   "submission": {
+    "status": "infeasible",
+    "binding": [
+     "R-QUOTA"
+    ]
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0
+   }
+  },
+  {
+   "name": "wrong_rule_named",
+   "kind": "violation",
+   "submission": {
+    "status": "infeasible",
+    "binding": [
+     "R-AVAIL"
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.0,
+    "fails": [
+     "R-INFEASIBLE"
+    ]
+   }
+  },
+  {
+   "name": "padded_with_an_unrelated_rule",
+   "kind": "violation",
+   "submission": {
+    "status": "infeasible",
+    "binding": [
+     "R-QUOTA",
+     "R-AVAIL"
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.0,
+    "fails": [
+     "R-INFEASIBLE"
+    ]
+   }
+  },
+  {
+   "name": "empty_binding",
+   "kind": "violation",
+   "submission": {
+    "status": "infeasible",
+    "binding": []
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.0,
+    "fails": [
+     "R-INFEASIBLE"
+    ]
+   }
+  },
+  {
+   "name": "a_plan_for_an_infeasible_task",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2027-01-10",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "16208",
+        "from": "Delhi",
+        "to": "Jaipur",
+        "dep": "2027-01-10T05:30",
+        "arr": "2027-01-10T10:49",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "activities": [
+       {
+        "id": "City Palace",
+        "start": "2027-01-10T12:00",
+        "end": "2027-01-10T14:00"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.0
+   }
+  }
+ ]
+}

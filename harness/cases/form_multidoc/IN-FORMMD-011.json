@@ -1,0 +1,94 @@
+{
+ "env": "form_multidoc",
+ "task_id": "IN-FORMMD-011",
+ "task": {
+  "id": "IN-FORMMD-011",
+  "family": "pan_name",
+  "difficulty": 4,
+  "lang": "en",
+  "prompt": "An application form gives an applicant name and an entity type, and quotes a PAN (get_input). Use the PAN structure rule in get_policy. Give: pan_matches_name = true only if the PAN fits the entity type and the name, otherwise false; reason = exactly one of ok (it fits), holder_type_mismatch (the 4th character does not match the entity type) or surname_initial_mismatch (the 4th character fits but the 5th character does not match the first letter of the surname, or of the entity name for a non-individual). If both are wrong, give holder_type_mismatch.\n\nAnswer fields: pan_matches_name, reason.",
+  "params": {
+   "world": {
+    "document_text": "APPLICATION\nApplicant name: Neha Joshi\nEntity type: Individual\nPAN quoted: GZXPU7938T"
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-MATCH",
+   "R-REASON"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "gold_answer": {
+    "pan_matches_name": false,
+    "reason": "surname_initial_mismatch"
+   },
+   "kind": "pan_name"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "pan_matches_name": false,
+     "reason": "surname_initial_mismatch"
+    }
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "answer"
+    ]
+   }
+  },
+  {
+   "name": "only_R-MATCH",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "pan_matches_name": true,
+     "reason": "surname_initial_mismatch"
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-MATCH"
+    ],
+    "passes_all_but": [
+     "R-MATCH"
+    ]
+   }
+  },
+  {
+   "name": "only_R-REASON",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "pan_matches_name": false,
+     "reason": "ok"
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-REASON"
+    ],
+    "passes_all_but": [
+     "R-REASON"
+    ]
+   }
+  }
+ ]
+}

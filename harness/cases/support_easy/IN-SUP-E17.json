@@ -1,0 +1,193 @@
+{
+ "env": "support_easy",
+ "task_id": "IN-SUP-E17",
+ "task": {
+  "id": "IN-SUP-E17",
+  "family": "damaged",
+  "difficulty": 1,
+  "lang": "hinglish",
+  "prompt": "Mera order OD82017 (Earphones) toota hua aaya hai. Ab kya karna hoga?",
+  "params": {
+   "policy": {
+    "damaged_report_window_days": 7,
+    "damaged_requires_photo": true
+   },
+   "world": {
+    "authenticated_customer_owns_order": true,
+    "order": {
+     "category": "electronics",
+     "delivered_on": "2026-11-14",
+     "id": "OD82017",
+     "item": "Earphones",
+     "payment": "prepaid",
+     "phone": "9000082017",
+     "price": 1299,
+     "ship_address": "Flat 57, Sample Colony, Pune 411001",
+     "shipping_fee": 60,
+     "status": "delivered"
+    },
+    "photo_uploaded": false,
+    "today": "2026-11-16"
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-ACTIONS",
+   "R-FORBIDDEN",
+   "R-DECISION",
+   "R-REASON",
+   "R-LANG"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "forbidden_actions": [
+    "issue_refund"
+   ],
+   "gold_answer": {
+    "action": "request_photo",
+    "reason": "no_photo",
+    "reply_language": "hinglish"
+   },
+   "kind": "damaged",
+   "review_status": "AI-drafted Hinglish, not native-reviewed",
+   "split": "easy"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "actions": [
+     {
+      "tool": "request_photo",
+      "args": {
+       "order_id": "OD82017"
+      }
+     }
+    ],
+    "decision": "request_photo",
+    "reason": "no_photo",
+    "reply": "Aapka order toota hua hai, kripya ek photo bhejiye taaki hum aapki madad kar sakein. Photo milte hi aage ka kaam hoga."
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "actions",
+     "decision",
+     "reason"
+    ]
+   }
+  },
+  {
+   "name": "wrong_decision",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [
+     {
+      "tool": "request_photo",
+      "args": {
+       "order_id": "OD82017"
+      }
+     }
+    ],
+    "decision": "refund",
+    "reason": "no_photo",
+    "reply": "Aapka order toota hua hai, kripya ek photo bhejiye taaki hum aapki madad kar sakein. Photo milte hi aage ka kaam hoga."
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-DECISION"
+    ],
+    "passes_all_but": [
+     "R-DECISION"
+    ]
+   }
+  },
+  {
+   "name": "wrong_reason",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [
+     {
+      "tool": "request_photo",
+      "args": {
+       "order_id": "OD82017"
+      }
+     }
+    ],
+    "decision": "request_photo",
+    "reason": "damaged_with_photo",
+    "reply": "Aapka order toota hua hai, kripya ek photo bhejiye taaki hum aapki madad kar sakein. Photo milte hi aage ka kaam hoga."
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-REASON"
+    ],
+    "passes_all_but": [
+     "R-REASON"
+    ]
+   }
+  },
+  {
+   "name": "english_reply",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [
+     {
+      "tool": "request_photo",
+      "args": {
+       "order_id": "OD82017"
+      }
+     }
+    ],
+    "decision": "request_photo",
+    "reason": "no_photo",
+    "reply": "Your request has been handled as per our policy."
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-LANG"
+    ],
+    "passes_all_but": [
+     "R-LANG"
+    ]
+   }
+  },
+  {
+   "name": "action_missing",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [],
+    "decision": "request_photo",
+    "reason": "no_photo",
+    "reply": "Aapka order toota hua hai, kripya ek photo bhejiye taaki hum aapki madad kar sakein. Photo milte hi aage ka kaam hoga."
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-ACTIONS"
+    ],
+    "passes_all_but": [
+     "R-ACTIONS"
+    ]
+   }
+  }
+ ]
+}

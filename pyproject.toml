@@ -1,0 +1,34 @@
+[project]
+name = "navital-gym"
+version = "1.0.0"
+description = "Navital Gym: deterministic, auto-graded environments for AI agents doing Indian-reality tasks (Navital Labs)."
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+dependencies = []          # the core and every env are standard library only
+
+[project.urls]
+Homepage = "https://navitallabs.com"
+Repository = "https://github.com/Navitallabs/navital-gym"
+"Hugging Face" = "https://huggingface.co/NavitalLabs"
+
+[project.scripts]
+navital-gym = "navital_gym.cli:main"
+
+[project.optional-dependencies]
+verifiers = ["verifiers"]
+inspect = ["inspect-ai"]
+openenv = ["openenv-core"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["navital_gym*"]
+[tool.setuptools.package-data]
+"navital_gym.envs.trip" = ["tasks.jsonl", "tasks_easy.jsonl", "*.json", "*.md"]   # tasks_source.jsonl is the build input, not shipped
+"navital_gym.envs.form" = ["*.jsonl", "*.json", "*.md"]
+"navital_gym.envs.form_multidoc" = ["*.jsonl", "*.json", "*.md"]
+"navital_gym.envs.support" = ["*.jsonl", "*.json", "*.md"]
+"navital_gym.envs.gst" = ["*.jsonl", "*.json", "*.md"]
+"navital_gym.envs.upi" = ["*.jsonl", "*.json", "*.md"]

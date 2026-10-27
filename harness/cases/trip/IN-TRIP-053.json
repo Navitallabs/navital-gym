@@ -1,0 +1,169 @@
+{
+ "env": "trip",
+ "task_id": "IN-TRIP-053",
+ "task": {
+  "id": "IN-TRIP-053",
+  "family": "kerala-backwaters",
+  "difficulty": 3,
+  "lang": "en",
+  "prompt": "Plan 4 days in Kerala (Kochi, Munnar, Alleppey) from 2026-12-10, 4 adults, Rs 7,000 total.",
+  "params": {
+   "budget_inr": 7000,
+   "days": 4,
+   "diet": "any",
+   "end": "Kochi",
+   "origin": "Kochi",
+   "route": [
+    "Kochi",
+    "Munnar",
+    "Alleppey"
+   ],
+   "start": "2026-12-10",
+   "travelers": {
+    "adults": 4,
+    "child_ages": [],
+    "seniors": 0
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-DATE",
+   "R-CONN",
+   "R-QUOTA",
+   "R-AVAIL",
+   "R-OPEN",
+   "R-SEASON",
+   "R-OCC",
+   "R-ROUTE",
+   "R-BUD",
+   "R-NIGHT"
+  ],
+  "expected_feasible": false,
+  "binding": [
+   "R-BUD"
+  ],
+  "traps": [
+   "calibrated impossible budget"
+  ],
+  "snapshot_date": null,
+  "meta": {
+   "binding_sets": [
+    [
+     "R-BUD"
+    ]
+   ],
+   "design_intent_binding": [
+    "R-BUD"
+   ],
+   "design_intent_feasible": false,
+   "design_notes": [
+    "calibrated impossible budget"
+   ],
+   "solver_note": "no plan in the search space"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_infeasible_claim",
+   "kind": "solved",
+   "submission": {
+    "status": "infeasible",
+    "binding": [
+     "R-BUD"
+    ]
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0
+   }
+  },
+  {
+   "name": "wrong_rule_named",
+   "kind": "violation",
+   "submission": {
+    "status": "infeasible",
+    "binding": [
+     "R-AVAIL"
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.0,
+    "fails": [
+     "R-INFEASIBLE"
+    ]
+   }
+  },
+  {
+   "name": "padded_with_an_unrelated_rule",
+   "kind": "violation",
+   "submission": {
+    "status": "infeasible",
+    "binding": [
+     "R-BUD",
+     "R-AVAIL"
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.0,
+    "fails": [
+     "R-INFEASIBLE"
+    ]
+   }
+  },
+  {
+   "name": "empty_binding",
+   "kind": "violation",
+   "submission": {
+    "status": "infeasible",
+    "binding": []
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.0,
+    "fails": [
+     "R-INFEASIBLE"
+    ]
+   }
+  },
+  {
+   "name": "a_plan_for_an_infeasible_task",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2027-01-10",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "16208",
+        "from": "Delhi",
+        "to": "Jaipur",
+        "dep": "2027-01-10T05:30",
+        "arr": "2027-01-10T10:49",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "activities": [
+       {
+        "id": "City Palace",
+        "start": "2027-01-10T12:00",
+        "end": "2027-01-10T14:00"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.0
+   }
+  }
+ ]
+}

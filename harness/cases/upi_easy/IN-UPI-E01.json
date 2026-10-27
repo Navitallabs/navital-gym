@@ -1,0 +1,153 @@
+{
+ "env": "upi_easy",
+ "task_id": "IN-UPI-E01",
+ "task": {
+  "id": "IN-UPI-E01",
+  "family": "pay_verify",
+  "difficulty": 1,
+  "lang": "en",
+  "prompt": "Pay Rs 600 to Meera Pillai at meera21@upibank for the tuition fee.",
+  "params": {
+   "world": {
+    "today": "2026-11-16",
+    "accounts": [
+     {
+      "id": "A1",
+      "bank": "Bank Alpha",
+      "balance": 20000,
+      "daily_limit": 100000,
+      "daily_used": 0,
+      "daily_count": 0,
+      "daily_count_limit": 20
+     }
+    ],
+    "vpa_directory": {
+     "meera21@upibank": {
+      "display_name": "Meera Pillai",
+      "category": "person"
+     }
+    }
+   },
+   "rules": {
+    "per_txn_limit": 100000,
+    "per_txn_limit_verified": 500000,
+    "verified_categories": [
+     "tax",
+     "hospital",
+     "education"
+    ]
+   },
+   "facts": {
+    "amount": 600,
+    "payee_name": "Meera Pillai",
+    "vpa": "meera21@upibank"
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-ACTION",
+   "R-EFFECTS",
+   "R-FORBIDDEN"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "kind": "pay_verify",
+   "gold_answer": {
+    "action": "paid",
+    "reason": null
+   },
+   "gold_actions": [
+    {
+     "tool": "initiate_payment",
+     "args": {
+      "vpa": "meera21@upibank",
+      "amount": 600
+     }
+    }
+   ],
+   "forbidden_actions": [],
+   "split": "easy"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "action": "paid"
+    },
+    "actions": [
+     {
+      "tool": "initiate_payment",
+      "args": {
+       "vpa": "meera21@upibank",
+       "amount": 600
+      }
+     }
+    ]
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "answer"
+    ]
+   }
+  },
+  {
+   "name": "only_R-ACTION",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "action": "cannot_pay"
+    },
+    "actions": [
+     {
+      "tool": "initiate_payment",
+      "args": {
+       "vpa": "meera21@upibank",
+       "amount": 600
+      }
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-ACTION"
+    ],
+    "passes_all_but": [
+     "R-ACTION"
+    ]
+   }
+  },
+  {
+   "name": "action_log_empty_claims_done",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "action": "paid"
+    },
+    "actions": []
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-EFFECTS"
+    ],
+    "passes_all_but": [
+     "R-EFFECTS"
+    ]
+   }
+  }
+ ]
+}

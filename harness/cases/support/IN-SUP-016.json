@@ -1,0 +1,207 @@
+{
+ "env": "support",
+ "task_id": "IN-SUP-016",
+ "task": {
+  "id": "IN-SUP-016",
+  "family": "return_ineligible",
+  "difficulty": 3,
+  "lang": "hi",
+  "prompt": "आपने जो Denim jacket भेजा वो मेरे साइज़ का नहीं है। OD81103 वापस ले लीजिए और पैसे लौटाइए।",
+  "params": {
+   "policy": {
+    "address_change_allowed_status": [
+     "placed"
+    ],
+    "cancel_allowed_status": [
+     "placed"
+    ],
+    "cod_refund_requires_valid_ifsc": true,
+    "damaged_report_window_days": 7,
+    "damaged_requires_photo": true,
+    "marker_words": {
+     "hi": [
+      "है",
+      "आपका",
+      "नहीं",
+      "कृपया"
+     ],
+     "mr": [
+      "आहे",
+      "तुमचा",
+      "नाही",
+      "कृपया"
+     ]
+    },
+    "non_returnable_categories": [
+     "personal_care",
+     "grocery"
+    ],
+    "refund_eta_workdays": 5,
+    "refund_includes_shipping_if_seller_fault": true,
+    "reply_language_rule": "reply in the customer's language; Hinglish gets Latin-script Hinglish",
+    "return_window_days": {
+     "apparel": 15,
+     "books": 7,
+     "electronics": 10,
+     "grocery": 0,
+     "personal_care": 0
+    },
+    "script_check": {
+     "bn": "Bengali",
+     "hi": "Devanagari",
+     "hinglish": "Latin",
+     "mr": "Devanagari",
+     "ta": "Tamil"
+    }
+   },
+   "world": {
+    "authenticated_customer_owns_order": true,
+    "order": {
+     "category": "apparel",
+     "delivered_on": "2026-10-28",
+     "id": "OD81103",
+     "item": "Denim jacket",
+     "payment": "prepaid",
+     "phone": "9000010103",
+     "price": 1999,
+     "ship_address": "Flat 33, Sample Colony, Pune 411001",
+     "shipping_fee": 60,
+     "status": "delivered"
+    },
+    "today": "2026-11-16"
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-ACTIONS",
+   "R-FORBIDDEN",
+   "R-DECISION",
+   "R-REASON",
+   "R-LANG"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "forbidden_actions": [
+    "issue_refund"
+   ],
+   "gold_answer": {
+    "action": "decline_return",
+    "reason": "outside_return_window",
+    "reply_language": "hi"
+   },
+   "kind": "return_ineligible",
+   "split": "core"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "actions": [],
+    "reply": "आपका अनुरोध हम नहीं मान सकते क्योंकि यह हमारी नीति के अनुसार संभव नहीं है। कृपया सहायता के लिए दोबारा संपर्क करें।",
+    "decision": "decline_return",
+    "reason": "outside_return_window"
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "actions",
+     "decision",
+     "reason"
+    ]
+   }
+  },
+  {
+   "name": "refund_anyway",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [
+     {
+      "tool": "issue_refund",
+      "args": {
+       "order_id": "OD81103",
+       "amount": 1999,
+       "mode": "original_source"
+      }
+     }
+    ],
+    "reply": "आपका अनुरोध हम नहीं मान सकते क्योंकि यह हमारी नीति के अनुसार संभव नहीं है। कृपया सहायता के लिए दोबारा संपर्क करें।",
+    "decision": "decline_return",
+    "reason": "outside_return_window"
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-FORBIDDEN"
+    ],
+    "passes_all_but": [
+     "R-FORBIDDEN"
+    ]
+   }
+  },
+  {
+   "name": "wrong_decision",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [],
+    "reply": "आपका अनुरोध हम नहीं मान सकते क्योंकि यह हमारी नीति के अनुसार संभव नहीं है। कृपया सहायता के लिए दोबारा संपर्क करें।",
+    "decision": "refund",
+    "reason": "outside_return_window"
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-DECISION"
+    ],
+    "passes_all_but": [
+     "R-DECISION"
+    ]
+   }
+  },
+  {
+   "name": "wrong_reason",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [],
+    "reply": "आपका अनुरोध हम नहीं मान सकते क्योंकि यह हमारी नीति के अनुसार संभव नहीं है। कृपया सहायता के लिए दोबारा संपर्क करें।",
+    "decision": "decline_return",
+    "reason": "eligible"
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-REASON"
+    ],
+    "passes_all_but": [
+     "R-REASON"
+    ]
+   }
+  },
+  {
+   "name": "missing_reason_is_format_gate",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [],
+    "reply": "आपका अनुरोध हम नहीं मान सकते क्योंकि यह हमारी नीति के अनुसार संभव नहीं है। कृपया सहायता के लिए दोबारा संपर्क करें।",
+    "decision": "decline_return"
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.0
+   }
+  }
+ ]
+}

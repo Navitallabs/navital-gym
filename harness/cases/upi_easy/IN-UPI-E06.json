@@ -1,0 +1,152 @@
+{
+ "env": "upi_easy",
+ "task_id": "IN-UPI-E06",
+ "task": {
+  "id": "IN-UPI-E06",
+  "family": "limits",
+  "difficulty": 1,
+  "lang": "en",
+  "prompt": "Send Rs 40,000 to Payee 8 (payee8@upibank). They are a private individual.",
+  "params": {
+   "world": {
+    "today": "2026-11-16",
+    "accounts": [
+     {
+      "id": "A1",
+      "bank": "Bank Alpha",
+      "balance": 2000000,
+      "daily_limit": 100000,
+      "daily_used": 0,
+      "daily_count": 0,
+      "daily_count_limit": 20
+     }
+    ],
+    "vpa_directory": {
+     "payee8@upibank": {
+      "display_name": "Payee 8",
+      "category": "person"
+     }
+    }
+   },
+   "rules": {
+    "per_txn_limit": 100000,
+    "per_txn_limit_verified": 500000,
+    "verified_categories": [
+     "tax",
+     "hospital",
+     "education"
+    ]
+   },
+   "facts": {
+    "amount": 40000,
+    "vpa": "payee8@upibank"
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-ACTION",
+   "R-EFFECTS",
+   "R-FORBIDDEN"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "kind": "limits",
+   "gold_answer": {
+    "action": "paid",
+    "reason": null
+   },
+   "gold_actions": [
+    {
+     "tool": "initiate_payment",
+     "args": {
+      "vpa": "payee8@upibank",
+      "amount": 40000
+     }
+    }
+   ],
+   "forbidden_actions": [],
+   "split": "easy"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "action": "paid"
+    },
+    "actions": [
+     {
+      "tool": "initiate_payment",
+      "args": {
+       "vpa": "payee8@upibank",
+       "amount": 40000
+      }
+     }
+    ]
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "answer"
+    ]
+   }
+  },
+  {
+   "name": "only_R-ACTION",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "action": "cannot_pay"
+    },
+    "actions": [
+     {
+      "tool": "initiate_payment",
+      "args": {
+       "vpa": "payee8@upibank",
+       "amount": 40000
+      }
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-ACTION"
+    ],
+    "passes_all_but": [
+     "R-ACTION"
+    ]
+   }
+  },
+  {
+   "name": "action_log_empty_claims_done",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "action": "paid"
+    },
+    "actions": []
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-EFFECTS"
+    ],
+    "passes_all_but": [
+     "R-EFFECTS"
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,604 @@
+{
+ "gemini:gemini-3.1-flash-lite": {
+  "graded_with": "123c1450dab5",
+  "k": 1,
+  "navital_gym_commit": "7d0a72acd069",
+  "settings": {
+   "base_url": "https://generativelanguage.googleapis.com/v1beta/openai",
+   "json_mode_on_final": true,
+   "max_turns": 40,
+   "model": "gemini-3.1-flash-lite",
+   "provider": "gemini",
+   "repair_retry": true,
+   "temperature": 0.0
+  },
+  "summary": {
+   "answered": 15,
+   "by_kind": {
+    "address_parse": {
+     "answered": 3,
+     "errors": 0.0,
+     "format_fail": 0.0,
+     "k": 1,
+     "mean_score": 0.75,
+     "not_run": 0,
+     "pass@1": 0.0,
+     "pass^k": 0.0,
+     "rule_failures": {
+      "R-PIN": 3
+     },
+     "strict_pass@1": 0.0,
+     "tasks": 3,
+     "turns_exhausted": 0.0
+    },
+    "fiscal_year": {
+     "answered": 3,
+     "errors": 0.0,
+     "format_fail": 0.0,
+     "k": 1,
+     "mean_score": 0.3333333333333333,
+     "not_run": 0,
+     "pass@1": 0.0,
+     "pass^k": 0.0,
+     "rule_failures": {
+      "R-AY": 3,
+      "R-FY": 3
+     },
+     "strict_pass@1": 0.0,
+     "tasks": 3,
+     "turns_exhausted": 0.3333333333333333
+    },
+    "kyc_fill": {
+     "answered": 3,
+     "errors": 0.0,
+     "format_fail": 0.0,
+     "k": 1,
+     "mean_score": 1.0,
+     "not_run": 0,
+     "pass@1": 1.0,
+     "pass^k": 1.0,
+     "rule_failures": {},
+     "strict_pass@1": 1.0,
+     "tasks": 3,
+     "turns_exhausted": 0.3333333333333333
+    },
+    "number_parse": {
+     "answered": 3,
+     "errors": 0.0,
+     "format_fail": 0.0,
+     "k": 1,
+     "mean_score": 1.0,
+     "not_run": 0,
+     "pass@1": 1.0,
+     "pass^k": 1.0,
+     "rule_failures": {},
+     "strict_pass@1": 1.0,
+     "tasks": 3,
+     "turns_exhausted": 0.0
+    },
+    "pin_consistency": {
+     "answered": 3,
+     "errors": 0.0,
+     "format_fail": 0.0,
+     "k": 1,
+     "mean_score": 1.0,
+     "not_run": 0,
+     "pass@1": 1.0,
+     "pass^k": 1.0,
+     "rule_failures": {},
+     "strict_pass@1": 1.0,
+     "tasks": 3,
+     "turns_exhausted": 0.0
+    }
+   },
+   "by_split": {
+    "core": {
+     "answered": 15,
+     "errors": 0.0,
+     "format_fail": 0.0,
+     "k": 1,
+     "mean_score": 0.8166666666666667,
+     "not_run": 0,
+     "pass@1": 0.6,
+     "pass^k": 0.6,
+     "rule_failures": {
+      "R-AY": 3,
+      "R-FY": 3,
+      "R-PIN": 3
+     },
+     "strict_pass@1": 0.6,
+     "tasks": 15,
+     "turns_exhausted": 0.13333333333333333
+    }
+   },
+   "errors": 0.0,
+   "format_fail": 0.0,
+   "k": 1,
+   "mean_score": 0.8166666666666667,
+   "not_run": 0,
+   "pass@1": 0.6,
+   "pass^k": 0.6,
+   "rule_failures": {
+    "R-AY": 3,
+    "R-FY": 3,
+    "R-PIN": 3
+   },
+   "strict_pass@1": 0.6,
+   "tasks": 15,
+   "turns_exhausted": 0.13333333333333333
+  },
+  "tasks": {
+   "IN-FORM-001": [
+    {
+     "details": {
+      "R-ACCOUNT": "account_type_allowed",
+      "R-AGE": "age",
+      "R-DOB": "dob",
+      "R-FMT": "answer must be an object",
+      "R-GUARDIAN": "guardian_required",
+      "R-IFSC": "ifsc",
+      "R-IFSC-VALID": "ifsc_valid",
+      "R-MINOR": "minor",
+      "R-MOBILE": "mobile",
+      "R-MOBILE-VALID": "mobile_valid",
+      "R-NAME": "full_name",
+      "R-PAN": "pan",
+      "R-PAN-VALID": "pan_valid"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 84180,
+      "turns": 40,
+      "turns_exhausted": true,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-ACCOUNT": true,
+      "R-AGE": true,
+      "R-DOB": true,
+      "R-FMT": true,
+      "R-GUARDIAN": true,
+      "R-IFSC": true,
+      "R-IFSC-VALID": true,
+      "R-MINOR": true,
+      "R-MOBILE": true,
+      "R-MOBILE-VALID": true,
+      "R-NAME": true,
+      "R-PAN": true,
+      "R-PAN-VALID": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-FORM-002": [
+    {
+     "details": {
+      "R-ACCOUNT": "account_type_allowed",
+      "R-AGE": "age",
+      "R-DOB": "dob",
+      "R-FMT": "answer must be an object",
+      "R-GUARDIAN": "guardian_required",
+      "R-IFSC": "ifsc must be null",
+      "R-IFSC-VALID": "ifsc_valid",
+      "R-MINOR": "minor",
+      "R-MOBILE": "mobile must be null",
+      "R-MOBILE-VALID": "mobile_valid",
+      "R-NAME": "full_name",
+      "R-PAN": "pan must be null",
+      "R-PAN-VALID": "pan_valid"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 14294,
+      "turns": 11,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-ACCOUNT": true,
+      "R-AGE": true,
+      "R-DOB": true,
+      "R-FMT": true,
+      "R-GUARDIAN": true,
+      "R-IFSC": true,
+      "R-IFSC-VALID": true,
+      "R-MINOR": true,
+      "R-MOBILE": true,
+      "R-MOBILE-VALID": true,
+      "R-NAME": true,
+      "R-PAN": true,
+      "R-PAN-VALID": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-FORM-003": [
+    {
+     "details": {
+      "R-ACCOUNT": "account_type_allowed",
+      "R-AGE": "age",
+      "R-DOB": "dob",
+      "R-FMT": "answer must be an object",
+      "R-GUARDIAN": "guardian_required",
+      "R-IFSC": "ifsc must be null",
+      "R-IFSC-VALID": "ifsc_valid",
+      "R-MINOR": "minor",
+      "R-MOBILE": "mobile",
+      "R-MOBILE-VALID": "mobile_valid",
+      "R-NAME": "full_name",
+      "R-PAN": "pan must be null",
+      "R-PAN-VALID": "pan_valid"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 8920,
+      "turns": 8,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-ACCOUNT": true,
+      "R-AGE": true,
+      "R-DOB": true,
+      "R-FMT": true,
+      "R-GUARDIAN": true,
+      "R-IFSC": true,
+      "R-IFSC-VALID": true,
+      "R-MINOR": true,
+      "R-MOBILE": true,
+      "R-MOBILE-VALID": true,
+      "R-NAME": true,
+      "R-PAN": true,
+      "R-PAN-VALID": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-FORM-016": [
+    {
+     "details": {
+      "R-CITY": "city",
+      "R-FMT": "answer must be an object",
+      "R-HOUSE": "house",
+      "R-PIN": "pin",
+      "R-STATE": "state"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 1533,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-CITY": true,
+      "R-FMT": true,
+      "R-HOUSE": true,
+      "R-PIN": false,
+      "R-STATE": true
+     },
+     "score": 0.75,
+     "soft": {},
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-PIN"
+    }
+   ],
+   "IN-FORM-017": [
+    {
+     "details": {
+      "R-CITY": "city",
+      "R-FMT": "answer must be an object",
+      "R-HOUSE": "house",
+      "R-PIN": "pin",
+      "R-STATE": "state"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 2778,
+      "turns": 3,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-CITY": true,
+      "R-FMT": true,
+      "R-HOUSE": true,
+      "R-PIN": false,
+      "R-STATE": true
+     },
+     "score": 0.75,
+     "soft": {},
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-PIN"
+    }
+   ],
+   "IN-FORM-018": [
+    {
+     "details": {
+      "R-CITY": "city",
+      "R-FMT": "answer must be an object",
+      "R-HOUSE": "house",
+      "R-PIN": "pin",
+      "R-STATE": "state"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 1514,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-CITY": true,
+      "R-FMT": true,
+      "R-HOUSE": true,
+      "R-PIN": false,
+      "R-STATE": true
+     },
+     "score": 0.75,
+     "soft": {},
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-PIN"
+    }
+   ],
+   "IN-FORM-028": [
+    {
+     "details": {
+      "R-CONSISTENT": "consistent",
+      "R-FMT": "answer must be an object"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 4758,
+      "turns": 5,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-CONSISTENT": true,
+      "R-FMT": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-FORM-029": [
+    {
+     "details": {
+      "R-CONSISTENT": "consistent",
+      "R-FMT": "answer must be an object"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 2602,
+      "turns": 3,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-CONSISTENT": true,
+      "R-FMT": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-FORM-030": [
+    {
+     "details": {
+      "R-CONSISTENT": "consistent",
+      "R-FMT": "answer must be an object"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 12298,
+      "turns": 9,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-CONSISTENT": true,
+      "R-FMT": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-FORM-036": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-VALUE": "value"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 3058,
+      "turns": 4,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-VALUE": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-FORM-037": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-VALUE": "value"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 1256,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-VALUE": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-FORM-038": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-VALUE": "value"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 1942,
+      "turns": 3,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-VALUE": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-FORM-046": [
+    {
+     "details": {
+      "R-ADV-TAX": "next_advance_tax_date",
+      "R-AY": "assessment_year",
+      "R-FMT": "answer must be an object",
+      "R-FY": "financial_year"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 8755,
+      "turns": 7,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-ADV-TAX": true,
+      "R-AY": false,
+      "R-FMT": true,
+      "R-FY": false
+     },
+     "score": 0.333333,
+     "soft": {},
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-FY, R-AY"
+    }
+   ],
+   "IN-FORM-047": [
+    {
+     "details": {
+      "R-ADV-TAX": "next_advance_tax_date",
+      "R-AY": "assessment_year",
+      "R-FMT": "answer must be an object",
+      "R-FY": "financial_year"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 12072,
+      "turns": 8,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-ADV-TAX": true,
+      "R-AY": false,
+      "R-FMT": true,
+      "R-FY": false
+     },
+     "score": 0.333333,
+     "soft": {},
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-FY, R-AY"
+    }
+   ],
+   "IN-FORM-048": [
+    {
+     "details": {
+      "R-ADV-TAX": "next_advance_tax_date",
+      "R-AY": "assessment_year",
+      "R-FMT": "answer must be an object",
+      "R-FY": "financial_year"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 210367,
+      "turns": 40,
+      "turns_exhausted": true,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-ADV-TAX": true,
+      "R-AY": false,
+      "R-FMT": true,
+      "R-FY": false
+     },
+     "score": 0.333333,
+     "soft": {},
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-FY, R-AY"
+    }
+   ]
+  }
+ }
+}

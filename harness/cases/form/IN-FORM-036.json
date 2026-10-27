@@ -1,0 +1,70 @@
+{
+ "env": "form",
+ "task_id": "IN-FORM-036",
+ "task": {
+  "id": "IN-FORM-036",
+  "family": "number_parse",
+  "difficulty": 3,
+  "lang": "hi",
+  "prompt": "Convert to an integer rupee amount: \"सवा दो लाख\"\n\nAnswer fields: value.",
+  "params": {
+   "world": {
+    "text": "सवा दो लाख"
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-VALUE"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "gold_answer": {
+    "indian_format": "2,25,000",
+    "value": 225000
+   },
+   "kind": "number_parse"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "value": 225000
+    }
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "answer"
+    ]
+   }
+  },
+  {
+   "name": "only_R-VALUE",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "value": 225
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-VALUE"
+    ],
+    "passes_all_but": [
+     "R-VALUE"
+    ]
+   }
+  }
+ ]
+}

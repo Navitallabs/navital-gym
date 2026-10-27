@@ -1,0 +1,73 @@
+{
+ "env": "form",
+ "task_id": "IN-FORM-029",
+ "task": {
+  "id": "IN-FORM-029",
+  "family": "pin_consistency",
+  "difficulty": 3,
+  "lang": "en",
+  "prompt": "Address says Chennai, Tamil Nadu - PIN 400001. Does the PIN's first digit match the postal zone of the state? (Zone 1: Delhi, Haryana, Punjab, Himachal Pradesh, Jammu and Kashmir, Chandigarh; 2: Uttar Pradesh, Uttarakhand; 3: Rajasthan, Gujarat; 4: Maharashtra, Goa, Madhya Pradesh, Chhattisgarh; 5: Andhra Pradesh, Telangana, Karnataka; 6: Kerala, Tamil Nadu, Puducherry; 7: West Bengal, Odisha, Assam; 8: Bihar, Jharkhand.)\n\nAnswer fields: consistent.",
+  "params": {
+   "world": {
+    "pin": "400001",
+    "state": "Tamil Nadu"
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-CONSISTENT"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "gold_answer": {
+    "consistent": false,
+    "expected_first_digit": "6"
+   },
+   "kind": "pin_consistency"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "consistent": false,
+     "expected_first_digit": "6"
+    }
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "answer"
+    ]
+   }
+  },
+  {
+   "name": "only_R-CONSISTENT",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "consistent": true,
+     "expected_first_digit": "6"
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-CONSISTENT"
+    ],
+    "passes_all_but": [
+     "R-CONSISTENT"
+    ]
+   }
+  }
+ ]
+}

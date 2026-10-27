@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+dist/
+build/
+.DS_Store
+runs/excluded/
+runs/orig/
+runs/*.log
+runs/*.stale.json
+runs/spend-ledger*
+.env
+.env.local
+.env.*.local
+*heldout*.jsonl
+heldout/

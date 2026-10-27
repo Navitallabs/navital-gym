@@ -1,0 +1,253 @@
+{
+ "env": "support",
+ "task_id": "IN-SUP-048",
+ "task": {
+  "id": "IN-SUP-048",
+  "family": "address_change",
+  "difficulty": 2,
+  "lang": "hi",
+  "prompt": "ऑर्डर OD81800 का पता बदलना है।",
+  "params": {
+   "policy": {
+    "address_change_allowed_status": [
+     "placed"
+    ],
+    "cancel_allowed_status": [
+     "placed"
+    ],
+    "cod_refund_requires_valid_ifsc": true,
+    "damaged_report_window_days": 7,
+    "damaged_requires_photo": true,
+    "marker_words": {
+     "hi": [
+      "है",
+      "आपका",
+      "नहीं",
+      "कृपया"
+     ],
+     "mr": [
+      "आहे",
+      "तुमचा",
+      "नाही",
+      "कृपया"
+     ]
+    },
+    "non_returnable_categories": [
+     "personal_care",
+     "grocery"
+    ],
+    "refund_eta_workdays": 5,
+    "refund_includes_shipping_if_seller_fault": true,
+    "reply_language_rule": "reply in the customer's language; Hinglish gets Latin-script Hinglish",
+    "return_window_days": {
+     "apparel": 15,
+     "books": 7,
+     "electronics": 10,
+     "grocery": 0,
+     "personal_care": 0
+    },
+    "script_check": {
+     "bn": "Bengali",
+     "hi": "Devanagari",
+     "hinglish": "Latin",
+     "mr": "Devanagari",
+     "ta": "Tamil"
+    }
+   },
+   "world": {
+    "authenticated_customer_owns_order": true,
+    "order": {
+     "category": "books",
+     "delivered_on": null,
+     "id": "OD81800",
+     "item": "Novel set",
+     "payment": "prepaid",
+     "phone": "9000010800",
+     "price": 650,
+     "ship_address": "Flat 10, Sample Colony, Pune 411001",
+     "shipping_fee": 60,
+     "status": "placed"
+    },
+    "today": "2026-11-16"
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-ACTIONS",
+   "R-FORBIDDEN",
+   "R-DECISION",
+   "R-REASON",
+   "R-LANG"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "forbidden_actions": [],
+   "gold_answer": {
+    "action": "request_address_change",
+    "reply_language": "hi"
+   },
+   "kind": "address_change",
+   "split": "core"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "actions": [
+     {
+      "tool": "request_address_change",
+      "args": {
+       "order_id": "OD81800"
+      }
+     }
+    ],
+    "reply": "आपका पता बदलने का अनुरोध हमने दर्ज कर लिया है और हम इसे जल्द ही अपडेट कर देंगे। कृपया ध्यान दें।",
+    "decision": "address_change",
+    "reason": "not_shipped"
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "actions",
+     "decision",
+     "reason"
+    ]
+   }
+  },
+  {
+   "name": "no_action",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [],
+    "reply": "आपका पता बदलने का अनुरोध हमने दर्ज कर लिया है और हम इसे जल्द ही अपडेट कर देंगे। कृपया ध्यान दें।",
+    "decision": "address_change",
+    "reason": "not_shipped"
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-ACTIONS"
+    ],
+    "passes_all_but": [
+     "R-ACTIONS"
+    ]
+   }
+  },
+  {
+   "name": "wrong_tool",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [
+     {
+      "tool": "cancel_order",
+      "args": {
+       "order_id": "OD81800"
+      }
+     }
+    ],
+    "reply": "आपका पता बदलने का अनुरोध हमने दर्ज कर लिया है और हम इसे जल्द ही अपडेट कर देंगे। कृपया ध्यान दें।",
+    "decision": "address_change",
+    "reason": "not_shipped"
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-ACTIONS",
+     "R-FORBIDDEN"
+    ],
+    "passes_all_but": [
+     "R-ACTIONS",
+     "R-FORBIDDEN"
+    ]
+   }
+  },
+  {
+   "name": "wrong_decision",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [
+     {
+      "tool": "request_address_change",
+      "args": {
+       "order_id": "OD81800"
+      }
+     }
+    ],
+    "reply": "आपका पता बदलने का अनुरोध हमने दर्ज कर लिया है और हम इसे जल्द ही अपडेट कर देंगे। कृपया ध्यान दें।",
+    "decision": "decline_address_change",
+    "reason": "not_shipped"
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-DECISION"
+    ],
+    "passes_all_but": [
+     "R-DECISION"
+    ]
+   }
+  },
+  {
+   "name": "wrong_reason",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [
+     {
+      "tool": "request_address_change",
+      "args": {
+       "order_id": "OD81800"
+      }
+     }
+    ],
+    "reply": "आपका पता बदलने का अनुरोध हमने दर्ज कर लिया है और हम इसे जल्द ही अपडेट कर देंगे। कृपया ध्यान दें।",
+    "decision": "address_change",
+    "reason": "already_shipped"
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-REASON"
+    ],
+    "passes_all_but": [
+     "R-REASON"
+    ]
+   }
+  },
+  {
+   "name": "missing_reason_is_format_gate",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [
+     {
+      "tool": "request_address_change",
+      "args": {
+       "order_id": "OD81800"
+      }
+     }
+    ],
+    "reply": "आपका पता बदलने का अनुरोध हमने दर्ज कर लिया है और हम इसे जल्द ही अपडेट कर देंगे। कृपया ध्यान दें।",
+    "decision": "address_change"
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.0
+   }
+  }
+ ]
+}

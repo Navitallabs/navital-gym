@@ -1,0 +1,121 @@
+{
+ "env": "form",
+ "task_id": "IN-FORM-046",
+ "task": {
+  "id": "IN-FORM-046",
+  "family": "fiscal_year",
+  "difficulty": 3,
+  "lang": "en",
+  "prompt": "Date written in India as 10/02/2027. Give the financial year (April to March), the assessment year, and the next advance-tax instalment date on or after it (15 June, 15 September, 15 December, 15 March).\n\nAnswer fields: financial_year, assessment_year, next_advance_tax_date.",
+  "params": {
+   "world": {
+    "date_dd_mm_yyyy": "10/02/2027"
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-FY",
+   "R-AY",
+   "R-ADV-TAX"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "gold_answer": {
+    "assessment_year": "2027-28",
+    "financial_year": "2026-27",
+    "next_advance_tax_date": "2027-03-15"
+   },
+   "kind": "fiscal_year"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "financial_year": "2026-27",
+     "assessment_year": "2027-28",
+     "next_advance_tax_date": "2027-03-15"
+    }
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "answer"
+    ]
+   }
+  },
+  {
+   "name": "only_R-FY",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "financial_year": "2027-28",
+     "assessment_year": "2027-28",
+     "next_advance_tax_date": "2027-03-15"
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-FY"
+    ],
+    "passes_all_but": [
+     "R-FY"
+    ]
+   }
+  },
+  {
+   "name": "only_R-AY",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "financial_year": "2026-27",
+     "assessment_year": "2026-27",
+     "next_advance_tax_date": "2027-03-15"
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-AY"
+    ],
+    "passes_all_but": [
+     "R-AY"
+    ]
+   }
+  },
+  {
+   "name": "only_R-ADV-TAX",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "financial_year": "2026-27",
+     "assessment_year": "2027-28",
+     "next_advance_tax_date": "2026-12-15"
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-ADV-TAX"
+    ],
+    "passes_all_but": [
+     "R-ADV-TAX"
+    ]
+   }
+  }
+ ]
+}

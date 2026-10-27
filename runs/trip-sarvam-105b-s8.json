@@ -1,0 +1,440 @@
+{
+ "sarvam:sarvam-105b": {
+  "graded_with": "123c1450dab5",
+  "k": 1,
+  "navital_gym_commit": "2c9209a",
+  "settings": {
+   "base_url": "https://api.sarvam.ai/v1",
+   "json_mode_on_final": true,
+   "max_turns": 40,
+   "model": "sarvam-105b",
+   "provider": "sarvam",
+   "repair_retry": true,
+   "temperature": 0.0
+  },
+  "summary": {
+   "answered": 8,
+   "by_kind": {
+    "feasible": {
+     "answered": 8,
+     "errors": 0.0,
+     "format_fail": 0.125,
+     "k": 1,
+     "mean_score": 0.6973484848484849,
+     "not_run": 0,
+     "pass@1": 0.0,
+     "pass^k": 0.0,
+     "rule_failures": {
+      "R-AVAIL": 2,
+      "R-CONN": 6,
+      "R-DATE": 4,
+      "R-OCC": 1,
+      "R-OPEN": 1
+     },
+     "strict_pass@1": 0.0,
+     "tasks": 8,
+     "turns_exhausted": 0.0
+    }
+   },
+   "by_split": {
+    "core": {
+     "answered": 8,
+     "errors": 0.0,
+     "format_fail": 0.125,
+     "k": 1,
+     "mean_score": 0.6973484848484849,
+     "not_run": 0,
+     "pass@1": 0.0,
+     "pass^k": 0.0,
+     "rule_failures": {
+      "R-AVAIL": 2,
+      "R-CONN": 6,
+      "R-DATE": 4,
+      "R-OCC": 1,
+      "R-OPEN": 1
+     },
+     "strict_pass@1": 0.0,
+     "tasks": 8,
+     "turns_exhausted": 0.0
+    }
+   },
+   "errors": 0.0,
+   "format_fail": 0.125,
+   "k": 1,
+   "mean_score": 0.6973484848484849,
+   "not_run": 0,
+   "pass@1": 0.0,
+   "pass^k": 0.0,
+   "rule_failures": {
+    "R-AVAIL": 2,
+    "R-CONN": 6,
+    "R-DATE": 4,
+    "R-OCC": 1,
+    "R-OPEN": 1
+   },
+   "strict_pass@1": 0.0,
+   "tasks": 8,
+   "turns_exhausted": 0.0
+  },
+  "tasks": {
+   "IN-TRIP-002": [
+    {
+     "details": {
+      "R-AVAIL": "",
+      "R-BUD": "cost 15460 vs budget 30000",
+      "R-CONN": "rail 13404: train times do not match the timetable",
+      "R-DATE": "",
+      "R-FMT": "",
+      "R-OCC": "rail 19063: wrong passenger count (rail: pax+half = travellers aged 5+, half only for ages 5-11; air: aged 2+; taxi: vehicles = ceil(everyone/4); bus: aged 5+)",
+      "R-OPEN": "",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 79407,
+      "turns": 8,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": true,
+      "R-BUD": true,
+      "R-CONN": false,
+      "R-DATE": true,
+      "R-FMT": true,
+      "R-OCC": false,
+      "R-OPEN": true,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.777778,
+     "soft": {
+      "budget_slack": 0.485,
+      "cost_inr": 15460,
+      "legs": 3,
+      "rail_share_km": 1.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-CONN, R-OCC"
+    }
+   ],
+   "IN-TRIP-011": [
+    {
+     "details": {
+      "R-ACC": "",
+      "R-AVAIL": "",
+      "R-BUD": "cost 26355 vs budget 48000",
+      "R-CONN": "road TX-ALLE-KOCH: transfer duration does not match",
+      "R-DATE": "",
+      "R-FMT": "",
+      "R-NIGHT": "",
+      "R-OCC": "",
+      "R-OPEN": "",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 100681,
+      "turns": 10,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-ACC": true,
+      "R-AVAIL": true,
+      "R-BUD": true,
+      "R-CONN": false,
+      "R-DATE": true,
+      "R-FMT": true,
+      "R-NIGHT": true,
+      "R-OCC": true,
+      "R-OPEN": true,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.909091,
+     "soft": {
+      "budget_slack": 0.451,
+      "cost_inr": 26355,
+      "legs": 3,
+      "rail_share_km": 0.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-CONN"
+    }
+   ],
+   "IN-TRIP-017": [
+    {
+     "details": {
+      "R-AVAIL": "",
+      "R-BUD": "cost 30055 vs budget 42000",
+      "R-CONN": "road TX-CHAN-SHIM: transfer duration does not match",
+      "R-DATE": "",
+      "R-FMT": "",
+      "R-NIGHT": "",
+      "R-OCC": "",
+      "R-OPEN": "",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 125712,
+      "turns": 9,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": true,
+      "R-BUD": true,
+      "R-CONN": false,
+      "R-DATE": true,
+      "R-FMT": true,
+      "R-NIGHT": true,
+      "R-OCC": true,
+      "R-OPEN": true,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.9,
+     "soft": {
+      "budget_slack": 0.284,
+      "cost_inr": 30055,
+      "legs": 3,
+      "rail_share_km": 0.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-CONN"
+    }
+   ],
+   "IN-TRIP-021": [
+    {
+     "details": {
+      "R-AVAIL": "13259 SL GN on 2026-12-04: AVL 1, need 3 confirmed seats",
+      "R-BUD": "cost 11465 vs budget 18000",
+      "R-CONN": "leg 13878 leaves Goa but you are in Bengaluru",
+      "R-DATE": "plan has 4 days, task needs 3",
+      "R-FMT": "",
+      "R-OCC": "",
+      "R-OPEN": "Beach day Palolem: an activity must start and end on its day",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": true,
+      "tokens": 120597,
+      "turns": 14,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": false,
+      "R-BUD": true,
+      "R-CONN": false,
+      "R-DATE": false,
+      "R-FMT": true,
+      "R-OCC": true,
+      "R-OPEN": false,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.555556,
+     "soft": {
+      "budget_slack": 0.363,
+      "cost_inr": 11465,
+      "legs": 3,
+      "rail_share_km": 1.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-DATE, R-CONN, R-AVAIL, R-OPEN"
+    }
+   ],
+   "IN-TRIP-026": [
+    {
+     "details": {
+      "R-ACC": "",
+      "R-AVAIL": "",
+      "R-BUD": "cost 20400 vs budget 30000",
+      "R-CONN": "",
+      "R-DATE": "trip ends in Lucknow, not Delhi",
+      "R-DIET": "",
+      "R-FMT": "",
+      "R-OCC": "",
+      "R-OPEN": "",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 101427,
+      "turns": 9,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-ACC": true,
+      "R-AVAIL": true,
+      "R-BUD": true,
+      "R-CONN": true,
+      "R-DATE": false,
+      "R-DIET": true,
+      "R-FMT": true,
+      "R-OCC": true,
+      "R-OPEN": true,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.909091,
+     "soft": {
+      "budget_slack": 0.32,
+      "cost_inr": 20400,
+      "legs": 3,
+      "rail_share_km": 1.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-DATE"
+    }
+   ],
+   "IN-TRIP-031": [
+    {
+     "details": {},
+     "meta": {
+      "error": null,
+      "repaired": true,
+      "tokens": 100819,
+      "truncated": 2,
+      "turns": 5,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {},
+     "score": 0.0,
+     "soft": {},
+     "solved": false,
+     "valid": false,
+     "verdict": "not a valid submission"
+    }
+   ],
+   "IN-TRIP-036": [
+    {
+     "details": {
+      "R-AVAIL": "",
+      "R-BUD": "cost 22645 vs budget 42000",
+      "R-CONN": "Umiam Lake is not reachable at that time (you are elsewhere or in transit)",
+      "R-DATE": "trip ends in Kaziranga, not Guwahati",
+      "R-FMT": "",
+      "R-NIGHT": "",
+      "R-OCC": "",
+      "R-OPEN": "",
+      "R-QUOTA": "",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": true,
+      "tokens": 366508,
+      "turns": 19,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": true,
+      "R-BUD": true,
+      "R-CONN": false,
+      "R-DATE": false,
+      "R-FMT": true,
+      "R-NIGHT": true,
+      "R-OCC": true,
+      "R-OPEN": true,
+      "R-QUOTA": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.8,
+     "soft": {
+      "budget_slack": 0.461,
+      "cost_inr": 22645,
+      "legs": 3,
+      "rail_share_km": 0.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-DATE, R-CONN"
+    }
+   ],
+   "IN-TRIP-046": [
+    {
+     "details": {
+      "R-AVAIL": "13497 3A GN on 2026-12-16: WL 12, need 4 confirmed seats",
+      "R-BUD": "cost 29730 vs budget 55000",
+      "R-CONN": "Hawa Mahal is not reachable at that time (you are elsewhere or in transit)",
+      "R-DATE": "a leg arrives after the last day",
+      "R-DIET": "",
+      "R-FMT": "",
+      "R-OCC": "",
+      "R-OPEN": "",
+      "R-QUOTA": "",
+      "R-REST": "1 rest day(s), need 1",
+      "R-ROUTE": "",
+      "R-SEASON": ""
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 149953,
+      "turns": 10,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-AVAIL": false,
+      "R-BUD": true,
+      "R-CONN": false,
+      "R-DATE": false,
+      "R-DIET": true,
+      "R-FMT": true,
+      "R-OCC": true,
+      "R-OPEN": true,
+      "R-QUOTA": true,
+      "R-REST": true,
+      "R-ROUTE": true,
+      "R-SEASON": true
+     },
+     "score": 0.727273,
+     "soft": {
+      "budget_slack": 0.459,
+      "cost_inr": 29730,
+      "legs": 3,
+      "rail_share_km": 1.0
+     },
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-DATE, R-CONN, R-AVAIL"
+    }
+   ]
+  }
+ }
+}

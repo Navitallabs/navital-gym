@@ -1,0 +1,407 @@
+{
+ "env": "trip",
+ "task_id": "IN-TRIP-041",
+ "task": {
+  "id": "IN-TRIP-041",
+  "family": "rail-logic",
+  "difficulty": 2,
+  "lang": "en",
+  "prompt": "Today is 2026-11-15. Book rail from Delhi to Jaipur on 2027-01-10 for 2 adults.",
+  "params": {
+   "days": 1,
+   "diet": "any",
+   "end": "Jaipur",
+   "mode_policy": "rail_only",
+   "origin": "Delhi",
+   "route": [
+    "Jaipur"
+   ],
+   "snapshot_date": "2026-11-15",
+   "start": "2027-01-10",
+   "travelers": {
+    "adults": 2,
+    "child_ages": [],
+    "seniors": 0
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-DATE",
+   "R-CONN",
+   "R-QUOTA",
+   "R-AVAIL",
+   "R-OPEN",
+   "R-SEASON",
+   "R-OCC",
+   "R-ROUTE"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": "2026-11-15",
+  "meta": {
+   "binding_sets": [],
+   "design_intent_binding": [],
+   "design_intent_feasible": true,
+   "design_notes": [
+    "booking date is today; travel is 56 days away: general quota allowed"
+   ],
+   "oracle_plan_cost": null,
+   "solver_note": "plan found (1 candidates checked)"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2027-01-10",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "16208",
+        "from": "Delhi",
+        "to": "Jaipur",
+        "dep": "2027-01-10T05:30",
+        "arr": "2027-01-10T10:49",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "activities": [
+       {
+        "id": "City Palace",
+        "start": "2027-01-10T12:00",
+        "end": "2027-01-10T14:00"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "days",
+     "booking_date"
+    ]
+   }
+  },
+  {
+   "name": "ticket_only_is_valid_now",
+   "kind": "variant",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2027-01-10",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "16208",
+        "from": "Delhi",
+        "to": "Jaipur",
+        "dep": "2027-01-10T05:30",
+        "arr": "2027-01-10T10:49",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0
+   }
+  },
+  {
+   "name": "booking_date_not_today",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-16",
+    "days": [
+     {
+      "date": "2027-01-10",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "16208",
+        "from": "Delhi",
+        "to": "Jaipur",
+        "dep": "2027-01-10T05:30",
+        "arr": "2027-01-10T10:49",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "activities": [
+       {
+        "id": "City Palace",
+        "start": "2027-01-10T12:00",
+        "end": "2027-01-10T14:00"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-QUOTA"
+    ],
+    "passes_all_but": [
+     "R-QUOTA"
+    ]
+   }
+  },
+  {
+   "name": "one_ticket_for_two",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2027-01-10",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "16208",
+        "from": "Delhi",
+        "to": "Jaipur",
+        "dep": "2027-01-10T05:30",
+        "arr": "2027-01-10T10:49",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 1,
+        "half": 0
+       }
+      ],
+      "activities": [
+       {
+        "id": "City Palace",
+        "start": "2027-01-10T12:00",
+        "end": "2027-01-10T14:00"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-OCC"
+    ],
+    "passes_all_but": [
+     "R-OCC"
+    ]
+   }
+  },
+  {
+   "name": "departure_not_a_real_service",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2027-01-10",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "16208",
+        "from": "Delhi",
+        "to": "Jaipur",
+        "dep": "2027-01-10T06:30",
+        "arr": "2027-01-10T10:49",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "activities": [
+       {
+        "id": "City Palace",
+        "start": "2027-01-10T12:00",
+        "end": "2027-01-10T14:00"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-CONN"
+    ],
+    "passes_all_but": [
+     "R-CONN"
+    ]
+   }
+  },
+  {
+   "name": "sight_after_closing",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2027-01-10",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "16208",
+        "from": "Delhi",
+        "to": "Jaipur",
+        "dep": "2027-01-10T05:30",
+        "arr": "2027-01-10T10:49",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "activities": [
+       {
+        "id": "City Palace",
+        "start": "2027-01-10T16:00",
+        "end": "2027-01-10T18:00"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-OPEN"
+    ],
+    "passes_all_but": [
+     "R-OPEN"
+    ]
+   }
+  },
+  {
+   "name": "sight_shorter_than_visit_length",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2027-01-10",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "16208",
+        "from": "Delhi",
+        "to": "Jaipur",
+        "dep": "2027-01-10T05:30",
+        "arr": "2027-01-10T10:49",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "activities": [
+       {
+        "id": "City Palace",
+        "start": "2027-01-10T12:00",
+        "end": "2027-01-10T13:00"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-OPEN"
+    ],
+    "passes_all_but": [
+     "R-OPEN"
+    ]
+   }
+  },
+  {
+   "name": "tatkal_56_days_early",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2027-01-10",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "16208",
+        "from": "Delhi",
+        "to": "Jaipur",
+        "dep": "2027-01-10T05:30",
+        "arr": "2027-01-10T10:49",
+        "class": "2S",
+        "quota": "TQ",
+        "pax": 2,
+        "half": 0,
+        "book_at": "10:00"
+       }
+      ],
+      "activities": [
+       {
+        "id": "City Palace",
+        "start": "2027-01-10T12:00",
+        "end": "2027-01-10T14:00"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-QUOTA"
+    ],
+    "passes_all_but": [
+     "R-QUOTA"
+    ]
+   }
+  },
+  {
+   "name": "claims_infeasible_on_a_feasible_task",
+   "kind": "violation",
+   "submission": {
+    "status": "infeasible",
+    "binding": [
+     "R-QUOTA"
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.0
+   }
+  }
+ ]
+}

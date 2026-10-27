@@ -1,0 +1,300 @@
+{
+ "env": "form",
+ "task_id": "IN-FORM-002",
+ "task": {
+  "id": "IN-FORM-002",
+  "family": "kyc_fill",
+  "difficulty": 4,
+  "lang": "en",
+  "prompt": "Fill the KYC form from this document text (today is 2026-11-16). Surname comes first in the document. Normalise name (given names then surname, Title Case), dob (ISO), compute age, flag minor, validate PAN, mobile (10 digits starting 6-9), IFSC, and say whether the requested account type is allowed (minors cannot open current accounts). Invalid fields must be null.\n\nAnswer fields: full_name, dob, age, minor, guardian_required, pan, pan_valid, mobile, mobile_valid, ifsc, ifsc_valid, account_type_allowed.",
+  "params": {
+   "world": {
+    "document_text": "NAME: GUPTA PRIYA KUMAR\nDOB: 15/08/2009\nMOBILE: 98765432109\nPAN: ABCPD12345\nBANK IFSC: SBIN1AB1234\nREQUESTED ACCOUNT: savings",
+    "today": "2026-11-16"
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-NAME",
+   "R-DOB",
+   "R-AGE",
+   "R-MINOR",
+   "R-GUARDIAN",
+   "R-PAN",
+   "R-PAN-VALID",
+   "R-MOBILE",
+   "R-MOBILE-VALID",
+   "R-IFSC",
+   "R-IFSC-VALID",
+   "R-ACCOUNT"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "gold_answer": {
+    "account_type_allowed": true,
+    "age": 17,
+    "dob": "2009-08-15",
+    "full_name": "Priya Kumar Gupta",
+    "guardian_required": true,
+    "ifsc": null,
+    "ifsc_valid": false,
+    "minor": true,
+    "mobile": null,
+    "mobile_valid": false,
+    "pan": null,
+    "pan_valid": false
+   },
+   "kind": "kyc_fill"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "full_name": "Priya Kumar Gupta",
+     "dob": "2009-08-15",
+     "age": 17,
+     "minor": true,
+     "guardian_required": true,
+     "pan": null,
+     "pan_valid": false,
+     "mobile": null,
+     "mobile_valid": false,
+     "ifsc": null,
+     "ifsc_valid": false,
+     "account_type_allowed": true
+    }
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "answer"
+    ]
+   }
+  },
+  {
+   "name": "only_R-PAN",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "full_name": "Priya Kumar Gupta",
+     "dob": "2009-08-15",
+     "age": 17,
+     "minor": true,
+     "guardian_required": true,
+     "pan": "ABCPD12345",
+     "pan_valid": false,
+     "mobile": null,
+     "mobile_valid": false,
+     "ifsc": null,
+     "ifsc_valid": false,
+     "account_type_allowed": true
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-PAN"
+    ],
+    "passes_all_but": [
+     "R-PAN"
+    ]
+   }
+  },
+  {
+   "name": "only_R-PAN-VALID",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "full_name": "Priya Kumar Gupta",
+     "dob": "2009-08-15",
+     "age": 17,
+     "minor": true,
+     "guardian_required": true,
+     "pan": null,
+     "pan_valid": true,
+     "mobile": null,
+     "mobile_valid": false,
+     "ifsc": null,
+     "ifsc_valid": false,
+     "account_type_allowed": true
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-PAN-VALID"
+    ],
+    "passes_all_but": [
+     "R-PAN-VALID"
+    ]
+   }
+  },
+  {
+   "name": "only_R-MOBILE",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "full_name": "Priya Kumar Gupta",
+     "dob": "2009-08-15",
+     "age": 17,
+     "minor": true,
+     "guardian_required": true,
+     "pan": null,
+     "pan_valid": false,
+     "mobile": "8765432109",
+     "mobile_valid": false,
+     "ifsc": null,
+     "ifsc_valid": false,
+     "account_type_allowed": true
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-MOBILE"
+    ],
+    "passes_all_but": [
+     "R-MOBILE"
+    ]
+   }
+  },
+  {
+   "name": "only_R-MOBILE-VALID",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "full_name": "Priya Kumar Gupta",
+     "dob": "2009-08-15",
+     "age": 17,
+     "minor": true,
+     "guardian_required": true,
+     "pan": null,
+     "pan_valid": false,
+     "mobile": null,
+     "mobile_valid": true,
+     "ifsc": null,
+     "ifsc_valid": false,
+     "account_type_allowed": true
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-MOBILE-VALID"
+    ],
+    "passes_all_but": [
+     "R-MOBILE-VALID"
+    ]
+   }
+  },
+  {
+   "name": "only_R-IFSC",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "full_name": "Priya Kumar Gupta",
+     "dob": "2009-08-15",
+     "age": 17,
+     "minor": true,
+     "guardian_required": true,
+     "pan": null,
+     "pan_valid": false,
+     "mobile": null,
+     "mobile_valid": false,
+     "ifsc": "SBIN1AB1234",
+     "ifsc_valid": false,
+     "account_type_allowed": true
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-IFSC"
+    ],
+    "passes_all_but": [
+     "R-IFSC"
+    ]
+   }
+  },
+  {
+   "name": "only_R-IFSC-VALID",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "full_name": "Priya Kumar Gupta",
+     "dob": "2009-08-15",
+     "age": 17,
+     "minor": true,
+     "guardian_required": true,
+     "pan": null,
+     "pan_valid": false,
+     "mobile": null,
+     "mobile_valid": false,
+     "ifsc": null,
+     "ifsc_valid": true,
+     "account_type_allowed": true
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-IFSC-VALID"
+    ],
+    "passes_all_but": [
+     "R-IFSC-VALID"
+    ]
+   }
+  },
+  {
+   "name": "only_R-NAME",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "answer": {
+     "full_name": "Priya Kumar",
+     "dob": "2009-08-15",
+     "age": 17,
+     "minor": true,
+     "guardian_required": true,
+     "pan": null,
+     "pan_valid": false,
+     "mobile": null,
+     "mobile_valid": false,
+     "ifsc": null,
+     "ifsc_valid": false,
+     "account_type_allowed": true
+    }
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-NAME"
+    ],
+    "passes_all_but": [
+     "R-NAME"
+    ]
+   }
+  }
+ ]
+}

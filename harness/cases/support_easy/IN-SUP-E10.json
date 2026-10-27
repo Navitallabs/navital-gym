@@ -1,0 +1,175 @@
+{
+ "env": "support_easy",
+ "task_id": "IN-SUP-E10",
+ "task": {
+  "id": "IN-SUP-E10",
+  "family": "cancel_before_ship",
+  "difficulty": 1,
+  "lang": "hinglish",
+  "prompt": "Order OD82010 (Cotton kurta) cancel karna hai, mat bhejna.",
+  "params": {
+   "policy": {
+    "cancel_allowed_status": [
+     "placed"
+    ]
+   },
+   "world": {
+    "authenticated_customer_owns_order": true,
+    "order": {
+     "category": "apparel",
+     "delivered_on": null,
+     "id": "OD82010",
+     "item": "Cotton kurta",
+     "payment": "cod",
+     "phone": "9000082010",
+     "price": 900,
+     "ship_address": "Flat 50, Sample Colony, Pune 411001",
+     "shipping_fee": 60,
+     "status": "shipped"
+    },
+    "today": "2026-11-16"
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-ACTIONS",
+   "R-FORBIDDEN",
+   "R-DECISION",
+   "R-REASON",
+   "R-LANG"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "forbidden_actions": [
+    "cancel_order",
+    "issue_refund"
+   ],
+   "gold_answer": {
+    "action": "decline_cancel",
+    "reason": "already_shipped",
+    "reply_language": "hinglish"
+   },
+   "kind": "cancel_before_ship",
+   "review_status": "AI-drafted Hinglish, not native-reviewed",
+   "split": "easy"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "actions": [],
+    "decision": "decline_cancel",
+    "reason": "already_shipped",
+    "reply": "Aapka order ship ho chuka hai, isliye hum ab cancel nahi kar sakte. Delivery ke baad aap return ke liye bata sakte hain."
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "actions",
+     "decision",
+     "reason"
+    ]
+   }
+  },
+  {
+   "name": "wrong_decision",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [],
+    "decision": "cancel",
+    "reason": "already_shipped",
+    "reply": "Aapka order ship ho chuka hai, isliye hum ab cancel nahi kar sakte. Delivery ke baad aap return ke liye bata sakte hain."
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-DECISION"
+    ],
+    "passes_all_but": [
+     "R-DECISION"
+    ]
+   }
+  },
+  {
+   "name": "wrong_reason",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [],
+    "decision": "decline_cancel",
+    "reason": "not_shipped",
+    "reply": "Aapka order ship ho chuka hai, isliye hum ab cancel nahi kar sakte. Delivery ke baad aap return ke liye bata sakte hain."
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-REASON"
+    ],
+    "passes_all_but": [
+     "R-REASON"
+    ]
+   }
+  },
+  {
+   "name": "english_reply",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [],
+    "decision": "decline_cancel",
+    "reason": "already_shipped",
+    "reply": "Your request has been handled as per our policy."
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-LANG"
+    ],
+    "passes_all_but": [
+     "R-LANG"
+    ]
+   }
+  },
+  {
+   "name": "extra_refund_action",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "actions": [
+     {
+      "tool": "issue_refund",
+      "args": {
+       "order_id": "OD82010",
+       "amount": 100,
+       "mode": "original_source"
+      }
+     }
+    ],
+    "decision": "decline_cancel",
+    "reason": "already_shipped",
+    "reply": "Aapka order ship ho chuka hai, isliye hum ab cancel nahi kar sakte. Delivery ke baad aap return ke liye bata sakte hain."
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-FORBIDDEN"
+    ],
+    "passes_all_but": [
+     "R-FORBIDDEN"
+    ]
+   }
+  }
+ ]
+}

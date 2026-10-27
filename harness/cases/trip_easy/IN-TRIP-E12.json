@@ -1,0 +1,155 @@
+{
+ "env": "trip_easy",
+ "task_id": "IN-TRIP-E12",
+ "task": {
+  "id": "IN-TRIP-E12",
+  "family": "easy-day-trip",
+  "difficulty": 1,
+  "lang": "en",
+  "prompt": "Plan a one-day trip from Delhi to Agra on 2026-12-11 for 2 adults. Visit the Taj Mahal. Budget Rs 9,000.",
+  "params": {
+   "budget_inr": 9000,
+   "days": 1,
+   "diet": "any",
+   "end": "Delhi",
+   "must_visit": [
+    "Taj Mahal"
+   ],
+   "origin": "Delhi",
+   "route": [
+    "Delhi",
+    "Agra"
+   ],
+   "start": "2026-12-11",
+   "travelers": {
+    "adults": 2,
+    "child_ages": [],
+    "seniors": 0
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-DATE",
+   "R-CONN",
+   "R-QUOTA",
+   "R-AVAIL",
+   "R-OPEN",
+   "R-SEASON",
+   "R-OCC",
+   "R-ROUTE",
+   "R-BUD"
+  ],
+  "expected_feasible": false,
+  "binding": [
+   "R-OPEN"
+  ],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "binding_sets": [
+    [
+     "R-OPEN"
+    ]
+   ],
+   "solver_note": "no plan in the search space",
+   "split": "easy"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_infeasible_claim",
+   "kind": "solved",
+   "submission": {
+    "status": "infeasible",
+    "binding": [
+     "R-OPEN"
+    ]
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0
+   }
+  },
+  {
+   "name": "wrong_rule_named",
+   "kind": "violation",
+   "submission": {
+    "status": "infeasible",
+    "binding": [
+     "R-AVAIL"
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.0,
+    "fails": [
+     "R-INFEASIBLE"
+    ]
+   }
+  },
+  {
+   "name": "padded_with_an_unrelated_rule",
+   "kind": "violation",
+   "submission": {
+    "status": "infeasible",
+    "binding": [
+     "R-OPEN",
+     "R-AVAIL"
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.0,
+    "fails": [
+     "R-INFEASIBLE"
+    ]
+   }
+  },
+  {
+   "name": "empty_binding",
+   "kind": "violation",
+   "submission": {
+    "status": "infeasible",
+    "binding": []
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.0,
+    "fails": [
+     "R-INFEASIBLE"
+    ]
+   }
+  },
+  {
+   "name": "a_plan_for_an_infeasible_task",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2026-12-02",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "13207",
+        "from": "Delhi",
+        "to": "Agra",
+        "dep": "2026-12-02T07:45",
+        "arr": "2026-12-02T11:40",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.0
+   }
+  }
+ ]
+}

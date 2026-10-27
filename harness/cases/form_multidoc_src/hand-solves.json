@@ -1,0 +1,20 @@
+{
+ "_note": "hand solves, written from prompt + get_policy text only, before looking at the oracle or any gold (2026-10-26). Workings are in the comments of build_form_multidoc_cases.py.",
+ "IN-FORMMD-001": {"conflicts": [], "name": "Neha Priya Verma", "dob": "1967-07-02", "needs_manual_review": false},
+ "IN-FORMMD-002": {"conflicts": [], "name": "Kavita Vikram Chopra", "dob": "1994-11-17", "needs_manual_review": false},
+ "IN-FORMMD-003": {"conflicts": ["dob"], "name": "Rekha Anil Singh", "dob": "1987-11-24", "needs_manual_review": true},
+ "IN-FORMMD-004": {"conflicts": ["dob"], "name": "Priya Arjun Banerjee", "dob": "1980-02-16", "needs_manual_review": true},
+ "IN-FORMMD-005": {"conflicts": ["pan"], "name": "Anil Sunita Das", "dob": "1988-07-09", "needs_manual_review": true},
+ "IN-FORMMD-009": {"pan_matches_name": true, "reason": "ok"},
+ "IN-FORMMD-010": {"pan_matches_name": true, "reason": "ok"},
+ "IN-FORMMD-011": {"pan_matches_name": false, "reason": "surname_initial_mismatch"},
+ "IN-FORMMD-017": {"inconsistent_fields": [], "age": 40, "minor": false},
+ "IN-FORMMD-018": {"inconsistent_fields": ["age"], "age": 48, "minor": false},
+ "IN-FORMMD-019": {"inconsistent_fields": ["minor"], "age": 22, "minor": false},
+ "IN-FORMMD-025": {"pan": "BVSPC2665G", "ifsc": "ICIC0D5T6RQ", "repaired": ["pan"]},
+ "IN-FORMMD-026": {"pan": "CHRPS1955C", "ifsc": "ICIC0R6JJDH", "repaired": ["pan"]},
+ "IN-FORMMD-027": {"pan": "HGNPP8578L", "ifsc": "UTIB0GVWN92", "repaired": ["ifsc"]},
+ "IN-FORMMD-033": {"minors": 2, "invalid_pans": [], "current_account_eligible": ["R5", "R6"]},
+ "IN-FORMMD-034": {"minors": 4, "invalid_pans": ["R2", "R4", "R5"], "current_account_eligible": ["R3"]},
+ "IN-FORMMD-035": {"minors": 1, "invalid_pans": ["R3", "R4"], "current_account_eligible": ["R1", "R2", "R5", "R6"]}
+}

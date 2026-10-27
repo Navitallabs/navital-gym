@@ -1,0 +1,557 @@
+{
+ "groq:openai/gpt-oss-20b": {
+  "graded_with": "123c1450dab5",
+  "k": 1,
+  "navital_gym_commit": "7d0a72acd069",
+  "settings": {
+   "base_url": "https://api.groq.com/openai/v1",
+   "json_mode_on_final": true,
+   "max_turns": 40,
+   "model": "openai/gpt-oss-20b",
+   "provider": "groq",
+   "repair_retry": true,
+   "temperature": 0.0
+  },
+  "summary": {
+   "answered": 18,
+   "by_kind": {
+    "easy_days_late": {
+     "answered": 7,
+     "errors": 0.0,
+     "format_fail": 0.0,
+     "k": 1,
+     "mean_score": 1.0,
+     "not_run": 0,
+     "pass@1": 1.0,
+     "pass^k": 1.0,
+     "rule_failures": {},
+     "strict_pass@1": 1.0,
+     "tasks": 7,
+     "turns_exhausted": 0.0
+    },
+    "easy_tax": {
+     "answered": 7,
+     "errors": 0.0,
+     "format_fail": 0.0,
+     "k": 1,
+     "mean_score": 1.0,
+     "not_run": 0,
+     "pass@1": 1.0,
+     "pass^k": 1.0,
+     "rule_failures": {},
+     "strict_pass@1": 0.8571428571428571,
+     "tasks": 7,
+     "turns_exhausted": 0.0
+    },
+    "place_of_supply": {
+     "answered": 2,
+     "errors": 0.0,
+     "format_fail": 0.0,
+     "k": 1,
+     "mean_score": 1.0,
+     "not_run": 0,
+     "pass@1": 1.0,
+     "pass^k": 1.0,
+     "rule_failures": {},
+     "strict_pass@1": 1.0,
+     "tasks": 2,
+     "turns_exhausted": 0.0
+    },
+    "threshold": {
+     "answered": 2,
+     "errors": 0.0,
+     "format_fail": 0.0,
+     "k": 1,
+     "mean_score": 1.0,
+     "not_run": 0,
+     "pass@1": 1.0,
+     "pass^k": 1.0,
+     "rule_failures": {},
+     "strict_pass@1": 1.0,
+     "tasks": 2,
+     "turns_exhausted": 0.0
+    }
+   },
+   "by_split": {
+    "easy": {
+     "answered": 18,
+     "errors": 0.0,
+     "format_fail": 0.0,
+     "k": 1,
+     "mean_score": 1.0,
+     "not_run": 0,
+     "pass@1": 1.0,
+     "pass^k": 1.0,
+     "rule_failures": {},
+     "strict_pass@1": 0.9444444444444444,
+     "tasks": 18,
+     "turns_exhausted": 0.0
+    }
+   },
+   "errors": 0.0,
+   "format_fail": 0.0,
+   "k": 1,
+   "mean_score": 1.0,
+   "not_run": 0,
+   "pass@1": 1.0,
+   "pass^k": 1.0,
+   "rule_failures": {},
+   "strict_pass@1": 0.9444444444444444,
+   "tasks": 18,
+   "turns_exhausted": 0.0
+  },
+  "tasks": {
+   "IN-GST-E01": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-TAXTYPE": "tax_type"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 1147,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-TAXTYPE": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-E02": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-TAXTYPE": "tax_type"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 1750,
+      "turns": 3,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-TAXTYPE": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-E03": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-REQUIRED": "required"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 1168,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-REQUIRED": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-E04": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-REQUIRED": "required"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 1239,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-REQUIRED": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-E05": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-TAX": "tax"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 1232,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-TAX": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-E06": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-TAX": "tax"
+     },
+     "meta": {
+      "error": null,
+      "repaired": true,
+      "tokens": 2820,
+      "truncated": 1,
+      "turns": 1,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-TAX": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-E07": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-TAX": "tax"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 630,
+      "turns": 1,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-TAX": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-E08": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-TAX": "tax"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 1174,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-TAX": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-E09": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-TAX": "tax"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 1185,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-TAX": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-E10": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-TAX": "tax"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 1281,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-TAX": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-E11": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-TAX": "tax"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 1173,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-TAX": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-E12": [
+    {
+     "details": {
+      "R-DAYS": "days_late",
+      "R-FMT": "answer must be an object"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 1208,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-DAYS": true,
+      "R-FMT": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-E13": [
+    {
+     "details": {
+      "R-DAYS": "days_late",
+      "R-FMT": "answer must be an object"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 1166,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-DAYS": true,
+      "R-FMT": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-E14": [
+    {
+     "details": {
+      "R-DAYS": "days_late",
+      "R-FMT": "answer must be an object"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 1197,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-DAYS": true,
+      "R-FMT": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-E15": [
+    {
+     "details": {
+      "R-DAYS": "days_late",
+      "R-FMT": "answer must be an object"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 1557,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-DAYS": true,
+      "R-FMT": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-E16": [
+    {
+     "details": {
+      "R-DAYS": "days_late",
+      "R-FMT": "answer must be an object"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 1659,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-DAYS": true,
+      "R-FMT": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-E17": [
+    {
+     "details": {
+      "R-DAYS": "days_late",
+      "R-FMT": "answer must be an object"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 1229,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-DAYS": true,
+      "R-FMT": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-GST-E18": [
+    {
+     "details": {
+      "R-DAYS": "days_late",
+      "R-FMT": "answer must be an object"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 1498,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-DAYS": true,
+      "R-FMT": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ]
+  }
+ }
+}

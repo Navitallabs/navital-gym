@@ -1,0 +1,1026 @@
+{
+ "env": "trip",
+ "task_id": "IN-TRIP-005",
+ "task": {
+  "id": "IN-TRIP-005",
+  "family": "golden-triangle",
+  "difficulty": 3,
+  "lang": "en",
+  "prompt": "Plan a 3-day trip Delhi -> Agra -> Jaipur starting 2027-01-02 for 2 adults, total budget Rs 12,000, trains where possible.",
+  "params": {
+   "budget_inr": 12000,
+   "days": 3,
+   "diet": "any",
+   "end": "Delhi",
+   "origin": "Delhi",
+   "route": [
+    "Delhi",
+    "Agra",
+    "Jaipur"
+   ],
+   "start": "2027-01-02",
+   "transport_pref": "rail",
+   "travelers": {
+    "adults": 2,
+    "child_ages": [],
+    "seniors": 0
+   }
+  },
+  "rules": [
+   "R-FMT",
+   "R-DATE",
+   "R-CONN",
+   "R-QUOTA",
+   "R-AVAIL",
+   "R-OPEN",
+   "R-SEASON",
+   "R-OCC",
+   "R-ROUTE",
+   "R-BUD"
+  ],
+  "expected_feasible": true,
+  "binding": [],
+  "traps": [],
+  "snapshot_date": null,
+  "meta": {
+   "binding_sets": [],
+   "design_intent_binding": [],
+   "design_intent_feasible": true,
+   "design_notes": [
+    "tight budget"
+   ],
+   "oracle_plan_cost": null,
+   "solver_note": "plan found (1 candidates checked)"
+  }
+ },
+ "cases": [
+  {
+   "name": "hand_solved",
+   "kind": "solved",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2027-01-02",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "13207",
+        "from": "Delhi",
+        "to": "Agra",
+        "dep": "2027-01-02T07:45",
+        "arr": "2027-01-02T11:40",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "stay": {
+       "hotel_id": "H-AGRA-2",
+       "rooms": [
+        {
+         "guests": 2
+        }
+       ]
+      },
+      "activities": [
+       {
+        "id": "Agra Fort",
+        "start": "2027-01-02T14:00",
+        "end": "2027-01-02T16:00"
+       }
+      ]
+     },
+     {
+      "date": "2027-01-03",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "15705",
+        "from": "Agra",
+        "to": "Jaipur",
+        "dep": "2027-01-03T15:40",
+        "arr": "2027-01-03T19:42",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "stay": {
+       "hotel_id": "H-JAIP-1",
+       "rooms": [
+        {
+         "guests": 2
+        }
+       ]
+      },
+      "activities": [
+       {
+        "id": "Taj Mahal",
+        "start": "2027-01-03T08:00",
+        "end": "2027-01-03T10:30"
+       }
+      ]
+     },
+     {
+      "date": "2027-01-04",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "18348",
+        "from": "Jaipur",
+        "to": "Delhi",
+        "dep": "2027-01-04T16:30",
+        "arr": "2027-01-04T21:52",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "activities": [
+       {
+        "id": "Hawa Mahal",
+        "start": "2027-01-04T10:00",
+        "end": "2027-01-04T11:00"
+       },
+       {
+        "id": "City Palace",
+        "start": "2027-01-04T12:00",
+        "end": "2027-01-04T14:00"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": true,
+    "min_score": 1.0,
+    "required_fields": [
+     "days",
+     "booking_date"
+    ]
+   }
+  },
+  {
+   "name": "two_tier3_hotels_blow_the_budget",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2027-01-02",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "13207",
+        "from": "Delhi",
+        "to": "Agra",
+        "dep": "2027-01-02T07:45",
+        "arr": "2027-01-02T11:40",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "stay": {
+       "hotel_id": "H-AGRA-6",
+       "rooms": [
+        {
+         "guests": 2
+        }
+       ]
+      },
+      "activities": [
+       {
+        "id": "Agra Fort",
+        "start": "2027-01-02T14:00",
+        "end": "2027-01-02T16:00"
+       }
+      ]
+     },
+     {
+      "date": "2027-01-03",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "15705",
+        "from": "Agra",
+        "to": "Jaipur",
+        "dep": "2027-01-03T15:40",
+        "arr": "2027-01-03T19:42",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "stay": {
+       "hotel_id": "H-JAIP-6",
+       "rooms": [
+        {
+         "guests": 2
+        }
+       ]
+      },
+      "activities": [
+       {
+        "id": "Taj Mahal",
+        "start": "2027-01-03T08:00",
+        "end": "2027-01-03T10:30"
+       }
+      ]
+     },
+     {
+      "date": "2027-01-04",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "18348",
+        "from": "Jaipur",
+        "to": "Delhi",
+        "dep": "2027-01-04T16:30",
+        "arr": "2027-01-04T21:52",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "activities": [
+       {
+        "id": "Hawa Mahal",
+        "start": "2027-01-04T10:00",
+        "end": "2027-01-04T11:00"
+       },
+       {
+        "id": "City Palace",
+        "start": "2027-01-04T12:00",
+        "end": "2027-01-04T14:00"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-BUD"
+    ],
+    "passes_all_but": [
+     "R-BUD"
+    ]
+   }
+  },
+  {
+   "name": "sight_before_opening",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2027-01-02",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "13207",
+        "from": "Delhi",
+        "to": "Agra",
+        "dep": "2027-01-02T07:45",
+        "arr": "2027-01-02T11:40",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "stay": {
+       "hotel_id": "H-AGRA-2",
+       "rooms": [
+        {
+         "guests": 2
+        }
+       ]
+      },
+      "activities": [
+       {
+        "id": "Agra Fort",
+        "start": "2027-01-02T14:00",
+        "end": "2027-01-02T16:00"
+       }
+      ]
+     },
+     {
+      "date": "2027-01-03",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "15705",
+        "from": "Agra",
+        "to": "Jaipur",
+        "dep": "2027-01-03T15:40",
+        "arr": "2027-01-03T19:42",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "stay": {
+       "hotel_id": "H-JAIP-1",
+       "rooms": [
+        {
+         "guests": 2
+        }
+       ]
+      },
+      "activities": [
+       {
+        "id": "Taj Mahal",
+        "start": "2027-01-03T08:00",
+        "end": "2027-01-03T10:30"
+       }
+      ]
+     },
+     {
+      "date": "2027-01-04",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "18348",
+        "from": "Jaipur",
+        "to": "Delhi",
+        "dep": "2027-01-04T16:30",
+        "arr": "2027-01-04T21:52",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "activities": [
+       {
+        "id": "Hawa Mahal",
+        "start": "2027-01-04T08:00",
+        "end": "2027-01-04T09:00"
+       },
+       {
+        "id": "City Palace",
+        "start": "2027-01-04T12:00",
+        "end": "2027-01-04T14:00"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-OPEN"
+    ],
+    "passes_all_but": [
+     "R-OPEN"
+    ]
+   }
+  },
+  {
+   "name": "taj_before_it_opens",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2027-01-02",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "13207",
+        "from": "Delhi",
+        "to": "Agra",
+        "dep": "2027-01-02T07:45",
+        "arr": "2027-01-02T11:40",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "stay": {
+       "hotel_id": "H-AGRA-2",
+       "rooms": [
+        {
+         "guests": 2
+        }
+       ]
+      },
+      "activities": [
+       {
+        "id": "Agra Fort",
+        "start": "2027-01-02T14:00",
+        "end": "2027-01-02T16:00"
+       }
+      ]
+     },
+     {
+      "date": "2027-01-03",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "15705",
+        "from": "Agra",
+        "to": "Jaipur",
+        "dep": "2027-01-03T15:40",
+        "arr": "2027-01-03T19:42",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "stay": {
+       "hotel_id": "H-JAIP-1",
+       "rooms": [
+        {
+         "guests": 2
+        }
+       ]
+      },
+      "activities": [
+       {
+        "id": "Taj Mahal",
+        "start": "2027-01-03T05:00",
+        "end": "2027-01-03T07:30"
+       }
+      ]
+     },
+     {
+      "date": "2027-01-04",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "18348",
+        "from": "Jaipur",
+        "to": "Delhi",
+        "dep": "2027-01-04T16:30",
+        "arr": "2027-01-04T21:52",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "activities": [
+       {
+        "id": "Hawa Mahal",
+        "start": "2027-01-04T10:00",
+        "end": "2027-01-04T11:00"
+       },
+       {
+        "id": "City Palace",
+        "start": "2027-01-04T12:00",
+        "end": "2027-01-04T14:00"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-OPEN"
+    ],
+    "passes_all_but": [
+     "R-OPEN"
+    ]
+   }
+  },
+  {
+   "name": "one_guest_in_the_room",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2027-01-02",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "13207",
+        "from": "Delhi",
+        "to": "Agra",
+        "dep": "2027-01-02T07:45",
+        "arr": "2027-01-02T11:40",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "stay": {
+       "hotel_id": "H-AGRA-2",
+       "rooms": [
+        {
+         "guests": 1
+        }
+       ]
+      },
+      "activities": [
+       {
+        "id": "Agra Fort",
+        "start": "2027-01-02T14:00",
+        "end": "2027-01-02T16:00"
+       }
+      ]
+     },
+     {
+      "date": "2027-01-03",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "15705",
+        "from": "Agra",
+        "to": "Jaipur",
+        "dep": "2027-01-03T15:40",
+        "arr": "2027-01-03T19:42",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "stay": {
+       "hotel_id": "H-JAIP-1",
+       "rooms": [
+        {
+         "guests": 2
+        }
+       ]
+      },
+      "activities": [
+       {
+        "id": "Taj Mahal",
+        "start": "2027-01-03T08:00",
+        "end": "2027-01-03T10:30"
+       }
+      ]
+     },
+     {
+      "date": "2027-01-04",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "18348",
+        "from": "Jaipur",
+        "to": "Delhi",
+        "dep": "2027-01-04T16:30",
+        "arr": "2027-01-04T21:52",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "activities": [
+       {
+        "id": "Hawa Mahal",
+        "start": "2027-01-04T10:00",
+        "end": "2027-01-04T11:00"
+       },
+       {
+        "id": "City Palace",
+        "start": "2027-01-04T12:00",
+        "end": "2027-01-04T14:00"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-OCC"
+    ],
+    "passes_all_but": [
+     "R-OCC"
+    ]
+   }
+  },
+  {
+   "name": "no_night_in_agra",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2027-01-02",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "13207",
+        "from": "Delhi",
+        "to": "Agra",
+        "dep": "2027-01-02T07:45",
+        "arr": "2027-01-02T11:40",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "activities": [
+       {
+        "id": "Agra Fort",
+        "start": "2027-01-02T14:00",
+        "end": "2027-01-02T16:00"
+       }
+      ]
+     },
+     {
+      "date": "2027-01-03",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "15705",
+        "from": "Agra",
+        "to": "Jaipur",
+        "dep": "2027-01-03T15:40",
+        "arr": "2027-01-03T19:42",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "stay": {
+       "hotel_id": "H-JAIP-1",
+       "rooms": [
+        {
+         "guests": 2
+        }
+       ]
+      },
+      "activities": [
+       {
+        "id": "Taj Mahal",
+        "start": "2027-01-03T08:00",
+        "end": "2027-01-03T10:30"
+       }
+      ]
+     },
+     {
+      "date": "2027-01-04",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "18348",
+        "from": "Jaipur",
+        "to": "Delhi",
+        "dep": "2027-01-04T16:30",
+        "arr": "2027-01-04T21:52",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "activities": [
+       {
+        "id": "Hawa Mahal",
+        "start": "2027-01-04T10:00",
+        "end": "2027-01-04T11:00"
+       },
+       {
+        "id": "City Palace",
+        "start": "2027-01-04T12:00",
+        "end": "2027-01-04T14:00"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-CONN"
+    ],
+    "passes_all_but": [
+     "R-CONN"
+    ]
+   }
+  },
+  {
+   "name": "rac_train_not_confirmed",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2027-01-02",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "13207",
+        "from": "Delhi",
+        "to": "Agra",
+        "dep": "2027-01-02T07:45",
+        "arr": "2027-01-02T11:40",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "stay": {
+       "hotel_id": "H-AGRA-2",
+       "rooms": [
+        {
+         "guests": 2
+        }
+       ]
+      },
+      "activities": [
+       {
+        "id": "Agra Fort",
+        "start": "2027-01-02T14:00",
+        "end": "2027-01-02T16:00"
+       }
+      ]
+     },
+     {
+      "date": "2027-01-03",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "17721",
+        "from": "Agra",
+        "to": "Jaipur",
+        "dep": "2027-01-03T06:15",
+        "arr": "2027-01-03T10:11",
+        "class": "CC",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "stay": {
+       "hotel_id": "H-JAIP-1",
+       "rooms": [
+        {
+         "guests": 2
+        }
+       ]
+      },
+      "activities": []
+     },
+     {
+      "date": "2027-01-04",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "18348",
+        "from": "Jaipur",
+        "to": "Delhi",
+        "dep": "2027-01-04T16:30",
+        "arr": "2027-01-04T21:52",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "activities": [
+       {
+        "id": "Hawa Mahal",
+        "start": "2027-01-04T10:00",
+        "end": "2027-01-04T11:00"
+       },
+       {
+        "id": "City Palace",
+        "start": "2027-01-04T12:00",
+        "end": "2027-01-04T14:00"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-AVAIL"
+    ],
+    "passes_all_but": [
+     "R-AVAIL"
+    ]
+   }
+  },
+  {
+   "name": "trip_ends_a_day_early",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2027-01-02",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "13207",
+        "from": "Delhi",
+        "to": "Agra",
+        "dep": "2027-01-02T07:45",
+        "arr": "2027-01-02T11:40",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "stay": {
+       "hotel_id": "H-AGRA-2",
+       "rooms": [
+        {
+         "guests": 2
+        }
+       ]
+      },
+      "activities": [
+       {
+        "id": "Agra Fort",
+        "start": "2027-01-02T14:00",
+        "end": "2027-01-02T16:00"
+       }
+      ]
+     },
+     {
+      "date": "2027-01-03",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "15705",
+        "from": "Agra",
+        "to": "Jaipur",
+        "dep": "2027-01-03T15:40",
+        "arr": "2027-01-03T19:42",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "stay": {
+       "hotel_id": "H-JAIP-1",
+       "rooms": [
+        {
+         "guests": 2
+        }
+       ]
+      },
+      "activities": [
+       {
+        "id": "Taj Mahal",
+        "start": "2027-01-03T08:00",
+        "end": "2027-01-03T10:30"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-DATE",
+     "R-CONN"
+    ],
+    "passes_all_but": [
+     "R-DATE",
+     "R-CONN"
+    ]
+   }
+  },
+  {
+   "name": "never_leaves_agra_so_no_jaipur",
+   "kind": "violation",
+   "submission": {
+    "status": "plan",
+    "booking_date": "2026-11-15",
+    "days": [
+     {
+      "date": "2027-01-02",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "13207",
+        "from": "Delhi",
+        "to": "Agra",
+        "dep": "2027-01-02T07:45",
+        "arr": "2027-01-02T11:40",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "stay": {
+       "hotel_id": "H-AGRA-2",
+       "rooms": [
+        {
+         "guests": 2
+        }
+       ]
+      },
+      "activities": [
+       {
+        "id": "Agra Fort",
+        "start": "2027-01-02T14:00",
+        "end": "2027-01-02T16:00"
+       }
+      ]
+     },
+     {
+      "date": "2027-01-03",
+      "activities": [
+       {
+        "id": "Taj Mahal",
+        "start": "2027-01-03T08:00",
+        "end": "2027-01-03T10:30"
+       }
+      ]
+     },
+     {
+      "date": "2027-01-04",
+      "legs": [
+       {
+        "mode": "rail",
+        "id": "18348",
+        "from": "Jaipur",
+        "to": "Delhi",
+        "dep": "2027-01-04T16:30",
+        "arr": "2027-01-04T21:52",
+        "class": "2S",
+        "quota": "GN",
+        "pax": 2,
+        "half": 0
+       }
+      ],
+      "activities": [
+       {
+        "id": "Hawa Mahal",
+        "start": "2027-01-04T10:00",
+        "end": "2027-01-04T11:00"
+       },
+       {
+        "id": "City Palace",
+        "start": "2027-01-04T12:00",
+        "end": "2027-01-04T14:00"
+       }
+      ]
+     }
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.99,
+    "fails": [
+     "R-CONN",
+     "R-ROUTE"
+    ],
+    "passes_all_but": [
+     "R-CONN",
+     "R-ROUTE"
+    ]
+   }
+  },
+  {
+   "name": "claims_infeasible_on_a_feasible_task",
+   "kind": "violation",
+   "submission": {
+    "status": "infeasible",
+    "binding": [
+     "R-QUOTA"
+    ]
+   },
+   "expect": {
+    "solved": false,
+    "max_score": 0.0
+   }
+  }
+ ]
+}
