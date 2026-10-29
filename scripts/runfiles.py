@@ -18,9 +18,9 @@ def first_run_partial(tasks, summary):
     runs = [r[0]["score"] for r in tasks.values() if r and not (r[0].get("meta") or {}).get("error")]
     return sum(runs) / len(runs) if runs else summary["mean_score"]
 def truncated_tasks(tasks, ids=None):
-    """Tasks (first run, like pass@1) whose model output hit the output-token limit (finish_reason "length", meta.truncated). They are scored as
-    failed, never skipped; this count says how many of a row's failures may be a cut-off rather than a wrong answer."""
-    return sum(1 for tid, r in tasks.items() if (ids is None or tid in ids) and r and ((r[0].get("meta") or {}).get("truncated") or 0) > 0)
+    """UNSOLVED tasks (first run, like pass@1) whose first attempt hit the output-token limit (finish_reason "length", meta.truncated). A task the format-repair
+    retry still solved is not counted, so this says how many of a row's failures may be a cut-off rather than a wrong answer."""
+    return sum(1 for tid, r in tasks.items() if (ids is None or tid in ids) and r and not r[0].get("solved") and ((r[0].get("meta") or {}).get("truncated") or 0) > 0)
 
 def env_tasks(env, easy=False):
     key = (env, easy)
