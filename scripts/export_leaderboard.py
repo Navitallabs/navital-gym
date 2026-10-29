@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """leaderboard.json for the website, built ONLY from the saved (regraded) run files. One entry per model x env x split x sample.
 Fields: model, provider, tier (small|large), env, split, sample ("stratified-15", "stratified-5", "full"), n (tasks), pass_at_1, strict_pass_at_1, pass_pow_k (+ k), format_fail,
-errors, partial_credit, harness_commit (id of the grading code: git tree id of navital_gym/, verify with `git rev-parse v1.0.0:navital_gym`), date, source (run file), origin (navital = our own runs, community = a verified outside submission under submissions/<model-slug>/, with submitter and self_reported=true). Rows where at least half the tasks hit provider errors are
+errors, partial_credit, harness_commit (id of the grading code: git tree id of navital_gym/, verify with `git rev-parse v1.0.1:navital_gym`), date, source (run file), origin (navital = our own runs, community = a verified outside submission under submissions/<model-slug>/, with submitter and self_reported=true). Rows where at least half the tasks hit provider errors are
 left out and listed under `excluded`; so are incomplete runs (fewer tasks than their sample size) and, with --commit, runs graded at another commit.
 usage: python3 scripts/export_leaderboard.py [out.json] [--runs DIR] [--submissions DIR] [--commit SHA] [--require-single-commit]
   out.json   default docs/leaderboard.json            --runs DIR   default <repo>/runs (read only)     --submissions DIR   default <repo>/submissions; each */*.json is verified (scripts/verify_submission.py) before it is counted
@@ -82,8 +82,10 @@ for path, origin in [(p, "navital") for p in ours] + [(p, "community") for p in 
         if easy:
             groups = {"easy": s}
         for split, g in groups.items():
+            ids = None if split in ("all", "easy") else {tid for tid, t in runfiles.env_tasks(base["env"]).items() if t.meta.get("split", "core") == split}
             entries.append({**base, "split": split, "n": g.get("answered", g["tasks"]), "pass_at_1": round(g["pass@1"], 4), "strict_pass_at_1": round(g["strict_pass@1"], 4),
                             "k": g["k"], "pass_pow_k": round(g["pass^k"], 4), "format_fail": round(g["format_fail"], 4), "errors": round(g["errors"], 4),
+                            "truncated_tasks": runfiles.truncated_tasks(d["tasks"], ids),
                             "partial_credit": round(runfiles.first_run_partial(d["tasks"], g) if g["k"] > 1 and split == "all" else g["mean_score"], 4)})
 entries.sort(key=lambda e: (e["env"], e["split"], e["sample"], e["model"]))
 commits = sorted({e["harness_commit"] for e in entries if e["harness_commit"]})

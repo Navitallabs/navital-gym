@@ -1,5 +1,5 @@
-"""Bhasha Support Desk grader rules. State (actions) first; reply language is a hard rule only for the Hindi / Hinglish core and a soft score
-for the machine-assisted Tamil / Bengali / Marathi split. The expected actions come from the independent oracle, never from gold_answer."""
+"""Bhasha Support Desk grader rules. State (actions) first; reply language is a hard rule on every task (Hindi, Hinglish and, since v1.0.1, the
+machine-assisted Tamil / Bengali / Marathi split too). The expected actions come from the independent oracle, never from gold_answer."""
 from __future__ import annotations
 import re, unicodedata
 from ...core.grader import Rule, RuleResult, Grader, Ctx

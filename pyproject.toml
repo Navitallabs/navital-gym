@@ -1,6 +1,6 @@
 [project]
 name = "navital-gym"
-version = "1.0.0"
+version = "1.0.1"
 description = "Navital Gym: deterministic, auto-graded environments for AI agents doing Indian-reality tasks (Navital Labs)."
 requires-python = ">=3.10"
 license = { text = "Apache-2.0" }

@@ -1,6 +1,6 @@
 """Env #5 Bhasha Support Desk: online-shop customer support in Hindi and Hinglish (core) plus an experimental Tamil / Bengali / Marathi split.
 State is graded from the actions the agent lists (replayed against the shop's invented policy by an independent oracle); the reply language is a
-hard rule for the core only. The policy is invented for this env: it is not Indian consumer law and not any real store's policy. All orders are synthetic.
+hard rule on every task (v1.0.1: the experimental split too). The policy is invented for this env: it is not Indian consumer law and not any real store's policy. All orders are synthetic.
 EXPERIMENTAL SPLIT: machine-assisted, not native-reviewed; corrections welcome.
     from navital_gym.envs.support import load_env, grade
     env = load_env()                      # core only (Hindi + Hinglish)

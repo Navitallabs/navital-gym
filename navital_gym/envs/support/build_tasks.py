@@ -1,5 +1,5 @@
 """Builds tasks.jsonl (core Task format) from the task authors' file tasks_support.jsonl.
-Applicable rules come from the oracle: R-ACTIONS, R-FORBIDDEN, R-DECISION, R-REASON always; R-LANG only for the Hindi / Hinglish core; R-AMOUNT when a refund is due; R-PRIVACY for privacy tasks.
+Applicable rules come from the oracle: R-ACTIONS, R-FORBIDDEN, R-DECISION, R-REASON always; R-LANG for every language (hard since v1.0.1; it was core-only in v1.0.0); R-AMOUNT when a refund is due; R-PRIVACY for privacy tasks.
 Tamil, Bengali and Marathi rows are tagged meta.split = "experimental" (machine-assisted, not native-reviewed)."""
 import json, os, sys
 from . import oracle
@@ -14,7 +14,7 @@ def build(src=DEFAULT_SRC):
         row = json.loads(line)
         o = oracle.solve(row["kind"], row["world"], row["policy"])
         rules = ["R-FMT", "R-ACTIONS", "R-FORBIDDEN", "R-DECISION", "R-REASON"]
-        if row["lang"] in CORE: rules.append("R-LANG")
+        rules.append("R-LANG")
         if o["amount"] is not None: rules.append("R-AMOUNT")
         if o["privacy"]: rules.append("R-PRIVACY")
         if o.get("answer_address"): rules.append("R-ANSWER")

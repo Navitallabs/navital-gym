@@ -30,7 +30,7 @@ class Tasks(unittest.TestCase):
         self.assertTrue(all(t.meta["split"] == "experimental" for t in TASKS if t.lang in ("ta", "bn", "mr")))
         for t in TASKS:
             for r in t.rules: self.assertIn(r, RULES, t.id)
-            self.assertEqual("R-LANG" in t.rules, t.lang in ("hi", "hinglish"), t.id)
+            self.assertIn("R-LANG", t.rules, t.id)   # hard on every language since v1.0.1
 
     def test_core_has_at_least_25_distinct_sentences_per_language(self):
         import re
@@ -124,8 +124,8 @@ class Grading(unittest.TestCase):
     def test_cheating_baselines_do_not_solve(self):
         for name in ("refund_all",):
             self.assertEqual(sum(grade(t.to_dict(), get_baselines()[name].solve({}, None, t))["solved"] for t in TASKS), 0)
-        eng = sum(grade(t.to_dict(), get_baselines()["english"].solve({}, None, t))["solved"] for t in TASKS if t.lang in ("hi", "hinglish"))
-        self.assertEqual(eng, 0)   # right actions, wrong language: fails R-LANG on the core
+        eng = sum(grade(t.to_dict(), get_baselines()["english"].solve({}, None, t))["solved"] for t in TASKS)
+        self.assertEqual(eng, 0)   # right actions, wrong language: fails R-LANG on every split (v1.0.0: core only, 33% on all 76)
 
     def test_the_gaming_floor_stays_below_25_percent(self):
         # An agent that never reads the order, takes no action and answers with one fixed sentence in the right language must not solve the core.
