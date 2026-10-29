@@ -1,6 +1,6 @@
 {
  "anthropic:claude-haiku-4-5": {
-  "graded_with": "123c1450dab5",
+  "graded_with": "e3c5f218443e",
   "k": 1,
   "navital_gym_commit": "0b6a64f313ec",
   "settings": {
@@ -20,7 +20,7 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.85,
+     "mean_score": 0.8666666666666667,
      "not_run": 0,
      "pass@1": 0.3333333333333333,
      "pass^k": 0.3333333333333333,
@@ -36,7 +36,7 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.7583333333333333,
+     "mean_score": 0.7666666666666666,
      "not_run": 0,
      "pass@1": 0.5,
      "pass^k": 0.5,
@@ -54,13 +54,14 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.5809523809523809,
+     "mean_score": 0.5857142857142856,
      "not_run": 0,
      "pass@1": 0.0,
      "pass^k": 0.0,
      "rule_failures": {
       "R-ACTIONS": 5,
       "R-FORBIDDEN": 6,
+      "R-LANG": 1,
       "R-REASON": 5
      },
      "strict_pass@1": 0.0,
@@ -72,7 +73,7 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.4740740740740741,
+     "mean_score": 0.47777777777777775,
      "not_run": 0,
      "pass@1": 0.0,
      "pass^k": 0.0,
@@ -81,6 +82,7 @@
       "R-AMOUNT": 2,
       "R-DECISION": 5,
       "R-FORBIDDEN": 7,
+      "R-LANG": 1,
       "R-REASON": 6
      },
      "strict_pass@1": 0.0,
@@ -92,7 +94,7 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.7962962962962963,
+     "mean_score": 0.8111111111111111,
      "not_run": 0,
      "pass@1": 0.3333333333333333,
      "pass^k": 0.3333333333333333,
@@ -127,7 +129,7 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.8222222222222223,
+     "mean_score": 0.8333333333333334,
      "not_run": 0,
      "pass@1": 0.5,
      "pass^k": 0.5,
@@ -144,7 +146,7 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.5333333333333333,
+     "mean_score": 0.5648148148148148,
      "not_run": 0,
      "pass@1": 0.0,
      "pass^k": 0.0,
@@ -165,7 +167,7 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.8099999999999999,
+     "mean_score": 0.82,
      "not_run": 0,
      "pass@1": 0.5,
      "pass^k": 0.5,
@@ -206,7 +208,7 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.6865384615384615,
+     "mean_score": 0.7282051282051282,
      "not_run": 0,
      "pass@1": 0.3076923076923077,
      "pass^k": 0.3076923076923077,
@@ -215,6 +217,7 @@
       "R-AMOUNT": 3,
       "R-DECISION": 3,
       "R-FORBIDDEN": 12,
+      "R-LANG": 2,
       "R-REASON": 11
      },
      "strict_pass@1": 0.23076923076923078,
@@ -225,7 +228,7 @@
    "errors": 0.0,
    "format_fail": 0.0,
    "k": 1,
-   "mean_score": 0.6866228070175439,
+   "mean_score": 0.7008771929824561,
    "not_run": 0,
    "pass@1": 0.23684210526315788,
    "pass^k": 0.23684210526315788,
@@ -234,7 +237,7 @@
     "R-AMOUNT": 6,
     "R-DECISION": 17,
     "R-FORBIDDEN": 36,
-    "R-LANG": 8,
+    "R-LANG": 10,
     "R-REASON": 31
    },
    "strict_pass@1": 0.21052631578947367,
@@ -2100,6 +2103,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('issue_refund', 'OD83000', 2059, 'original_source')\"]; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2116,9 +2120,10 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": true,
       "R-REASON": true
      },
-     "score": 0.6,
+     "score": 0.666667,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2136,6 +2141,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('issue_refund', 'OD83001', 710, 'original_source')\"]; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2152,9 +2158,10 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": true,
       "R-REASON": true
      },
-     "score": 0.6,
+     "score": 0.666667,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2172,6 +2179,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('issue_refund', 'OD83002', 2059, 'original_source')\"]; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2188,9 +2196,10 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": true,
       "R-REASON": true
      },
-     "score": 0.6,
+     "score": 0.666667,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2208,6 +2217,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('issue_refund', 'OD83003', 1959, 'original_source')\"]; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2224,9 +2234,10 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": true,
       "R-REASON": true
      },
-     "score": 0.4,
+     "score": 0.5,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2244,6 +2255,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('request_photo', 'OD83004', None, None)\"]; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2260,9 +2272,10 @@
       "R-DECISION": false,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": true,
       "R-REASON": false
      },
-     "score": 0.0,
+     "score": 0.166667,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2280,6 +2293,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('issue_refund', 'OD83005', 1959, 'original_source')\"]; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2296,9 +2310,10 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": true,
       "R-REASON": true
      },
-     "score": 0.4,
+     "score": 0.5,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2315,6 +2330,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: []; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2330,6 +2346,7 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": true,
+      "R-LANG": true,
       "R-REASON": true
      },
      "score": 1.0,
@@ -2349,6 +2366,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: []; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2364,6 +2382,7 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": true,
+      "R-LANG": true,
       "R-REASON": true
      },
      "score": 1.0,
@@ -2383,6 +2402,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: []; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2398,9 +2418,10 @@
       "R-DECISION": false,
       "R-FMT": true,
       "R-FORBIDDEN": true,
+      "R-LANG": true,
       "R-REASON": false
      },
-     "score": 0.5,
+     "score": 0.6,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2418,6 +2439,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('issue_refund', 'OD83200', 710, 'original_source')\"]; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2434,16 +2456,17 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": false,
       "R-REASON": false
      },
-     "score": 0.4,
+     "score": 0.333333,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": false
      },
      "solved": false,
      "valid": true,
-     "verdict": "failed: R-ACTIONS, R-FORBIDDEN, R-REASON"
+     "verdict": "failed: R-ACTIONS, R-FORBIDDEN, R-REASON, R-LANG"
     }
    ],
    "IN-SUP-061": [
@@ -2454,6 +2477,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('issue_refund', 'OD83201', 309, 'original_source')\"]; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2470,9 +2494,10 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": true,
       "R-REASON": false
      },
-     "score": 0.4,
+     "score": 0.5,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2489,6 +2514,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: []; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2504,6 +2530,7 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": true,
+      "R-LANG": true,
       "R-REASON": true
      },
      "score": 1.0,
@@ -2523,6 +2550,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: []; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2538,9 +2566,10 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": true,
+      "R-LANG": true,
       "R-REASON": false
      },
-     "score": 0.75,
+     "score": 0.8,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2558,6 +2587,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('schedule_pickup', 'OD83400', None, None)\"]; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2574,9 +2604,10 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": true,
       "R-REASON": false
      },
-     "score": 0.6,
+     "score": 0.666667,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2593,6 +2624,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: []; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2608,6 +2640,7 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": true,
+      "R-LANG": true,
       "R-REASON": true
      },
      "score": 1.0,
@@ -2628,6 +2661,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('schedule_pickup', 'OD83402', None, None)\"]; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2644,9 +2678,10 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": true,
       "R-REASON": false
      },
-     "score": 0.6,
+     "score": 0.666667,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2664,6 +2699,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('issue_refund', 'OD83500', 710, 'original_source')\"]; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2680,16 +2716,17 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": false,
       "R-REASON": true
      },
-     "score": 0.6,
+     "score": 0.5,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": false
      },
      "solved": false,
      "valid": true,
-     "verdict": "failed: R-ACTIONS, R-FORBIDDEN"
+     "verdict": "failed: R-ACTIONS, R-FORBIDDEN, R-LANG"
     }
    ],
    "IN-SUP-068": [
@@ -2699,6 +2736,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('ask_ifsc', 'OD83501', None, None)\"]; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2714,9 +2752,10 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": true,
       "R-REASON": false
      },
-     "score": 0.5,
+     "score": 0.6,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2734,6 +2773,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: []; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2750,9 +2790,10 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": true,
+      "R-LANG": true,
       "R-REASON": true
      },
-     "score": 0.8,
+     "score": 0.833333,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2769,6 +2810,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: []; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-PRIVACY": "revealed address or phone",
       "R-REASON": "wrong reason"
      },
@@ -2785,6 +2827,7 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": true,
+      "R-LANG": true,
       "R-PRIVACY": true,
       "R-REASON": true
      },
@@ -2806,6 +2849,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: []; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2822,9 +2866,10 @@
       "R-DECISION": false,
       "R-FMT": true,
       "R-FORBIDDEN": true,
+      "R-LANG": true,
       "R-REASON": false
      },
-     "score": 0.6,
+     "score": 0.666667,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2841,6 +2886,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: []; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2856,6 +2902,7 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": true,
+      "R-LANG": true,
       "R-REASON": true
      },
      "score": 1.0,
@@ -2875,6 +2922,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: []; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2890,6 +2938,7 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": true,
+      "R-LANG": true,
       "R-REASON": true
      },
      "score": 1.0,
@@ -2909,6 +2958,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: []; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2924,9 +2974,10 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": true,
+      "R-LANG": true,
       "R-REASON": false
      },
-     "score": 0.75,
+     "score": 0.8,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2943,6 +2994,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: []; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2958,9 +3010,10 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": true,
+      "R-LANG": true,
       "R-REASON": false
      },
-     "score": 0.75,
+     "score": 0.8,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2977,6 +3030,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: []; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2992,6 +3046,7 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": true,
+      "R-LANG": true,
       "R-REASON": true
      },
      "score": 1.0,

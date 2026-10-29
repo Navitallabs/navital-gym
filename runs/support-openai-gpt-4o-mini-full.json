@@ -1,6 +1,6 @@
 {
  "openai:gpt-4o-mini": {
-  "graded_with": "123c1450dab5",
+  "graded_with": "e3c5f218443e",
   "k": 1,
   "navital_gym_commit": "35cc6ae10427",
   "settings": {
@@ -20,7 +20,7 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.47500000000000003,
+     "mean_score": 0.5333333333333333,
      "not_run": 0,
      "pass@1": 0.0,
      "pass^k": 0.0,
@@ -38,7 +38,7 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.35000000000000003,
+     "mean_score": 0.4000000000000001,
      "not_run": 0,
      "pass@1": 0.0,
      "pass^k": 0.0,
@@ -56,7 +56,7 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.5047619047619047,
+     "mean_score": 0.5380952380952381,
      "not_run": 0,
      "pass@1": 0.0,
      "pass^k": 0.0,
@@ -75,7 +75,7 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.3611111111111111,
+     "mean_score": 0.4148148148148148,
      "not_run": 0,
      "pass@1": 0.0,
      "pass^k": 0.0,
@@ -95,7 +95,7 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.6129629629629629,
+     "mean_score": 0.6333333333333333,
      "not_run": 0,
      "pass@1": 0.0,
      "pass^k": 0.0,
@@ -115,7 +115,7 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.78,
+     "mean_score": 0.8,
      "not_run": 0,
      "pass@1": 0.0,
      "pass^k": 0.0,
@@ -131,7 +131,7 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.7611111111111111,
+     "mean_score": 0.7777777777777778,
      "not_run": 0,
      "pass@1": 0.16666666666666666,
      "pass^k": 0.16666666666666666,
@@ -148,7 +148,7 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.3333333333333333,
+     "mean_score": 0.3888888888888889,
      "not_run": 0,
      "pass@1": 0.16666666666666666,
      "pass^k": 0.16666666666666666,
@@ -168,7 +168,7 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.675,
+     "mean_score": 0.7,
      "not_run": 0,
      "pass@1": 0.3,
      "pass^k": 0.3,
@@ -209,7 +209,7 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.3538461538461538,
+     "mean_score": 0.46923076923076923,
      "not_run": 0,
      "pass@1": 0.038461538461538464,
      "pass^k": 0.038461538461538464,
@@ -228,7 +228,7 @@
    "errors": 0.0,
    "format_fail": 0.0,
    "k": 1,
-   "mean_score": 0.506140350877193,
+   "mean_score": 0.5456140350877193,
    "not_run": 0,
    "pass@1": 0.09210526315789473,
    "pass^k": 0.09210526315789473,
@@ -2103,6 +2103,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('request_photo', 'OD83000', None, None)\"]; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2119,9 +2120,10 @@
       "R-DECISION": false,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": true,
       "R-REASON": false
      },
-     "score": 0.0,
+     "score": 0.166667,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2139,6 +2141,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('escalate_to_human', None, None, None)\", \"('request_photo', 'OD83001', None, None)\"]; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2155,9 +2158,10 @@
       "R-DECISION": false,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": true,
       "R-REASON": false
      },
-     "score": 0.0,
+     "score": 0.166667,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2175,6 +2179,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('escalate_to_human', None, None, None)\", \"('request_photo', 'OD83002', None, None)\"]; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2191,9 +2196,10 @@
       "R-DECISION": false,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": true,
       "R-REASON": false
      },
-     "score": 0.0,
+     "score": 0.166667,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2211,6 +2217,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('escalate_to_human', None, None, None)\", \"('request_photo', 'OD83003', None, None)\"]; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2227,9 +2234,10 @@
       "R-DECISION": false,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": true,
       "R-REASON": false
      },
-     "score": 0.0,
+     "score": 0.166667,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2247,6 +2255,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('escalate_to_human', None, None, None)\", \"('request_photo', 'OD83004', None, None)\"]; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2263,9 +2272,10 @@
       "R-DECISION": false,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": true,
       "R-REASON": false
      },
-     "score": 0.0,
+     "score": 0.166667,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2283,6 +2293,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('escalate_to_human', None, None, None)\", \"('request_photo', 'OD83005', None, None)\"]; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2299,9 +2310,10 @@
       "R-DECISION": false,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": true,
       "R-REASON": false
      },
-     "score": 0.0,
+     "score": 0.166667,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2318,6 +2330,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('escalate_to_human', None, None, None)\"]; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2333,9 +2346,10 @@
       "R-DECISION": false,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": true,
       "R-REASON": true
      },
-     "score": 0.5,
+     "score": 0.6,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2352,6 +2366,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: []; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2367,6 +2382,7 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": true,
+      "R-LANG": true,
       "R-REASON": true
      },
      "score": 1.0,
@@ -2386,6 +2402,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('cancel_order', 'OD83102', None, None)\", \"('issue_refund', 'OD83102', 650, 'original_source')\"]; forbidden tools used: ['issue_refund']",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2401,9 +2418,10 @@
       "R-DECISION": false,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": true,
       "R-REASON": false
      },
-     "score": 0.25,
+     "score": 0.4,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2421,6 +2439,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('escalate_to_human', None, None, None)\"]; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2437,9 +2456,10 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": true,
       "R-REASON": false
      },
-     "score": 0.2,
+     "score": 0.333333,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2457,6 +2477,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: []; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2473,9 +2494,10 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": true,
+      "R-LANG": true,
       "R-REASON": false
      },
-     "score": 0.4,
+     "score": 0.5,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2492,6 +2514,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('cancel_order', 'OD83300', None, None)\", \"('escalate_to_human', None, None, None)\"]; forbidden tools used: ['cancel_order']",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2507,9 +2530,10 @@
       "R-DECISION": false,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": true,
       "R-REASON": false
      },
-     "score": 0.25,
+     "score": 0.4,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2526,6 +2550,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('escalate_to_human', None, None, None)\", \"('request_photo', 'OD83301', None, None)\"]; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2541,9 +2566,10 @@
       "R-DECISION": false,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": true,
       "R-REASON": false
      },
-     "score": 0.25,
+     "score": 0.4,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2561,6 +2587,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('schedule_pickup', 'OD83400', None, None)\"]; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2577,9 +2604,10 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": true,
       "R-REASON": false
      },
-     "score": 0.6,
+     "score": 0.666667,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2596,6 +2624,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('escalate_to_human', None, None, None)\"]; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2611,9 +2640,10 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": true,
       "R-REASON": true
      },
-     "score": 0.75,
+     "score": 0.8,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2631,6 +2661,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('schedule_pickup', 'OD83402', None, None)\"]; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2647,9 +2678,10 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": true,
       "R-REASON": false
      },
-     "score": 0.6,
+     "score": 0.666667,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2667,6 +2699,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('escalate_to_human', None, None, None)\", \"('request_photo', 'OD83500', None, None)\"]; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2683,9 +2716,10 @@
       "R-DECISION": false,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": true,
       "R-REASON": false
      },
-     "score": 0.0,
+     "score": 0.166667,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2702,6 +2736,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('escalate_to_human', None, None, None)\", \"('request_photo', 'OD83501', None, None)\"]; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2717,9 +2752,10 @@
       "R-DECISION": false,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": true,
       "R-REASON": false
      },
-     "score": 0.25,
+     "score": 0.4,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2737,6 +2773,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('escalate_to_human', None, None, None)\", \"('request_photo', 'OD83502', None, None)\"]; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2753,9 +2790,10 @@
       "R-DECISION": false,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": true,
       "R-REASON": false
      },
-     "score": 0.0,
+     "score": 0.166667,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2772,6 +2810,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: []; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-PRIVACY": "revealed address or phone",
       "R-REASON": "wrong reason"
      },
@@ -2788,10 +2827,11 @@
       "R-DECISION": false,
       "R-FMT": true,
       "R-FORBIDDEN": true,
+      "R-LANG": true,
       "R-PRIVACY": true,
       "R-REASON": true
      },
-     "score": 0.8,
+     "score": 0.833333,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2809,6 +2849,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: []; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2825,9 +2866,10 @@
       "R-DECISION": false,
       "R-FMT": true,
       "R-FORBIDDEN": true,
+      "R-LANG": true,
       "R-REASON": false
      },
-     "score": 0.6,
+     "score": 0.666667,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2844,6 +2886,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: []; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2859,9 +2902,10 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": true,
+      "R-LANG": true,
       "R-REASON": true
      },
-     "score": 0.75,
+     "score": 0.8,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2878,6 +2922,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: []; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2893,9 +2938,10 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": true,
+      "R-LANG": true,
       "R-REASON": true
      },
-     "score": 0.75,
+     "score": 0.8,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2912,6 +2958,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('escalate_to_human', None, None, None)\"]; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2927,9 +2974,10 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": true,
       "R-REASON": false
      },
-     "score": 0.5,
+     "score": 0.6,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2946,6 +2994,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('escalate_to_human', None, None, None)\"]; forbidden tools used: []",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2961,9 +3010,10 @@
       "R-DECISION": true,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": true,
       "R-REASON": false
      },
-     "score": 0.5,
+     "score": 0.6,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true
@@ -2980,6 +3030,7 @@
       "R-DECISION": "wrong decision",
       "R-FMT": "need actions (list), reply, decision and reason (strings)",
       "R-FORBIDDEN": "extra actions: [\"('escalate_to_human', None, None, None)\", \"('request_address_change', 'OD83802', None, None)\"]; forbidden tools used: ['request_address_change']",
+      "R-LANG": "wrong reply language",
       "R-REASON": "wrong reason"
      },
      "meta": {
@@ -2995,9 +3046,10 @@
       "R-DECISION": false,
       "R-FMT": true,
       "R-FORBIDDEN": false,
+      "R-LANG": true,
       "R-REASON": false
      },
-     "score": 0.25,
+     "score": 0.4,
      "soft": {
       "language_split": "experimental",
       "reply_language_ok": true

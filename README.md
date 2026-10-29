@@ -56,7 +56,7 @@ Each adapter has an offline end-to-end test with a scripted model. They are writ
 
 ## Results
 <!-- RESULTS:START -->
-Pass@1 on deterministic stratified samples or whole splits (k=1, one run per cell; n = tasks, so one task is 1/n of the cell: read small-n cells as indicative). 'easy' columns are the easy tier (designed so a 7B-30B model can sometimes solve them); the others are the standard tasks. Full tables with format failures, strict (no-repair) pass@1, partial credit, spend, dates and commits: [`docs/RESULTS.md`](docs/RESULTS.md). Every row was re-graded by the same grading code (`scripts/regrade.py`); check it with `git rev-parse v1.0.0:navital_gym` (see `docs/RESULTS.md`).
+Pass@1 on deterministic stratified samples or whole splits (k=1, one run per cell; n = tasks, so one task is 1/n of the cell: read small-n cells as indicative). 'easy' columns are the easy tier (designed so a 7B-30B model can sometimes solve them); the others are the standard tasks. Full tables with format failures, strict (no-repair) pass@1, partial credit, spend, dates and commits: [`docs/RESULTS.md`](docs/RESULTS.md). Every row was re-graded by the same grading code (`scripts/regrade.py`); check it with `git rev-parse v1.0.1:navital_gym` (see `docs/RESULTS.md`).
 
 **Small and mid-size models: pass@1 (the typical user's models)**
 
@@ -67,18 +67,18 @@ Pass@1 on deterministic stratified samples or whole splits (k=1, one run per cel
 | gpt-4o-mini | 0.05 (n=55) | 0.54 (n=50) | 0.33 (n=40) | 0.50 (n=50) | 0.09 (n=76) | 0.18 (n=50) | 0.06 (n=18) | 0.94 (n=18) | - | 0.33 (n=18) |
 | openai/gpt-oss-120b | - | - | - | - | - | - | - | 0.94 (n=18) | 0.00 (n=18) | - |
 | openai/gpt-oss-20b | - | 0.80 (n=15) | - | - | - | - | - | 1.00 (n=18) | 0.00 (n=18) | - |
-| sarvam-105b | 0.20 (n=55) | 0.82 (n=50) | 1.00 (n=40) | 0.78 (n=50) | 0.43 (n=76) | 0.52 (n=50) | - | 1.00 (n=18) | - | - |
+| sarvam-105b | 0.20 (n=55) | 0.82 (n=50) | 1.00 (n=40) | 0.78 (n=50) | 0.38 (n=76) | 0.52 (n=50) | - | 1.00 (n=18) | - | - |
 
 **Small and mid-size models: partial credit (mean fraction of scored rules passed; shows progress where pass@1 is near zero)**
 
 | model | trip | form | form multi-document | gst | support | upi | trip easy | gst easy | support easy | upi easy |
 |---|---|---|---|---|---|---|---|---|---|---|
-| claude-haiku-4-5 | 0.73 | 0.90 | 0.99 | 0.91 | 0.69 | 0.67 | 0.95 | 1.00 | - | 0.83 |
+| claude-haiku-4-5 | 0.73 | 0.90 | 0.99 | 0.91 | 0.70 | 0.67 | 0.95 | 1.00 | - | 0.83 |
 | gemini-3.1-flash-lite | 0.58 | 0.82 | - | - | 0.73 | 0.87 | - | - | - | - |
-| gpt-4o-mini | 0.28 | 0.83 | 0.61 | 0.69 | 0.51 | 0.47 | 0.59 | 0.94 | - | 0.59 |
+| gpt-4o-mini | 0.28 | 0.83 | 0.61 | 0.69 | 0.55 | 0.47 | 0.59 | 0.94 | - | 0.59 |
 | openai/gpt-oss-120b | - | - | - | - | - | - | - | 0.94 | 0.76 | - |
 | openai/gpt-oss-20b | - | 0.87 | - | - | - | - | - | 1.00 | 0.73 | - |
-| sarvam-105b | 0.54 | 0.95 | 1.00 | 0.87 | 0.78 | 0.77 | - | 1.00 | - | - |
+| sarvam-105b | 0.54 | 0.95 | 1.00 | 0.87 | 0.77 | 0.77 | - | 1.00 | - | - |
 
 **Larger model, for reference (what a strong model reaches)**
 

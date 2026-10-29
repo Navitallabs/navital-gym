@@ -1,8 +1,8 @@
 {
- "generated": "2026-10-27",
+ "generated": "2026-10-29",
  "note": "Small samples: with n=15 one task is 6.7 points. Built from run files; see docs/RESULTS.md. Small and mid-size models are marked tier=small; tier=large rows have fewer tasks unless sample=full.",
  "grader_commits": [
-  "123c1450dab5"
+  "e3c5f218443e"
  ],
  "ungraded": [],
  "single_grader_commit": true,
@@ -35,8 +35,8 @@
    "tier": "small",
    "env": "form",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "form-anthropic-haiku-4-5-full.json",
    "origin": "navital",
@@ -48,6 +48,7 @@
    "pass_pow_k": 0.82,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.895
   },
   {
@@ -56,8 +57,8 @@
    "tier": "large",
    "env": "form",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "form-anthropic-sonnet-5-5-full.json",
    "origin": "navital",
@@ -69,6 +70,7 @@
    "pass_pow_k": 1.0,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 1.0
   },
   {
@@ -77,8 +79,8 @@
    "tier": "small",
    "env": "form",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "form-openai-gpt-4o-mini-full.json",
    "origin": "navital",
@@ -90,6 +92,7 @@
    "pass_pow_k": 0.54,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.8283
   },
   {
@@ -98,8 +101,8 @@
    "tier": "small",
    "env": "form",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "form-sarvam-105b-full.json",
    "origin": "navital",
@@ -111,6 +114,7 @@
    "pass_pow_k": 0.82,
    "format_fail": 0.02,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.95
   },
   {
@@ -119,8 +123,8 @@
    "tier": "small",
    "env": "form",
    "sample": "stratified-15",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "form-anthropic-haiku-4-5-s15.json",
    "origin": "navital",
@@ -132,6 +136,7 @@
    "pass_pow_k": 0.7333,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.8
   },
   {
@@ -140,8 +145,8 @@
    "tier": "small",
    "env": "form",
    "sample": "stratified-15",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "form-gemini-3.1-flash-lite-s15.json",
    "origin": "navital",
@@ -153,6 +158,7 @@
    "pass_pow_k": 0.6,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.8167
   },
   {
@@ -161,8 +167,8 @@
    "tier": "small",
    "env": "form",
    "sample": "stratified-15",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "form-openai-gpt-4o-mini-s15.json",
    "origin": "navital",
@@ -174,6 +180,7 @@
    "pass_pow_k": 0.5333,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.7389
   },
   {
@@ -182,8 +189,8 @@
    "tier": "small",
    "env": "form",
    "sample": "stratified-15",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "form-groq-gpt-oss-20b-s15.json",
    "origin": "navital",
@@ -195,6 +202,7 @@
    "pass_pow_k": 0.8,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.8722
   },
   {
@@ -203,8 +211,8 @@
    "tier": "small",
    "env": "form",
    "sample": "stratified-8",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "form-sarvam-105b-s8.json",
    "origin": "navital",
@@ -216,6 +224,7 @@
    "pass_pow_k": 0.875,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.9688
   },
   {
@@ -224,8 +233,8 @@
    "tier": "small",
    "env": "form_multidoc",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "form_multidoc-anthropic-haiku-4-5-full.json",
    "origin": "navital",
@@ -237,6 +246,7 @@
    "pass_pow_k": 0.975,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.9938
   },
   {
@@ -245,8 +255,8 @@
    "tier": "large",
    "env": "form_multidoc",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "form_multidoc-anthropic-sonnet-5-5-full.json",
    "origin": "navital",
@@ -258,6 +268,7 @@
    "pass_pow_k": 1.0,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 1.0
   },
   {
@@ -266,8 +277,8 @@
    "tier": "small",
    "env": "form_multidoc",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "form_multidoc-openai-gpt-4o-mini-full.json",
    "origin": "navital",
@@ -279,6 +290,7 @@
    "pass_pow_k": 0.325,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.6125
   },
   {
@@ -287,8 +299,8 @@
    "tier": "small",
    "env": "form_multidoc",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "form_multidoc-sarvam-105b-full.json",
    "origin": "navital",
@@ -300,6 +312,7 @@
    "pass_pow_k": 1.0,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 1.0
   },
   {
@@ -308,8 +321,8 @@
    "tier": "small",
    "env": "form_multidoc",
    "sample": "stratified-15",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "form_multidoc-anthropic-haiku-4-5-s15.json",
    "origin": "navital",
@@ -321,6 +334,7 @@
    "pass_pow_k": 1.0,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 1.0
   },
   {
@@ -329,8 +343,8 @@
    "tier": "small",
    "env": "form_multidoc",
    "sample": "stratified-15",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "form_multidoc-openai-gpt-4o-mini-s15.json",
    "origin": "navital",
@@ -342,6 +356,7 @@
    "pass_pow_k": 0.3333,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.6
   },
   {
@@ -350,8 +365,8 @@
    "tier": "small",
    "env": "form_multidoc",
    "sample": "stratified-8",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "form_multidoc-sarvam-105b-s8.json",
    "origin": "navital",
@@ -363,6 +378,7 @@
    "pass_pow_k": 1.0,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 1.0
   },
   {
@@ -371,8 +387,8 @@
    "tier": "small",
    "env": "gst",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "gst-anthropic-haiku-4-5-full.json",
    "origin": "navital",
@@ -384,6 +400,7 @@
    "pass_pow_k": 0.82,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.9143
   },
   {
@@ -392,8 +409,8 @@
    "tier": "large",
    "env": "gst",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "gst-anthropic-sonnet-5-5-full.json",
    "origin": "navital",
@@ -405,6 +422,7 @@
    "pass_pow_k": 1.0,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 1.0
   },
   {
@@ -413,8 +431,8 @@
    "tier": "small",
    "env": "gst",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "gst-openai-gpt-4o-mini-full.json",
    "origin": "navital",
@@ -426,6 +444,7 @@
    "pass_pow_k": 0.5,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.6907
   },
   {
@@ -434,8 +453,8 @@
    "tier": "small",
    "env": "gst",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "gst-sarvam-105b-full.json",
    "origin": "navital",
@@ -447,6 +466,7 @@
    "pass_pow_k": 0.78,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.8721
   },
   {
@@ -455,8 +475,8 @@
    "tier": "small",
    "env": "gst",
    "sample": "easy",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "gst-anthropic-haiku-4-5-easy.json",
    "origin": "navital",
@@ -468,6 +488,7 @@
    "pass_pow_k": 1.0,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 1.0
   },
   {
@@ -476,8 +497,8 @@
    "tier": "small",
    "env": "gst",
    "sample": "easy",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "gst-openai-gpt-4o-mini-easy.json",
    "origin": "navital",
@@ -489,6 +510,7 @@
    "pass_pow_k": 0.9444,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.9444
   },
   {
@@ -497,8 +519,8 @@
    "tier": "small",
    "env": "gst",
    "sample": "easy",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "gst-groq-gpt-oss-120b-easy.json",
    "origin": "navital",
@@ -510,6 +532,7 @@
    "pass_pow_k": 0.9444,
    "format_fail": 0.0556,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.9444
   },
   {
@@ -518,8 +541,8 @@
    "tier": "small",
    "env": "gst",
    "sample": "easy",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "gst-groq-gpt-oss-20b-easy.json",
    "origin": "navital",
@@ -531,6 +554,7 @@
    "pass_pow_k": 1.0,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 1,
    "partial_credit": 1.0
   },
   {
@@ -539,8 +563,8 @@
    "tier": "small",
    "env": "gst",
    "sample": "easy",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "gst-sarvam-105b-easy.json",
    "origin": "navital",
@@ -552,6 +576,7 @@
    "pass_pow_k": 1.0,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 1.0
   },
   {
@@ -560,8 +585,8 @@
    "tier": "small",
    "env": "support",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "support-anthropic-haiku-4-5-full.json",
    "origin": "navital",
@@ -573,7 +598,8 @@
    "pass_pow_k": 0.2368,
    "format_fail": 0.0,
    "errors": 0.0,
-   "partial_credit": 0.6866
+   "truncated_tasks": 0,
+   "partial_credit": 0.7009
   },
   {
    "model": "claude-sonnet-5-5",
@@ -581,8 +607,8 @@
    "tier": "large",
    "env": "support",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "support-anthropic-sonnet-5-5-full.json",
    "origin": "navital",
@@ -594,7 +620,8 @@
    "pass_pow_k": 0.6579,
    "format_fail": 0.0,
    "errors": 0.0,
-   "partial_credit": 0.9033
+   "truncated_tasks": 0,
+   "partial_credit": 0.9101
   },
   {
    "model": "gpt-4o-mini",
@@ -602,8 +629,8 @@
    "tier": "small",
    "env": "support",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "support-openai-gpt-4o-mini-full.json",
    "origin": "navital",
@@ -615,7 +642,8 @@
    "pass_pow_k": 0.0921,
    "format_fail": 0.0,
    "errors": 0.0,
-   "partial_credit": 0.5061
+   "truncated_tasks": 0,
+   "partial_credit": 0.5456
   },
   {
    "model": "sarvam-105b",
@@ -623,20 +651,21 @@
    "tier": "small",
    "env": "support",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "support-sarvam-105b-full.json",
    "origin": "navital",
    "split": "all",
    "n": 76,
-   "pass_at_1": 0.4342,
-   "strict_pass_at_1": 0.4342,
+   "pass_at_1": 0.3816,
+   "strict_pass_at_1": 0.3816,
    "k": 1,
-   "pass_pow_k": 0.4342,
+   "pass_pow_k": 0.3816,
    "format_fail": 0.0,
    "errors": 0.0,
-   "partial_credit": 0.7772
+   "truncated_tasks": 0,
+   "partial_credit": 0.7741
   },
   {
    "model": "claude-haiku-4-5",
@@ -644,8 +673,8 @@
    "tier": "small",
    "env": "support",
    "sample": "stratified-15",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "support-anthropic-haiku-4-5-s15.json",
    "origin": "navital",
@@ -657,6 +686,7 @@
    "pass_pow_k": 0.2,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.7533
   },
   {
@@ -665,8 +695,8 @@
    "tier": "small",
    "env": "support",
    "sample": "stratified-15",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "support-gemini-3.1-flash-lite-s15.json",
    "origin": "navital",
@@ -678,6 +708,7 @@
    "pass_pow_k": 0.3333,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.7267
   },
   {
@@ -686,8 +717,8 @@
    "tier": "small",
    "env": "support",
    "sample": "stratified-15",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "support-openai-gpt-4o-mini-s15.json",
    "origin": "navital",
@@ -699,6 +730,7 @@
    "pass_pow_k": 0.0667,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.5756
   },
   {
@@ -707,8 +739,8 @@
    "tier": "large",
    "env": "support",
    "sample": "stratified-5",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "support-anthropic-sonnet-5-5-s5.json",
    "origin": "navital",
@@ -720,6 +752,7 @@
    "pass_pow_k": 0.2,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.7933
   },
   {
@@ -728,8 +761,8 @@
    "tier": "small",
    "env": "support",
    "sample": "stratified-8",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "support-sarvam-105b-s8.json",
    "origin": "navital",
@@ -741,6 +774,7 @@
    "pass_pow_k": 0.375,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.7625
   },
   {
@@ -749,8 +783,8 @@
    "tier": "small",
    "env": "support",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "support-anthropic-haiku-4-5-full.json",
    "origin": "navital",
@@ -762,6 +796,7 @@
    "pass_pow_k": 0.2,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.6867
   },
   {
@@ -770,8 +805,8 @@
    "tier": "large",
    "env": "support",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "support-anthropic-sonnet-5-5-full.json",
    "origin": "navital",
@@ -783,6 +818,7 @@
    "pass_pow_k": 0.66,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.91
   },
   {
@@ -791,8 +827,8 @@
    "tier": "small",
    "env": "support",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "support-openai-gpt-4o-mini-full.json",
    "origin": "navital",
@@ -804,6 +840,7 @@
    "pass_pow_k": 0.12,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.5853
   },
   {
@@ -812,8 +849,8 @@
    "tier": "small",
    "env": "support",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "support-sarvam-105b-full.json",
    "origin": "navital",
@@ -825,6 +862,7 @@
    "pass_pow_k": 0.36,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.7613
   },
   {
@@ -833,8 +871,8 @@
    "tier": "small",
    "env": "support",
    "sample": "easy",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "support-groq-gpt-oss-120b-easy.json",
    "origin": "navital",
@@ -846,6 +884,7 @@
    "pass_pow_k": 0.0,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.7611
   },
   {
@@ -854,8 +893,8 @@
    "tier": "small",
    "env": "support",
    "sample": "easy",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "support-groq-gpt-oss-20b-easy.json",
    "origin": "navital",
@@ -867,6 +906,7 @@
    "pass_pow_k": 0.0,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.7296
   },
   {
@@ -875,8 +915,8 @@
    "tier": "small",
    "env": "support",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "support-anthropic-haiku-4-5-full.json",
    "origin": "navital",
@@ -888,7 +928,8 @@
    "pass_pow_k": 0.3077,
    "format_fail": 0.0,
    "errors": 0.0,
-   "partial_credit": 0.6865
+   "truncated_tasks": 0,
+   "partial_credit": 0.7282
   },
   {
    "model": "claude-sonnet-5-5",
@@ -896,8 +937,8 @@
    "tier": "large",
    "env": "support",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "support-anthropic-sonnet-5-5-full.json",
    "origin": "navital",
@@ -909,7 +950,8 @@
    "pass_pow_k": 0.6538,
    "format_fail": 0.0,
    "errors": 0.0,
-   "partial_credit": 0.8904
+   "truncated_tasks": 0,
+   "partial_credit": 0.9103
   },
   {
    "model": "gpt-4o-mini",
@@ -917,8 +959,8 @@
    "tier": "small",
    "env": "support",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "support-openai-gpt-4o-mini-full.json",
    "origin": "navital",
@@ -930,7 +972,8 @@
    "pass_pow_k": 0.0385,
    "format_fail": 0.0,
    "errors": 0.0,
-   "partial_credit": 0.3538
+   "truncated_tasks": 0,
+   "partial_credit": 0.4692
   },
   {
    "model": "sarvam-105b",
@@ -938,20 +981,21 @@
    "tier": "small",
    "env": "support",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "support-sarvam-105b-full.json",
    "origin": "navital",
    "split": "experimental",
    "n": 26,
-   "pass_at_1": 0.5769,
-   "strict_pass_at_1": 0.5769,
+   "pass_at_1": 0.4231,
+   "strict_pass_at_1": 0.4231,
    "k": 1,
-   "pass_pow_k": 0.5769,
+   "pass_pow_k": 0.4231,
    "format_fail": 0.0,
    "errors": 0.0,
-   "partial_credit": 0.8077
+   "truncated_tasks": 0,
+   "partial_credit": 0.7987
   },
   {
    "model": "claude-haiku-4-5",
@@ -959,8 +1003,8 @@
    "tier": "small",
    "env": "trip",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "trip-anthropic-haiku-4-5-full.json",
    "origin": "navital",
@@ -972,6 +1016,7 @@
    "pass_pow_k": 0.3091,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.7276
   },
   {
@@ -980,8 +1025,8 @@
    "tier": "large",
    "env": "trip",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "trip-anthropic-sonnet-5-5-full.json",
    "origin": "navital",
@@ -993,6 +1038,7 @@
    "pass_pow_k": 0.5818,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.9204
   },
   {
@@ -1001,8 +1047,8 @@
    "tier": "small",
    "env": "trip",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "trip-openai-gpt-4o-mini-full.json",
    "origin": "navital",
@@ -1014,6 +1060,7 @@
    "pass_pow_k": 0.0545,
    "format_fail": 0.0727,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.2826
   },
   {
@@ -1022,8 +1069,8 @@
    "tier": "small",
    "env": "trip",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "trip-sarvam-105b-full.json",
    "origin": "navital",
@@ -1035,6 +1082,7 @@
    "pass_pow_k": 0.2,
    "format_fail": 0.1273,
    "errors": 0.0,
+   "truncated_tasks": 9,
    "partial_credit": 0.5393
   },
   {
@@ -1043,8 +1091,8 @@
    "tier": "small",
    "env": "trip",
    "sample": "stratified-15",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "trip-anthropic-haiku-4-5-s15.json",
    "origin": "navital",
@@ -1056,6 +1104,7 @@
    "pass_pow_k": 0.2,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.6132
   },
   {
@@ -1064,8 +1113,8 @@
    "tier": "large",
    "env": "trip",
    "sample": "stratified-15",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "trip-anthropic-sonnet-5-5-s15.json",
    "origin": "navital",
@@ -1077,6 +1126,7 @@
    "pass_pow_k": 0.7333,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.9597
   },
   {
@@ -1085,8 +1135,8 @@
    "tier": "small",
    "env": "trip",
    "sample": "stratified-15",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "trip-gemini-3.1-flash-lite-s15.json",
    "origin": "navital",
@@ -1098,6 +1148,7 @@
    "pass_pow_k": 0.2,
    "format_fail": 0.0667,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.5771
   },
   {
@@ -1106,8 +1157,8 @@
    "tier": "small",
    "env": "trip",
    "sample": "stratified-15",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "trip-openai-gpt-4o-mini-s15.json",
    "origin": "navital",
@@ -1119,6 +1170,7 @@
    "pass_pow_k": 0.1333,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.4058
   },
   {
@@ -1127,8 +1179,8 @@
    "tier": "small",
    "env": "trip",
    "sample": "stratified-8",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "trip-sarvam-105b-s8.json",
    "origin": "navital",
@@ -1140,6 +1192,7 @@
    "pass_pow_k": 0.0,
    "format_fail": 0.125,
    "errors": 0.0,
+   "truncated_tasks": 1,
    "partial_credit": 0.6973
   },
   {
@@ -1148,8 +1201,8 @@
    "tier": "small",
    "env": "trip",
    "sample": "easy",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "trip-anthropic-haiku-4-5-easy.json",
    "origin": "navital",
@@ -1161,6 +1214,7 @@
    "pass_pow_k": 0.6667,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.9506
   },
   {
@@ -1169,8 +1223,8 @@
    "tier": "small",
    "env": "trip",
    "sample": "easy",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "trip-openai-gpt-4o-mini-easy.json",
    "origin": "navital",
@@ -1182,6 +1236,7 @@
    "pass_pow_k": 0.0556,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.586
   },
   {
@@ -1190,8 +1245,8 @@
    "tier": "small",
    "env": "upi",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "upi-anthropic-haiku-4-5-full.json",
    "origin": "navital",
@@ -1203,6 +1258,7 @@
    "pass_pow_k": 0.42,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.674
   },
   {
@@ -1211,8 +1267,8 @@
    "tier": "large",
    "env": "upi",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "upi-anthropic-sonnet-5-5-full.json",
    "origin": "navital",
@@ -1224,6 +1280,7 @@
    "pass_pow_k": 0.68,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.915
   },
   {
@@ -1232,8 +1289,8 @@
    "tier": "small",
    "env": "upi",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "upi-openai-gpt-4o-mini-full.json",
    "origin": "navital",
@@ -1245,6 +1302,7 @@
    "pass_pow_k": 0.18,
    "format_fail": 0.16,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.4717
   },
   {
@@ -1253,8 +1311,8 @@
    "tier": "small",
    "env": "upi",
    "sample": "full",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "upi-sarvam-105b-full.json",
    "origin": "navital",
@@ -1266,6 +1324,7 @@
    "pass_pow_k": 0.52,
    "format_fail": 0.06,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.7705
   },
   {
@@ -1274,8 +1333,8 @@
    "tier": "small",
    "env": "upi",
    "sample": "stratified-15",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "upi-anthropic-haiku-4-5-s15.json",
    "origin": "navital",
@@ -1287,6 +1346,7 @@
    "pass_pow_k": 0.4,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.6911
   },
   {
@@ -1295,8 +1355,8 @@
    "tier": "large",
    "env": "upi",
    "sample": "stratified-15",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "upi-anthropic-sonnet-5-5-k3-s15.json",
    "origin": "navital",
@@ -1308,6 +1368,7 @@
    "pass_pow_k": 0.7333,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.9422
   },
   {
@@ -1316,8 +1377,8 @@
    "tier": "large",
    "env": "upi",
    "sample": "stratified-15",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "upi-anthropic-sonnet-5-5-s15.json",
    "origin": "navital",
@@ -1329,6 +1390,7 @@
    "pass_pow_k": 0.7333,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.9289
   },
   {
@@ -1337,8 +1399,8 @@
    "tier": "small",
    "env": "upi",
    "sample": "stratified-15",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "upi-gemini-3.1-flash-lite-s15.json",
    "origin": "navital",
@@ -1350,6 +1412,7 @@
    "pass_pow_k": 0.6,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.8656
   },
   {
@@ -1358,8 +1421,8 @@
    "tier": "small",
    "env": "upi",
    "sample": "stratified-15",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "upi-openai-gpt-4o-mini-s15.json",
    "origin": "navital",
@@ -1371,6 +1434,7 @@
    "pass_pow_k": 0.1333,
    "format_fail": 0.0667,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.4633
   },
   {
@@ -1379,8 +1443,8 @@
    "tier": "small",
    "env": "upi",
    "sample": "stratified-8",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "upi-sarvam-105b-s8.json",
    "origin": "navital",
@@ -1392,6 +1456,7 @@
    "pass_pow_k": 0.375,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.7615
   },
   {
@@ -1400,8 +1465,8 @@
    "tier": "small",
    "env": "upi",
    "sample": "easy",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "upi-anthropic-haiku-4-5-easy.json",
    "origin": "navital",
@@ -1413,6 +1478,7 @@
    "pass_pow_k": 0.6111,
    "format_fail": 0.0,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.8287
   },
   {
@@ -1421,8 +1487,8 @@
    "tier": "small",
    "env": "upi",
    "sample": "easy",
-   "harness_commit": "123c1450dab5",
-   "date": "2026-10-27",
+   "harness_commit": "e3c5f218443e",
+   "date": "2026-10-29",
    "date_basis": "file-modified",
    "source": "upi-openai-gpt-4o-mini-easy.json",
    "origin": "navital",
@@ -1434,6 +1500,7 @@
    "pass_pow_k": 0.3333,
    "format_fail": 0.2778,
    "errors": 0.0,
+   "truncated_tasks": 0,
    "partial_credit": 0.5856
   }
  ],
