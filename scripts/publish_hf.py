@@ -11,9 +11,14 @@ import argparse, glob, json, os, sys, tempfile
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CARD = """---
 license: cc-by-4.0
-language: [en, hi]
+language: [en, hi, ta, bn, mr]
 pretty_name: Navital Gym tasks
-tags: [agents, evaluation, india, tool-use]
+task_categories:
+- text-generation
+- question-answering
+tags: [agents, benchmark, evaluation, india, hindi, hinglish, upi, gst, tool-use]
+size_categories:
+- n<1K
 configs:
 - config_name: form
   data_files: form/tasks.jsonl
@@ -32,10 +37,17 @@ configs:
 
 Task prompts and structured parameters for the environments in https://github.com/Navitallabs/navital-gym (code: Apache-2.0; this data: CC BY 4.0, attribution "Navital Labs, Navital Gym").
 Environments: {envs}.
+Languages: English and Hindi/Hinglish are the core set; Tamil, Bengali and Marathi customer-support tasks are experimental (machine-assisted drafts, not native-reviewed).
+
+Links: [GitHub](https://github.com/Navitallabs/navital-gym) · [PyPI](https://pypi.org/project/navital-gym/) · [report](https://navitallabs.com/labs/navital-gym/report) · [leaderboard](https://navitallabs.com/labs/navital-gym/leaderboard)
 
 **Simplified rules, synthetic data.** Every task uses a documented, simplified version of Indian practice and synthetic data; nothing here states current law, railway, bank or tax rules. Not affiliated with or endorsed by NPCI, RBI, GSTN / CBIC, IRCTC / Indian Railways or any bank or government body. Not financial or tax advice.
 **No answers here.** Gold answers, expected actions, expected feasibility and solver notes are not part of this dataset; grade with the graders in the repository (`navital-gym run`). The full task files, answers included, are public in the GitHub repository.
 Each env's README in the repository states its rules, sources and "as of" date. Load one environment at a time, e.g. `load_dataset("NavitalLabs/navital-gym-tasks", "trip")`: each environment has its own columns, so there is no single combined table. Run the tasks with `pip install navital-gym` and `navital-gym run --env <name> --agent <agent>`.
+
+## Citation
+
+Navital Labs. *Navital Gym: deterministic, auto-graded environments for AI agents doing Indian-reality tasks* (version 1.0.1). https://github.com/Navitallabs/navital-gym (Apache-2.0 code, CC BY 4.0 data). The repository's `CITATION.cff` has the machine-readable form.
 """
 
 STRIP_TOP = ("gold_answer", "gold_actions", "forbidden_actions", "expected_feasible", "binding_constraint", "traps", "grader_notes")
