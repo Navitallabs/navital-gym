@@ -17,10 +17,11 @@ tags: [agents, evaluation, india, tool-use]
 ---
 # Navital Gym: task data
 
-Task prompts, structured parameters and labels for the environments in https://github.com/Navitallabs/navital-gym (code: Apache-2.0; this data: CC BY 4.0, attribution "Navital Labs, Navital Gym").
+Task prompts and structured parameters for the environments in https://github.com/Navitallabs/navital-gym (code: Apache-2.0; this data: CC BY 4.0, attribution "Navital Labs, Navital Gym").
 Environments: {envs}.
 
 **Simplified rules, synthetic data.** Every task uses a documented, simplified version of Indian practice and synthetic data; nothing here states current law, railway, bank or tax rules. Not affiliated with or endorsed by NPCI, RBI, GSTN / CBIC, IRCTC / Indian Railways or any bank or government body. Not financial or tax advice.
+**No answers here.** Gold answers, expected actions, expected feasibility and solver notes are not part of this dataset; grade with the graders in the repository (`navital-gym run`).
 Each env's README in the repository states its rules, sources and "as of" date. Run the tasks with `pip install navital-gym` and `navital-gym run --env <name> --agent <agent>`.
 """
 
