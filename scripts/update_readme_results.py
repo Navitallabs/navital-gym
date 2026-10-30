@@ -29,7 +29,7 @@ small = sorted(m for m in cell if not any(x in m.lower() for x in LARGE))
 large = sorted(m for m in cell if any(x in m.lower() for x in LARGE))
 block = ("Pass@1 on deterministic stratified samples or whole splits (k=1, one run per cell; n = tasks, so one task is 1/n of the cell: read small-n cells as indicative). "
          "'easy' columns are the easy tier (designed so a 7B-30B model can sometimes solve them); the others are the standard tasks. "
-         "Full tables with format failures, strict (no-repair) pass@1, partial credit, spend, dates and commits: [`docs/RESULTS.md`](docs/RESULTS.md). "
+         "Full tables with format failures, strict (no-repair) pass@1, partial credit, spend, dates and commits: [`docs/RESULTS.md`](https://github.com/Navitallabs/navital-gym/blob/main/docs/RESULTS.md). "
          "Every row was re-graded by the same grading code (`scripts/regrade.py`); check it with `git rev-parse v1.0.1:navital_gym` (see `docs/RESULTS.md`).\n\n"
          + table(small, "Small and mid-size models: pass@1 (the typical user's models)") + "\n"
          + table(small, "Small and mid-size models: partial credit (mean fraction of scored rules passed; shows progress where pass@1 is near zero)", partial=True) + "\n"

@@ -2,14 +2,31 @@
 name = "navital-gym"
 version = "1.0.1"
 description = "Navital Gym: deterministic, auto-graded environments for AI agents doing Indian-reality tasks (Navital Labs)."
+readme = "README.md"
 requires-python = ">=3.10"
-license = { text = "Apache-2.0" }
+license = "Apache-2.0"
+license-files = ["LICENSE", "LICENSE-DATA", "NOTICE"]
+authors = [{ name = "Navital Labs", email = "dakshbathla@navitallabs.com" }]
+keywords = ["ai-agents", "evaluation", "benchmark", "india", "tool-use", "llm"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
 dependencies = []          # the core and every env are standard library only
 
 [project.urls]
-Homepage = "https://navitallabs.com"
+Homepage = "https://navitallabs.com/labs/navital-gym"
 Repository = "https://github.com/Navitallabs/navital-gym"
-"Hugging Face" = "https://huggingface.co/NavitalLabs"
+Issues = "https://github.com/Navitallabs/navital-gym/issues"
+Changelog = "https://github.com/Navitallabs/navital-gym/blob/main/CHANGELOG.md"
+Results = "https://github.com/Navitallabs/navital-gym/blob/main/docs/RESULTS.md"
 
 [project.scripts]
 navital-gym = "navital_gym.cli:main"
@@ -20,7 +37,7 @@ inspect = ["inspect-ai"]
 openenv = ["openenv-core"]
 
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
