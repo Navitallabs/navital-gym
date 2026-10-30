@@ -14,6 +14,19 @@ license: cc-by-4.0
 language: [en, hi]
 pretty_name: Navital Gym tasks
 tags: [agents, evaluation, india, tool-use]
+configs:
+- config_name: form
+  data_files: form/tasks.jsonl
+- config_name: form_multidoc
+  data_files: form_multidoc/tasks.jsonl
+- config_name: gst
+  data_files: gst/tasks.jsonl
+- config_name: support
+  data_files: support/tasks.jsonl
+- config_name: trip
+  data_files: trip/tasks.jsonl
+- config_name: upi
+  data_files: upi/tasks.jsonl
 ---
 # Navital Gym: task data
 
@@ -22,7 +35,7 @@ Environments: {envs}.
 
 **Simplified rules, synthetic data.** Every task uses a documented, simplified version of Indian practice and synthetic data; nothing here states current law, railway, bank or tax rules. Not affiliated with or endorsed by NPCI, RBI, GSTN / CBIC, IRCTC / Indian Railways or any bank or government body. Not financial or tax advice.
 **No answers here.** Gold answers, expected actions, expected feasibility and solver notes are not part of this dataset; grade with the graders in the repository (`navital-gym run`). The full task files, answers included, are public in the GitHub repository.
-Each env's README in the repository states its rules, sources and "as of" date. Run the tasks with `pip install navital-gym` and `navital-gym run --env <name> --agent <agent>`.
+Each env's README in the repository states its rules, sources and "as of" date. Load one environment at a time, e.g. `load_dataset("NavitalLabs/navital-gym-tasks", "trip")`: each environment has its own columns, so there is no single combined table. Run the tasks with `pip install navital-gym` and `navital-gym run --env <name> --agent <agent>`.
 """
 
 STRIP_TOP = ("gold_answer", "gold_actions", "forbidden_actions", "expected_feasible", "binding_constraint", "traps", "grader_notes")
