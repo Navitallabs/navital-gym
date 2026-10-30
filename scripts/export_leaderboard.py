@@ -7,6 +7,7 @@ usage: python3 scripts/export_leaderboard.py [out.json] [--runs DIR] [--submissi
   out.json   default docs/leaderboard.json            --runs DIR   default <repo>/runs (read only)     --submissions DIR   default <repo>/submissions; each */*.json is verified (scripts/verify_submission.py) before it is counted
   --commit SHA            keep only run files whose graded_with is SHA (use the launch commit after scripts/regrade.py); others go to `excluded`
   --require-single-commit exit 2 unless every published row was graded by ONE commit (the site says so; this makes it true)
+Each entry carries rule_failures ({rule id: count}, per task at k=1; a task can fail several rules; answered tasks only; null when k>1, where counts would be runs, not tasks); top level rule_names maps env -> rule id -> the rule's `description` from rules.py verbatim ("" if it has none).
 Top level also carries grader_commits, ungraded (run files with no graded_with), single_grader_commit, and task_counts (tasks per env and split) so the site need not hand-keep them.
 `date` is the run file's modification time (date_basis says so): scripts/regrade.py rewrites files, so after a regrade it is the regrade date, not the day the model ran."""
 import glob, importlib, json, os, sys, time
@@ -86,6 +87,7 @@ for path, origin in [(p, "navital") for p in ours] + [(p, "community") for p in 
             entries.append({**base, "split": split, "n": g.get("answered", g["tasks"]), "pass_at_1": round(g["pass@1"], 4), "strict_pass_at_1": round(g["strict_pass@1"], 4),
                             "k": g["k"], "pass_pow_k": round(g["pass^k"], 4), "format_fail": round(g["format_fail"], 4), "errors": round(g["errors"], 4),
                             "truncated_tasks": runfiles.truncated_tasks(d["tasks"], ids),
+                            "rule_failures": dict(sorted((g.get("rule_failures") or {}).items())) if g["k"] == 1 else None,
                             "partial_credit": round(runfiles.first_run_partial(d["tasks"], g) if g["k"] > 1 and split == "all" else g["mean_score"], 4)})
 entries.sort(key=lambda e: (e["env"], e["split"], e["sample"], e["model"]))
 commits = sorted({e["harness_commit"] for e in entries if e["harness_commit"]})
@@ -101,8 +103,17 @@ for env in sorted({e["env"] for e in entries}):
     for sp in sorted({task_split(t) for t in allt.values()}):
         if len({task_split(t) for t in allt.values()}) > 1: counts[sp] = sum(1 for t in allt.values() if task_split(t) == sp)
     task_counts[env] = counts
+rule_names = {}                      # verbatim `description` of each rule, "" when rules.py has none (never filled in here: editing navital_gym/ changes the grader id)
+for env in sorted({e["env"] for e in entries}):
+    rules = importlib.import_module(f"navital_gym.envs.{env}").load_env().grader.rules
+    rule_names[env] = {rid: getattr(r, "description", "") or "" for rid, r in sorted(rules.items())}
+    for e in entries:
+        if e["env"] == env:
+            for rid in e["rule_failures"] or {}:
+                rule_names[env].setdefault(rid, "")
 doc = {"generated": time.strftime("%Y-%m-%d"), "note": "Small samples: with n=15 one task is 6.7 points. Built from run files; see docs/RESULTS.md. Small and mid-size models are marked tier=small; tier=large rows have fewer tasks unless sample=full.",
-       "grader_commits": commits, "ungraded": ungraded, "single_grader_commit": single, "task_counts": task_counts, "entries": entries, "excluded": excluded}
+       "grader_commits": commits, "ungraded": ungraded, "single_grader_commit": single, "task_counts": task_counts,
+       "rule_failures_note": "per task at k=1; a task can fail several rules; answered tasks only", "rule_names": rule_names, "entries": entries, "excluded": excluded}
 json.dump(doc, open(out_path, "w"), indent=1, ensure_ascii=False)
 print(f"wrote {out_path}: {len(entries)} entries, {len(excluded)} excluded; grader commits: {commits or 'none'}; run files without graded_with: {len(ungraded)}")
 if REQUIRE_ONE and not single:

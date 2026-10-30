@@ -33,9 +33,9 @@ block = ("Pass@1 on deterministic stratified samples or whole splits (k=1, one r
          "Every row was re-graded by the same grading code (`scripts/regrade.py`); check it with `git rev-parse v1.0.1:navital_gym` (see `docs/RESULTS.md`).\n\n"
          + table(small, "Small and mid-size models: pass@1 (the typical user's models)") + "\n"
          + table(small, "Small and mid-size models: partial credit (mean fraction of scored rules passed; shows progress where pass@1 is near zero)", partial=True) + "\n"
-         + table(large, "Larger model, for reference (what a strong model reaches)")
+         + table(large, "Larger models, for reference (what strong models reach)")
          + "\nMost of the models people will test are small or mid-size, so they come first. Many score low: that is the point of a hard benchmark, but a cell near zero says little, so read partial credit next to it. "
-         "Samples are small and these are not the strongest agents available; they show that the environments separate models, not a leaderboard. "
+         "Samples are small and the small and mid-size models above are not the strongest agents available; these results show that the environments separate models, not a leaderboard. "
          "Task difficulty labels are designer intent, not calibrated.")
 readme = os.path.join(root, "README.md")
 text = open(readme).read()

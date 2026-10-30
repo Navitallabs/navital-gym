@@ -8,7 +8,7 @@ Each row is ONE run (k=1). The task count is in the table: a 15-task sample has 
 
 **Note on the Sarvam final answer (json_object).** The run settings of every row say `json_mode_on_final: true`. For Sarvam this was not applied on the final call: Sarvam rejects a tool-free call once the history holds tool messages, so the harness re-sends the tools with `tool_choice: none` and drops `response_format`. In a later test of that combination (tools + `tool_choice: none` + `response_format: json_object`, tool-message history) Sarvam accepted the call (HTTP 200) but returned empty content in 3 of 3 calls, while 2 of 2 calls without `response_format` returned valid JSON. We did not change the harness for this: the Sarvam rows were run as described here, and the cut-off column above counts the tasks the output limit ended.
 
-**Note on est. USD.** The estimate is only computed for Anthropic and OpenAI, whose per-token prices are in our price table. Gemini and Groq runs used free tiers (0.00). Sarvam's price is not in our price table, so the 0.00 on Sarvam rows means *not estimated*, not that the run was free. The Claude Sonnet 5.5 form and GST rows were first priced at the lower Haiku-level default; their est. USD was multiplied by 2.5 (the Sonnet-to-default price ratio, the same for input and output tokens) to the Sonnet rate.
+**Note on est. USD.** The estimate is only computed for Anthropic and OpenAI, whose per-token prices are in our price table. Gemini and Groq runs used free tiers (0.00). Sarvam's price is not in our price table, so the 0.00 on Sarvam rows means *not estimated*, not that the run was free. The Claude Sonnet 5.5 form and GST rows were first priced at the lower Haiku-level default; their est. USD was multiplied by 2.5 (the Sonnet-to-default price ratio, the same for input and output tokens) to the Sonnet rate. The Claude Opus 5.5 rows were priced at the Haiku-level default (2 / 10 USD per million input / output tokens); at Opus's list price of 4 / 20 USD the est. USD would be twice the value shown (not recomputed here).
 
 **Verify it.** The grading code is identified by the git tree id of `navital_gym/` at the release tag v1.0.1. Check with `git rev-parse v1.0.1:navital_gym`: it must start with the id in the `graded` column.
 
@@ -53,17 +53,23 @@ Most people testing will use models like these, so they come first. Many score l
 | upi (easy) | claude-haiku-4-5 (anthropic) | 18 | 0.61 | 0.56 | 0% | 0% | 0 | 0.83 | 0.33 | 2026-10-29 | ed78addcd557 |
 | upi (easy) | gpt-4o-mini (openai) | 18 | 0.33 | 0.33 | 28% | 0% | 0 | 0.59 | 0.06 | 2026-10-29 | ed78addcd557 |
 
-## Larger model, for reference (Claude Sonnet 5.5)
+## Larger models, for reference (Claude Sonnet 5.5 and Opus 5.5)
 
-What a strong model reaches. Not the typical user's model.
+What strong models reach. Not the typical user's model.
 
 | env | model (provider) | tasks | pass@1 | strict | format fail | errors | length cut-off | partial credit | est. USD | date | graded |
 |---|---|---|---|---|---|---|---|---|---|---|---|
+| form | claude-opus-5-5 (anthropic) | 50 | 1.00 | 1.00 | 0% | 0% | 0 | 1.00 | 1.09 | 2026-10-30 | ed78addcd557 |
 | form | claude-sonnet-5-5 (anthropic) | 50 | 1.00 | 1.00 | 0% | 0% | 0 | 1.00 | 1.19 | 2026-10-29 | ed78addcd557 |
+| form multi-document | claude-opus-5-5 (anthropic) | 40 | 1.00 | 1.00 | 0% | 0% | 0 | 1.00 | 1.18 | 2026-10-30 | ed78addcd557 |
 | form multi-document | claude-sonnet-5-5 (anthropic) | 40 | 1.00 | 1.00 | 0% | 0% | 0 | 1.00 | 1.05 | 2026-10-29 | ed78addcd557 |
+| gst | claude-opus-5-5 (anthropic) | 50 | 0.98 | 0.98 | 0% | 0% | 0 | 0.98 | 1.29 | 2026-10-30 | ed78addcd557 |
 | gst | claude-sonnet-5-5 (anthropic) | 50 | 1.00 | 1.00 | 0% | 0% | 0 | 1.00 | 1.53 | 2026-10-29 | ed78addcd557 |
+| support | claude-opus-5-5 (anthropic) | 76 | 0.71 | 0.71 | 0% | 0% | 0 | 0.92 | 2.32 | 2026-10-30 | ed78addcd557 |
 | support | claude-sonnet-5-5 (anthropic) | 76 | 0.66 | 0.66 | 0% | 0% | 0 | 0.91 | 2.71 | 2026-10-29 | ed78addcd557 |
+| trip | claude-opus-5-5 (anthropic) | 55 | 0.58 | 0.56 | 0% | 0% | 0 | 0.87 | 12.04 | 2026-10-30 | ed78addcd557 |
 | trip | claude-sonnet-5-5 (anthropic) | 55 | 0.58 | 0.49 | 0% | 0% | 0 | 0.92 | 14.64 | 2026-10-29 | ed78addcd557 |
+| upi | claude-opus-5-5 (anthropic) | 50 | 0.78 | 0.78 | 0% | 0% | 0 | 0.94 | 2.20 | 2026-10-30 | ed78addcd557 |
 | upi | claude-sonnet-5-5 (anthropic) | 50 | 0.68 | 0.68 | 0% | 0% | 0 | 0.92 | 2.69 | 2026-10-29 | ed78addcd557 |
 
 ## Do the difficulty labels separate small and mid-size models?
@@ -79,3 +85,4 @@ Tasks solved / tried by the designers' difficulty label (designer intent, not ca
 | openai/gpt-oss-20b | 20/38 | 7/9 | 3/4 |
 | sarvam-105b | 48/83 | 64/117 | 92/139 |
 
+Spend (conservative per-token prices; free tiers cost nothing): openai $0.00.

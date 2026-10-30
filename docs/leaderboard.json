@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-29",
+ "generated": "2026-10-30",
  "note": "Small samples: with n=15 one task is 6.7 points. Built from run files; see docs/RESULTS.md. Small and mid-size models are marked tier=small; tier=large rows have fewer tasks unless sample=full.",
  "grader_commits": [
   "ed78addcd557"
@@ -28,6 +28,116 @@
    "all": 50
   }
  },
+ "rule_failures_note": "per task at k=1; a task can fail several rules; answered tasks only",
+ "rule_names": {
+  "form": {
+   "R-ACCOUNT": "",
+   "R-ADV-TAX": "",
+   "R-AGE": "",
+   "R-AY": "",
+   "R-CITY": "",
+   "R-CONSISTENT": "",
+   "R-DOB": "",
+   "R-FMT": "answer is a JSON object",
+   "R-FY": "",
+   "R-GUARDIAN": "",
+   "R-HOUSE": "",
+   "R-IFSC": "",
+   "R-IFSC-VALID": "",
+   "R-MINOR": "",
+   "R-MOBILE": "",
+   "R-MOBILE-VALID": "",
+   "R-NAME": "",
+   "R-PAN": "",
+   "R-PAN-VALID": "",
+   "R-PIN": "",
+   "R-STATE": "",
+   "R-VALUE": ""
+  },
+  "form_multidoc": {
+   "R-AGE": "",
+   "R-CONFLICTS": "",
+   "R-DOB": "",
+   "R-ELIGIBLE": "",
+   "R-FMT": "answer is a JSON object",
+   "R-IFSC": "",
+   "R-INCONSISTENT": "",
+   "R-INVALID-PANS": "",
+   "R-MATCH": "",
+   "R-MINOR": "",
+   "R-MINORS": "",
+   "R-NAME": "",
+   "R-PAN": "",
+   "R-REASON": "",
+   "R-REPAIRED": "",
+   "R-REVIEW": ""
+  },
+  "gst": {
+   "R-CGST": "",
+   "R-DAYS": "",
+   "R-DUE": "",
+   "R-ELIGIBLE": "",
+   "R-FEE": "",
+   "R-FMT": "answer is a JSON object",
+   "R-IGST": "",
+   "R-INTEREST": "",
+   "R-ITC-AMOUNT": "",
+   "R-ITC-INVOICES": "",
+   "R-REQUIRED": "",
+   "R-ROUNDOFF": "",
+   "R-SGST": "",
+   "R-TAX": "",
+   "R-TAXABLE": "",
+   "R-TAXTYPE": "",
+   "R-TOTAL": ""
+  },
+  "support": {
+   "R-ACTIONS": "every action the policy requires is present, with the right order, amount and mode",
+   "R-AMOUNT": "reply states the refund amount",
+   "R-ANSWER": "the customer asked about their OWN order: the reply must give the recorded address (refusing is wrong)",
+   "R-DECISION": "the stated decision matches what the policy requires (read from the order, not guessable from the prompt)",
+   "R-FMT": "submission has an actions list, a reply, a decision and a reason",
+   "R-FORBIDDEN": "no action beyond what the policy requires (no wrong refund, no extra cancel, no double refund)",
+   "R-LANG": "reply is in the customer's language (script and marker words; heuristic)",
+   "R-PRIVACY": "reply reveals nothing about another customer's order",
+   "R-REASON": "the stated reason code matches the policy fact that decided the case"
+  },
+  "trip": {
+   "R-ACC": "no_stairs: lift or ground-floor rooms and wheelchair-friendly sights; seniors need a free lower berth in berth classes",
+   "R-ALT": "Altitude pacing (simplified, not medical advice): the day you reach Leh is rest only; nothing higher than Leh (here: above 3,500 m) before day 3",
+   "R-AVAIL": "Every rail leg is confirmed (AVL with enough seats); RAC and WL do not count",
+   "R-BUD": "Recomputed total cost (fares, rooms, transfers, tickets, permits, food allowance) within budget",
+   "R-CONN": "Real services, location continuity, buffers (rail 60 / road 30 / air 120 min), a hotel for each night",
+   "R-DATE": "Exactly `days` consecutive dates from `start`; starts at origin, ends at the end city on the last date",
+   "R-DIET": "veg / jain / satvik: each day's food hotel serves the diet (flags are separate)",
+   "R-FMT": "Schema-valid JSON with known ids",
+   "R-HRS": "No more than max_travel_hours_per_day of travel on any day",
+   "R-NIGHT": "No road leg in the night window: 22:00-05:00 if no_night_road; the task's no_road_after; winter hill roads 20:00-05:00",
+   "R-OCC": "Rooms hold at most 3 guests and cover everyone; every leg is ticketed for exactly the right people",
+   "R-OPEN": "Each activity on an open weekday, within hours, for at least its visit length",
+   "R-PERMIT": "Permit places need permit_booked between today and the day before the visit",
+   "R-QUOTA": "booking_date is today; quota window open (GN 2-60 days, TQ day before with 10:00 AC / 11:00 non-AC, CUR same day)",
+   "R-REST": "A rest day: no leg over 2 hours, no ticketed activity",
+   "R-ROUTE": "The trip does what was asked: visits every named city, must_visit sights, must_use legs, day-specific visits",
+   "R-SEASON": "Seasonal facts: sights in season, seasonal roads open",
+   "R-INFEASIBLE": ""
+  },
+  "upi": {
+   "R-ACTION": "",
+   "R-AUTOCOMP": "",
+   "R-CAP": "",
+   "R-COMP": "",
+   "R-DAYS": "",
+   "R-DEBIT-APPROVAL": "",
+   "R-EFFECTS": "the account changed exactly as it should: required actions done once, nothing else",
+   "R-FMT": "answer is a JSON object with a text `action` (an empty answer scores 0, even where refusing is right)",
+   "R-FORBIDDEN": "never called a tool the task forbids (an attempt counts, even if the bank refused it)",
+   "R-NOPROMISE": "does not promise the money will come back",
+   "R-REASON": "the stated reason code is the right one",
+   "R-TAT": "",
+   "R-TYPE": ""
+  }
+ },
  "entries": [
   {
    "model": "claude-haiku-4-5",
@@ -49,7 +159,40 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ADV-TAX": 1,
+    "R-AY": 5,
+    "R-FY": 5,
+    "R-IFSC": 1,
+    "R-MOBILE": 1,
+    "R-PAN": 2,
+    "R-PIN": 1,
+    "R-VALUE": 1
+   },
    "partial_credit": 0.895
+  },
+  {
+   "model": "claude-opus-5-5",
+   "provider": "anthropic",
+   "tier": "large",
+   "env": "form",
+   "sample": "full",
+   "harness_commit": "ed78addcd557",
+   "date": "2026-10-30",
+   "date_basis": "file-modified",
+   "source": "form-anthropic-opus-5-5-full.json",
+   "origin": "navital",
+   "split": "all",
+   "n": 50,
+   "pass_at_1": 1.0,
+   "strict_pass_at_1": 1.0,
+   "k": 1,
+   "pass_pow_k": 1.0,
+   "format_fail": 0.0,
+   "errors": 0.0,
+   "truncated_tasks": 0,
+   "rule_failures": {},
+   "partial_credit": 1.0
   },
   {
    "model": "claude-sonnet-5-5",
@@ -71,6 +214,7 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {},
    "partial_credit": 1.0
   },
   {
@@ -93,6 +237,21 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACCOUNT": 6,
+    "R-ADV-TAX": 2,
+    "R-AY": 5,
+    "R-FY": 5,
+    "R-GUARDIAN": 1,
+    "R-IFSC": 8,
+    "R-MINOR": 1,
+    "R-MOBILE": 6,
+    "R-MOBILE-VALID": 1,
+    "R-NAME": 1,
+    "R-PAN": 10,
+    "R-PIN": 3,
+    "R-VALUE": 1
+   },
    "partial_credit": 0.8283
   },
   {
@@ -115,6 +274,14 @@
    "format_fail": 0.02,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-AGE": 1,
+    "R-IFSC": 1,
+    "R-MOBILE": 2,
+    "R-NAME": 1,
+    "R-PAN": 1,
+    "R-PIN": 4
+   },
    "partial_credit": 0.95
   },
   {
@@ -137,6 +304,11 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-AY": 3,
+    "R-FY": 3,
+    "R-VALUE": 1
+   },
    "partial_credit": 0.8
   },
   {
@@ -159,6 +331,11 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-AY": 3,
+    "R-FY": 3,
+    "R-PIN": 3
+   },
    "partial_credit": 0.8167
   },
   {
@@ -181,6 +358,16 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACCOUNT": 2,
+    "R-ADV-TAX": 1,
+    "R-AY": 3,
+    "R-FY": 3,
+    "R-IFSC": 2,
+    "R-MOBILE": 1,
+    "R-PAN": 2,
+    "R-VALUE": 1
+   },
    "partial_credit": 0.7389
   },
   {
@@ -203,6 +390,14 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-AY": 1,
+    "R-FY": 1,
+    "R-IFSC": 1,
+    "R-MOBILE": 1,
+    "R-PAN": 1,
+    "R-VALUE": 1
+   },
    "partial_credit": 0.8722
   },
   {
@@ -225,6 +420,9 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-PIN": 1
+   },
    "partial_credit": 0.9688
   },
   {
@@ -247,7 +445,33 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-REVIEW": 1
+   },
    "partial_credit": 0.9938
+  },
+  {
+   "model": "claude-opus-5-5",
+   "provider": "anthropic",
+   "tier": "large",
+   "env": "form_multidoc",
+   "sample": "full",
+   "harness_commit": "ed78addcd557",
+   "date": "2026-10-30",
+   "date_basis": "file-modified",
+   "source": "form_multidoc-anthropic-opus-5-5-full.json",
+   "origin": "navital",
+   "split": "all",
+   "n": 40,
+   "pass_at_1": 1.0,
+   "strict_pass_at_1": 1.0,
+   "k": 1,
+   "pass_pow_k": 1.0,
+   "format_fail": 0.0,
+   "errors": 0.0,
+   "truncated_tasks": 0,
+   "rule_failures": {},
+   "partial_credit": 1.0
   },
   {
    "model": "claude-sonnet-5-5",
@@ -269,6 +493,7 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {},
    "partial_credit": 1.0
   },
   {
@@ -291,6 +516,19 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-CONFLICTS": 6,
+    "R-ELIGIBLE": 2,
+    "R-IFSC": 1,
+    "R-INCONSISTENT": 8,
+    "R-MATCH": 5,
+    "R-MINOR": 2,
+    "R-MINORS": 5,
+    "R-PAN": 3,
+    "R-REASON": 5,
+    "R-REPAIRED": 3,
+    "R-REVIEW": 4
+   },
    "partial_credit": 0.6125
   },
   {
@@ -313,6 +551,7 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {},
    "partial_credit": 1.0
   },
   {
@@ -335,6 +574,7 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {},
    "partial_credit": 1.0
   },
   {
@@ -357,6 +597,17 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-CONFLICTS": 2,
+    "R-ELIGIBLE": 1,
+    "R-INCONSISTENT": 3,
+    "R-MATCH": 2,
+    "R-MINORS": 1,
+    "R-PAN": 2,
+    "R-REASON": 2,
+    "R-REPAIRED": 2,
+    "R-REVIEW": 2
+   },
    "partial_credit": 0.6
   },
   {
@@ -379,6 +630,7 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {},
    "partial_credit": 1.0
   },
   {
@@ -401,7 +653,44 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-CGST": 2,
+    "R-ELIGIBLE": 1,
+    "R-FEE": 2,
+    "R-INTEREST": 2,
+    "R-REQUIRED": 1,
+    "R-ROUNDOFF": 3,
+    "R-SGST": 2,
+    "R-TAXABLE": 1,
+    "R-TOTAL": 1
+   },
    "partial_credit": 0.9143
+  },
+  {
+   "model": "claude-opus-5-5",
+   "provider": "anthropic",
+   "tier": "large",
+   "env": "gst",
+   "sample": "full",
+   "harness_commit": "ed78addcd557",
+   "date": "2026-10-30",
+   "date_basis": "file-modified",
+   "source": "gst-anthropic-opus-5-5-full.json",
+   "origin": "navital",
+   "split": "all",
+   "n": 50,
+   "pass_at_1": 0.98,
+   "strict_pass_at_1": 0.98,
+   "k": 1,
+   "pass_pow_k": 0.98,
+   "format_fail": 0.0,
+   "errors": 0.0,
+   "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ITC-AMOUNT": 1,
+    "R-ITC-INVOICES": 1
+   },
+   "partial_credit": 0.98
   },
   {
    "model": "claude-sonnet-5-5",
@@ -423,6 +712,7 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {},
    "partial_credit": 1.0
   },
   {
@@ -445,6 +735,20 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-CGST": 5,
+    "R-DAYS": 3,
+    "R-DUE": 3,
+    "R-FEE": 3,
+    "R-IGST": 8,
+    "R-INTEREST": 6,
+    "R-REQUIRED": 1,
+    "R-ROUNDOFF": 10,
+    "R-SGST": 5,
+    "R-TAXABLE": 7,
+    "R-TAXTYPE": 8,
+    "R-TOTAL": 8
+   },
    "partial_credit": 0.6907
   },
   {
@@ -467,6 +771,19 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-CGST": 2,
+    "R-DAYS": 1,
+    "R-DUE": 1,
+    "R-FEE": 2,
+    "R-IGST": 2,
+    "R-INTEREST": 1,
+    "R-REQUIRED": 2,
+    "R-ROUNDOFF": 5,
+    "R-SGST": 2,
+    "R-TAXTYPE": 1,
+    "R-TOTAL": 4
+   },
    "partial_credit": 0.8721
   },
   {
@@ -489,6 +806,7 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {},
    "partial_credit": 1.0
   },
   {
@@ -511,6 +829,9 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-DAYS": 1
+   },
    "partial_credit": 0.9444
   },
   {
@@ -533,6 +854,9 @@
    "format_fail": 0.0556,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-FMT": 1
+   },
    "partial_credit": 0.9444
   },
   {
@@ -555,6 +879,7 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {},
    "partial_credit": 1.0
   },
   {
@@ -577,6 +902,7 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {},
    "partial_credit": 1.0
   },
   {
@@ -599,7 +925,44 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTIONS": 29,
+    "R-AMOUNT": 6,
+    "R-DECISION": 17,
+    "R-FORBIDDEN": 36,
+    "R-LANG": 10,
+    "R-REASON": 31
+   },
    "partial_credit": 0.7009
+  },
+  {
+   "model": "claude-opus-5-5",
+   "provider": "anthropic",
+   "tier": "large",
+   "env": "support",
+   "sample": "full",
+   "harness_commit": "ed78addcd557",
+   "date": "2026-10-30",
+   "date_basis": "file-modified",
+   "source": "support-anthropic-opus-5-5-full.json",
+   "origin": "navital",
+   "split": "all",
+   "n": 76,
+   "pass_at_1": 0.7105,
+   "strict_pass_at_1": 0.7105,
+   "k": 1,
+   "pass_pow_k": 0.7105,
+   "format_fail": 0.0,
+   "errors": 0.0,
+   "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTIONS": 5,
+    "R-DECISION": 6,
+    "R-FORBIDDEN": 10,
+    "R-LANG": 3,
+    "R-REASON": 10
+   },
+   "partial_credit": 0.9206
   },
   {
    "model": "claude-sonnet-5-5",
@@ -621,6 +984,14 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTIONS": 5,
+    "R-AMOUNT": 4,
+    "R-DECISION": 6,
+    "R-FORBIDDEN": 6,
+    "R-LANG": 2,
+    "R-REASON": 15
+   },
    "partial_credit": 0.9101
   },
   {
@@ -643,6 +1014,14 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTIONS": 33,
+    "R-AMOUNT": 25,
+    "R-DECISION": 38,
+    "R-FORBIDDEN": 50,
+    "R-LANG": 1,
+    "R-REASON": 47
+   },
    "partial_credit": 0.5456
   },
   {
@@ -665,6 +1044,14 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTIONS": 8,
+    "R-AMOUNT": 6,
+    "R-DECISION": 10,
+    "R-FORBIDDEN": 19,
+    "R-LANG": 27,
+    "R-REASON": 25
+   },
    "partial_credit": 0.7741
   },
   {
@@ -687,6 +1074,13 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTIONS": 4,
+    "R-DECISION": 2,
+    "R-FORBIDDEN": 6,
+    "R-LANG": 3,
+    "R-REASON": 5
+   },
    "partial_credit": 0.7533
   },
   {
@@ -709,6 +1103,14 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTIONS": 5,
+    "R-AMOUNT": 3,
+    "R-DECISION": 2,
+    "R-FORBIDDEN": 4,
+    "R-LANG": 5,
+    "R-REASON": 4
+   },
    "partial_credit": 0.7267
   },
   {
@@ -731,6 +1133,13 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTIONS": 7,
+    "R-AMOUNT": 4,
+    "R-DECISION": 6,
+    "R-FORBIDDEN": 9,
+    "R-REASON": 9
+   },
    "partial_credit": 0.5756
   },
   {
@@ -753,6 +1162,13 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTIONS": 1,
+    "R-AMOUNT": 1,
+    "R-FORBIDDEN": 1,
+    "R-LANG": 1,
+    "R-REASON": 2
+   },
    "partial_credit": 0.7933
   },
   {
@@ -775,6 +1191,13 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTIONS": 1,
+    "R-AMOUNT": 1,
+    "R-FORBIDDEN": 2,
+    "R-LANG": 4,
+    "R-REASON": 3
+   },
    "partial_credit": 0.7625
   },
   {
@@ -797,7 +1220,44 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTIONS": 19,
+    "R-AMOUNT": 3,
+    "R-DECISION": 14,
+    "R-FORBIDDEN": 24,
+    "R-LANG": 8,
+    "R-REASON": 20
+   },
    "partial_credit": 0.6867
+  },
+  {
+   "model": "claude-opus-5-5",
+   "provider": "anthropic",
+   "tier": "large",
+   "env": "support",
+   "sample": "full",
+   "harness_commit": "ed78addcd557",
+   "date": "2026-10-30",
+   "date_basis": "file-modified",
+   "source": "support-anthropic-opus-5-5-full.json",
+   "origin": "navital",
+   "split": "core",
+   "n": 50,
+   "pass_at_1": 0.7,
+   "strict_pass_at_1": 0.7,
+   "k": 1,
+   "pass_pow_k": 0.7,
+   "format_fail": 0.0,
+   "errors": 0.0,
+   "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTIONS": 3,
+    "R-DECISION": 4,
+    "R-FORBIDDEN": 6,
+    "R-LANG": 3,
+    "R-REASON": 7
+   },
+   "partial_credit": 0.918
   },
   {
    "model": "claude-sonnet-5-5",
@@ -819,6 +1279,14 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTIONS": 3,
+    "R-AMOUNT": 3,
+    "R-DECISION": 4,
+    "R-FORBIDDEN": 3,
+    "R-LANG": 2,
+    "R-REASON": 10
+   },
    "partial_credit": 0.91
   },
   {
@@ -841,6 +1309,14 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTIONS": 21,
+    "R-AMOUNT": 15,
+    "R-DECISION": 22,
+    "R-FORBIDDEN": 30,
+    "R-LANG": 1,
+    "R-REASON": 27
+   },
    "partial_credit": 0.5853
   },
   {
@@ -863,6 +1339,14 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTIONS": 5,
+    "R-AMOUNT": 4,
+    "R-DECISION": 7,
+    "R-FORBIDDEN": 13,
+    "R-LANG": 21,
+    "R-REASON": 16
+   },
    "partial_credit": 0.7613
   },
   {
@@ -885,6 +1369,11 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-DECISION": 1,
+    "R-LANG": 13,
+    "R-REASON": 8
+   },
    "partial_credit": 0.7611
   },
   {
@@ -907,6 +1396,12 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-DECISION": 1,
+    "R-FORBIDDEN": 1,
+    "R-LANG": 14,
+    "R-REASON": 9
+   },
    "partial_credit": 0.7296
   },
   {
@@ -929,7 +1424,43 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTIONS": 10,
+    "R-AMOUNT": 3,
+    "R-DECISION": 3,
+    "R-FORBIDDEN": 12,
+    "R-LANG": 2,
+    "R-REASON": 11
+   },
    "partial_credit": 0.7282
+  },
+  {
+   "model": "claude-opus-5-5",
+   "provider": "anthropic",
+   "tier": "large",
+   "env": "support",
+   "sample": "full",
+   "harness_commit": "ed78addcd557",
+   "date": "2026-10-30",
+   "date_basis": "file-modified",
+   "source": "support-anthropic-opus-5-5-full.json",
+   "origin": "navital",
+   "split": "experimental",
+   "n": 26,
+   "pass_at_1": 0.7308,
+   "strict_pass_at_1": 0.7308,
+   "k": 1,
+   "pass_pow_k": 0.7308,
+   "format_fail": 0.0,
+   "errors": 0.0,
+   "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTIONS": 2,
+    "R-DECISION": 2,
+    "R-FORBIDDEN": 4,
+    "R-REASON": 3
+   },
+   "partial_credit": 0.9256
   },
   {
    "model": "claude-sonnet-5-5",
@@ -951,6 +1482,13 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTIONS": 2,
+    "R-AMOUNT": 1,
+    "R-DECISION": 2,
+    "R-FORBIDDEN": 3,
+    "R-REASON": 5
+   },
    "partial_credit": 0.9103
   },
   {
@@ -973,6 +1511,13 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTIONS": 12,
+    "R-AMOUNT": 10,
+    "R-DECISION": 16,
+    "R-FORBIDDEN": 20,
+    "R-REASON": 20
+   },
    "partial_credit": 0.4692
   },
   {
@@ -995,6 +1540,14 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTIONS": 3,
+    "R-AMOUNT": 2,
+    "R-DECISION": 3,
+    "R-FORBIDDEN": 6,
+    "R-LANG": 6,
+    "R-REASON": 9
+   },
    "partial_credit": 0.7987
   },
   {
@@ -1017,7 +1570,52 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACC": 1,
+    "R-ALT": 1,
+    "R-AVAIL": 1,
+    "R-BUD": 4,
+    "R-CONN": 24,
+    "R-DATE": 30,
+    "R-DIET": 3,
+    "R-HRS": 1,
+    "R-INFEASIBLE": 3,
+    "R-OPEN": 13,
+    "R-REST": 1,
+    "R-ROUTE": 5,
+    "R-SEASON": 2
+   },
    "partial_credit": 0.7276
+  },
+  {
+   "model": "claude-opus-5-5",
+   "provider": "anthropic",
+   "tier": "large",
+   "env": "trip",
+   "sample": "full",
+   "harness_commit": "ed78addcd557",
+   "date": "2026-10-30",
+   "date_basis": "file-modified",
+   "source": "trip-anthropic-opus-5-5-full.json",
+   "origin": "navital",
+   "split": "all",
+   "n": 55,
+   "pass_at_1": 0.5818,
+   "strict_pass_at_1": 0.5636,
+   "k": 1,
+   "pass_pow_k": 0.5818,
+   "format_fail": 0.0,
+   "errors": 0.0,
+   "truncated_tasks": 0,
+   "rule_failures": {
+    "R-CONN": 5,
+    "R-DATE": 18,
+    "R-DIET": 1,
+    "R-INFEASIBLE": 3,
+    "R-OCC": 3,
+    "R-ROUTE": 5
+   },
+   "partial_credit": 0.8729
   },
   {
    "model": "claude-sonnet-5-5",
@@ -1039,6 +1637,16 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACC": 1,
+    "R-CONN": 3,
+    "R-DATE": 18,
+    "R-DIET": 1,
+    "R-INFEASIBLE": 1,
+    "R-OCC": 3,
+    "R-OPEN": 1,
+    "R-ROUTE": 7
+   },
    "partial_credit": 0.9204
   },
   {
@@ -1061,6 +1669,22 @@
    "format_fail": 0.0727,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACC": 1,
+    "R-ALT": 1,
+    "R-AVAIL": 6,
+    "R-BUD": 7,
+    "R-CONN": 27,
+    "R-DATE": 21,
+    "R-DIET": 5,
+    "R-FMT": 4,
+    "R-INFEASIBLE": 20,
+    "R-OCC": 8,
+    "R-OPEN": 20,
+    "R-REST": 1,
+    "R-ROUTE": 2,
+    "R-SEASON": 2
+   },
    "partial_credit": 0.2826
   },
   {
@@ -1083,6 +1707,21 @@
    "format_fail": 0.1273,
    "errors": 0.0,
    "truncated_tasks": 9,
+   "rule_failures": {
+    "R-ACC": 1,
+    "R-AVAIL": 5,
+    "R-BUD": 3,
+    "R-CONN": 23,
+    "R-DATE": 19,
+    "R-DIET": 2,
+    "R-FMT": 1,
+    "R-INFEASIBLE": 8,
+    "R-OCC": 5,
+    "R-OPEN": 12,
+    "R-QUOTA": 2,
+    "R-ROUTE": 2,
+    "R-SEASON": 1
+   },
    "partial_credit": 0.5393
   },
   {
@@ -1105,6 +1744,17 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-AVAIL": 1,
+    "R-BUD": 1,
+    "R-CONN": 6,
+    "R-DATE": 10,
+    "R-INFEASIBLE": 1,
+    "R-OPEN": 3,
+    "R-REST": 1,
+    "R-ROUTE": 1,
+    "R-SEASON": 2
+   },
    "partial_credit": 0.6132
   },
   {
@@ -1127,6 +1777,11 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-DATE": 4,
+    "R-OCC": 1,
+    "R-ROUTE": 1
+   },
    "partial_credit": 0.9597
   },
   {
@@ -1149,6 +1804,16 @@
    "format_fail": 0.0667,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-BUD": 3,
+    "R-CONN": 7,
+    "R-DATE": 11,
+    "R-FMT": 1,
+    "R-OCC": 1,
+    "R-OPEN": 2,
+    "R-ROUTE": 1,
+    "R-SEASON": 1
+   },
    "partial_credit": 0.5771
   },
   {
@@ -1171,6 +1836,18 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACC": 1,
+    "R-AVAIL": 1,
+    "R-BUD": 1,
+    "R-CONN": 7,
+    "R-DATE": 6,
+    "R-DIET": 1,
+    "R-INFEASIBLE": 5,
+    "R-OCC": 2,
+    "R-OPEN": 5,
+    "R-REST": 1
+   },
    "partial_credit": 0.4058
   },
   {
@@ -1193,6 +1870,13 @@
    "format_fail": 0.125,
    "errors": 0.0,
    "truncated_tasks": 1,
+   "rule_failures": {
+    "R-AVAIL": 2,
+    "R-CONN": 6,
+    "R-DATE": 4,
+    "R-OCC": 1,
+    "R-OPEN": 1
+   },
    "partial_credit": 0.6973
   },
   {
@@ -1215,6 +1899,11 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-CONN": 3,
+    "R-DATE": 1,
+    "R-OPEN": 4
+   },
    "partial_credit": 0.9506
   },
   {
@@ -1237,6 +1926,14 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-AVAIL": 1,
+    "R-BUD": 1,
+    "R-CONN": 11,
+    "R-DATE": 6,
+    "R-INFEASIBLE": 4,
+    "R-OPEN": 5
+   },
    "partial_credit": 0.586
   },
   {
@@ -1259,7 +1956,46 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTION": 20,
+    "R-AUTOCOMP": 10,
+    "R-CAP": 3,
+    "R-COMP": 10,
+    "R-DAYS": 10,
+    "R-DEBIT-APPROVAL": 4,
+    "R-EFFECTS": 9,
+    "R-FORBIDDEN": 6,
+    "R-NOPROMISE": 5,
+    "R-TAT": 10,
+    "R-TYPE": 10
+   },
    "partial_credit": 0.674
+  },
+  {
+   "model": "claude-opus-5-5",
+   "provider": "anthropic",
+   "tier": "large",
+   "env": "upi",
+   "sample": "full",
+   "harness_commit": "ed78addcd557",
+   "date": "2026-10-30",
+   "date_basis": "file-modified",
+   "source": "upi-anthropic-opus-5-5-full.json",
+   "origin": "navital",
+   "split": "all",
+   "n": 50,
+   "pass_at_1": 0.78,
+   "strict_pass_at_1": 0.78,
+   "k": 1,
+   "pass_pow_k": 0.78,
+   "format_fail": 0.0,
+   "errors": 0.0,
+   "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTION": 11,
+    "R-EFFECTS": 2
+   },
+   "partial_credit": 0.94
   },
   {
    "model": "claude-sonnet-5-5",
@@ -1281,6 +2017,12 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTION": 12,
+    "R-DEBIT-APPROVAL": 1,
+    "R-EFFECTS": 2,
+    "R-FORBIDDEN": 4
+   },
    "partial_credit": 0.915
   },
   {
@@ -1303,6 +2045,19 @@
    "format_fail": 0.16,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTION": 18,
+    "R-AUTOCOMP": 10,
+    "R-CAP": 3,
+    "R-COMP": 10,
+    "R-DAYS": 10,
+    "R-DEBIT-APPROVAL": 2,
+    "R-EFFECTS": 12,
+    "R-FORBIDDEN": 15,
+    "R-NOPROMISE": 5,
+    "R-TAT": 10,
+    "R-TYPE": 10
+   },
    "partial_credit": 0.4717
   },
   {
@@ -1325,6 +2080,19 @@
    "format_fail": 0.06,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTION": 11,
+    "R-AUTOCOMP": 2,
+    "R-CAP": 3,
+    "R-COMP": 2,
+    "R-DAYS": 3,
+    "R-DEBIT-APPROVAL": 2,
+    "R-EFFECTS": 8,
+    "R-FORBIDDEN": 4,
+    "R-NOPROMISE": 2,
+    "R-TAT": 2,
+    "R-TYPE": 3
+   },
    "partial_credit": 0.7705
   },
   {
@@ -1347,6 +2115,19 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTION": 5,
+    "R-AUTOCOMP": 2,
+    "R-CAP": 2,
+    "R-COMP": 2,
+    "R-DAYS": 2,
+    "R-DEBIT-APPROVAL": 2,
+    "R-EFFECTS": 3,
+    "R-FORBIDDEN": 2,
+    "R-NOPROMISE": 2,
+    "R-TAT": 2,
+    "R-TYPE": 2
+   },
    "partial_credit": 0.6911
   },
   {
@@ -1369,6 +2150,7 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": null,
    "partial_credit": 0.9422
   },
   {
@@ -1391,6 +2173,10 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTION": 2,
+    "R-FORBIDDEN": 2
+   },
    "partial_credit": 0.9289
   },
   {
@@ -1413,6 +2199,12 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTION": 4,
+    "R-CAP": 1,
+    "R-EFFECTS": 2,
+    "R-FORBIDDEN": 4
+   },
    "partial_credit": 0.8656
   },
   {
@@ -1435,6 +2227,19 @@
    "format_fail": 0.0667,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTION": 6,
+    "R-AUTOCOMP": 2,
+    "R-CAP": 1,
+    "R-COMP": 2,
+    "R-DAYS": 2,
+    "R-DEBIT-APPROVAL": 1,
+    "R-EFFECTS": 7,
+    "R-FORBIDDEN": 7,
+    "R-NOPROMISE": 2,
+    "R-TAT": 2,
+    "R-TYPE": 2
+   },
    "partial_credit": 0.4633
   },
   {
@@ -1457,6 +2262,13 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTION": 2,
+    "R-CAP": 1,
+    "R-DAYS": 1,
+    "R-EFFECTS": 2,
+    "R-NOPROMISE": 1
+   },
    "partial_credit": 0.7615
   },
   {
@@ -1479,6 +2291,17 @@
    "format_fail": 0.0,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTION": 4,
+    "R-AUTOCOMP": 2,
+    "R-COMP": 2,
+    "R-DAYS": 2,
+    "R-EFFECTS": 1,
+    "R-FORBIDDEN": 1,
+    "R-NOPROMISE": 3,
+    "R-TAT": 2,
+    "R-TYPE": 2
+   },
    "partial_credit": 0.8287
   },
   {
@@ -1501,6 +2324,17 @@
    "format_fail": 0.2778,
    "errors": 0.0,
    "truncated_tasks": 0,
+   "rule_failures": {
+    "R-ACTION": 3,
+    "R-AUTOCOMP": 1,
+    "R-COMP": 1,
+    "R-DAYS": 1,
+    "R-EFFECTS": 1,
+    "R-FORBIDDEN": 2,
+    "R-NOPROMISE": 3,
+    "R-TAT": 1,
+    "R-TYPE": 1
+   },
    "partial_credit": 0.5856
   }
  ],

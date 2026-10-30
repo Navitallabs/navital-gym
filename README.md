@@ -80,13 +80,14 @@ Pass@1 on deterministic stratified samples or whole splits (k=1, one run per cel
 | openai/gpt-oss-20b | - | 0.87 | - | - | - | - | - | 1.00 | 0.73 | - |
 | sarvam-105b | 0.54 | 0.95 | 1.00 | 0.87 | 0.77 | 0.77 | - | 1.00 | - | - |
 
-**Larger model, for reference (what a strong model reaches)**
+**Larger models, for reference (what strong models reach)**
 
 | model | trip | form | form multi-document | gst | support | upi | trip easy | gst easy | support easy | upi easy |
 |---|---|---|---|---|---|---|---|---|---|---|
+| claude-opus-5-5 | 0.58 (n=55) | 1.00 (n=50) | 1.00 (n=40) | 0.98 (n=50) | 0.71 (n=76) | 0.78 (n=50) | - | - | - | - |
 | claude-sonnet-5-5 | 0.58 (n=55) | 1.00 (n=50) | 1.00 (n=40) | 1.00 (n=50) | 0.66 (n=76) | 0.68 (n=50) | - | - | - | - |
 
-Most of the models people will test are small or mid-size, so they come first. Many score low: that is the point of a hard benchmark, but a cell near zero says little, so read partial credit next to it. Samples are small and these are not the strongest agents available; they show that the environments separate models, not a leaderboard. Task difficulty labels are designer intent, not calibrated.
+Most of the models people will test are small or mid-size, so they come first. Many score low: that is the point of a hard benchmark, but a cell near zero says little, so read partial credit next to it. Samples are small and the small and mid-size models above are not the strongest agents available; these results show that the environments separate models, not a leaderboard. Task difficulty labels are designer intent, not calibrated.
 <!-- RESULTS:END -->
 
 ## Build your own env
