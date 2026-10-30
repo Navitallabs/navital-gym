@@ -21,13 +21,13 @@ Task prompts and structured parameters for the environments in https://github.co
 Environments: {envs}.
 
 **Simplified rules, synthetic data.** Every task uses a documented, simplified version of Indian practice and synthetic data; nothing here states current law, railway, bank or tax rules. Not affiliated with or endorsed by NPCI, RBI, GSTN / CBIC, IRCTC / Indian Railways or any bank or government body. Not financial or tax advice.
-**No answers here.** Gold answers, expected actions, expected feasibility and solver notes are not part of this dataset; grade with the graders in the repository (`navital-gym run`).
+**No answers here.** Gold answers, expected actions, expected feasibility and solver notes are not part of this dataset; grade with the graders in the repository (`navital-gym run`). The full task files, answers included, are public in the GitHub repository.
 Each env's README in the repository states its rules, sources and "as of" date. Run the tasks with `pip install navital-gym` and `navital-gym run --env <name> --agent <agent>`.
 """
 
 STRIP_TOP = ("gold_answer", "gold_actions", "forbidden_actions", "expected_feasible", "binding_constraint", "traps", "grader_notes")
 STRIP_META = ("gold_answer", "forbidden_actions", "binding_sets", "design_intent_binding", "design_intent_feasible", "design_notes", "oracle_plan_cost", "solver_note", "review_status")
-STRIP_EXTRA = {"support": ("family", "kind")}       # support scenario names ("return_ineligible", "cancel_after_ship") state the expected decision
+STRIP_EXTRA = {"support": ("family", "kind", "rules")}       # support scenario names ("return_ineligible", "cancel_after_ship") state the expected decision; the per-task rule list (R-AMOUNT, R-PRIVACY, R-ANSWER) gives it away too
 
 def strip_row(row: dict, env: str) -> dict:
     """One task row without any answer field (top level and meta)."""

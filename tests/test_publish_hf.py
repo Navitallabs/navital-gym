@@ -20,6 +20,7 @@ class PublishHF(unittest.TestCase):
         r = json.loads(open(os.path.join(ROOT, "navital_gym", "envs", "support", "tasks.jsonl")).readline())
         s = H.strip_row(r, "support")
         self.assertNotIn("family", s); self.assertNotIn("kind", s.get("meta", {}))
+        self.assertNotIn("rules", s)                 # R-AMOUNT / R-PRIVACY / R-ANSWER name the outcome
 
     def test_dry_run_prints_the_stripped_list_and_uploads_nothing(self):
         out = subprocess.run([sys.executable, os.path.join(ROOT, "scripts", "publish_hf.py")], capture_output=True, text=True)
