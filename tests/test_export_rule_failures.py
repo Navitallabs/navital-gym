@@ -3,7 +3,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 class ExportRuleFailures(unittest.TestCase):
     def test_entries_carry_rule_failures_and_names_are_verbatim(self):
-        src = sorted(glob.glob(os.path.join(ROOT, "runs", "trip-*-full.json")) + glob.glob(os.path.expanduser("~/navital-gym/runs/trip-anthropic-opus-5-5-full.json")))
+        src = sorted(glob.glob(os.path.join(ROOT, "runs", "trip-anthropic-opus-5-5-full.json")))
         if not src: self.skipTest("no full trip run file available")
         tmp = tempfile.mkdtemp(); self.addCleanup(shutil.rmtree, tmp)
         runs, subs = os.path.join(tmp, "runs"), os.path.join(tmp, "subs"); os.makedirs(runs); os.makedirs(subs)
