@@ -36,12 +36,21 @@ class Inspect(unittest.TestCase):
 class Verifiers(unittest.TestCase):
     def grade(self, calls, final):
         from navital_gym.adapters.verifiers_env import NavitalTask
-        msgs = []
+        msgs, results = [], []
         if calls:
-            msgs.append(types.SimpleNamespace(tool_calls=[types.SimpleNamespace(name=n, arguments=json.dumps(a)) for n, a in calls], content=""))
+            msgs.append(types.SimpleNamespace(tool_calls=[types.SimpleNamespace(id=f"c{i}", name=n, arguments=json.dumps(a)) for i, (n, a) in enumerate(calls)], content=""))
+            results = [types.SimpleNamespace(tool_call_id=f"c{i}") for i in range(len(calls))]
         msgs.append(types.SimpleNamespace(tool_calls=None, content=final))
-        trace = types.SimpleNamespace(last_reply=final, assistant_messages=msgs)
+        trace = types.SimpleNamespace(last_reply=final, assistant_messages=msgs, tool_messages=results)
         return NavitalTask._grade(types.SimpleNamespace(data=types.SimpleNamespace(env_name="upi", id="IN-UPI-001")), trace)
+
+    def test_a_call_without_a_tool_result_was_never_executed(self):
+        """Security review: only calls with a matching tool result count; a call emitted in the final message, never run, earns nothing."""
+        from navital_gym.adapters.verifiers_env import NavitalTask
+        final = types.SimpleNamespace(tool_calls=[types.SimpleNamespace(id="late", name="initiate_payment", arguments=json.dumps(PAY))], content=HONEST)
+        trace = types.SimpleNamespace(last_reply=HONEST, assistant_messages=[final], tool_messages=[])
+        res = NavitalTask._grade(types.SimpleNamespace(data=types.SimpleNamespace(env_name="upi", id="IN-UPI-001")), trace)
+        self.assertFalse(res["solved"])
 
     def test_an_executed_payment_is_credited_without_a_claimed_list(self):
         self.assertTrue(self.grade([("initiate_payment", PAY)], HONEST)["solved"])

@@ -78,6 +78,13 @@ class NavitalToolset(vf.Toolset[vf.ToolsetConfig]):
         return CallToolResult(content=[TextContent(type="text", text=json.dumps(res))], is_error="error" in res)
 
 
+def executed_calls(trace) -> list[tuple[str, dict]]:
+    """The tool calls the rollout really executed: a call counts only if the trace holds a tool RESULT with the same call id (a call the model merely
+    emitted, for example in its final message, was never run). A trace without a log gives no calls, so nothing is credited."""
+    done = {m.tool_call_id for m in (getattr(trace, "tool_messages", None) or [])}
+    return [(c.name, parse_arguments(c.arguments)) for m in (getattr(trace, "assistant_messages", None) or []) for c in (m.tool_calls or []) if getattr(c, "id", None) in done]
+
+
 class NavitalTask(vf.Task[NavitalData]):
     @classmethod
     def toolsets(cls, config) -> list[vf.Toolset]:
@@ -86,8 +93,7 @@ class NavitalTask(vf.Task[NavitalData]):
     def _grade(self, trace) -> dict:
         env = _navital_env(self.data.env_name)
         # the tool server's world lives in another process: the host replays the tool calls the model really made, on a fresh world, and grades that
-        calls = [(c.name, parse_arguments(c.arguments)) for m in trace.assistant_messages for c in (m.tool_calls or [])]
-        return grade_executed(env, self.data.id, extract_json(trace.last_reply or ""), calls)  # hidden fields live only host-side, in env
+        return grade_executed(env, self.data.id, extract_json(trace.last_reply or ""), executed_calls(trace))  # hidden fields live only host-side, in env
 
     @vf.reward
     async def navital_score(self, trace) -> float:
