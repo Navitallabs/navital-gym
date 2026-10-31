@@ -25,6 +25,7 @@ Most people testing will use models like these, so they come first. Many score l
 | gst | claude-haiku-4-5 (anthropic) | 50 | 0.84 | 0.84 | 0% | 0% | 0 | 0.93 | 0.63 | - | 1543b5103be5 |
 | gst | sarvam-105b (sarvam) | 50 | 0.82 | 0.82 | 0% | 0% | 0 | 0.91 | 0.00 | - | 1543b5103be5 |
 | support | claude-haiku-4-5 (anthropic) | 76 | 0.42 | 0.39 | 0% | 0% | 0 | 0.74 | 1.08 | - | 1543b5103be5 |
+| support (core only) | gemini-3.1-flash-lite (gemini) | 50 | 0.42 | 0.42 | 0% | 0% | 0 | 0.75 | 0.00 | - | 1543b5103be5 |
 | support | sarvam-105b (sarvam) | 76 | 0.54 | 0.54 | 0% | 0% | 0 | 0.87 | 0.00 | - | 1543b5103be5 |
 | trip | claude-haiku-4-5 (anthropic) | 55 | 0.35 | 0.33 | 7% | 0% | 0 | 0.66 | 9.87 | - | 1543b5103be5 |
 | upi | claude-haiku-4-5 (anthropic) | 50 | 0.52 | 0.52 | 0% | 0% | 0 | 0.73 | 0.95 | - | 1543b5103be5 |
@@ -57,8 +58,10 @@ Tasks solved / tried by the designers' difficulty label (designer intent, not ca
 | model | difficulty 1-2 | difficulty 3 | difficulty 4-5 |
 |---|---|---|---|
 | claude-haiku-4-5 | 35/65 | 77/117 | 93/139 |
-| gemini-3.1-flash-lite | 10/11 | 9/14 | 20/25 |
+| gemini-3.1-flash-lite | 17/31 | 19/35 | 24/34 |
 | sarvam-105b | 39/54 | 69/90 | 92/122 |
+
+**Core-only rows.** support (core only) / gemini-3.1-flash-lite: the 50 core tasks only, experimental 26 not run: free-tier quota. A core-only row is not comparable with a full-split row of the same environment.
 
 ## Not shown
 

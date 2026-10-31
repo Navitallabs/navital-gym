@@ -7,6 +7,7 @@ Regenerate whenever run files change (after scripts/regrade.py). Only run files 
 elsewhere (or never regraded) are skipped and listed on stderr. Incomplete runs (fewer tasks than their sample size) are skipped. A complete full-set run replaces the
 sample run of the same model and environment (n on every bar says which). --require-single-commit exits 2 if anything had to be skipped for its commit."""
 import glob, importlib, json, os, sys, time
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
@@ -47,6 +48,11 @@ def load():
             summ = d["summary"]
             if d.get("partial") or summ["errors"] >= 0.5:
                 continue
+            if sample == "full":                     # a full-set row must hold every task of the standard split (a run cut short by a quota is not a bar)
+                import runfiles
+                need = len(runfiles.env_tasks(env))
+                if summ["tasks"] < need:
+                    SKIPPED.append((os.path.basename(path), f"incomplete: {summ['tasks']} of {need} tasks")); continue
             if sample != "full" and summ.get("answered", summ["tasks"]) < int(sample):
                 SKIPPED.append((os.path.basename(path), f"incomplete: {summ['tasks']} of {sample} tasks")); continue
             cands.append({"env": env, "agent": agent, "model": d.get("settings", {}).get("model", agent), "summary": summ, "tasks": d["tasks"], "sample": sample, "file": os.path.basename(path),

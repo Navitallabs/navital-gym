@@ -18,8 +18,16 @@ for r in sorted(allrows, key=lambda r: (r["kind"] == "sample", r["file"])):     
     if not ok:
         hidden.append(r); continue
     shown.setdefault(key, r)                                                          # the first complete row wins (the whole split over a sample)
-rows = list(shown.values())
-env_label = lambda r: {"form_multidoc": "form multi-document"}.get(r["env"], r["env"]) + (" (easy)" if r["tier"] == "easy" else "")
+# A standard-set run cut short (a free-tier daily limit) whose CORE split is complete is shown as a labelled core-only row, so the finished part is not lost; the rest stays under 'Not shown'.
+core_only = []
+for r in hidden:
+    sc = (r["summary"].get("by_split") or {}).get("core")
+    if r["kind"] != "full" or not sc or r.get("complete") or (r["env"], r["tier"], r["model"]) in shown: continue
+    ids = [k for k, t in runfiles.env_tasks(r["env"]).items() if (t.meta or {}).get("split") == "core"]
+    if sc["tasks"] == len(ids) and sc.get("answered", sc["tasks"]) == len(ids) and sc["errors"] < ERR and all(k in r["tasks"] for k in ids):
+        core_only.append(dict(r, summary=sc, tasks={k: r["tasks"][k] for k in ids}, core_only=True, n=len(ids)))
+rows = list(shown.values()) + core_only
+env_label = lambda r: {"form_multidoc": "form multi-document"}.get(r["env"], r["env"]) + (" (easy)" if r["tier"] == "easy" else "") + (" (core only)" if r.get("core_only") else "")
 print("# Baseline results\n")
 print("Each row is ONE run (k=1). The task count is in the table: a 15-task sample has a wide error bar (one task is 6.7 points) and a 5-task sample a very wide one. "
       "Easy and standard tasks are separate tiers. Columns: pass@1 = tasks solved by the first run (one format-repair retry is allowed); strict = solved with no repair retry; "
@@ -59,6 +67,8 @@ if buckets:
     for m in sorted(buckets):
         print(f"| {m} | " + " | ".join(f"{buckets[m][b][0]}/{buckets[m][b][1]}" for b in ("difficulty 1-2", "difficulty 3", "difficulty 4-5")) + " |")
     print()
+if core_only:
+    print("**Core-only rows.** " + "; ".join(f"{env_label(r)} / {r['model']}: the {len(r['tasks'])} core tasks only, experimental 26 not run: free-tier quota" for r in core_only) + ". A core-only row is not comparable with a full-split row of the same environment.\n")
 if hidden:
     print("## Not shown\n")
     print("Runs that are incomplete (still running, or cut short by a daily free-tier limit) or where at least a fifth of the tasks ended in provider errors say nothing yet about the model:\n")
