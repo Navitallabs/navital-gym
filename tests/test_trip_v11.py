@@ -124,7 +124,7 @@ class ToolInputs(unittest.TestCase):
     def test_search_hotels_rejects_bad_nights_without_crashing(self):
         from navital_gym.core.world import ToolError
         w = TripWorld(ENV.tasks["IN-TRIP-023"])
-        for bad in ("oops", float("inf"), float("nan"), [3], 2.5, None):
+        for bad in ("oops", float("inf"), float("nan"), [3], 2.5, None, True):
             with self.assertRaises(ToolError):
                 w.search_hotels("Goa", "2026-11-16", bad)
         self.assertTrue(w.search_hotels("Goa", "2026-11-16", 2))

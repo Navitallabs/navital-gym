@@ -275,6 +275,8 @@ class TripWorld(World):
     def search_hotels(self, city, check_in, nights):
         d = pdate(check_in)
         self._city(city)
+        if isinstance(nights, bool):                # True is not a number of nights
+            raise ToolError("nights must be a whole number from 1 to 14")
         try:
             n = int(nights)                     # "oops", inf, NaN or a list is a tool error, never a crash
         except (TypeError, ValueError, OverflowError):
