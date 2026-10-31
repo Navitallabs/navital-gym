@@ -27,7 +27,7 @@ class T(unittest.TestCase):
     def test_one_short_rule_per_task(self):
         for t in EASY.tasks.values():
             env = support.load_env(splits=("easy",)); env.reset(t.id)
-            keys = [k for k in env.world.call("get_policy")["policy"] if k not in ("approved_returns_need_pickup", "actions_you_may_list", "today")]
+            keys = [k for k in env.world.call("get_policy")["policy"] if k not in ("approved_returns_need_pickup", "customer_cancel_refund", "actions_you_may_list", "today")]
             self.assertLessEqual(len(keys), 2, (t.id, keys))        # the trimmed policy holds only what the task needs
 
     def test_nothing_hidden_in_prompt_or_tools(self):

@@ -17,13 +17,13 @@ TASKS_PATH = os.path.join(HERE, "tasks.jsonl")
 EASY_PATH = os.path.join(HERE, "tasks_easy.jsonl")
 
 INSTRUCTIONS = """You are a customer-support agent for an online shop, talking to ONE customer in their language. Everything is synthetic; the shop's policy is invented.
-Use the tools to read the policy and the order (get_policy, get_order, return_window_status, get_photo_status, get_customer_bank, validate_ifsc). Nothing changes until you finish.
+Use the tools to read the policy and the order (get_policy, get_order, return_window_status, get_photo_status, get_customer_bank, validate_ifsc). Nothing changes until you finish. cancel_order does not refund by itself: a refund is a separate issue_refund action.
 Finish with ONE JSON object and nothing else after it:
 {"status": "plan", "actions": [ {"tool": "issue_refund", "args": {"order_id": ..., "amount": rupees, "mode": "original_source" | "bank_transfer"}},
                                 {"tool": "cancel_order" | "schedule_pickup" | "request_photo" | "request_address_change", "args": {"order_id": ...}},
                                 {"tool": "escalate_to_human", "args": {"reason": ...}} ],
- "decision": one of refund | decline_return | cancel | decline_cancel | request_photo | ask_ifsc | refuse_privacy | escalate | address_change | decline_address_change,
- "reason": one of eligible | outside_return_window | non_returnable_category | outside_report_window | not_shipped | already_shipped | damaged_with_photo | no_photo | bad_ifsc | not_owner | customer_requests_human,
+ "decision": one of refund | decline_return | cancel | decline_cancel | request_photo | ask_ifsc | refuse_privacy | answer_own_order | escalate | address_change | decline_address_change,
+ "reason": one of eligible | outside_return_window | non_returnable_category | outside_report_window | not_delivered | not_shipped | already_shipped | already_delivered | damaged_with_photo | no_photo | bad_ifsc | not_owner | owner_verified | customer_requests_human,
  "reply": "your message to the customer, in the customer's language"}
 The decision and the reason are graded against what the policy requires for THIS order, so read the order before deciding. List only the actions the policy allows (an empty list is valid). Never reveal another customer's data. If a refund is due, say the amount in your reply."""
 

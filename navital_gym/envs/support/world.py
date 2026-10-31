@@ -32,6 +32,7 @@ class SupportWorld(World):
         for k in ("marker_words", "script_check"):   # grader-only: an agent that sees the marker list could game the language rule
             p.pop(k, None)
         p["approved_returns_need_pickup"] = True
+        p["customer_cancel_refund"] = "when the customer cancels a prepaid order that has not shipped, refund the item price only (the shipping fee is not refunded); cancel_order does not refund by itself"
         p["actions_you_may_list"] = ["issue_refund(order_id, amount, mode: original_source|bank_transfer)", "cancel_order(order_id)", "schedule_pickup(order_id)",
                                      "request_photo(order_id)", "request_address_change(order_id)", "escalate_to_human(reason)"]
         p["today"] = self.today

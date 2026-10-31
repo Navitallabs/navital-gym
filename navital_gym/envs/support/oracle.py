@@ -44,7 +44,7 @@ def solve(kind: str, world: dict, policy: dict) -> dict:
     elif kind == "damaged":
         within = o.get("delivered_on") and (today - dt.date.fromisoformat(o["delivered_on"])).days <= policy["damaged_report_window_days"]
         if within and world.get("photo_uploaded"):
-            out["actions"] = [act("issue_refund", oid, price + ship, "original_source")]; out["amount"] = price + ship; out["reply"] = "refund"; out["decision"], out["reason"] = "refund", "damaged_with_photo"
+            out["actions"] = [act("issue_refund", oid, price + ship, "original_source"), act("schedule_pickup", oid)]; out["amount"] = price + ship; out["reply"] = "refund"; out["decision"], out["reason"] = "refund", "damaged_with_photo"
         elif within:
             out["actions"] = [act("request_photo", oid)]; out["forbidden"] = {"issue_refund"}; out["reply"] = "request_photo"; out["decision"], out["reason"] = "request_photo", "no_photo"
         else:

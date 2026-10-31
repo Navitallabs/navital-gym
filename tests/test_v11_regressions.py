@@ -256,13 +256,10 @@ class Support(unittest.TestCase):
         sc = grade("support", "IN-SUP-001", FX["sup001_gptoss"])
         self.assertFalse(sc["rules"].get("R-AMOUNT", True))
 
-    def test_S7_refund_before_cancel_fails_actions_order(self):
-        """qa S7, IN-SUP-020: README says R-ACTIONS checks order. Fix: grade order (this test), or delete the README claim (then drop this test)."""
-        sub = json.loads(json.dumps(FX["sup020_opus"])); sub["actions"] = list(reversed(sub["actions"]))
-        sub["actions"][0]["args"]["amount"] = sub["actions"][0]["args"]["amount"]
-        for a in sub["actions"]:
-            if a["tool"] == "issue_refund": a["args"]["amount"] = 420
-        self.assertFalse(grade("support", "IN-SUP-020", sub)["rules"]["R-ACTIONS"])
+    def test_S7_order_is_not_claimed(self):
+        """qa S7: the README no longer says R-ACTIONS checks order (v1.1 chose the README fix the docstring allowed; the grader still ignores order)."""
+        from navital_gym.envs.support import RULES
+        self.assertIn("not checked", RULES["R-ACTIONS"].description)
 
 class Trip(unittest.TestCase):
     def test_T1_return_is_in_the_prompt_when_end_is_origin(self):
@@ -311,7 +308,7 @@ class Controls(unittest.TestCase):
     """Positive controls: pass on v1.0.1 AND v1.1 (the harness and the fixtures are sound; the fixes did not over-correct)."""
     def test_oracle_style_answers_still_solve(self):
         self.assertTrue(grade("upi", "IN-UPI-046", {"status": "plan", "answer": {"action": "done"}, "actions": [{"tool": "pay_with_lite", "args": {"amount": 300}}]})["solved"])
-        s = json.loads(json.dumps(FX["sup029_opus"])); s["actions"] = [a for a in s["actions"] if a["tool"] == "issue_refund"]
+        s = json.loads(json.dumps(FX["sup029_opus"]))   # v1.1: the refund AND the pickup the policy promises (backend edited this control; v1.0.1 wanted the refund alone)
         self.assertTrue(grade("support", "IN-SUP-029", s)["solved"])
         from navital_gym.envs.form import oracle
         t = ENVS["form"].tasks["IN-FORM-001"]
