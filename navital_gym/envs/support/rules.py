@@ -21,8 +21,11 @@ def norm_action(a):
         return (tool, None, None, None)
     oid = str(args.get("order_id")) if args.get("order_id") is not None else None
     if tool == "issue_refund":
-        try: amt = int(round(float(str(args.get("amount")).replace(",", ""))))
-        except (TypeError, ValueError): amt = None
+        # Exact, not rounded: 1899.49 is not 1899 (the oracle's amounts are whole rupees, and Decimal(1899) == 1899 hashes alike). NaN, infinity and junk are unreadable.
+        try:
+            amt = Decimal(str(args.get("amount")).replace(",", "").strip())
+            if not amt.is_finite(): amt = None
+        except (InvalidOperation, ValueError): amt = None
         mode = str(args.get("mode")) if args.get("mode") is not None else None
         return (tool, oid, amt, mode)
     return (tool, oid, None, None)
