@@ -77,12 +77,14 @@ class Grader:
             return Score(verdict="status must be 'plan' or 'infeasible'")
         passed = 0
         gate_fail = False
+        errored = []                      # rules that raised: reported by name, so a grader error is never read as an ordinary rule failure
         applicable = sorted(applicable, key=lambda r: not r.gate)     # gates first
         for r in applicable:
             try:
                 res = r.check(ctx)
             except Exception as e:   # a rule that cannot evaluate fails; it never crashes the grade
-                res = RuleResult(False, f"could not evaluate: {type(e).__name__}")
+                res = RuleResult(False, f"rule error: {r.id} raised {type(e).__name__} (counted as failed)")
+                errored.append(r.id)
             out.rules[r.id] = bool(res.passed); out.details[r.id] = res.detail
             passed += bool(res.passed)
             if r.gate and not res.passed:
@@ -103,6 +105,8 @@ class Grader:
             out.verdict = "plan given for an infeasible task"
         else:
             out.verdict = "solved" if out.solved else "failed: " + ", ".join(k for k, v in out.rules.items() if not v)
+            if errored:
+                out.verdict += " (rule error in " + ", ".join(errored) + ")"
         if self.soft:
             try: out.soft = self.soft(ctx)
             except Exception: out.soft = {}
