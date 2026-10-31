@@ -40,14 +40,34 @@ def numbers_in(reply: str) -> set:
         except ValueError: pass
     return out
 
-_RUPEE = r"(?:₹|(?<![a-z])(?:rs\.?|inr|rupees?)(?![a-z])|रुपये|रुपए|(?<![\u0900-\u097f])रु\.?(?![\u0900-\u097f])|ரூபாய்|টাকা)"
+# Currency markers. Latin words must not sit inside an identifier ("2500inr_code"); Indic stems allow the usual inflections (रुपयांचा, ரூபாய்க்கு) but must not start inside a longer word.
+_DEV, _BEN, _TAM = "\u0900-\u097f", "\u0980-\u09ff", "\u0b80-\u0bff"
+_RUPEE = (r"(?:₹"
+          r"|(?<![a-z_])(?:rs\.?|inr|rupees?|rupaye|rupaiye|rupiya|rupay)(?![a-z_])"
+          rf"|(?<![{_DEV}])(?:रु|रू)प(?:ये|ए|या|यों|यां)[{_DEV}]*"
+          rf"|(?<![{_DEV}])(?:रु|रू)\.?(?![{_DEV}])"
+          rf"|টাকা[{_BEN}]*|রুপি|রুপী"
+          rf"|ரூபாய்[{_TAM}]*|ரூ(?![{_TAM}])\.?)")
 _AMOUNT = r"(\d[\d,]*(?:\.\d+)?)"          # 1899, 1,899, 1899.00, 1899.99
+_SEP = r"(?:[-–—]|(?<![a-z])(?:to|se|tak)(?![a-z])|से)"      # a range: 1899-2500, 1899 to 2500
+
+def _dec(tok: str):
+    try: return Decimal(tok.replace(",", "").rstrip(","))
+    except InvalidOperation: return None
+
+def amounts_in(text: str) -> set:
+    """Every number in the text as an exact Decimal (1899.00 equals 1899, 1899.99 does not)."""
+    return {d for d in (_dec(t) for t in re.findall(_AMOUNT, to_ascii_digits(text))) if d is not None}
+
 def rupee_figures(reply: str) -> set:
-    """Exact (Decimal) numbers the reply attaches to a rupee marker (before or after it): 'Rs 480', '₹480', '480 रुपये', '1899.00 रुपये'. Dates, days and order ids are not figures."""
+    """Exact (Decimal) numbers the reply attaches to a rupee marker, before or after it: 'Rs 480', '₹480', '480 रुपये', '1899.00 रुपये'; for a range ('₹1899-2500',
+    '2500 से 1899 रुपये') both ends count. Dates, days and order ids are not figures."""
     t = to_ascii_digits(reply).lower(); out = set()
-    for m in list(re.finditer(_RUPEE + r"\s*" + _AMOUNT, t)) + list(re.finditer(_AMOUNT + r"\s*" + _RUPEE, t)):
-        try: out.add(Decimal(m.group(1).replace(",", "").rstrip(",")))
-        except InvalidOperation: pass
+    for m in re.finditer(_RUPEE + r"\s*" + _AMOUNT, t): out.add(_dec(m.group(1)))
+    for m in re.finditer(_AMOUNT + r"\s*" + _RUPEE, t): out.add(_dec(m.group(1)))
+    for m in re.finditer(_RUPEE + r"\s*" + _AMOUNT + r"\s*" + _SEP + r"\s*" + _AMOUNT, t): out.update((_dec(m.group(1)), _dec(m.group(2))))
+    for m in re.finditer(_AMOUNT + r"\s*" + _SEP + r"\s*" + _AMOUNT + r"\s*" + _RUPEE, t): out.update((_dec(m.group(1)), _dec(m.group(2))))
+    out.discard(None)
     return out
 
 def _strip_entities(reply: str, order: dict) -> str:
@@ -137,12 +157,12 @@ class Amount(Rule):
     id, description = "R-AMOUNT", "reply states the refund amount, and no other rupee figure than the order's own (the refund, the price, the shipping fee, or a figure the customer wrote)"
     def check(self, ctx):
         want = expected(ctx)["amount"]; reply = ctx.sub["reply"]
-        if want not in numbers_in(reply):
+        if Decimal(want) not in amounts_in(reply):
             return RuleResult(False, "refund amount missing from the reply")
         o = ctx.task.params["world"]["order"]; price, ship = int(o["price"]), int(o["shipping_fee"])
         # The refund, the price and the shipping fee may be named (also as exact decimals: 1899.00 is 1899). Their sum is a figure on the order only where it IS the refund:
         # for a refund of the price alone, a reply promising price + shipping promises the wrong amount.
-        known = {Decimal(want), Decimal(price), Decimal(ship)} | {Decimal(n) for n in numbers_in(ctx.task.prompt)}
+        known = {Decimal(want), Decimal(price), Decimal(ship)} | amounts_in(ctx.task.prompt)
         stray = sorted(rupee_figures(reply) - known)
         return RuleResult(not stray, f"reply states a rupee figure that is not on the order: {stray}")
 

@@ -90,6 +90,28 @@ class AmountDecimalsAndTotals(unittest.TestCase):
         self.assertTrue(grade(t.to_dict(), s)["rules"]["R-AMOUNT"])
 
 
+class AmountMarkersAndRanges(unittest.TestCase):
+    """Review/Codex round 3 on IN-SUP-001 (refund 1899): wrong extra amounts written with other currency spellings, unmarked decimals, ranges."""
+    def verdict(self, reply):
+        t = ALL.tasks["IN-SUP-001"]; s = good(t); s["reply"] = reply
+        return grade(t.to_dict(), s)["rules"]["R-AMOUNT"]
+
+    def test_other_spellings_of_rupees_mark_a_wrong_figure(self):
+        for reply in ("आपका रिफंड ₹1899 है। अतिरिक्त 2500 रूपये मिलेंगे।", "₹1899 मिलेंगे, অতিরিক্ত ২৫০০ রুপি পাবেন", "₹1899; கூடுதலாக ரூ ௨௫௦௦",
+                      "₹1899 अतिरिक्त २५०० रुपयांचा बोनस", "Refund ₹1899 milega aur 2500 rupaye bonus"):
+            self.assertFalse(self.verdict(reply), reply)
+
+    def test_an_unmarked_wrong_decimal_does_not_satisfy_the_refund(self):
+        self.assertFalse(self.verdict("आपका रिफंड 1899.99 है।"))
+
+    def test_ranges_count_both_ends(self):
+        self.assertFalse(self.verdict("₹1899–2500")); self.assertFalse(self.verdict("₹1899 है; 2500–1899 रुपये")); self.assertFalse(self.verdict("₹1899 से 2500"))
+
+    def test_correct_replies_still_pass(self):
+        for reply in ("Reference code: 2500inr_code, refund ₹1899", "Refund 1899 rupaye milega.", "आपका रिफंड 1899.00 रुपये", "Rs 1,899.00", "Rs. 1899/-", "₹१८९९.००"):
+            self.assertTrue(self.verdict(reply), reply)
+
+
 class Pickup(unittest.TestCase):
     def test_a_damaged_refund_needs_the_pickup_the_policy_promises(self):
         t = next(t for t in TASKS if o_of(t)["reason"] == "damaged_with_photo")
