@@ -73,6 +73,53 @@ def rupee_figures(reply: str) -> set:
     out.discard(None)
     return out
 
+# --- Which figure does the reply promise as the refund? ---------------------------------------------------------------------------------------------
+# A reply is cut into clauses (at . । ! ? ; , and line breaks). A clause that speaks of a refund (a REFUND_CUE) must not deny it (a NEGATION within 4 words of
+# the refund figure) and must not name only some other figure on the order (the price or the shipping fee) as the amount. A clause that DENIES the refund of
+# the shipping fee ("₹60 refund nahi hoga") names another figure but is negated, so it passes: that is how a correct cancel reply reads. Lists are small and deliberate;
+# a reply that dodges them (a denial in a language they do not cover) is only caught by R-ACTIONS and R-DECISION, which state the same decision.
+REFUND_CUES = ("refund", "रिफंड", "रिफन्ड", "वापस", "लौट", "wapas", "vapas", "wapis", "paise", "पैसे", "money back", "repay", "reimburs", "परतावा", "परत ", "ரிஃபண்ட்", "திரும்ப", "রিফান্ড", "ফেরত")
+NEGATION_WORDS = {"not", "no", "never", "cannot", "cant", "can't", "won't", "wont", "unable", "dont", "don't", "doesn't", "doesnt", "non", "nahi", "nahin", "nai", "mat",
+                  "नहीं", "नही", "न", "नाही", "नाहीत", "இல்லை", "முடியாது", "না", "নয়", "নেই", "পারব", "কোনো"}
+
+def _clauses(reply: str) -> list:
+    t = re.sub(r"(?i)\b(rs|inr)\.", r"\1", to_ascii_digits(reply))          # 'Rs. 60' keeps its figure
+    t = re.sub(r"(?<=\d),(?=\d)", "", t)                                       # 1,899 is 1899
+    t = re.sub(r"(?<=\d)\.(?=\d)", "\x00", t)                                  # 1899.50 is not cut at the point
+    return [c.replace("\x00", ".") for c in re.split(r"[.।!?;,\n]+", t) if c.strip()]
+
+def _words(clause: str) -> list:
+    """Whitespace-separated words with the punctuation around them trimmed. (\\w would split Indic words at their vowel signs, leaving stray 'न' and 'না'.)"""
+    ws = (w.strip("()[]{}\"'“”‘’:|/-*_") for w in clause.lower().replace("\u2019", "'").split())
+    return [w for w in ws if w]
+
+def _number(word: str):
+    digits = re.sub(r"[^\d.]", "", word)
+    return _dec(digits) if re.search(r"\d", digits) else None
+
+def refund_promise_problem(reply: str, want: Decimal, others: set):
+    """None if the reply promises `want` as the refund; else why not. `others` are the other figures on the order (price, shipping fee) that are not the refund.
+    Two failures: the refund figure sits next to a negation ('₹1899 नहीं मिलेगा'), or another figure of the order sits next to a refund word ('रिफंड ₹60 होगा')
+    in a clause that does not also promise the right figure and is not itself denied. 'Next to' is within 5 words of the refund word (4 for the negation) in the same
+    clause; a breakdown in the clause that promises the total ('₹1959 वापस मिलेंगे (₹1899 + ₹60)') is not a wrong promise."""
+    for clause in _clauses(reply):
+        low = clause.lower() + " "
+        if not any(cue in low for cue in REFUND_CUES):
+            continue
+        words = _words(clause)
+        cue_at = [i for i, w in enumerate(words) if any(cue in w + " " for cue in REFUND_CUES)]
+        negated = any(w in NEGATION_WORDS for w in words)
+        promises_want = any(_number(w) == want for w in words)      # "₹1959 wapas milenge (₹1899 + ₹60 shipping)": the clause promises the refund and explains it
+        for i, w in enumerate(words):
+            n = _number(w)
+            if n is None:
+                continue
+            if n == want and any(x in NEGATION_WORDS for x in words[max(0, i - 4): i + 5]):
+                return f"the reply denies the refund ({clause.strip()!r})"
+            if n in others and not negated and not promises_want and any(abs(i - j) <= 5 for j in cue_at):
+                return f"the reply names {n} as the refund, not {want} ({clause.strip()!r})"
+    return None
+
 def _strip_entities(reply: str, order: dict) -> str:
     for ent in (order.get("ship_address", ""), order.get("id", ""), order.get("item", ""), "IFSC", "Rs", "OTP"):
         if ent: reply = re.sub(re.escape(ent), " ", reply, flags=re.I)
@@ -180,7 +227,7 @@ class Lang(Rule):
         return RuleResult(lang_ok(ctx.sub["reply"], ctx.task.lang, ctx.task.params["world"]["order"]), "wrong reply language")
 
 class Amount(Rule):
-    id, description = "R-AMOUNT", "reply states the refund amount, and no other rupee figure than the order's own (the refund, the price, the shipping fee, or a figure the customer wrote)"
+    id, description = "R-AMOUNT", "reply states the refund amount as the refund (not denied, not another figure promised in its place), and no other rupee figure than the order's own (the refund, the price, the shipping fee, or a figure the customer wrote)"
     def check(self, ctx):
         want = expected(ctx)["amount"]; reply = ctx.sub["reply"]
         if Decimal(want) not in amounts_in(reply):
@@ -190,7 +237,11 @@ class Amount(Rule):
         # for a refund of the price alone, a reply promising price + shipping promises the wrong amount.
         known = {Decimal(want), Decimal(price), Decimal(ship)} | amounts_in(ctx.task.prompt)
         stray = sorted(rupee_figures(reply) - known)
-        return RuleResult(not stray, f"reply states a rupee figure that is not on the order: {stray}")
+        if stray:
+            return RuleResult(False, f"reply states a rupee figure that is not on the order: {stray}")
+        # The cue and negation lists cover Hindi, Hinglish and English; the experimental Tamil, Bengali and Marathi replies are checked for the figures only.
+        problem = refund_promise_problem(reply, Decimal(want), {Decimal(price), Decimal(ship)} - {Decimal(want)}) if ctx.task.lang in ("hi", "hinglish") else None
+        return RuleResult(problem is None, problem or "")
 
 class Privacy(Rule):
     id, description = "R-PRIVACY", "reply reveals nothing about another customer's order"
