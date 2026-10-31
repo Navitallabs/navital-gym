@@ -37,8 +37,8 @@ class Field(Rule):
         if want is None:
             return RuleResult(self.field in ans and ans[self.field] is None, f"{self.field} must be null")
         got = ans.get(self.field)
-        if self.field == "governing_act" and isinstance(got, int) and not isinstance(got, bool):
-            got = str(got)      # 1961 / 2025 as a number is the same answer
+        if self.field in ("governing_act", "pin") and isinstance(got, int) and not isinstance(got, bool):
+            got = str(got)      # 1961 / 2025 or a PIN code written as a number is the same answer (the instructions say whole numbers as numbers)
         if isinstance(want, bool):
             return RuleResult(isinstance(got, bool) and got == want, self.field)
         if isinstance(want, int):
