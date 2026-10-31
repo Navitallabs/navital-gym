@@ -45,7 +45,7 @@ for pth in sys.argv[1].split(","):
 have = {e["model"] for e in json.load(open(sys.argv[2]))["entries"] if e["sample"] == "full" and e["split"] == "all"}
 seen = set(); rows = []
 for e in allb:
-    if e["model"] in have or e["split"] not in ("all", "") : continue
+    if e["model"] in have or e["split"] not in ("all", "", "easy"): continue
     k = (e["model"], e["env"], e["sample"])
     if k in seen: continue
     seen.add(k); rows.append(e)
