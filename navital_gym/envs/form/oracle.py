@@ -86,7 +86,9 @@ def fiscal(world: dict) -> dict:
     d = dt.date(yyyy, mm, dd); s = _fy_start(d)
     cand = [dt.date(s, 6, 15), dt.date(s, 9, 15), dt.date(s, 12, 15), dt.date(s + 1, 3, 15), dt.date(s + 1, 6, 15)]
     nxt = next(x for x in cand if x >= d)
-    return {"financial_year": f"{s}-{str(s + 1)[-2:]}", "assessment_year": f"{s + 1}-{str(s + 2)[-2:]}", "next_advance_tax_date": nxt.isoformat()}
+    act = "2025" if d >= dt.date(2026, 4, 1) else "1961"      # the Income-tax Act, 2025 applies to income from 1 April 2026; it has no assessment year
+    return {"financial_year": f"{s}-{str(s + 1)[-2:]}", "governing_act": act,
+            "assessment_year": f"{s + 1}-{str(s + 2)[-2:]}" if act == "1961" else None, "next_advance_tax_date": nxt.isoformat()}
 
 def solve(kind: str, world: dict) -> dict:
     if kind == "kyc_fill": return kyc(world)

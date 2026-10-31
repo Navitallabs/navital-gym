@@ -27,7 +27,7 @@ class FormWorld(World):
             "mobile": "10 digits starting with 6, 7, 8 or 9 after removing spaces and dashes and a single leading 0 (11 digits) or +91 / 91 (12 digits). Any other length is invalid.",
             "minor": "Under 18 on the given date. A minor needs a guardian and cannot open a current account (env rule).",
             "postal_zones": D.ZONES,
-            "financial_year": "April to March; assessment year is the next financial year. Advance-tax dates: 15 June, 15 September, 15 December, 15 March (simplified).",
+            "financial_year": "April to March, written YYYY-YY (e.g. 2026-27). Income earned before 1 April 2026: Income-tax Act, 1961; the assessment year is the next financial year. Income earned on or after 1 April 2026: Income-tax Act, 2025, which uses a single 'tax year' (the same April-March year) and has no assessment year. Advance-tax dates: 15 June, 15 September, 15 December, 15 March (simplified).",
             "address": "house = the first part of the address, up to the first comma or semicolon, as written, without surrounding spaces (\"Shop 12, Rose Apartments, Pune\" gives house \"Shop 12\"). city = the city named in the address, normal capitalisation. state = the full state name (infer it from the city or PIN zone if only an abbreviation or nothing is written). pin = the 6-digit PIN, or null if it is not exactly 6 digits.",
             "invalid_values": "A value that fails its format rule must be reported as null, never repaired or guessed.",
             "note": "Names, numbers and addresses are synthetic. These are env rules, not claims about live systems."}}

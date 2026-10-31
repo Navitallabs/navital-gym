@@ -25,7 +25,7 @@ class Fmt(Rule):
     def check(self, ctx):
         return RuleResult(isinstance(ctx.sub.get("answer"), dict), "answer must be an object")
 
-EXACT = {"pan", "ifsc"}   # compared case-sensitively (whitespace still trimmed)
+EXACT = {"pan", "ifsc", "full_name"}   # compared case-sensitively (whitespace still trimmed); full_name must be Title Case as the prompt asks
 
 class Field(Rule):
     """answer[field] must equal the oracle's value: bools exact, numbers exact (Decimal), None means the key must be present and null, strings case/space-insensitive."""
@@ -37,6 +37,8 @@ class Field(Rule):
         if want is None:
             return RuleResult(self.field in ans and ans[self.field] is None, f"{self.field} must be null")
         got = ans.get(self.field)
+        if self.field == "governing_act" and isinstance(got, int) and not isinstance(got, bool):
+            got = str(got)      # 1961 / 2025 as a number is the same answer
         if isinstance(want, bool):
             return RuleResult(isinstance(got, bool) and got == want, self.field)
         if isinstance(want, int):
@@ -54,7 +56,7 @@ FIELDS = {
     "address_parse": [("R-HOUSE", "house"), ("R-CITY", "city"), ("R-STATE", "state"), ("R-PIN", "pin")],
     "pin_consistency": [("R-CONSISTENT", "consistent")],
     "number_parse": [("R-VALUE", "value")],
-    "fiscal_year": [("R-FY", "financial_year"), ("R-AY", "assessment_year"), ("R-ADV-TAX", "next_advance_tax_date")],
+    "fiscal_year": [("R-FY", "financial_year"), ("R-ACT", "governing_act"), ("R-AY", "assessment_year"), ("R-ADV-TAX", "next_advance_tax_date")],
 }
 def answer_fields(kind: str) -> list:
     return [f for _, f in FIELDS[kind]]
