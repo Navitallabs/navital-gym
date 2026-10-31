@@ -1054,5 +1054,36 @@
    "partial_credit": 0.7527
   }
  ],
- "excluded": []
+ "excluded": [
+  {
+   "model": "gemini-3.1-flash-lite",
+   "provider": "gemini",
+   "tier": "small",
+   "env": "support",
+   "sample": "full",
+   "harness_commit": "1543b5103be5",
+   "date": null,
+   "date_basis": "not recorded in the run file",
+   "source": "support-gemini-3.1-flash-lite-full.json",
+   "origin": "navital",
+   "split": "all",
+   "reason": "incomplete split: 51 of 76 tasks answered",
+   "n": 51
+  },
+  {
+   "model": "gemini-3.1-flash-lite",
+   "provider": "gemini",
+   "tier": "small",
+   "env": "support",
+   "sample": "full",
+   "harness_commit": "1543b5103be5",
+   "date": null,
+   "date_basis": "not recorded in the run file",
+   "source": "support-gemini-3.1-flash-lite-full.json",
+   "origin": "navital",
+   "split": "experimental",
+   "reason": "incomplete split: 1 of 26 tasks answered",
+   "n": 1
+  }
+ ]
 }

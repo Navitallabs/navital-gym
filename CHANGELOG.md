@@ -1,6 +1,6 @@
 # Changelog
 
-## v1.1 (grader tree id 1543b5103be5, 1 Nov 2026)
+## v1.1 (grader tree id 1543b5103be5, 31 Oct 2026)
 Verify with `git rev-parse v1.1.0:navital_gym` (first 12 characters). Every v1.1 row is graded by that one id. v1.1 changes grading code and some task data, so v1.1 scores are not comparable with v1.0.1 scores; the tables below show both.
 
 ### What changed
@@ -54,6 +54,8 @@ Not re-run for v1.1 (every v1.0.1 row, by model, env and set, with no v1.1 row o
 | gpt-oss 20B | GST | easy tier | 18/18 |
 | gpt-oss 20B | Support | easy tier | 0/18 |
 | gpt-oss 20B | Form | sample of 15 | 12/15 |
+
+Also not re-run: Sarvam 105B (reasoning_effort=low), Trip, full set, 13/55 (v1.0.1 grader). It has been shown on the site since 30 Oct; its run file is not in the repository.
 
 ### Known issues (to be fixed in v1.1.1)
 - **R-AMOUNT (support).** Some ways of stating a refund are not checked yet: ranges joined by words ("₹1899 से लेकर 2500 तक", "between ₹1899 and 2500") check only the end next to the rupee sign; the spelling "rupaiya" is not recognised; a minus glued to the word before it ("रिफंड-₹1899") is read as a hyphen, and the minus check knows only the ₹, Rs and INR markers. For the experimental Tamil, Bengali and Marathi replies, and for a figure given in another role (such as a reference number), the rule checks which rupee figures appear, not which one the reply calls the refund. A number right after a suffix marker ("1899 रुपये 5 दिनों में") is read as a rupee figure, which can fail a correct reply. None of these spellings occurs in the saved v1.0.1 or v1.1 support replies. To be fixed in v1.1.1.

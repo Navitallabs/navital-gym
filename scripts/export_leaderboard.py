@@ -2,7 +2,7 @@
 """leaderboard.json for the website, built ONLY from the saved (regraded) run files. One entry per model x env x split x sample.
 Fields: model, provider, tier (small|large), env, split, sample ("stratified-15", "stratified-5", "full"), n (tasks), pass_at_1, strict_pass_at_1, pass_pow_k (+ k), format_fail,
 errors, partial_credit, harness_commit (id of the grading code: git tree id of navital_gym/, verify with `git rev-parse v1.1.0:navital_gym`), date, source (run file), origin (navital = our own runs, community = a verified outside submission under submissions/<model-slug>/, with submitter and self_reported=true). Rows where at least half the tasks hit provider errors are
-left out and listed under `excluded`; so are incomplete runs (fewer tasks than their sample size) and, with --commit, runs graded at another commit.
+left out and listed under `excluded`; so are incomplete runs (fewer tasks than their sample size) and incomplete splits of a full run (fewer answered tasks than the split holds, with the reason) and, with --commit, runs graded at another commit.
 usage: python3 scripts/export_leaderboard.py [out.json] [--runs DIR] [--submissions DIR] [--commit SHA] [--require-single-commit]
   out.json   default docs/leaderboard.json            --runs DIR   default <repo>/runs (read only)     --submissions DIR   default <repo>/submissions; each */*.json is verified (scripts/verify_submission.py) before it is counted
   --commit SHA            keep only run files whose graded_with is SHA (use the launch commit after scripts/regrade.py); others go to `excluded`
@@ -67,8 +67,6 @@ for path, origin in [(p, "navital") for p in ours] + [(p, "community") for p in 
         if easy and s.get("answered", s["tasks"]) < len(runfiles.env_tasks(env, easy=True)):
             excluded.append({**base, "reason": f"incomplete run: {s.get('answered', s['tasks'])} answered of {len(runfiles.env_tasks(env, easy=True))} easy tasks", "n": s["tasks"]})
             continue
-        if sample == "full" and s.get("answered", s["tasks"]) < len(importlib.import_module(f"navital_gym.envs.{env}").load_env().tasks):
-            continue                 # a full-set run still in progress is not published as a result
         want = int(sample.split("-")[1]) if sample.startswith("stratified-") else None
         if want is not None and s.get("answered", s["tasks"]) < want:
             excluded.append({**base, "reason": f"incomplete run: {s.get('answered', s['tasks'])} of {want} tasks answered ({s.get('not_run', 0)} not run)", "n": s["tasks"]})
@@ -85,7 +83,13 @@ for path, origin in [(p, "navital") for p in ours] + [(p, "community") for p in 
                 groups[split] = sub
         if easy:
             groups = {"easy": s}
+        std_tasks = runfiles.env_tasks(env) if sample == "full" else None
         for split, g in groups.items():
+            if std_tasks is not None:                    # a split with fewer answered tasks than the split holds (a run cut short, or still running) is never published; say why
+                size = len(std_tasks) if split == "all" else sum(1 for t in std_tasks.values() if t.meta.get("split", "core") == split)
+                if g.get("answered", g["tasks"]) < size:
+                    excluded.append({**base, "split": split, "reason": f"incomplete split: {g.get('answered', g['tasks'])} of {size} tasks answered", "n": g["tasks"]})
+                    continue
             ids = None if split in ("all", "easy") else {tid for tid, t in runfiles.env_tasks(base["env"]).items() if t.meta.get("split", "core") == split}
             entries.append({**base, "split": split, "n": g.get("answered", g["tasks"]), "pass_at_1": round(g["pass@1"], 4), "strict_pass_at_1": round(g["strict_pass@1"], 4),
                             "k": g["k"], "pass_pow_k": round(g["pass^k"], 4), "format_fail": round(g["format_fail"], 4), "errors": round(g["errors"], 4),
