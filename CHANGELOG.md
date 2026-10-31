@@ -1,5 +1,11 @@
 # Changelog
 
+## Results update, 31 Oct 2026 (grader unchanged, 1543b5103be5)
+No code release: `navital_gym/` is untouched, the version stays 1.1.0 and there is no new tag. Verify with `git rev-parse v1.1.0:navital_gym` (and `git rev-parse HEAD:navital_gym` here): both start with `1543b5103be5`.
+- **Sarvam 105B, Trip planning, full set (v1.1 re-run).** 16 of 55 tasks (29.1%); v1.0.1 was 11 of 55 (20.0%). k=1, 0 provider errors, strict pass@1 23.6%, format failures 7.3%, partial credit 0.56, 7 unsolved tasks ended on a length cut-off. With it, Sarvam 105B has a v1.1 row in all six environments: 216 of 321 tasks (67.3%; v1.0.1: 186 of 321). The run file and transcripts are in `runs/`, graded at `1543b5103be5`. The run was made in several sessions on identical settings (model, max turns 40, temperature 0, repair retry on): two partial runs were merged and the rest resumed after a token cap stopped it at 32 tasks; every one of the 55 task prompts matches the v1.1 task file. This supersedes the "Sarvam 105B, Trip, full set, 11/55" line in the v1.1 not-re-run list.
+- **Still not re-run:** Sarvam 105B (reasoning_effort=low), Trip, full set, 13/55 (v1.0.1 grader; its run file is not in the repository).
+- **Regenerated from the run files:** `docs/leaderboard.json` (one added entry, 34 in all; every other row is unchanged and the partial Gemini support splits stay excluded with their reason), `docs/RESULTS.md`, the README results tables and `docs/figures/`.
+
 ## v1.1 (grader tree id 1543b5103be5, 31 Oct 2026)
 Verify with `git rev-parse v1.1.0:navital_gym` (first 12 characters). Every v1.1 row is graded by that one id. v1.1 changes grading code and some task data, so v1.1 scores are not comparable with v1.0.1 scores; the tables below show both.
 

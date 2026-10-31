@@ -70,7 +70,7 @@ Pass@1 on deterministic stratified samples or whole splits (k=1, one run per cel
 |---|---|---|---|---|---|---|
 | claude-haiku-4-5 | 0.35 (n=55) | 0.94 (n=50) | 0.98 (n=40) | 0.84 (n=50) | 0.42 (n=76) | 0.52 (n=50) |
 | gemini-3.1-flash-lite | - | - | - | - | - | 0.78 (n=50) |
-| sarvam-105b | - | 0.98 (n=50) | 1.00 (n=40) | 0.82 (n=50) | 0.54 (n=76) | 0.58 (n=50) |
+| sarvam-105b | 0.29 (n=55) | 0.98 (n=50) | 1.00 (n=40) | 0.82 (n=50) | 0.54 (n=76) | 0.58 (n=50) |
 
 **Small and mid-size models: partial credit (mean fraction of scored rules passed; shows progress where pass@1 is near zero)**
 
@@ -78,7 +78,7 @@ Pass@1 on deterministic stratified samples or whole splits (k=1, one run per cel
 |---|---|---|---|---|---|---|
 | claude-haiku-4-5 | 0.66 | 0.97 | 0.99 | 0.93 | 0.74 | 0.73 |
 | gemini-3.1-flash-lite | - | - | - | - | - | 0.92 |
-| sarvam-105b | - | 1.00 | 1.00 | 0.91 | 0.87 | 0.75 |
+| sarvam-105b | 0.56 | 1.00 | 1.00 | 0.91 | 0.87 | 0.75 |
 
 **Larger models, for reference (what strong models reach)**
 
