@@ -116,10 +116,10 @@ def _headline(results: dict) -> dict:
     """pass@1 counts the first run of each task (a format-repair retry, if the agent used one, is allowed).
     strict_pass@1 counts only first runs solved with NO repair retry. format_fail = runs whose answer was not a readable, valid-format submission
     (reported on its own so a harness/format problem is never mistaken for lack of task skill). turns_exhausted / errors come from the runner.
-    A task whose FIRST run ended in a PROVIDER error (rate limit, quota, outage, spend cap) was not answered by the model: it is NOT RUN, left out of every rate
+    A task with an empty run list, or whose FIRST run ended in a PROVIDER error (rate limit, quota, outage, spend cap) was not answered by the model: it is NOT RUN, left out of every rate
     (the denominator is `answered`) and counted in `not_run`; `tasks` is still every task attempted. An error in a later repetition drops only that repetition from the
     per-run averages and the task from pass^k (whose denominator is then the tasks with every repetition answered); pass@1 still counts the task."""
-    errored = {tid for tid, runs in results.items() if runs and runs[0].meta.get("error")}      # first-run semantics: a later repetition's error does not drop the task
+    errored = {tid for tid, runs in results.items() if not runs or runs[0].meta.get("error")}      # no run at all counts as not run      # first-run semantics: a later repetition's error does not drop the task
     ans = {tid: runs for tid, runs in results.items() if tid not in errored}
     n = len(ans)
     p1 = sum(1 for runs in ans.values() if runs and runs[0].solved)

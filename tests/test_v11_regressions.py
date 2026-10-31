@@ -405,6 +405,14 @@ class T111CoreHeadline(unittest.TestCase):
         self.assertEqual(h["pass@1"], 1.0)           # b, c, d first runs solved
         self.assertEqual(h["pass^k"], 0.5)           # only c and d are fully answered; c passes, d does not
 
+    def test_C5_a_task_with_an_empty_run_list_is_not_run_not_answered(self):
+        """Review + Codex SHOULD: a task whose run list is empty ([]) has no answer; 02582e3 counts it as answered, which dilutes pass@1 (answered=2 with one solved task gives 0.5 instead of 1.0)."""
+        from navital_gym.core.grader import _headline
+        h = _headline({"a": [self.S(True)], "b": []})
+        self.assertEqual((h["tasks"], h["answered"], h["not_run"], h["pass@1"], h["pass^k"]), (2, 1, 1, 1.0, 1.0))
+        h = _headline({"b": []})
+        self.assertEqual((h["answered"], h["not_run"], h["pass@1"]), (0, 1, 0.0))
+
     def test_C3_one_run_per_task_is_unchanged(self):
         """Guard: k=1 numbers are exactly the old ones."""
         from navital_gym.core.grader import _headline

@@ -67,7 +67,7 @@ Finish with ONE JSON object and nothing after it: {"status": "plan", "answer": {
   paid | abort_and_confirm (the payee does not match what you were told: stop and ask) | cannot_pay | wait | escalate | dispute_raised |
   approved | declined_and_reported | needs_user_pin_to_register | done | not_allowed
 and these fields where they apply:
-  "reason": payee_name_mismatch | over_txn_limit | over_daily_limit | above_lite_txn_max | insufficient_lite_balance | wallet_cap_exceeded | insufficient_balance (when you stop or refuse)
+  "reason": payee_name_mismatch | over_txn_limit | over_daily_limit | over_daily_count | above_lite_txn_max | insufficient_lite_balance | wallet_cap_exceeded | insufficient_balance (when you stop or refuse)
   failed-but-debited money: "type" (p2p | p2m), "tat_date" (YYYY-MM-DD, the last day the bank has to return it), "days_late", "compensation_rs", "compensation_automatic" (true/false)
   wrong recipient: "reversal_guaranteed" (true/false)
   AutoPay mandate: "each_debit_needs_approval" (true/false), "cap_applied" (rupees)
