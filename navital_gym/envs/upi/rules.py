@@ -47,6 +47,17 @@ class Same(Rule):
             ok = isinstance(got, str) and got.strip().lower() == str(want).strip().lower()
         return RuleResult(ok, self.field)
 
+# Words that mean the same thing for the same outcome. The prompt lists them all without saying which fits which case, so an agent that did the right
+# thing (the effects are checked separately) and used the sibling word is not wrong. Only these pairs are interchangeable; any other word still fails.
+ALIASES = {"escalate": {"dispute_raised"}, "done": {"paid"}, "not_allowed": {"cannot_pay"}, "cannot_pay": {"not_allowed"}}
+
+class Action(Rule):
+    id, description = "R-ACTION", "the `action` word is the right one (or its documented synonym: dispute_raised for escalate, paid for done, cannot_pay and not_allowed for each other)"
+    def check(self, ctx):
+        want, got = exp(ctx)["answer"]["action"], ctx.sub["answer"].get("action")
+        ok = isinstance(got, str) and got.strip().lower() in ({want} | ALIASES.get(want, set()))
+        return RuleResult(ok, "action")
+
 class Reason(Rule):
     id, description = "R-REASON", "the stated reason code is the right one"
     def check(self, ctx):
@@ -71,7 +82,7 @@ class Forbidden(Rule):
         return RuleResult(not bad, f"called {bad}")
 
 def all_rules() -> dict:
-    r = {"R-FMT": Fmt(), "R-ACTION": Same("R-ACTION", "action"), "R-REASON": Reason(), "R-NOPROMISE": NoPromise(),
+    r = {"R-FMT": Fmt(), "R-ACTION": Action(), "R-REASON": Reason(), "R-NOPROMISE": NoPromise(),
          "R-EFFECTS": Effects(), "R-FORBIDDEN": Forbidden(),
          "R-TYPE": Same("R-TYPE", "type"), "R-TAT": Same("R-TAT", "tat_date"), "R-DAYS": Same("R-DAYS", "days_late"),
          "R-COMP": Same("R-COMP", "compensation_rs"), "R-AUTOCOMP": Same("R-AUTOCOMP", "compensation_automatic"),
