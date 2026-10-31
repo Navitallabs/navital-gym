@@ -214,7 +214,7 @@ class TripWorld(World):
           {"date": {"type": "string", "description": "YYYY-MM-DD", "optional": True}})
     def calendar_info(self, date=None):
         out = {"today": self.today.isoformat(), "peak_season": "24 Dec to 2 Jan: hotels +40%, flights +70%",
-               "booking": "Rail bookings are made today. General quota (GN): 2 to 60 days before departure. Tatkal (TQ): only the day before, opens 10:00 for AC classes and 11:00 for non-AC, surcharge on the base fare: +10% for 2S, +30% for every other class (SL, CC, 3A, 2A). Current (CUR): same day. Plan 'booking_date' must be today."}
+               "booking": "Rail bookings are made today. General quota (GN): 1 to 60 days before departure. Tatkal (TQ): only the day before, opens 10:00 for AC classes and 11:00 for non-AC, surcharge on the base fare: +10% for 2S, +30% for every other class (SL, CC, 3A, 2A). Current (CUR): same day. Plan 'booking_date' must be today."}
         if date:
             d = pdate(date)
             out.update(date=date, weekday=D.WEEKDAYS[d.weekday()], days_from_today=(d - self.today).days, peak=D.is_peak(d), winter=D.is_winter(d))
