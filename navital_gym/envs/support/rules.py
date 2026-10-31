@@ -2,6 +2,7 @@
 machine-assisted Tamil / Bengali / Marathi split too). The expected actions come from the independent oracle, never from gold_answer."""
 from __future__ import annotations
 import re, unicodedata
+from decimal import Decimal, InvalidOperation
 from ...core.grader import Rule, RuleResult, Grader, Ctx
 from . import oracle, data as D
 
@@ -40,12 +41,13 @@ def numbers_in(reply: str) -> set:
     return out
 
 _RUPEE = r"(?:₹|(?<![a-z])(?:rs\.?|inr|rupees?)(?![a-z])|रुपये|रुपए|(?<![\u0900-\u097f])रु\.?(?![\u0900-\u097f])|ரூபாய்|টাকা)"
+_AMOUNT = r"(\d[\d,]*(?:\.\d+)?)"          # 1899, 1,899, 1899.00, 1899.99
 def rupee_figures(reply: str) -> set:
-    """Numbers the reply attaches to a rupee marker (before or after it): 'Rs 480', '₹480', '480 रुपये'. Dates, days and order ids are not figures."""
+    """Exact (Decimal) numbers the reply attaches to a rupee marker (before or after it): 'Rs 480', '₹480', '480 रुपये', '1899.00 रुपये'. Dates, days and order ids are not figures."""
     t = to_ascii_digits(reply).lower(); out = set()
-    for m in list(re.finditer(_RUPEE + r"\s*(\d[\d,]*)", t)) + list(re.finditer(r"(\d[\d,]*)\s*" + _RUPEE, t)):
-        try: out.add(int(m.group(1).replace(",", "").rstrip(",")))
-        except ValueError: pass
+    for m in list(re.finditer(_RUPEE + r"\s*" + _AMOUNT, t)) + list(re.finditer(_AMOUNT + r"\s*" + _RUPEE, t)):
+        try: out.add(Decimal(m.group(1).replace(",", "").rstrip(",")))
+        except InvalidOperation: pass
     return out
 
 def _strip_entities(reply: str, order: dict) -> str:
@@ -132,13 +134,15 @@ class Lang(Rule):
         return RuleResult(lang_ok(ctx.sub["reply"], ctx.task.lang, ctx.task.params["world"]["order"]), "wrong reply language")
 
 class Amount(Rule):
-    id, description = "R-AMOUNT", "reply states the refund amount, and no other rupee figure than the order's own (price, shipping fee, their sum, or a figure the customer wrote)"
+    id, description = "R-AMOUNT", "reply states the refund amount, and no other rupee figure than the order's own (the refund, the price, the shipping fee, or a figure the customer wrote)"
     def check(self, ctx):
         want = expected(ctx)["amount"]; reply = ctx.sub["reply"]
         if want not in numbers_in(reply):
             return RuleResult(False, "refund amount missing from the reply")
         o = ctx.task.params["world"]["order"]; price, ship = int(o["price"]), int(o["shipping_fee"])
-        known = {want, price, ship, price + ship} | numbers_in(ctx.task.prompt)
+        # The refund, the price and the shipping fee may be named (also as exact decimals: 1899.00 is 1899). Their sum is a figure on the order only where it IS the refund:
+        # for a refund of the price alone, a reply promising price + shipping promises the wrong amount.
+        known = {Decimal(want), Decimal(price), Decimal(ship)} | {Decimal(n) for n in numbers_in(ctx.task.prompt)}
         stray = sorted(rupee_figures(reply) - known)
         return RuleResult(not stray, f"reply states a rupee figure that is not on the order: {stray}")
 

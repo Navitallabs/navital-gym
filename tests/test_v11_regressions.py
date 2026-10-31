@@ -308,6 +308,37 @@ class Form(unittest.TestCase):
         sub = {"status": "plan", "answer": dict(want, full_name=want["full_name"].upper())}
         self.assertFalse(grade("form", "IN-FORM-001", sub)["rules"]["R-NAME"])
 
+class SupportAmountEdgeCases(unittest.TestCase):
+    """Codex findings on support R-AMOUNT in v1.1 (31 Oct). Each of the three bug tests fails before the fix and passes after."""
+    ACTIONS = [{"tool": "issue_refund", "args": {"order_id": "OD81000", "amount": 1899, "mode": "original_source"}},
+               {"tool": "schedule_pickup", "args": {"order_id": "OD81000"}}]
+
+    def amount_rule(self, reply):
+        sub = {"status": "plan", "actions": self.ACTIONS, "decision": "refund", "reason": "eligible", "reply": reply}
+        return grade("support", "IN-SUP-001", sub)["rules"]["R-AMOUNT"]
+
+    def test_A1_a_figure_with_decimals_before_a_rupee_word_is_not_read_as_zero(self):
+        """IN-SUP-001: '1899.00 रुपये' states the right refund (1899); v1.1 reads the '00' after the dot as a stray figure 0 and fails it (false fail)."""
+        self.assertTrue(self.amount_rule("आपका रिटर्न मंज़ूर हो गया है। आपको 1899.00 रुपये मूल भुगतान माध्यम में वापस मिलेंगे।"))
+        self.assertTrue(self.amount_rule("आपको ₹1899.00 वापस मिलेंगे, पिकअप शेड्यूल हो गया है।"))
+
+    def test_A2_a_different_amount_with_the_same_whole_part_is_not_the_refund(self):
+        """IN-SUP-001: '₹1899.99' is not 1899 (it promises 99 paise more); v1.1 truncates it to 1899 and passes it (false pass)."""
+        self.assertFalse(self.amount_rule("आपका रिटर्न मंज़ूर हो गया है। आपको ₹1899.99 वापस मिलेंगे।"))
+        self.assertFalse(self.amount_rule("आपको 1899.99 रुपये वापस मिलेंगे।"))
+
+    def test_A3_price_plus_shipping_is_not_a_refund_figure_when_shipping_is_excluded(self):
+        """IN-SUP-001 (price 1899, shipping 60, a normal return): the oracle refunds the price only. A reply that also promises ₹1959 (price + shipping) must fail; v1.1 whitelists every order figure and passes it."""
+        self.assertFalse(self.amount_rule("आपको ₹1899 वापस मिलेंगे, और कुल ₹1959 आपके खाते में आएंगे।"))
+        self.assertFalse(self.amount_rule("आपका रिफंड ₹1,959 है (₹1,899 सामान और ₹60 शिपिंग)।"))
+
+    def test_A4_guards_that_must_keep_passing(self):
+        """Not bugs: the exact refund passes, and saying the shipping fee is NOT refunded passes."""
+        self.assertTrue(self.amount_rule("आपको ₹1899 मूल भुगतान माध्यम में वापस मिलेंगे।"))
+        self.assertTrue(self.amount_rule("आपको ₹1899 वापस मिलेंगे। ₹60 का शिपिंग शुल्क वापस नहीं होगा।"))
+        self.assertTrue(self.amount_rule("आपको 1,899 रुपये वापस मिलेंगे।"))
+        self.assertFalse(self.amount_rule("आपको ₹1799 वापस मिलेंगे।"))
+
 class Controls(unittest.TestCase):
     """Positive controls: pass on v1.0.1 AND v1.1 (the harness and the fixtures are sound; the fixes did not over-correct)."""
     def test_oracle_style_answers_still_solve(self):

@@ -64,6 +64,32 @@ class Amount(unittest.TestCase):
         s = good(t); s["reply"] += " Aapke dono orders 2 din mein pickup honge."
         self.assertTrue(grade(t.to_dict(), s)["rules"]["R-AMOUNT"])
 
+class AmountDecimalsAndTotals(unittest.TestCase):
+    """Codex findings on R-AMOUNT (rules.py): decimals are read as one exact number, and price + shipping is a figure on the order only where it is the refund."""
+    def verdict(self, tid, reply):
+        t = ALL.tasks[tid]; s = good(t); s["reply"] = reply
+        return grade(t.to_dict(), s)["rules"]["R-AMOUNT"]
+
+    def test_zero_decimals_are_the_same_amount(self):
+        self.assertTrue(self.verdict("IN-SUP-001", "आपका रिफंड 1899.00 रुपये आपके खाते में वापस आएगा। हम आपकी मदद कर रहे हैं।"))
+        self.assertTrue(self.verdict("IN-SUP-001", "Aapka refund Rs 1,899.00 aapke khate mein aa jayega."))
+
+    def test_a_non_zero_decimal_is_a_wrong_figure(self):
+        self.assertFalse(self.verdict("IN-SUP-001", "आपका रिफंड ₹1899.99 आपके खाते में वापस आएगा। हम आपकी मदद कर रहे हैं।"))
+
+    def test_a_total_that_is_not_the_refund_is_a_wrong_promise(self):
+        # IN-SUP-020: a prepaid cancel before shipping refunds the item price (420) only
+        self.assertFalse(self.verdict("IN-SUP-020", "आपका ऑर्डर रद्द है। सामान ₹420 का था, कुल ₹480 वापस आएँगे।"))
+        self.assertTrue(self.verdict("IN-SUP-020", "आपका ऑर्डर रद्द है। ₹420 वापस आएँगे; ₹60 शिपिंग वापस नहीं होगा।"))
+
+    def test_the_combined_figure_is_fine_where_it_is_the_refund(self):
+        t = next(t for t in TASKS if o_of(t)["reason"] == "damaged_with_photo")
+        o = o_of(t); s = good(t)
+        self.assertTrue(grade(t.to_dict(), s)["rules"]["R-AMOUNT"])
+        s["reply"] += " (कुल ₹%d)" % o["amount"]
+        self.assertTrue(grade(t.to_dict(), s)["rules"]["R-AMOUNT"])
+
+
 class Pickup(unittest.TestCase):
     def test_a_damaged_refund_needs_the_pickup_the_policy_promises(self):
         t = next(t for t in TASKS if o_of(t)["reason"] == "damaged_with_photo")
