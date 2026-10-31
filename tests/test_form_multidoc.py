@@ -95,10 +95,12 @@ class Grading(unittest.TestCase):
         for junk in (None, 5, "x", [], {}, {"status": "plan"}, {"status": "plan", "answer": 5}, {"status": "infeasible", "binding": ["R-X"]}, {"answer": {"conflicts": "name"}}):
             r = grade(t, junk); self.assertFalse(r["solved"]); self.assertLess(r["score"], 1.0)
 
-    def test_lists_are_sets_without_duplicates_and_must_be_lists(self):
-        t = next(t for t in TASKS if t.meta["kind"] == "batch" and oracle.solve("batch", t.params["world"])["invalid_pans"])
+    def test_lists_are_ordered_without_duplicates_and_must_be_lists(self):
+        """v1.1: the prompts ask for sorted lists, so order matters (v1.0.1 graded them as sets and a reversed list passed)."""
+        t = next(t for t in TASKS if t.meta["kind"] == "batch" and len(oracle.solve("batch", t.params["world"])["invalid_pans"]) > 1)
         sub = answer(t); inv = sub["answer"]["invalid_pans"]
-        sub["answer"]["invalid_pans"] = list(reversed(inv)); self.assertTrue(grade(t.to_dict(), sub)["rules"]["R-INVALID-PANS"])
+        self.assertTrue(grade(t.to_dict(), sub)["rules"]["R-INVALID-PANS"])
+        sub["answer"]["invalid_pans"] = list(reversed(inv)); self.assertFalse(grade(t.to_dict(), sub)["rules"]["R-INVALID-PANS"])
         sub["answer"]["invalid_pans"] = inv + inv[:1]; self.assertFalse(grade(t.to_dict(), sub)["rules"]["R-INVALID-PANS"])
         sub["answer"]["invalid_pans"] = ",".join(inv); self.assertFalse(grade(t.to_dict(), sub)["rules"]["R-INVALID-PANS"])
 

@@ -13,5 +13,5 @@ A harder companion to Form Desk, added because the standard Form Desk is **satur
 
 Rules are env rules (simplified; the PAN structure and IFSC bank-code facts are public format facts, to be dated and verified by review). Lists are graded as sets with each item at most once. Reported separately from the 50 core Form tasks, never mixed with them.
 Private held-out set: the generator (not part of this repository) takes a private seed from `FORM_HARD_SEED`, which is never committed; the committed tasks do not depend on it (tested).
-Status: oracle agrees with the generator on all 40; qa hand-solved all 40 independently from the prompt and policy and agreed on all 40; scripted floors empty 0%, reject_only 0%, prior 15%. Model results are in the leaderboard and `docs/RESULTS.md`.
+Status: oracle agrees with the generator on all 40; qa hand-solved all 40 independently from the prompt and policy and agreed on all 40; scripted floors empty 0%, reject_only 5% (2 of 40: replayed in v1.1), prior 15%. Model results are in the leaderboard and `docs/RESULTS.md`.
 Use: `from navital_gym.envs.form_multidoc import load_env, grade`; rebuild tasks with `python -m navital_gym.envs.form_multidoc.build_tasks`. Tests: `tests/test_form_multidoc.py`.

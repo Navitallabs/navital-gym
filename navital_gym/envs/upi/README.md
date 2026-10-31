@@ -12,7 +12,7 @@ Rules last checked: 25 October 2026 (by Navital Labs' review step, against the p
 It is the account owner's assistant in a simulated bank and UPI app, with 50 tasks in seven kinds: pay after checking the payee's name (10), payment limits (8),
 money debited for a failed payment (10), a payment sent to the wrong VPA (5), collect requests, some of them scams (7), AutoPay mandates (5), UPI Lite (5).
 Tools: policy, account, VPA lookup, a dry-run payment check, transactions, pending requests, and the actions that change things (pay, dispute, approve or decline a
-request, report a VPA, UPI Lite). Creating a mandate always fails: registration needs the owner's own PIN, which the agent never has.
+request, report a VPA, UPI Lite; `pay_with_lite` takes the payee VPA, which must be in the directory and is graded). Creating a mandate always fails: registration needs the owner's own PIN, which the agent never has.
 
 ## How it is graded (no model judge)
 Each rule checks one thing, so a submission that is wrong in one way loses one rule. `solved` means every rule passed.

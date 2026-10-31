@@ -39,7 +39,7 @@ def numbers_in(reply: str) -> set:
         except ValueError: pass
     return out
 
-_RUPEE = r"(?:₹|rs\.?|inr|rupees?|रुपये|रुपए|रु\.?|ரூபாய்|টাকা)"
+_RUPEE = r"(?:₹|(?<![a-z])(?:rs\.?|inr|rupees?)(?![a-z])|रुपये|रुपए|(?<![\u0900-\u097f])रु\.?(?![\u0900-\u097f])|ரூபாய்|টাকা)"
 def rupee_figures(reply: str) -> set:
     """Numbers the reply attaches to a rupee marker (before or after it): 'Rs 480', '₹480', '480 रुपये'. Dates, days and order ids are not figures."""
     t = to_ascii_digits(reply).lower(); out = set()

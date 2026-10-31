@@ -22,7 +22,7 @@ class Fmt(Rule):
 EXACT = {"pan", "ifsc", "invalid_pans", "current_account_eligible"}   # identifiers and record ids: case-sensitive (whitespace still trimmed)
 
 class Field(Rule):
-    """answer[field] must equal the oracle's value: bools exact, integers exact, None means present and null, lists compared as sets of strings with no duplicates, pan, ifsc and record-id lists case-sensitive, other strings case/space-insensitive."""
+    """answer[field] must equal the oracle's value: bools exact, integers exact, None means present and null, lists compared in the order the oracle gives (the prompts ask for alphabetical or record-number order) with no duplicates, pan, ifsc and record-id lists case-sensitive, other strings case/space-insensitive."""
     def __init__(self, rid, field, description=""): self.id, self.field, self.description = rid, field, description
     def check(self, ctx):
         want = expected(ctx)[self.field]; ans = ctx.sub["answer"]
@@ -31,7 +31,7 @@ class Field(Rule):
         if isinstance(want, bool): return RuleResult(isinstance(got, bool) and got == want, self.field)
         if isinstance(want, list):
             fold = (lambda x: x.strip()) if self.field in EXACT else (lambda x: x.strip().lower())
-            ok = isinstance(got, list) and all(isinstance(x, str) for x in got) and len(set(fold(x) for x in got)) == len(got) and {fold(x) for x in got} == {fold(w) for w in want}
+            ok = isinstance(got, list) and all(isinstance(x, str) for x in got) and len(set(fold(x) for x in got)) == len(got) and [fold(x) for x in got] == [fold(w) for w in want]      # v1.1: order matters, the prompts ask for sorted lists
             return RuleResult(ok, self.field)
         if isinstance(want, int):
             g = num(got); return RuleResult(g is not None and g == Dc(want), self.field)

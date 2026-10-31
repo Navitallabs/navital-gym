@@ -47,6 +47,23 @@ class Reasons(unittest.TestCase):
         t = next(t for t in TASKS if t.meta["kind"] == "cancel_before_ship")
         self.assertIn("shipping fee is not refunded", SupportWorld(t, 0).get_policy()["policy"]["customer_cancel_refund"])
 
+class Amount(unittest.TestCase):
+    """R-AMOUNT looks only at rupee-marked figures; words that merely end in 'rs' or 'ru' must not make a number a rupee figure (review, b5bd909)."""
+    def test_words_are_not_rupee_markers(self):
+        from navital_gym.envs.support.rules import rupee_figures
+        self.assertEqual(rupee_figures("Aapke 2 orders 3 din mein pickup honge, refund Rs 420"), {420})
+        self.assertEqual(rupee_figures("we have 4 customers"), set())
+        self.assertEqual(rupee_figures("शुरु 3 दिन में"), set())
+
+    def test_real_markers_still_count(self):
+        from navital_gym.envs.support.rules import rupee_figures
+        self.assertEqual(rupee_figures("refund ₹1,899, Rs. 60 and 4899 रुपये, INR 5, 7 rupees"), {1899, 60, 4899, 5, 7})
+
+    def test_a_correct_reply_with_other_numbers_still_passes(self):
+        t = next(t for t in TASKS if o_of(t)["amount"] and o_of(t)["reason"] == "eligible" and t.lang == "hinglish")
+        s = good(t); s["reply"] += " Aapke dono orders 2 din mein pickup honge."
+        self.assertTrue(grade(t.to_dict(), s)["rules"]["R-AMOUNT"])
+
 class Pickup(unittest.TestCase):
     def test_a_damaged_refund_needs_the_pickup_the_policy_promises(self):
         t = next(t for t in TASKS if o_of(t)["reason"] == "damaged_with_photo")
