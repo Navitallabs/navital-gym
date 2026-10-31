@@ -133,9 +133,24 @@ def _number(word: str):
     digits = re.sub(r"[^\d.]", "", word)
     return _dec(digits) if re.search(r"\d", digits) else None
 
+def _refund_bound(clause: str, want: Decimal) -> bool:
+    """The refund amount itself is tied to a refund word in this clause: 'refund ₹420', '₹420 वापस मिलेंगे', '₹2059 ka refund'. Then another figure in the reply is an explanation
+    ('refund mein item ₹1999 aur shipping ₹60 shamil hai'), not a competing promise. A price tied to something else ('सामान ₹1899 का था') does not bind."""
+    words = [w for w in (x.strip("()[]{}\"'“”‘’:|/-*_") for x in _plain(clause).split()) if w and w not in _CURRENCY_WORDS]
+    cue = lambda w: any(_plain(c) in w for c in REFUND_CUES)
+    for i, w in enumerate(words):
+        if _number(w) != want:
+            continue
+        if any(cue(x) for x in words[max(0, i - PROMISE_WINDOW): i]) or any(cue(x) for x in words[i + 1: i + 3]):
+            return True
+    return False
+
 def refund_promise_problem(reply: str, want: Decimal, others: set):
     """None unless a refund word is followed (within PROMISE_WINDOW words, same clause) by another figure of the order than the refund: 'रिफंड केवल ₹60 होगा'."""
-    for clause in _clauses(reply):
+    clauses = _clauses(reply)
+    if any(_refund_bound(c, want) for c in clauses):
+        return None          # the refund itself is tied to a refund word somewhere: other figures are explanation (a reply that then contradicts itself is a known limitation)
+    for clause in clauses:
         # Words keep their opening bracket here: a parenthesis starts a breakdown ('₹2059 वापस मिलेगा (jacket ₹1999 + shipping ₹60)'), which is explaining the promise, not making one.
         words = [w for w in clause.lower().split() if w.strip("()[]{}\"'“”‘’:|/-*_") not in _CURRENCY_WORDS]          # 'refund will be Rs 60': the marker does not use up the window
         words = [(w[:1] if w[:1] in "([{" else "") + w.strip("()[]{}\"'“”‘’:|/-*_") for w in (_plain(x) for x in words)]
@@ -154,12 +169,12 @@ def refund_promise_problem(reply: str, want: Decimal, others: set):
     return None
 
 # --- Reply-quality floor (inside R-LANG) ----------------------------------------------------------------------------------------------------------------
-# Correct actions plus 'aap aap aap ...' and the amount used to pass. A reply now also needs (1) at least MIN_DISTINCT (3) different words, (2) no word over
+# Correct actions plus 'aap aap aap ...' and the amount used to pass. A reply now also needs (1) at least MIN_DISTINCT (2) different words, (2) no word over
 # MAX_SHARE of all words, and (3) for Hindi and Hinglish replies, a word that states the decision the policy requires OR the one the reply itself declares (DECISION_WORDS: any one of the stems;
 # whether the declared decision is the right one is R-DECISION's job, so a wrong decision is not also counted as a language failure).
 # This is a floor, not a quality score: whether the reply is helpful, polite or well written beyond it is not graded. The vocabulary check is skipped for the
 # experimental Tamil, Bengali and Marathi replies (no word list there); they get the first two checks only.
-MIN_DISTINCT, MAX_SHARE = 3, 0.4
+MIN_DISTINCT, MAX_SHARE = 2, 0.4
 _APOLOGY = ("sorry", "maaf", "khed", "क्षमा", "खेद", "माफ")
 _DENY = tuple(NEGATION_WORDS) + _APOLOGY + ("cannot", "can't", "unable", "mana", "मना", "decline")
 DECISION_WORDS = {
@@ -182,7 +197,7 @@ def _plain(text: str) -> str:
 
 def reply_floor_ok(reply: str, lang: str, decisions=()) -> bool:
     ws = [w for w in (x.strip("()[]{}\"'“”‘’:;,.!?।|/-*_₹") for x in reply.lower().split()) if any(c.isalpha() for c in w)]
-    if len(set(ws)) < MIN_DISTINCT or max(Counter(ws).values()) / len(ws) > MAX_SHARE:
+    if len(set(ws)) < MIN_DISTINCT or (len(ws) >= 6 and max(Counter(ws).values()) / len(ws) > MAX_SHARE):
         return False
     stems = [st for d in decisions for st in DECISION_WORDS.get(d, ())]
     if lang in ("hi", "hinglish") and stems:
@@ -240,19 +255,28 @@ def address_given(address: str, reply: str) -> bool:
     """Every comma-separated part of the recorded address appears in the reply as whole words, ignoring case, spacing, punctuation and the order of the parts."""
     parts = [_norm(p) for p in address.split(",") if _norm(p)]
     body = _norm(reply)
+    body = re.sub(r"(?<!\d)(\d{3}) (\d{3})(?!\d)", r"\1\2", body)       # a PIN written '411 001' or '411-001' is 411001
     return bool(parts) and all(_has(p, body) for p in parts)
 
+_ADDRESS_WORDS = {"flat", "फ्लैट", "फ़्लैट", "फ्लेट", "house", "मकान", "makaan", "ghar", "घर", "no", "no.", "number", "नंबर", "नम्बर", "नं", "hno", "h.no", "plot", "room", "apartment", "apt", "#"}
+
 def digit_runs_leaked(address: str, reply: str) -> bool:
-    """A number from the recorded address, the house number or the PIN code, appears in the reply as its own number: 'flat number 55', 'PIN 411 001', '4 1 1 0 0 1'.
-    A PIN split by spaces or dashes counts (up to six pieces); a number inside a longer one ('OD82015', '5500') does not."""
-    runs = re.findall(r"\d+", to_ascii_digits(reply))
-    for num in re.findall(r"\d+", to_ascii_digits(address)):
+    """A number from the recorded address appears in the reply. The PIN code (5+ digits) counts anywhere, written whole or split by spaces or dashes ('411 001',
+    '4 1 1 0 0 1'). The house number (a short number) counts only right after an address word ('flat number 55', 'house no. 55', 'फ्लैट 55'), so '55 minutes' is not a leak."""
+    text = to_ascii_digits(reply)
+    runs = re.findall(r"\d+", text)
+    for num in re.findall(r"\d{5,}", to_ascii_digits(address)):
         for i in range(len(runs)):
             joined = ""
             for run in runs[i:i + 6]:
                 joined += run
                 if joined == num: return True
                 if len(joined) >= len(num): break
+    toks = [t.strip("()[]{}\"'“”‘’:;,!?।|/-*_").lower() for t in text.split()]
+    for num in re.findall(r"\d{1,4}", re.sub(r"\d{5,}", " ", to_ascii_digits(address))):
+        for i, t in enumerate(toks):
+            if t.strip(".") == num and any(w.strip(".") in _ADDRESS_WORDS or w in _ADDRESS_WORDS for w in toks[max(0, i - 3):i]):
+                return True
     return False
 
 class Fmt(Rule):

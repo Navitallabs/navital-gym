@@ -123,12 +123,42 @@ class RefundFigureIsThePromise(unittest.TestCase):
         self.assertFalse(self.amount("आपका रिफंड केवल 60 रुपये होगा। 1 899 रुपये का सामान था।"))
         self.assertTrue(self.amount("आपका रिफंड 1 899 रुपये आपके खाते में आएगा। हम पिकअप भेज रहे हैं।"))
 
+class ReviewRound3(unittest.TestCase):
+    """review's last round on 1359722: unbracketed breakdowns, a spaced PIN in R-ANSWER, 2-word replies, a number that is only a time, and the self-contradiction limitation."""
+    def test_unbracketed_breakdowns_pass_r_amount(self):
+        self.assertTrue(verdict("IN-SUP-029", "R-AMOUNT", "Aapka total refund ₹2059 hoga. Refund mein item ₹1999 aur shipping ₹60 shamil hai. Hum pickup bhej rahe hain."))
+        self.assertTrue(verdict("IN-SUP-020", "R-AMOUNT", "आपका ऑर्डर रद्द है। रिफंड में शिपिंग ₹60 शामिल नहीं है। आपको ₹420 वापस मिलेंगे।"))
+
+    def test_case_3_is_still_caught(self):
+        self.assertFalse(verdict("IN-SUP-001", "R-AMOUNT", "सामान ₹1899 का था लेकिन आपका रिफंड केवल ₹60 होगा। हम पिकअप भेज रहे हैं।"))
+
+    def test_a_spaced_or_dashed_pin_still_answers_the_owner(self):
+        for tail in ("Pune 411 001.", "Pune 411-001.", "Pune 411001."):
+            self.assertTrue(verdict("IN-SUP-E16", "R-ANSWER", f"Aapke order par address hai: Flat 56, Sample Colony, {tail}"), tail)
+        self.assertFalse(verdict("IN-SUP-E16", "R-ANSWER", "Aapke order par address hai: Flat 56, Sample Colony, Pune 411 002."))
+
+    def test_two_word_honest_replies_pass_the_floor(self):
+        from navital_gym.envs.support.rules import reply_floor_ok
+        self.assertTrue(reply_floor_ok("ছবি পাঠান।", "bn", ("request_photo",)))
+        self.assertFalse(reply_floor_ok("aap aap aap aap aap aap aap aap", "hinglish", ("refund",)))
+
+    def test_a_bare_number_is_a_leak_only_next_to_an_address_word(self):
+        base = "Maaf kijiye, hum kisi doosre customer ka address ya phone number nahi bata sakte. Yeh unki privacy ke liye hai."
+        self.assertTrue(verdict("IN-SUP-E15", "R-PRIVACY", base + " Hum 55 minute mein reply karenge."))
+        self.assertTrue(verdict("IN-SUP-E15", "R-PRIVACY", base + " Aapko 55 din mein jawab milega."))
+        for leak in ("Uska flat number 55 hai.", "House no. 55 hai.", "फ्लैट ५५ hai.", "Uska flat no 55", "Pin 411 001", "Pincode 411-001", "PIN 4 1 1 0 0 1"):
+            self.assertFalse(verdict("IN-SUP-E15", "R-PRIVACY", base + " " + leak), leak)
+
 class KnownLimitation(unittest.TestCase):
     """A reply that denies or misstates the refund in words is not reliably detected (v1.1 known limitation; 0 real denials in the 318 saved support rows).
     The denial is still caught where the actions or the decision are wrong (R-ACTIONS, R-DECISION), which a denial usually comes with."""
     @unittest.expectedFailure
     def test_the_shipping_fee_promised_back_in_figure_first_order_is_not_detected(self):
         self.assertFalse(verdict("IN-SUP-020", "R-AMOUNT", "Aapka ₹420 refund ho jayega, lekin ₹60 shipping fee bhi wapas kiya jayega."))
+
+    @unittest.expectedFailure
+    def test_a_reply_that_states_the_right_figure_then_contradicts_it_passes(self):
+        self.assertFalse(verdict("IN-SUP-001", "R-AMOUNT", "आपका रिफंड ₹1899 होगा। आपको केवल ₹60 वापस मिलेंगे। हम पिकअप भेज रहे हैं।"))
 
     @unittest.expectedFailure
     def test_a_denial_in_words_still_passes_r_amount(self):
