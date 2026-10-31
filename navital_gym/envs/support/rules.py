@@ -67,7 +67,24 @@ def amounts_in(text: str) -> set:
     """Every number in the text as an exact Decimal (1899.00 equals 1899, 1899.99 does not)."""
     return {d for d in (_dec(t) for t in re.findall(_AMOUNT, _grouped(to_ascii_digits(text)))) if d is not None}
 
-_TIME_UNITS = ("दिन", "दिवस", "din", "day", "ghant", "घंट", "hour", "hafte", "हफ्ते", "सप्ताह", "week", "mahine", "महीन", "month", "minute", "मिनट", "kaam", "कार्य", "working", "business")
+_DAY_WORDS = {"din", "dino", "dinon", "day", "days", "दिन", "दिनों", "दिवस", "दिवसों", "दिनो"}
+_TIME_WORDS = _DAY_WORDS | {"hafte", "hafta", "हफ्ते", "हफ्ता", "सप्ताह", "week", "weeks", "ghante", "ghanta", "घंटे", "घंटा", "hour", "hours", "hrs", "mahine", "mahina", "महीने", "महीना",
+                            "month", "months", "minute", "minutes", "mins", "मिनट"}
+_WORKING_WORDS = {"kaam", "kaamkaaj", "कार्य", "कामकाजी", "working", "business"}      # 'kaam ke dino', 'कार्य दिवसों', 'working days': the next word must be a day word
+
+def _is_count(after: list) -> bool:
+    """True when the words right after a number make it a count of time ('5 दिन', '5 कार्य दिवसों', '5 working days', '2 weeks'): the FIRST word must be a whole time word,
+    or a working-day word followed (optionally after 'ke'/'के') by a day word. Nothing else, so 'dinner', '2500 अतिरिक्त' or a unit in the second word do not qualify."""
+    if not after:
+        return False
+    if after[0] in _TIME_WORDS:
+        return True
+    if after[0] in _WORKING_WORDS:
+        rest = after[1:]
+        if rest and rest[0] in ("ke", "के"):
+            rest = rest[1:]
+        return bool(rest) and rest[0] in _DAY_WORDS
+    return False
 
 def rupee_figures(reply: str) -> set:
     """Exact (Decimal) numbers the reply attaches to a rupee marker, before or after it: 'Rs 480', '₹480', '480 रुपये', '1899.00 रुपये'; for a range ('₹1899-2500',
@@ -80,8 +97,7 @@ def rupee_figures(reply: str) -> set:
     for m in re.finditer(_RUPEE + r"\s*" + _AMOUNT, t):
         marker = m.group(0)[: m.start(1) - m.start()].strip()
         shared = any(a < m.start() < b for a, b in suffix_of)          # this marker was already the suffix of the number before it
-        after = re.findall(r"[^\s\d.,;:!?।()]+", t[m.end(1): m.end(1) + 40])[:2]
-        counted = any(u in w for w in after for u in _TIME_UNITS)       # only a number followed by a day / time unit is a count; any other second number stays a figure
+        counted = _is_count(re.findall(r"[^\s\d.,;:!?।()\-–]+", t[m.end(1): m.end(1) + 40])[:3])      # only a number followed by a day / time word is a count; any other second number stays a figure
         if shared and counted and marker not in ("₹", "rs", "rs.", "inr", "रु", "रु.", "रू", "रू.", "ரூ", "ரூ."):
             continue
         out.add(_dec(m.group(1)))

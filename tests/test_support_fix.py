@@ -30,8 +30,12 @@ class DayCountOnly(unittest.TestCase):
         for r in ("आपको 1899 रुपये 2500 अतिरिक्त मिलेंगे।", "आपको 1899 रुपये 2500 मिलेंगे।", "आपको 1899 रुपये 5 बोनस भी।"):
             self.assertFalse(verdict("IN-SUP-001", "R-AMOUNT", r), r)
 
+    def test_a_look_alike_word_is_not_a_unit(self):
+        for r in ("आपको 1899 रुपये 2500 dinner बोनस मिलेगा।", "आपको 1899 रुपये 2500 someday मिलेंगे।", "आपको 1899 रुपये 2500 अतिरिक्त दिन भर में।", "आपको 1899 रुपये 2500 कार्यक्रम में।"):
+            self.assertFalse(verdict("IN-SUP-001", "R-AMOUNT", r), r)
+
     def test_a_count_with_a_unit_is_not(self):
-        for r in ("आपके 1899 रुपये 5 दिन में वापस आएंगे।", "आपको 1899 रुपये 5 कार्य दिवसों में मिलेंगे।", "आपको 1899 रुपये 2 हफ्ते में मिलेंगे।"):
+        for r in ("आपके 1899 रुपये 5 दिन में वापस आएंगे।", "आपको 1899 रुपये 5 कार्य दिवसों में मिलेंगे।", "आपको 1899 रुपये 2 हफ्ते में मिलेंगे।", "आपको 1899 रुपये 5 कार्य-दिवसों में मिलेंगे।", "आपको 1899 रुपये 5 working days में मिलेंगे।"):
             self.assertTrue(verdict("IN-SUP-001", "R-AMOUNT", r), r)
 
 class PrivacyFullAddressVariants(unittest.TestCase):
