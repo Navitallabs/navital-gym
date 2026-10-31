@@ -99,6 +99,11 @@ def _check(path, allow_incomplete):
     # 3-4 prompts and replay
     tr_all = tr_all or {}
     tr = tr_all.get(agent) or (next(iter(tr_all.values())) if len(tr_all) == 1 else {})
+    empty = sorted(tid for tid, runs in d["tasks"].items() if not isinstance(runs, list) or not runs)
+    if empty: reasons.append(f"{len(empty)} task(s) have no run recorded ({', '.join(empty[:5])}{', ...' if len(empty) > 5 else ''}): every task needs at least one attempt and its transcript")
+    ks = {len(runs) for runs in d["tasks"].values() if isinstance(runs, list) and runs}
+    if len(ks) > 1: reasons.append(f"tasks have different numbers of runs ({sorted(ks)}): every task needs the same k")
+    if reasons: return False, reasons, notes, None
     replayed = {}
     for tid, runs in d["tasks"].items():
         runs_msgs = tr.get(tid, [])

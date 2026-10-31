@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.1 follow-ups noted for v1.2
+- **UPI reason `over_daily_count`.** The UPI oracle now answers `insufficient_balance` and `over_daily_count` in the world's check order (balance and daily payment-count boundaries). `over_daily_count` will be listed in the UPI instructions in v1.2; the instructions are unchanged in v1.1 so that no UPI task prompt changes. No public task reaches either path.
+
 ## Results update, 30 Oct 2026 (grader unchanged, ed78addcd557)
 No code release: `navital_gym/` is untouched, the version stays 1.0.1 and there is no new tag. Verify with `git rev-parse v1.0.1:navital_gym` (and `git rev-parse HEAD:navital_gym` here): both start with `ed78addcd557`.
 - **Claude Opus 5.5 added.** Full standard set, k=1, 264 of 321 tasks (82.2%), 0 length cut-offs: trip 32/55, UPI 39/50, GST 49/50, form 50/50, form multi-document 40/40, support 54/76 (core 35/50, experimental 19/26). Claude Sonnet 5.5 solved 256 of 321; at one run per task, an 8-task gap does not separate the two. The six run files and their transcripts are in `runs/`, graded at `ed78addcd557`.

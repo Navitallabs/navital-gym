@@ -57,8 +57,10 @@ def _pay(rules, a, rec, vpa, amount):
         reason = "over_txn_limit"
     elif a["daily_used"] + amount > a["daily_limit"]:
         reason = "over_daily_limit"
-    elif a["daily_count"] + 1 > a["daily_count_limit"] or amount > a["balance"]:
-        reason = "cannot_pay"
+    elif a["daily_count"] + 1 > a["daily_count_limit"]:        # same order as UpiWorld._payment_problem: per-payment limit, daily amount, daily count, balance
+        reason = "over_daily_count"
+    elif amount > a["balance"]:
+        reason = "insufficient_balance"
     else:
         return dict(answer=dict(action="paid"), effects=[("initiate_payment", vpa, amount)], forbidden=[])
     return dict(answer=dict(action="cannot_pay", reason=reason), effects=[], forbidden=["initiate_payment"])
