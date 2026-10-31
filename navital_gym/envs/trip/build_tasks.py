@@ -25,13 +25,13 @@ STRUCT = {
     34: {"must_use": [MB_LEH], "extra_cities": ["Manali", "Chandigarh"]}, 35: {"must_visit": ["Pangong Lake"]},
     36: {"must_visit": ["Kaziranga Jeep Safari"]}, 37: {"must_visit": ["Kaziranga Jeep Safari"]},
     38: {"must_visit": ["Kaziranga Jeep Safari", "Kaziranga Elephant Safari"]},
-    39: {"route": ["Guwahati", "Shillong"], "must_visit": ["Cherrapunji day trip"]},
+    39: {"route": ["Guwahati", "Shillong"], "must_visit": ["Cherrapunji day trip"], "avoid_cities": ["Kaziranga"]},   # v1.1: the prompt says "no Kaziranga"
     41: {"end": "Jaipur", "snapshot_date": "2026-11-15", "mode_policy": "rail_only"}, 42: {"end": "Jaipur", "snapshot_date": "2026-11-15", "mode_policy": "rail_only"},
     43: {"end": "Pune", "snapshot_date": "2026-12-03", "mode_policy": "rail_only"},
     44: {"end": "Agra", "snapshot_date": "2026-12-05", "classes_only": ["CC"], "rail_dep_before": "12:00", "mode_policy": "rail_only"},
     45: {"end": "Bengaluru", "snapshot_date": "2026-12-10", "mode_policy": "rail_only"},
     46: {"rest_days": 1}, 48: {"mode_policy": "rail_only"}, 49: {"day_visit": [{"name": "Taj Mahal", "day": 1}]},
-    50: {"no_stairs": True},
+    50: {"no_stairs": True, "need_lift": True},   # v1.1: the prompt asks for "लिफ्ट वाला होटल"; ground-floor rooms alone do not meet it
 }
 # hill/Ladakh tasks whose designer prompt does not say "by train" but whose intent needs it
 PROMPT_APPEND = {24: " Travel by train.", 25: " Travel by train.",

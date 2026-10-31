@@ -492,6 +492,8 @@ class RAcc(Rule):
             for d in plan["days"]:
                 if d["stay"] and not (d["stay"]["hotel"]["lift"] or d["stay"]["hotel"]["ground_floor"]):
                     return RuleResult(False, f"{d['stay']['hotel']['name']} has no lift or ground-floor rooms")
+                if p.get("need_lift") and d["stay"] and not d["stay"]["hotel"]["lift"]:     # v1.1: the task asks for a hotel with a lift
+                    return RuleResult(False, f"{d['stay']['hotel']['name']} has no lift")
                 for a in d["acts"]:
                     if not D.ATTRACTIONS[a["name"]]["wheelchair"]:
                         return RuleResult(False, f"{a['name']} is not step-free")
@@ -587,6 +589,9 @@ class RRoute(Rule):
                 return RuleResult(False, f"never reaches {c}")
             if c != p["origin"] and c != p.get("end") and c not in seen:      # arriving is enough where the trip ENDS (a rail booking has no night or sight)
                 return RuleResult(False, f"passes through {c} without a night or a sight there")
+        for c in p.get("avoid_cities", []):      # v1.1: a city the task excludes ("no Kaziranga") must not be visited, stayed in or passed through
+            if c in arrived or c in seen or any(l["frm"] == c for l in plan["legs"]):
+                return RuleResult(False, f"the task excludes {c}")
         names = [(a["name"], i, a) for i, d in enumerate(plan["days"]) for a in d["acts"]]
         for need in p.get("must_visit", []):
             if not any(n == need for n, _, _ in names):

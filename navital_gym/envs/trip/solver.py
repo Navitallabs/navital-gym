@@ -322,6 +322,8 @@ class Solver:
             return False
         if self.on("R-ACC") and self.p.get("no_stairs") and not (h["lift"] or h["ground_floor"]):
             return False
+        if self.on("R-ACC") and self.p.get("need_lift") and not h["lift"]:
+            return False
         return True
 
     # --------------------------------------------------------------------- build + verify a candidate
