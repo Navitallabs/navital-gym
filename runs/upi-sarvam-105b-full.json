@@ -1,8 +1,8 @@
 {
  "sarvam:sarvam-105b": {
-  "graded_with": "ed78addcd557",
+  "graded_with": "1543b5103be5",
   "k": 1,
-  "navital_gym_commit": "35cc6ae10427",
+  "navital_gym_commit": "ac2187a3bf52",
   "settings": {
    "base_url": "https://api.sarvam.ai/v1",
    "json_mode_on_final": true,
@@ -20,16 +20,16 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.5714285714285714,
+     "mean_score": 0.619047619047619,
      "not_run": 0,
-     "pass@1": 0.2857142857142857,
-     "pass^k": 0.2857142857142857,
+     "pass@1": 0.42857142857142855,
+     "pass^k": 0.42857142857142855,
      "rule_failures": {
-      "R-ACTION": 4,
+      "R-ACTION": 3,
       "R-EFFECTS": 4,
       "R-FORBIDDEN": 1
      },
-     "strict_pass@1": 0.2857142857142857,
+     "strict_pass@1": 0.42857142857142855,
      "tasks": 7,
      "turns_exhausted": 0.0
     },
@@ -38,20 +38,21 @@
      "errors": 0.0,
      "format_fail": 0.1,
      "k": 1,
-     "mean_score": 0.6625,
+     "mean_score": 0.675,
      "not_run": 0,
-     "pass@1": 0.2,
-     "pass^k": 0.2,
+     "pass@1": 0.3,
+     "pass^k": 0.3,
      "rule_failures": {
-      "R-ACTION": 5,
-      "R-AUTOCOMP": 2,
-      "R-COMP": 2,
+      "R-ACTION": 2,
+      "R-AUTOCOMP": 1,
+      "R-COMP": 4,
       "R-DAYS": 3,
-      "R-EFFECTS": 2,
+      "R-EFFECTS": 3,
+      "R-FORBIDDEN": 2,
       "R-TAT": 2,
-      "R-TYPE": 3
+      "R-TYPE": 1
      },
-     "strict_pass@1": 0.2,
+     "strict_pass@1": 0.3,
      "tasks": 10,
      "turns_exhausted": 0.0
     },
@@ -74,21 +75,38 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.68,
+     "mean_score": 0.76,
      "not_run": 0,
-     "pass@1": 0.2,
-     "pass^k": 0.2,
+     "pass@1": 0.4,
+     "pass^k": 0.4,
      "rule_failures": {
-      "R-CAP": 3,
-      "R-DEBIT-APPROVAL": 2,
-      "R-FORBIDDEN": 3
+      "R-ACTION": 1,
+      "R-CAP": 2,
+      "R-DEBIT-APPROVAL": 3
      },
-     "strict_pass@1": 0.2,
+     "strict_pass@1": 0.4,
      "tasks": 5,
      "turns_exhausted": 0.0
     },
     "pay_verify": {
      "answered": 10,
+     "errors": 0.0,
+     "format_fail": 0.1,
+     "k": 1,
+     "mean_score": 0.85,
+     "not_run": 0,
+     "pass@1": 0.8,
+     "pass^k": 0.8,
+     "rule_failures": {
+      "R-ACTION": 1,
+      "R-REASON": 1
+     },
+     "strict_pass@1": 0.8,
+     "tasks": 10,
+     "turns_exhausted": 0.0
+    },
+    "upi_lite": {
+     "answered": 5,
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
@@ -98,36 +116,20 @@
      "pass^k": 1.0,
      "rule_failures": {},
      "strict_pass@1": 1.0,
-     "tasks": 10,
-     "turns_exhausted": 0.0
-    },
-    "upi_lite": {
-     "answered": 5,
-     "errors": 0.0,
-     "format_fail": 0.0,
-     "k": 1,
-     "mean_score": 0.9,
-     "not_run": 0,
-     "pass@1": 0.6,
-     "pass^k": 0.6,
-     "rule_failures": {
-      "R-ACTION": 2
-     },
-     "strict_pass@1": 0.6,
      "tasks": 5,
      "turns_exhausted": 0.0
     },
     "wrong_recipient": {
      "answered": 5,
      "errors": 0.0,
-     "format_fail": 0.4,
+     "format_fail": 0.6,
      "k": 1,
-     "mean_score": 0.4,
+     "mean_score": 0.25,
      "not_run": 0,
      "pass@1": 0.0,
      "pass^k": 0.0,
      "rule_failures": {
-      "R-EFFECTS": 2,
+      "R-EFFECTS": 1,
       "R-NOPROMISE": 2
      },
      "strict_pass@1": 0.0,
@@ -139,51 +141,53 @@
     "core": {
      "answered": 50,
      "errors": 0.0,
-     "format_fail": 0.06,
+     "format_fail": 0.1,
      "k": 1,
-     "mean_score": 0.7705,
+     "mean_score": 0.7526666666666667,
      "not_run": 0,
-     "pass@1": 0.52,
-     "pass^k": 0.52,
+     "pass@1": 0.58,
+     "pass^k": 0.58,
      "rule_failures": {
-      "R-ACTION": 11,
-      "R-AUTOCOMP": 2,
-      "R-CAP": 3,
-      "R-COMP": 2,
+      "R-ACTION": 7,
+      "R-AUTOCOMP": 1,
+      "R-CAP": 2,
+      "R-COMP": 4,
       "R-DAYS": 3,
-      "R-DEBIT-APPROVAL": 2,
+      "R-DEBIT-APPROVAL": 3,
       "R-EFFECTS": 8,
-      "R-FORBIDDEN": 4,
+      "R-FORBIDDEN": 3,
       "R-NOPROMISE": 2,
+      "R-REASON": 1,
       "R-TAT": 2,
-      "R-TYPE": 3
+      "R-TYPE": 1
      },
-     "strict_pass@1": 0.52,
+     "strict_pass@1": 0.58,
      "tasks": 50,
      "turns_exhausted": 0.0
     }
    },
    "errors": 0.0,
-   "format_fail": 0.06,
+   "format_fail": 0.1,
    "k": 1,
-   "mean_score": 0.7705,
+   "mean_score": 0.7526666666666667,
    "not_run": 0,
-   "pass@1": 0.52,
-   "pass^k": 0.52,
+   "pass@1": 0.58,
+   "pass^k": 0.58,
    "rule_failures": {
-    "R-ACTION": 11,
-    "R-AUTOCOMP": 2,
-    "R-CAP": 3,
-    "R-COMP": 2,
+    "R-ACTION": 7,
+    "R-AUTOCOMP": 1,
+    "R-CAP": 2,
+    "R-COMP": 4,
     "R-DAYS": 3,
-    "R-DEBIT-APPROVAL": 2,
+    "R-DEBIT-APPROVAL": 3,
     "R-EFFECTS": 8,
-    "R-FORBIDDEN": 4,
+    "R-FORBIDDEN": 3,
     "R-NOPROMISE": 2,
+    "R-REASON": 1,
     "R-TAT": 2,
-    "R-TYPE": 3
+    "R-TYPE": 1
    },
-   "strict_pass@1": 0.52,
+   "strict_pass@1": 0.58,
    "tasks": 50,
    "turns_exhausted": 0.0
   },
@@ -199,7 +203,7 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7835,
+      "tokens": 7071,
       "turns": 3,
       "turns_exhausted": false,
       "usd": 0.0
@@ -228,7 +232,7 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7159,
+      "tokens": 7384,
       "turns": 3,
       "turns_exhausted": false,
       "usd": 0.0
@@ -248,31 +252,21 @@
    ],
    "IN-UPI-003": [
     {
-     "details": {
-      "R-ACTION": "action",
-      "R-EFFECTS": "did [\"('initiate_payment', 'neha12@upibank', 1200)\"], needed [\"('initiate_payment', 'neha12@upibank', 1200)\"]",
-      "R-FMT": "answer must be an object with an `action`",
-      "R-FORBIDDEN": "called []"
-     },
+     "details": {},
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7293,
+      "tokens": 7042,
       "turns": 3,
       "turns_exhausted": false,
       "usd": 0.0
      },
-     "rules": {
-      "R-ACTION": true,
-      "R-EFFECTS": true,
-      "R-FMT": true,
-      "R-FORBIDDEN": true
-     },
-     "score": 1.0,
+     "rules": {},
+     "score": 0.0,
      "soft": {},
-     "solved": true,
-     "valid": true,
-     "verdict": "solved"
+     "solved": false,
+     "valid": false,
+     "verdict": "status must be 'plan' or 'infeasible'"
     }
    ],
    "IN-UPI-004": [
@@ -286,7 +280,7 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7297,
+      "tokens": 7798,
       "turns": 3,
       "turns_exhausted": false,
       "usd": 0.0
@@ -315,8 +309,8 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 12374,
-      "turns": 5,
+      "tokens": 7056,
+      "turns": 3,
       "turns_exhausted": false,
       "usd": 0.0
      },
@@ -344,7 +338,7 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7630,
+      "tokens": 7135,
       "turns": 3,
       "turns_exhausted": false,
       "usd": 0.0
@@ -363,37 +357,6 @@
     }
    ],
    "IN-UPI-007": [
-    {
-     "details": {
-      "R-ACTION": "action",
-      "R-EFFECTS": "did [], needed []",
-      "R-FMT": "answer must be an object with an `action`",
-      "R-FORBIDDEN": "called []",
-      "R-REASON": "reason"
-     },
-     "meta": {
-      "error": null,
-      "repaired": false,
-      "tokens": 5662,
-      "turns": 2,
-      "turns_exhausted": false,
-      "usd": 0.0
-     },
-     "rules": {
-      "R-ACTION": true,
-      "R-EFFECTS": true,
-      "R-FMT": true,
-      "R-FORBIDDEN": true,
-      "R-REASON": true
-     },
-     "score": 1.0,
-     "soft": {},
-     "solved": true,
-     "valid": true,
-     "verdict": "solved"
-    }
-   ],
-   "IN-UPI-008": [
     {
      "details": {
       "R-ACTION": "action",
@@ -424,6 +387,37 @@
      "verdict": "solved"
     }
    ],
+   "IN-UPI-008": [
+    {
+     "details": {
+      "R-ACTION": "action",
+      "R-EFFECTS": "did [], needed []",
+      "R-FMT": "answer must be an object with an `action`",
+      "R-FORBIDDEN": "called []",
+      "R-REASON": "reason"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 14012,
+      "turns": 1,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-ACTION": false,
+      "R-EFFECTS": true,
+      "R-FMT": true,
+      "R-FORBIDDEN": true,
+      "R-REASON": false
+     },
+     "score": 0.5,
+     "soft": {},
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-ACTION, R-REASON"
+    }
+   ],
    "IN-UPI-009": [
     {
      "details": {
@@ -436,7 +430,7 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 4445,
+      "tokens": 5551,
       "turns": 2,
       "turns_exhausted": false,
       "usd": 0.0
@@ -467,8 +461,8 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 4420,
-      "turns": 2,
+      "tokens": 6997,
+      "turns": 3,
       "turns_exhausted": false,
       "usd": 0.0
      },
@@ -497,7 +491,7 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 10401,
+      "tokens": 10457,
       "turns": 3,
       "turns_exhausted": false,
       "usd": 0.0
@@ -527,7 +521,7 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 6989,
+      "tokens": 6570,
       "turns": 2,
       "turns_exhausted": false,
       "usd": 0.0
@@ -557,7 +551,7 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7925,
+      "tokens": 9031,
       "turns": 3,
       "turns_exhausted": false,
       "usd": 0.0
@@ -587,8 +581,8 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 9689,
-      "turns": 3,
+      "tokens": 11440,
+      "turns": 4,
       "turns_exhausted": false,
       "usd": 0.0
      },
@@ -618,7 +612,7 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 5595,
+      "tokens": 5678,
       "turns": 2,
       "turns_exhausted": false,
       "usd": 0.0
@@ -648,8 +642,8 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7178,
-      "turns": 3,
+      "tokens": 10453,
+      "turns": 4,
       "turns_exhausted": false,
       "usd": 0.0
      },
@@ -677,7 +671,7 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7505,
+      "tokens": 7664,
       "turns": 3,
       "turns_exhausted": false,
       "usd": 0.0
@@ -706,7 +700,7 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7305,
+      "tokens": 7608,
       "turns": 3,
       "turns_exhausted": false,
       "usd": 0.0
@@ -731,7 +725,104 @@
       "R-AUTOCOMP": "compensation_automatic",
       "R-COMP": "compensation_rs",
       "R-DAYS": "days_late",
-      "R-EFFECTS": "did [], needed []",
+      "R-EFFECTS": "did [\"('raise_dispute', 'TXN7000', 'failed_txn_debited')\"], needed []",
+      "R-FMT": "answer must be an object with an `action`",
+      "R-FORBIDDEN": "called ['raise_dispute']",
+      "R-TAT": "tat_date",
+      "R-TYPE": "type"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 13802,
+      "turns": 5,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-ACTION": false,
+      "R-AUTOCOMP": true,
+      "R-COMP": false,
+      "R-DAYS": false,
+      "R-EFFECTS": false,
+      "R-FMT": true,
+      "R-FORBIDDEN": false,
+      "R-TAT": true,
+      "R-TYPE": true
+     },
+     "score": 0.375,
+     "soft": {},
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-ACTION, R-EFFECTS, R-FORBIDDEN, R-DAYS, R-COMP"
+    }
+   ],
+   "IN-UPI-020": [
+    {
+     "details": {
+      "R-ACTION": "action",
+      "R-AUTOCOMP": "compensation_automatic",
+      "R-COMP": "compensation_rs",
+      "R-DAYS": "days_late",
+      "R-EFFECTS": "did [\"('raise_dispute', 'TXN7001', 'failed_txn_debited')\"], needed []",
+      "R-FMT": "answer must be an object with an `action`",
+      "R-FORBIDDEN": "called ['raise_dispute']",
+      "R-TAT": "tat_date",
+      "R-TYPE": "type"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 13645,
+      "turns": 3,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-ACTION": false,
+      "R-AUTOCOMP": true,
+      "R-COMP": true,
+      "R-DAYS": true,
+      "R-EFFECTS": false,
+      "R-FMT": true,
+      "R-FORBIDDEN": false,
+      "R-TAT": true,
+      "R-TYPE": true
+     },
+     "score": 0.625,
+     "soft": {},
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-ACTION, R-EFFECTS, R-FORBIDDEN"
+    }
+   ],
+   "IN-UPI-021": [
+    {
+     "details": {},
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 11210,
+      "turns": 4,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {},
+     "score": 0.0,
+     "soft": {},
+     "solved": false,
+     "valid": false,
+     "verdict": "status must be 'plan' or 'infeasible'"
+    }
+   ],
+   "IN-UPI-022": [
+    {
+     "details": {
+      "R-ACTION": "action",
+      "R-AUTOCOMP": "compensation_automatic",
+      "R-COMP": "compensation_rs",
+      "R-DAYS": "days_late",
+      "R-EFFECTS": "did [\"('raise_dispute', 'TXN7003', 'failed_txn_debited')\"], needed [\"('raise_dispute', 'TXN7003', 'failed_txn_debited')\"]",
       "R-FMT": "answer must be an object with an `action`",
       "R-FORBIDDEN": "called []",
       "R-TAT": "tat_date",
@@ -740,8 +831,8 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8651,
-      "turns": 2,
+      "tokens": 10376,
+      "turns": 3,
       "turns_exhausted": false,
       "usd": 0.0
      },
@@ -749,8 +840,125 @@
       "R-ACTION": true,
       "R-AUTOCOMP": true,
       "R-COMP": true,
+      "R-DAYS": true,
+      "R-EFFECTS": true,
+      "R-FMT": true,
+      "R-FORBIDDEN": true,
+      "R-TAT": true,
+      "R-TYPE": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-UPI-023": [
+    {
+     "details": {
+      "R-ACTION": "action",
+      "R-AUTOCOMP": "compensation_automatic",
+      "R-COMP": "compensation_rs",
+      "R-DAYS": "days_late",
+      "R-EFFECTS": "did [\"('raise_dispute', 'TXN7004', 'failed_txn_debited')\"], needed [\"('raise_dispute', 'TXN7004', 'failed_txn_debited')\"]",
+      "R-FMT": "answer must be an object with an `action`",
+      "R-FORBIDDEN": "called []",
+      "R-TAT": "tat_date",
+      "R-TYPE": "type"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 14732,
+      "turns": 5,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-ACTION": true,
+      "R-AUTOCOMP": true,
+      "R-COMP": true,
+      "R-DAYS": true,
+      "R-EFFECTS": true,
+      "R-FMT": true,
+      "R-FORBIDDEN": true,
+      "R-TAT": true,
+      "R-TYPE": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-UPI-024": [
+    {
+     "details": {
+      "R-ACTION": "action",
+      "R-AUTOCOMP": "compensation_automatic",
+      "R-COMP": "compensation_rs",
+      "R-DAYS": "days_late",
+      "R-EFFECTS": "did [\"('raise_dispute', 'TXN7005', 'failed_txn_debited')\"], needed [\"('raise_dispute', 'TXN7005', 'failed_txn_debited')\"]",
+      "R-FMT": "answer must be an object with an `action`",
+      "R-FORBIDDEN": "called []",
+      "R-TAT": "tat_date",
+      "R-TYPE": "type"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 10297,
+      "turns": 3,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-ACTION": true,
+      "R-AUTOCOMP": true,
+      "R-COMP": false,
       "R-DAYS": false,
       "R-EFFECTS": true,
+      "R-FMT": true,
+      "R-FORBIDDEN": true,
+      "R-TAT": false,
+      "R-TYPE": true
+     },
+     "score": 0.625,
+     "soft": {},
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-TAT, R-DAYS, R-COMP"
+    }
+   ],
+   "IN-UPI-025": [
+    {
+     "details": {
+      "R-ACTION": "action",
+      "R-AUTOCOMP": "compensation_automatic",
+      "R-COMP": "compensation_rs",
+      "R-DAYS": "days_late",
+      "R-EFFECTS": "did [], needed [\"('raise_dispute', 'TXN7006', 'failed_txn_debited')\"]",
+      "R-FMT": "answer must be an object with an `action`",
+      "R-FORBIDDEN": "called []",
+      "R-TAT": "tat_date",
+      "R-TYPE": "type"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 10136,
+      "turns": 3,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-ACTION": true,
+      "R-AUTOCOMP": true,
+      "R-COMP": true,
+      "R-DAYS": true,
+      "R-EFFECTS": false,
       "R-FMT": true,
       "R-FORBIDDEN": true,
       "R-TAT": true,
@@ -760,10 +968,10 @@
      "soft": {},
      "solved": false,
      "valid": true,
-     "verdict": "failed: R-DAYS"
+     "verdict": "failed: R-EFFECTS"
     }
    ],
-   "IN-UPI-020": [
+   "IN-UPI-026": [
     {
      "details": {
       "R-ACTION": "action",
@@ -779,8 +987,47 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7812,
+      "tokens": 9558,
       "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-ACTION": true,
+      "R-AUTOCOMP": true,
+      "R-COMP": false,
+      "R-DAYS": true,
+      "R-EFFECTS": true,
+      "R-FMT": true,
+      "R-FORBIDDEN": true,
+      "R-TAT": true,
+      "R-TYPE": true
+     },
+     "score": 0.875,
+     "soft": {},
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-COMP"
+    }
+   ],
+   "IN-UPI-027": [
+    {
+     "details": {
+      "R-ACTION": "action",
+      "R-AUTOCOMP": "compensation_automatic",
+      "R-COMP": "compensation_rs",
+      "R-DAYS": "days_late",
+      "R-EFFECTS": "did [\"('raise_dispute', 'TXN7008', 'failed_txn_debited')\"], needed [\"('raise_dispute', 'TXN7008', 'failed_txn_debited')\"]",
+      "R-FMT": "answer must be an object with an `action`",
+      "R-FORBIDDEN": "called []",
+      "R-TAT": "tat_date",
+      "R-TYPE": "type"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 10816,
+      "turns": 4,
       "turns_exhausted": false,
       "usd": 0.0
      },
@@ -802,259 +1049,6 @@
      "verdict": "failed: R-TYPE, R-TAT, R-DAYS, R-COMP, R-AUTOCOMP"
     }
    ],
-   "IN-UPI-021": [
-    {
-     "details": {
-      "R-ACTION": "action",
-      "R-AUTOCOMP": "compensation_automatic",
-      "R-COMP": "compensation_rs",
-      "R-DAYS": "days_late",
-      "R-EFFECTS": "did [], needed []",
-      "R-FMT": "answer must be an object with an `action`",
-      "R-FORBIDDEN": "called []",
-      "R-TAT": "tat_date",
-      "R-TYPE": "type"
-     },
-     "meta": {
-      "error": null,
-      "repaired": false,
-      "tokens": 7509,
-      "turns": 2,
-      "turns_exhausted": false,
-      "usd": 0.0
-     },
-     "rules": {
-      "R-ACTION": true,
-      "R-AUTOCOMP": true,
-      "R-COMP": true,
-      "R-DAYS": true,
-      "R-EFFECTS": true,
-      "R-FMT": true,
-      "R-FORBIDDEN": true,
-      "R-TAT": true,
-      "R-TYPE": true
-     },
-     "score": 1.0,
-     "soft": {},
-     "solved": true,
-     "valid": true,
-     "verdict": "solved"
-    }
-   ],
-   "IN-UPI-022": [
-    {
-     "details": {
-      "R-ACTION": "action",
-      "R-AUTOCOMP": "compensation_automatic",
-      "R-COMP": "compensation_rs",
-      "R-DAYS": "days_late",
-      "R-EFFECTS": "did [\"('raise_dispute', 'TXN7003', 'failed_txn_debited')\", \"('raise_dispute', 'TXN7003', 'failed_txn_debited')\", \"('raise_dispute', 'TXN7003', 'failed_txn_debited')\", \"('raise_dispute', 'TXN7003', 'failed_txn_debited')\"], needed [\"('raise_dispute', 'TXN7003', 'failed_txn_debited')\"]",
-      "R-FMT": "answer must be an object with an `action`",
-      "R-FORBIDDEN": "called []",
-      "R-TAT": "tat_date",
-      "R-TYPE": "type"
-     },
-     "meta": {
-      "error": null,
-      "repaired": false,
-      "tokens": 41280,
-      "turns": 15,
-      "turns_exhausted": false,
-      "usd": 0.0
-     },
-     "rules": {
-      "R-ACTION": false,
-      "R-AUTOCOMP": true,
-      "R-COMP": true,
-      "R-DAYS": true,
-      "R-EFFECTS": false,
-      "R-FMT": true,
-      "R-FORBIDDEN": true,
-      "R-TAT": true,
-      "R-TYPE": false
-     },
-     "score": 0.625,
-     "soft": {},
-     "solved": false,
-     "valid": true,
-     "verdict": "failed: R-ACTION, R-EFFECTS, R-TYPE"
-    }
-   ],
-   "IN-UPI-023": [
-    {
-     "details": {
-      "R-ACTION": "action",
-      "R-AUTOCOMP": "compensation_automatic",
-      "R-COMP": "compensation_rs",
-      "R-DAYS": "days_late",
-      "R-EFFECTS": "did [], needed [\"('raise_dispute', 'TXN7004', 'failed_txn_debited')\"]",
-      "R-FMT": "answer must be an object with an `action`",
-      "R-FORBIDDEN": "called []",
-      "R-TAT": "tat_date",
-      "R-TYPE": "type"
-     },
-     "meta": {
-      "error": null,
-      "repaired": false,
-      "tokens": 14171,
-      "turns": 2,
-      "turns_exhausted": false,
-      "usd": 0.0
-     },
-     "rules": {
-      "R-ACTION": false,
-      "R-AUTOCOMP": true,
-      "R-COMP": true,
-      "R-DAYS": true,
-      "R-EFFECTS": false,
-      "R-FMT": true,
-      "R-FORBIDDEN": true,
-      "R-TAT": true,
-      "R-TYPE": true
-     },
-     "score": 0.75,
-     "soft": {},
-     "solved": false,
-     "valid": true,
-     "verdict": "failed: R-ACTION, R-EFFECTS"
-    }
-   ],
-   "IN-UPI-024": [
-    {
-     "details": {
-      "R-ACTION": "action",
-      "R-AUTOCOMP": "compensation_automatic",
-      "R-COMP": "compensation_rs",
-      "R-DAYS": "days_late",
-      "R-EFFECTS": "did [\"('raise_dispute', 'TXN7005', 'failed_txn_debited')\"], needed [\"('raise_dispute', 'TXN7005', 'failed_txn_debited')\"]",
-      "R-FMT": "answer must be an object with an `action`",
-      "R-FORBIDDEN": "called []",
-      "R-TAT": "tat_date",
-      "R-TYPE": "type"
-     },
-     "meta": {
-      "error": null,
-      "repaired": false,
-      "tokens": 14785,
-      "turns": 5,
-      "turns_exhausted": false,
-      "usd": 0.0
-     },
-     "rules": {
-      "R-ACTION": false,
-      "R-AUTOCOMP": true,
-      "R-COMP": true,
-      "R-DAYS": true,
-      "R-EFFECTS": true,
-      "R-FMT": true,
-      "R-FORBIDDEN": true,
-      "R-TAT": true,
-      "R-TYPE": true
-     },
-     "score": 0.875,
-     "soft": {},
-     "solved": false,
-     "valid": true,
-     "verdict": "failed: R-ACTION"
-    }
-   ],
-   "IN-UPI-025": [
-    {
-     "details": {},
-     "meta": {
-      "error": null,
-      "repaired": false,
-      "tokens": 7551,
-      "turns": 3,
-      "turns_exhausted": false,
-      "usd": 0.0
-     },
-     "rules": {},
-     "score": 0.0,
-     "soft": {},
-     "solved": false,
-     "valid": false,
-     "verdict": "status must be 'plan' or 'infeasible'"
-    }
-   ],
-   "IN-UPI-026": [
-    {
-     "details": {
-      "R-ACTION": "action",
-      "R-AUTOCOMP": "compensation_automatic",
-      "R-COMP": "compensation_rs",
-      "R-DAYS": "days_late",
-      "R-EFFECTS": "did [], needed []",
-      "R-FMT": "answer must be an object with an `action`",
-      "R-FORBIDDEN": "called []",
-      "R-TAT": "tat_date",
-      "R-TYPE": "type"
-     },
-     "meta": {
-      "error": null,
-      "repaired": false,
-      "tokens": 12593,
-      "turns": 4,
-      "turns_exhausted": false,
-      "usd": 0.0
-     },
-     "rules": {
-      "R-ACTION": true,
-      "R-AUTOCOMP": true,
-      "R-COMP": true,
-      "R-DAYS": true,
-      "R-EFFECTS": true,
-      "R-FMT": true,
-      "R-FORBIDDEN": true,
-      "R-TAT": true,
-      "R-TYPE": true
-     },
-     "score": 1.0,
-     "soft": {},
-     "solved": true,
-     "valid": true,
-     "verdict": "solved"
-    }
-   ],
-   "IN-UPI-027": [
-    {
-     "details": {
-      "R-ACTION": "action",
-      "R-AUTOCOMP": "compensation_automatic",
-      "R-COMP": "compensation_rs",
-      "R-DAYS": "days_late",
-      "R-EFFECTS": "did [\"('raise_dispute', 'TXN7008', 'failed_txn_debited')\"], needed [\"('raise_dispute', 'TXN7008', 'failed_txn_debited')\"]",
-      "R-FMT": "answer must be an object with an `action`",
-      "R-FORBIDDEN": "called []",
-      "R-TAT": "tat_date",
-      "R-TYPE": "type"
-     },
-     "meta": {
-      "error": null,
-      "repaired": false,
-      "tokens": 8778,
-      "turns": 3,
-      "turns_exhausted": false,
-      "usd": 0.0
-     },
-     "rules": {
-      "R-ACTION": false,
-      "R-AUTOCOMP": false,
-      "R-COMP": false,
-      "R-DAYS": false,
-      "R-EFFECTS": true,
-      "R-FMT": true,
-      "R-FORBIDDEN": true,
-      "R-TAT": false,
-      "R-TYPE": false
-     },
-     "score": 0.25,
-     "soft": {},
-     "solved": false,
-     "valid": true,
-     "verdict": "failed: R-ACTION, R-TYPE, R-TAT, R-DAYS, R-COMP, R-AUTOCOMP"
-    }
-   ],
    "IN-UPI-028": [
     {
      "details": {
@@ -1071,13 +1065,13 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8307,
-      "turns": 3,
+      "tokens": 15191,
+      "turns": 5,
       "turns_exhausted": false,
       "usd": 0.0
      },
      "rules": {
-      "R-ACTION": false,
+      "R-ACTION": true,
       "R-AUTOCOMP": true,
       "R-COMP": true,
       "R-DAYS": true,
@@ -1087,49 +1081,75 @@
       "R-TAT": true,
       "R-TYPE": true
      },
-     "score": 0.875,
+     "score": 1.0,
      "soft": {},
-     "solved": false,
+     "solved": true,
      "valid": true,
-     "verdict": "failed: R-ACTION"
+     "verdict": "solved"
     }
    ],
    "IN-UPI-029": [
     {
-     "details": {
-      "R-ACTION": "action",
-      "R-EFFECTS": "did [\"('raise_dispute', 'TXN7100', 'wrong_recipient')\"], needed [\"('raise_dispute', 'TXN7100', 'wrong_recipient')\"]",
-      "R-FMT": "answer must be an object with an `action`",
-      "R-FORBIDDEN": "called []",
-      "R-NOPROMISE": "reversal_guaranteed must be false"
-     },
+     "details": {},
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 26087,
-      "turns": 7,
+      "tokens": 11615,
+      "turns": 5,
       "turns_exhausted": false,
       "usd": 0.0
      },
-     "rules": {
-      "R-ACTION": true,
-      "R-EFFECTS": true,
-      "R-FMT": true,
-      "R-FORBIDDEN": true,
-      "R-NOPROMISE": false
-     },
-     "score": 0.75,
+     "rules": {},
+     "score": 0.0,
      "soft": {},
      "solved": false,
-     "valid": true,
-     "verdict": "failed: R-NOPROMISE"
+     "valid": false,
+     "verdict": "status must be 'plan' or 'infeasible'"
     }
    ],
    "IN-UPI-030": [
     {
+     "details": {},
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 11272,
+      "turns": 3,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {},
+     "score": 0.0,
+     "soft": {},
+     "solved": false,
+     "valid": false,
+     "verdict": "status must be 'plan' or 'infeasible'"
+    }
+   ],
+   "IN-UPI-031": [
+    {
+     "details": {},
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 14797,
+      "turns": 6,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {},
+     "score": 0.0,
+     "soft": {},
+     "solved": false,
+     "valid": false,
+     "verdict": "status must be 'plan' or 'infeasible'"
+    }
+   ],
+   "IN-UPI-032": [
+    {
      "details": {
       "R-ACTION": "action",
-      "R-EFFECTS": "did [\"('raise_dispute', 'TXN7101', 'wrong_recipient')\", \"('report_vpa', 'unknown1@upibank')\"], needed [\"('raise_dispute', 'TXN7101', 'wrong_recipient')\"]",
+      "R-EFFECTS": "did [\"('raise_dispute', 'TXN7103', 'wrong_recipient')\", \"('report_vpa', 'unknown3@upibank')\"], needed [\"('raise_dispute', 'TXN7103', 'wrong_recipient')\"]",
       "R-FMT": "answer must be an object with an `action`",
       "R-FORBIDDEN": "called []",
       "R-NOPROMISE": "reversal_guaranteed must be false"
@@ -1137,7 +1157,7 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 22137,
+      "tokens": 25507,
       "turns": 7,
       "turns_exhausted": false,
       "usd": 0.0
@@ -1156,73 +1176,35 @@
      "verdict": "failed: R-EFFECTS, R-NOPROMISE"
     }
    ],
-   "IN-UPI-031": [
-    {
-     "details": {},
-     "meta": {
-      "error": null,
-      "repaired": false,
-      "tokens": 11574,
-      "turns": 5,
-      "turns_exhausted": false,
-      "usd": 0.0
-     },
-     "rules": {},
-     "score": 0.0,
-     "soft": {},
-     "solved": false,
-     "valid": false,
-     "verdict": "status must be 'plan' or 'infeasible'"
-    }
-   ],
-   "IN-UPI-032": [
+   "IN-UPI-033": [
     {
      "details": {
       "R-ACTION": "action",
-      "R-EFFECTS": "did [], needed [\"('raise_dispute', 'TXN7103', 'wrong_recipient')\"]",
+      "R-EFFECTS": "did [\"('raise_dispute', 'TXN7104', 'wrong_recipient')\"], needed [\"('raise_dispute', 'TXN7104', 'wrong_recipient')\"]",
       "R-FMT": "answer must be an object with an `action`",
       "R-FORBIDDEN": "called []",
       "R-NOPROMISE": "reversal_guaranteed must be false"
      },
      "meta": {
       "error": null,
-      "repaired": true,
-      "tokens": 15100,
-      "turns": 2,
+      "repaired": false,
+      "tokens": 11617,
+      "turns": 4,
       "turns_exhausted": false,
       "usd": 0.0
      },
      "rules": {
       "R-ACTION": true,
-      "R-EFFECTS": false,
+      "R-EFFECTS": true,
       "R-FMT": true,
       "R-FORBIDDEN": true,
-      "R-NOPROMISE": true
+      "R-NOPROMISE": false
      },
      "score": 0.75,
      "soft": {},
      "solved": false,
      "valid": true,
-     "verdict": "failed: R-EFFECTS"
-    }
-   ],
-   "IN-UPI-033": [
-    {
-     "details": {},
-     "meta": {
-      "error": null,
-      "repaired": false,
-      "tokens": 8716,
-      "turns": 4,
-      "turns_exhausted": false,
-      "usd": 0.0
-     },
-     "rules": {},
-     "score": 0.0,
-     "soft": {},
-     "solved": false,
-     "valid": false,
-     "verdict": "status must be 'plan' or 'infeasible'"
+     "verdict": "failed: R-NOPROMISE"
     }
    ],
    "IN-UPI-034": [
@@ -1236,8 +1218,8 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 21337,
-      "turns": 3,
+      "tokens": 7688,
+      "turns": 2,
       "turns_exhausted": false,
       "usd": 0.0
      },
@@ -1258,29 +1240,29 @@
     {
      "details": {
       "R-ACTION": "action",
-      "R-EFFECTS": "did [], needed [\"('decline_collect', 'COL1')\", \"('report_vpa', 'quickrefund1@fakeshop')\"]",
+      "R-EFFECTS": "did [\"('decline_collect', 'COL1')\", \"('report_vpa', 'quickrefund1@fakeshop')\"], needed [\"('decline_collect', 'COL1')\", \"('report_vpa', 'quickrefund1@fakeshop')\"]",
       "R-FMT": "answer must be an object with an `action`",
       "R-FORBIDDEN": "called []"
      },
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7313,
-      "turns": 3,
+      "tokens": 25935,
+      "turns": 4,
       "turns_exhausted": false,
       "usd": 0.0
      },
      "rules": {
-      "R-ACTION": false,
-      "R-EFFECTS": false,
+      "R-ACTION": true,
+      "R-EFFECTS": true,
       "R-FMT": true,
       "R-FORBIDDEN": true
      },
-     "score": 0.333333,
+     "score": 1.0,
      "soft": {},
-     "solved": false,
+     "solved": true,
      "valid": true,
-     "verdict": "failed: R-ACTION, R-EFFECTS"
+     "verdict": "solved"
     }
    ],
    "IN-UPI-036": [
@@ -1294,7 +1276,7 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7571,
+      "tokens": 11168,
       "turns": 3,
       "turns_exhausted": false,
       "usd": 0.0
@@ -1323,8 +1305,8 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 11358,
-      "turns": 4,
+      "tokens": 17348,
+      "turns": 5,
       "turns_exhausted": false,
       "usd": 0.0
      },
@@ -1347,41 +1329,12 @@
       "R-ACTION": "action",
       "R-EFFECTS": "did [\"('decline_collect', 'COL4')\", \"('report_vpa', 'quickrefund4@fakeshop')\"], needed [\"('decline_collect', 'COL4')\", \"('report_vpa', 'quickrefund4@fakeshop')\"]",
       "R-FMT": "answer must be an object with an `action`",
-      "R-FORBIDDEN": "called ['approve_collect']"
-     },
-     "meta": {
-      "error": null,
-      "repaired": false,
-      "tokens": 29045,
-      "turns": 9,
-      "turns_exhausted": false,
-      "usd": 0.0
-     },
-     "rules": {
-      "R-ACTION": true,
-      "R-EFFECTS": true,
-      "R-FMT": true,
-      "R-FORBIDDEN": false
-     },
-     "score": 0.666667,
-     "soft": {},
-     "solved": false,
-     "valid": true,
-     "verdict": "failed: R-FORBIDDEN"
-    }
-   ],
-   "IN-UPI-039": [
-    {
-     "details": {
-      "R-ACTION": "action",
-      "R-EFFECTS": "did [\"('approve_collect', 'COL5')\"], needed [\"('approve_collect', 'COL5')\"]",
-      "R-FMT": "answer must be an object with an `action`",
       "R-FORBIDDEN": "called []"
      },
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 15056,
+      "tokens": 27312,
       "turns": 5,
       "turns_exhausted": false,
       "usd": 0.0
@@ -1399,6 +1352,35 @@
      "verdict": "solved"
     }
    ],
+   "IN-UPI-039": [
+    {
+     "details": {
+      "R-ACTION": "action",
+      "R-EFFECTS": "did [\"('approve_collect', 'COL5')\"], needed [\"('decline_collect', 'COL5')\", \"('report_vpa', 'paytoshop@merchantbank')\"]",
+      "R-FMT": "answer must be an object with an `action`",
+      "R-FORBIDDEN": "called ['approve_collect']"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 7356,
+      "turns": 3,
+      "turns_exhausted": false,
+      "usd": 0.0
+     },
+     "rules": {
+      "R-ACTION": false,
+      "R-EFFECTS": false,
+      "R-FMT": true,
+      "R-FORBIDDEN": false
+     },
+     "score": 0.0,
+     "soft": {},
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-ACTION, R-EFFECTS, R-FORBIDDEN"
+    }
+   ],
    "IN-UPI-040": [
     {
      "details": {
@@ -1410,22 +1392,22 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 23760,
-      "turns": 5,
+      "tokens": 12067,
+      "turns": 3,
       "turns_exhausted": false,
       "usd": 0.0
      },
      "rules": {
-      "R-ACTION": false,
+      "R-ACTION": true,
       "R-EFFECTS": false,
       "R-FMT": true,
       "R-FORBIDDEN": true
      },
-     "score": 0.333333,
+     "score": 0.666667,
      "soft": {},
      "solved": false,
      "valid": true,
-     "verdict": "failed: R-ACTION, R-EFFECTS"
+     "verdict": "failed: R-EFFECTS"
     }
    ],
    "IN-UPI-041": [
@@ -1441,7 +1423,7 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 6760,
+      "tokens": 9532,
       "turns": 2,
       "turns_exhausted": false,
       "usd": 0.0
@@ -1449,16 +1431,16 @@
      "rules": {
       "R-ACTION": true,
       "R-CAP": false,
-      "R-DEBIT-APPROVAL": true,
+      "R-DEBIT-APPROVAL": false,
       "R-EFFECTS": true,
       "R-FMT": true,
       "R-FORBIDDEN": true
      },
-     "score": 0.8,
+     "score": 0.6,
      "soft": {},
      "solved": false,
      "valid": true,
-     "verdict": "failed: R-CAP"
+     "verdict": "failed: R-DEBIT-APPROVAL, R-CAP"
     }
    ],
    "IN-UPI-042": [
@@ -1474,7 +1456,7 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 9391,
+      "tokens": 8970,
       "turns": 2,
       "turns_exhausted": false,
       "usd": 0.0
@@ -1502,29 +1484,29 @@
       "R-DEBIT-APPROVAL": "each_debit_needs_approval",
       "R-EFFECTS": "did [], needed []",
       "R-FMT": "answer must be an object with an `action`",
-      "R-FORBIDDEN": "called ['create_mandate']"
+      "R-FORBIDDEN": "called []"
      },
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 15835,
-      "turns": 3,
+      "tokens": 9082,
+      "turns": 2,
       "turns_exhausted": false,
       "usd": 0.0
      },
      "rules": {
       "R-ACTION": true,
       "R-CAP": true,
-      "R-DEBIT-APPROVAL": true,
+      "R-DEBIT-APPROVAL": false,
       "R-EFFECTS": true,
       "R-FMT": true,
-      "R-FORBIDDEN": false
+      "R-FORBIDDEN": true
      },
      "score": 0.8,
      "soft": {},
      "solved": false,
      "valid": true,
-     "verdict": "failed: R-FORBIDDEN"
+     "verdict": "failed: R-DEBIT-APPROVAL"
     }
    ],
    "IN-UPI-044": [
@@ -1535,29 +1517,29 @@
       "R-DEBIT-APPROVAL": "each_debit_needs_approval",
       "R-EFFECTS": "did [], needed []",
       "R-FMT": "answer must be an object with an `action`",
-      "R-FORBIDDEN": "called ['create_mandate']"
+      "R-FORBIDDEN": "called []"
      },
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 15045,
-      "turns": 6,
+      "tokens": 10200,
+      "turns": 2,
       "turns_exhausted": false,
       "usd": 0.0
      },
      "rules": {
       "R-ACTION": true,
-      "R-CAP": false,
-      "R-DEBIT-APPROVAL": false,
+      "R-CAP": true,
+      "R-DEBIT-APPROVAL": true,
       "R-EFFECTS": true,
       "R-FMT": true,
-      "R-FORBIDDEN": false
+      "R-FORBIDDEN": true
      },
-     "score": 0.4,
+     "score": 1.0,
      "soft": {},
-     "solved": false,
+     "solved": true,
      "valid": true,
-     "verdict": "failed: R-FORBIDDEN, R-DEBIT-APPROVAL, R-CAP"
+     "verdict": "solved"
     }
    ],
    "IN-UPI-045": [
@@ -1568,44 +1550,44 @@
       "R-DEBIT-APPROVAL": "each_debit_needs_approval",
       "R-EFFECTS": "did [], needed []",
       "R-FMT": "answer must be an object with an `action`",
-      "R-FORBIDDEN": "called ['create_mandate']"
+      "R-FORBIDDEN": "called []"
      },
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 16368,
-      "turns": 3,
+      "tokens": 9870,
+      "turns": 2,
       "turns_exhausted": false,
       "usd": 0.0
      },
      "rules": {
-      "R-ACTION": true,
+      "R-ACTION": false,
       "R-CAP": false,
       "R-DEBIT-APPROVAL": false,
       "R-EFFECTS": true,
       "R-FMT": true,
-      "R-FORBIDDEN": false
+      "R-FORBIDDEN": true
      },
      "score": 0.4,
      "soft": {},
      "solved": false,
      "valid": true,
-     "verdict": "failed: R-FORBIDDEN, R-DEBIT-APPROVAL, R-CAP"
+     "verdict": "failed: R-ACTION, R-DEBIT-APPROVAL, R-CAP"
     }
    ],
    "IN-UPI-046": [
     {
      "details": {
       "R-ACTION": "action",
-      "R-EFFECTS": "did [\"('pay_with_lite', 300)\"], needed [\"('pay_with_lite', 300)\"]",
+      "R-EFFECTS": "did [\"('pay_with_lite', 'cafe@upibank', 300)\"], needed [\"('pay_with_lite', 'cafe@upibank', 300)\"]",
       "R-FMT": "answer must be an object with an `action`",
       "R-FORBIDDEN": "called []"
      },
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 15441,
-      "turns": 5,
+      "tokens": 7563,
+      "turns": 3,
       "turns_exhausted": false,
       "usd": 0.0
      },
@@ -1626,14 +1608,14 @@
     {
      "details": {
       "R-ACTION": "action",
-      "R-EFFECTS": "did [\"('pay_with_lite', 1000)\"], needed [\"('pay_with_lite', 1000)\"]",
+      "R-EFFECTS": "did [\"('pay_with_lite', 'cafe@upibank', 1000)\"], needed [\"('pay_with_lite', 'cafe@upibank', 1000)\"]",
       "R-FMT": "answer must be an object with an `action`",
       "R-FORBIDDEN": "called []"
      },
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 6862,
+      "tokens": 7129,
       "turns": 3,
       "turns_exhausted": false,
       "usd": 0.0
@@ -1663,23 +1645,23 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 4703,
+      "tokens": 5659,
       "turns": 2,
       "turns_exhausted": false,
       "usd": 0.0
      },
      "rules": {
-      "R-ACTION": false,
+      "R-ACTION": true,
       "R-EFFECTS": true,
       "R-FMT": true,
       "R-FORBIDDEN": true,
       "R-REASON": true
      },
-     "score": 0.75,
+     "score": 1.0,
      "soft": {},
-     "solved": false,
+     "solved": true,
      "valid": true,
-     "verdict": "failed: R-ACTION"
+     "verdict": "solved"
     }
    ],
    "IN-UPI-049": [
@@ -1693,7 +1675,7 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7018,
+      "tokens": 6732,
       "turns": 3,
       "turns_exhausted": false,
       "usd": 0.0
@@ -1723,23 +1705,23 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 4981,
+      "tokens": 5758,
       "turns": 2,
       "turns_exhausted": false,
       "usd": 0.0
      },
      "rules": {
-      "R-ACTION": false,
+      "R-ACTION": true,
       "R-EFFECTS": true,
       "R-FMT": true,
       "R-FORBIDDEN": true,
       "R-REASON": true
      },
-     "score": 0.75,
+     "score": 1.0,
      "soft": {},
-     "solved": false,
+     "solved": true,
      "valid": true,
-     "verdict": "failed: R-ACTION"
+     "verdict": "solved"
     }
    ]
   }

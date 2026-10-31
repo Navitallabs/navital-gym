@@ -1,8 +1,8 @@
 {
  "anthropic:claude-opus-5-5": {
-  "graded_with": "ed78addcd557",
+  "graded_with": "1543b5103be5",
   "k": 1,
-  "navital_gym_commit": "ed78addcd557",
+  "navital_gym_commit": "ac2187a3bf52",
   "settings": {
    "json_mode_on_final": true,
    "max_tokens": 4096,
@@ -20,15 +20,12 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.8095238095238095,
+     "mean_score": 1.0,
      "not_run": 0,
-     "pass@1": 0.7142857142857143,
-     "pass^k": 0.7142857142857143,
-     "rule_failures": {
-      "R-ACTION": 2,
-      "R-EFFECTS": 2
-     },
-     "strict_pass@1": 0.7142857142857143,
+     "pass@1": 1.0,
+     "pass^k": 1.0,
+     "rule_failures": {},
+     "strict_pass@1": 1.0,
      "tasks": 7,
      "turns_exhausted": 0.0
     },
@@ -37,14 +34,12 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.925,
+     "mean_score": 1.0,
      "not_run": 0,
-     "pass@1": 0.4,
-     "pass^k": 0.4,
-     "rule_failures": {
-      "R-ACTION": 6
-     },
-     "strict_pass@1": 0.4,
+     "pass@1": 1.0,
+     "pass^k": 1.0,
+     "rule_failures": {},
+     "strict_pass@1": 1.0,
      "tasks": 10,
      "turns_exhausted": 0.0
     },
@@ -95,14 +90,12 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.8166666666666667,
+     "mean_score": 1.0,
      "not_run": 0,
-     "pass@1": 0.4,
-     "pass^k": 0.4,
-     "rule_failures": {
-      "R-ACTION": 3
-     },
-     "strict_pass@1": 0.4,
+     "pass@1": 1.0,
+     "pass^k": 1.0,
+     "rule_failures": {},
+     "strict_pass@1": 1.0,
      "tasks": 5,
      "turns_exhausted": 0.0
     },
@@ -127,15 +120,12 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.94,
+     "mean_score": 1.0,
      "not_run": 0,
-     "pass@1": 0.78,
-     "pass^k": 0.78,
-     "rule_failures": {
-      "R-ACTION": 11,
-      "R-EFFECTS": 2
-     },
-     "strict_pass@1": 0.78,
+     "pass@1": 1.0,
+     "pass^k": 1.0,
+     "rule_failures": {},
+     "strict_pass@1": 1.0,
      "tasks": 50,
      "turns_exhausted": 0.0
     }
@@ -143,15 +133,12 @@
    "errors": 0.0,
    "format_fail": 0.0,
    "k": 1,
-   "mean_score": 0.94,
+   "mean_score": 1.0,
    "not_run": 0,
-   "pass@1": 0.78,
-   "pass^k": 0.78,
-   "rule_failures": {
-    "R-ACTION": 11,
-    "R-EFFECTS": 2
-   },
-   "strict_pass@1": 0.78,
+   "pass@1": 1.0,
+   "pass^k": 1.0,
+   "rule_failures": {},
+   "strict_pass@1": 1.0,
    "tasks": 50,
    "turns_exhausted": 0.0
   },
@@ -167,10 +154,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 9063,
-      "turns": 3,
+      "tokens": 13009,
+      "turns": 4,
       "turns_exhausted": false,
-      "usd": 0.043068
+      "usd": 0.06034
      },
      "rules": {
       "R-ACTION": true,
@@ -196,10 +183,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 12857,
+      "tokens": 13019,
       "turns": 4,
       "turns_exhausted": false,
-      "usd": 0.059652
+      "usd": 0.060092
      },
      "rules": {
       "R-ACTION": true,
@@ -225,10 +212,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8752,
+      "tokens": 9191,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.040544
+      "usd": 0.042908
      },
      "rules": {
       "R-ACTION": true,
@@ -254,10 +241,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 12842,
+      "tokens": 12949,
       "turns": 4,
       "turns_exhausted": false,
-      "usd": 0.058856
+      "usd": 0.058772
      },
      "rules": {
       "R-ACTION": true,
@@ -283,10 +270,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8794,
+      "tokens": 8868,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.04092
+      "usd": 0.040784
      },
      "rules": {
       "R-ACTION": true,
@@ -312,10 +299,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 12807,
-      "turns": 4,
+      "tokens": 8869,
+      "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.058204
+      "usd": 0.040708
      },
      "rules": {
       "R-ACTION": true,
@@ -342,10 +329,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 5949,
+      "tokens": 5818,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.029732
+      "usd": 0.027832
      },
      "rules": {
       "R-ACTION": true,
@@ -373,10 +360,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 6060,
+      "tokens": 6143,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.0296
+      "usd": 0.029868
      },
      "rules": {
       "R-ACTION": true,
@@ -404,10 +391,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 6070,
+      "tokens": 5909,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.02948
+      "usd": 0.029748
      },
      "rules": {
       "R-ACTION": true,
@@ -435,10 +422,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 6104,
+      "tokens": 5879,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.030272
+      "usd": 0.029212
      },
      "rules": {
       "R-ACTION": true,
@@ -465,10 +452,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 12806,
+      "tokens": 12933,
       "turns": 4,
       "turns_exhausted": false,
-      "usd": 0.05908
+      "usd": 0.059588
      },
      "rules": {
       "R-ACTION": true,
@@ -495,10 +482,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 6218,
+      "tokens": 6341,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.03276
+      "usd": 0.034084
      },
      "rules": {
       "R-ACTION": true,
@@ -525,10 +512,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 12840,
+      "tokens": 13006,
       "turns": 4,
       "turns_exhausted": false,
-      "usd": 0.0596
+      "usd": 0.060888
      },
      "rules": {
       "R-ACTION": true,
@@ -555,10 +542,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 9666,
-      "turns": 3,
+      "tokens": 6339,
+      "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.049528
+      "usd": 0.034044
      },
      "rules": {
       "R-ACTION": true,
@@ -586,10 +573,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 9610,
-      "turns": 3,
+      "tokens": 6246,
+      "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.048312
+      "usd": 0.032232
      },
      "rules": {
       "R-ACTION": true,
@@ -616,10 +603,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 12979,
+      "tokens": 13091,
       "turns": 4,
       "turns_exhausted": false,
-      "usd": 0.061004
+      "usd": 0.06198
      },
      "rules": {
       "R-ACTION": true,
@@ -645,10 +632,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 12906,
+      "tokens": 13030,
       "turns": 4,
       "turns_exhausted": false,
-      "usd": 0.060088
+      "usd": 0.06068
      },
      "rules": {
       "R-ACTION": true,
@@ -674,10 +661,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 12971,
+      "tokens": 13018,
       "turns": 4,
       "turns_exhausted": false,
-      "usd": 0.061228
+      "usd": 0.060584
      },
      "rules": {
       "R-ACTION": true,
@@ -708,10 +695,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 6276,
+      "tokens": 6408,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.033664
+      "usd": 0.035168
      },
      "rules": {
       "R-ACTION": true,
@@ -747,10 +734,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 6347,
+      "tokens": 6342,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.035084
+      "usd": 0.033848
      },
      "rules": {
       "R-ACTION": true,
@@ -786,10 +773,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 6304,
+      "tokens": 6392,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.034224
+      "usd": 0.034848
      },
      "rules": {
       "R-ACTION": true,
@@ -825,13 +812,13 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 9767,
+      "tokens": 9792,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.050972
+      "usd": 0.05032
      },
      "rules": {
-      "R-ACTION": false,
+      "R-ACTION": true,
       "R-AUTOCOMP": true,
       "R-COMP": true,
       "R-DAYS": true,
@@ -841,11 +828,11 @@
       "R-TAT": true,
       "R-TYPE": true
      },
-     "score": 0.875,
+     "score": 1.0,
      "soft": {},
-     "solved": false,
+     "solved": true,
      "valid": true,
-     "verdict": "failed: R-ACTION"
+     "verdict": "solved"
     }
    ],
    "IN-UPI-023": [
@@ -864,13 +851,13 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 9712,
+      "tokens": 9888,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.050304
+      "usd": 0.05176
      },
      "rules": {
-      "R-ACTION": false,
+      "R-ACTION": true,
       "R-AUTOCOMP": true,
       "R-COMP": true,
       "R-DAYS": true,
@@ -880,11 +867,11 @@
       "R-TAT": true,
       "R-TYPE": true
      },
-     "score": 0.875,
+     "score": 1.0,
      "soft": {},
-     "solved": false,
+     "solved": true,
      "valid": true,
-     "verdict": "failed: R-ACTION"
+     "verdict": "solved"
     }
    ],
    "IN-UPI-024": [
@@ -903,13 +890,13 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 9756,
+      "tokens": 9848,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.051264
+      "usd": 0.05152
      },
      "rules": {
-      "R-ACTION": false,
+      "R-ACTION": true,
       "R-AUTOCOMP": true,
       "R-COMP": true,
       "R-DAYS": true,
@@ -919,11 +906,11 @@
       "R-TAT": true,
       "R-TYPE": true
      },
-     "score": 0.875,
+     "score": 1.0,
      "soft": {},
-     "solved": false,
+     "solved": true,
      "valid": true,
-     "verdict": "failed: R-ACTION"
+     "verdict": "solved"
     }
    ],
    "IN-UPI-025": [
@@ -942,13 +929,13 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 9709,
+      "tokens": 9781,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.050244
+      "usd": 0.0501
      },
      "rules": {
-      "R-ACTION": false,
+      "R-ACTION": true,
       "R-AUTOCOMP": true,
       "R-COMP": true,
       "R-DAYS": true,
@@ -958,11 +945,11 @@
       "R-TAT": true,
       "R-TYPE": true
      },
-     "score": 0.875,
+     "score": 1.0,
      "soft": {},
-     "solved": false,
+     "solved": true,
      "valid": true,
-     "verdict": "failed: R-ACTION"
+     "verdict": "solved"
     }
    ],
    "IN-UPI-026": [
@@ -981,10 +968,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 6279,
+      "tokens": 6366,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.033628
+      "usd": 0.034232
      },
      "rules": {
       "R-ACTION": true,
@@ -1020,13 +1007,13 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 9746,
+      "tokens": 9859,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.050824
+      "usd": 0.0515
      },
      "rules": {
-      "R-ACTION": false,
+      "R-ACTION": true,
       "R-AUTOCOMP": true,
       "R-COMP": true,
       "R-DAYS": true,
@@ -1036,11 +1023,11 @@
       "R-TAT": true,
       "R-TYPE": true
      },
-     "score": 0.875,
+     "score": 1.0,
      "soft": {},
-     "solved": false,
+     "solved": true,
      "valid": true,
-     "verdict": "failed: R-ACTION"
+     "verdict": "solved"
     }
    ],
    "IN-UPI-028": [
@@ -1059,13 +1046,13 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 9769,
+      "tokens": 9832,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.051284
+      "usd": 0.05096
      },
      "rules": {
-      "R-ACTION": false,
+      "R-ACTION": true,
       "R-AUTOCOMP": true,
       "R-COMP": true,
       "R-DAYS": true,
@@ -1075,11 +1062,11 @@
       "R-TAT": true,
       "R-TYPE": true
      },
-     "score": 0.875,
+     "score": 1.0,
      "soft": {},
-     "solved": false,
+     "solved": true,
      "valid": true,
-     "verdict": "failed: R-ACTION"
+     "verdict": "solved"
     }
    ],
    "IN-UPI-029": [
@@ -1094,10 +1081,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 9267,
+      "tokens": 9289,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.044924
+      "usd": 0.04378
      },
      "rules": {
       "R-ACTION": true,
@@ -1125,10 +1112,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 9256,
+      "tokens": 9381,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.044704
+      "usd": 0.04562
      },
      "rules": {
       "R-ACTION": true,
@@ -1156,10 +1143,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 9280,
+      "tokens": 9244,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.044784
+      "usd": 0.04288
      },
      "rules": {
       "R-ACTION": true,
@@ -1187,10 +1174,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 9175,
+      "tokens": 9350,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.043084
+      "usd": 0.045
      },
      "rules": {
       "R-ACTION": true,
@@ -1218,10 +1205,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 9236,
+      "tokens": 9361,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.044304
+      "usd": 0.04522
      },
      "rules": {
       "R-ACTION": true,
@@ -1248,10 +1235,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 9018,
-      "turns": 3,
+      "tokens": 12851,
+      "turns": 4,
       "turns_exhausted": false,
-      "usd": 0.04508
+      "usd": 0.060684
      },
      "rules": {
       "R-ACTION": true,
@@ -1277,10 +1264,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 9366,
+      "tokens": 9446,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.045032
+      "usd": 0.045064
      },
      "rules": {
       "R-ACTION": true,
@@ -1306,10 +1293,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 12747,
-      "turns": 4,
+      "tokens": 9462,
+      "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.060636
+      "usd": 0.045288
      },
      "rules": {
       "R-ACTION": true,
@@ -1335,10 +1322,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 9281,
+      "tokens": 9465,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.043396
+      "usd": 0.045444
      },
      "rules": {
       "R-ACTION": true,
@@ -1364,10 +1351,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 9384,
+      "tokens": 9500,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.045328
+      "usd": 0.046144
      },
      "rules": {
       "R-ACTION": true,
@@ -1386,58 +1373,58 @@
     {
      "details": {
       "R-ACTION": "action",
-      "R-EFFECTS": "did [], needed [\"('approve_collect', 'COL5')\"]",
+      "R-EFFECTS": "did [\"('decline_collect', 'COL5')\", \"('report_vpa', 'paytoshop@merchantbank')\"], needed [\"('decline_collect', 'COL5')\", \"('report_vpa', 'paytoshop@merchantbank')\"]",
       "R-FMT": "answer must be an object with an `action`",
       "R-FORBIDDEN": "called []"
      },
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 9366,
-      "turns": 3,
+      "tokens": 13146,
+      "turns": 4,
       "turns_exhausted": false,
-      "usd": 0.04756
+      "usd": 0.064664
      },
      "rules": {
-      "R-ACTION": false,
-      "R-EFFECTS": false,
+      "R-ACTION": true,
+      "R-EFFECTS": true,
       "R-FMT": true,
       "R-FORBIDDEN": true
      },
-     "score": 0.333333,
+     "score": 1.0,
      "soft": {},
-     "solved": false,
+     "solved": true,
      "valid": true,
-     "verdict": "failed: R-ACTION, R-EFFECTS"
+     "verdict": "solved"
     }
    ],
    "IN-UPI-040": [
     {
      "details": {
       "R-ACTION": "action",
-      "R-EFFECTS": "did [], needed [\"('approve_collect', 'COL6')\"]",
+      "R-EFFECTS": "did [\"('approve_collect', 'COL6')\"], needed [\"('approve_collect', 'COL6')\"]",
       "R-FMT": "answer must be an object with an `action`",
       "R-FORBIDDEN": "called []"
      },
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 9561,
-      "turns": 3,
+      "tokens": 13152,
+      "turns": 4,
       "turns_exhausted": false,
-      "usd": 0.05146
+      "usd": 0.063952
      },
      "rules": {
-      "R-ACTION": false,
-      "R-EFFECTS": false,
+      "R-ACTION": true,
+      "R-EFFECTS": true,
       "R-FMT": true,
       "R-FORBIDDEN": true
      },
-     "score": 0.333333,
+     "score": 1.0,
      "soft": {},
-     "solved": false,
+     "solved": true,
      "valid": true,
-     "verdict": "failed: R-ACTION, R-EFFECTS"
+     "verdict": "solved"
     }
    ],
    "IN-UPI-041": [
@@ -1453,10 +1440,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 6078,
+      "tokens": 6226,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.031608
+      "usd": 0.032312
      },
      "rules": {
       "R-ACTION": true,
@@ -1486,10 +1473,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 6018,
+      "tokens": 6202,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.030472
+      "usd": 0.031896
      },
      "rules": {
       "R-ACTION": true,
@@ -1519,10 +1506,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 6053,
+      "tokens": 6256,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.031172
+      "usd": 0.032976
      },
      "rules": {
       "R-ACTION": true,
@@ -1552,10 +1539,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 6115,
+      "tokens": 6214,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.032172
+      "usd": 0.031896
      },
      "rules": {
       "R-ACTION": true,
@@ -1585,10 +1572,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 6087,
+      "tokens": 6350,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.031612
+      "usd": 0.034616
      },
      "rules": {
       "R-ACTION": true,
@@ -1609,58 +1596,58 @@
     {
      "details": {
       "R-ACTION": "action",
-      "R-EFFECTS": "did [\"('pay_with_lite', 300)\"], needed [\"('pay_with_lite', 300)\"]",
+      "R-EFFECTS": "did [\"('pay_with_lite', 'cafe@upibank', 300)\"], needed [\"('pay_with_lite', 'cafe@upibank', 300)\"]",
       "R-FMT": "answer must be an object with an `action`",
       "R-FORBIDDEN": "called []"
      },
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 9230,
+      "tokens": 9436,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.042568
+      "usd": 0.044416
      },
      "rules": {
-      "R-ACTION": false,
+      "R-ACTION": true,
       "R-EFFECTS": true,
       "R-FMT": true,
       "R-FORBIDDEN": true
      },
-     "score": 0.666667,
+     "score": 1.0,
      "soft": {},
-     "solved": false,
+     "solved": true,
      "valid": true,
-     "verdict": "failed: R-ACTION"
+     "verdict": "solved"
     }
    ],
    "IN-UPI-047": [
     {
      "details": {
       "R-ACTION": "action",
-      "R-EFFECTS": "did [\"('pay_with_lite', 1000)\"], needed [\"('pay_with_lite', 1000)\"]",
+      "R-EFFECTS": "did [\"('pay_with_lite', 'cafe@upibank', 1000)\"], needed [\"('pay_with_lite', 'cafe@upibank', 1000)\"]",
       "R-FMT": "answer must be an object with an `action`",
       "R-FORBIDDEN": "called []"
      },
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 9234,
+      "tokens": 9433,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.042568
+      "usd": 0.044388
      },
      "rules": {
-      "R-ACTION": false,
+      "R-ACTION": true,
       "R-EFFECTS": true,
       "R-FMT": true,
       "R-FORBIDDEN": true
      },
-     "score": 0.666667,
+     "score": 1.0,
      "soft": {},
-     "solved": false,
+     "solved": true,
      "valid": true,
-     "verdict": "failed: R-ACTION"
+     "verdict": "solved"
     }
    ],
    "IN-UPI-048": [
@@ -1675,23 +1662,23 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 6106,
+      "tokens": 6046,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.03132
+      "usd": 0.028984
      },
      "rules": {
-      "R-ACTION": false,
+      "R-ACTION": true,
       "R-EFFECTS": true,
       "R-FMT": true,
       "R-FORBIDDEN": true,
       "R-REASON": true
      },
-     "score": 0.75,
+     "score": 1.0,
      "soft": {},
-     "solved": false,
+     "solved": true,
      "valid": true,
-     "verdict": "failed: R-ACTION"
+     "verdict": "solved"
     }
    ],
    "IN-UPI-049": [
@@ -1705,10 +1692,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 9155,
+      "tokens": 9202,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.041788
+      "usd": 0.041592
      },
      "rules": {
       "R-ACTION": true,
@@ -1735,10 +1722,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 5981,
+      "tokens": 6098,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.029172
+      "usd": 0.030376
      },
      "rules": {
       "R-ACTION": true,

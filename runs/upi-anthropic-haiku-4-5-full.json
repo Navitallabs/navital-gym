@@ -1,8 +1,8 @@
 {
  "anthropic:claude-haiku-4-5": {
-  "graded_with": "ed78addcd557",
+  "graded_with": "1543b5103be5",
   "k": 1,
-  "navital_gym_commit": "0b6a64f313ec",
+  "navital_gym_commit": "ac2187a3bf52",
   "settings": {
    "json_mode_on_final": true,
    "max_tokens": 4096,
@@ -20,15 +20,15 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.5238095238095238,
+     "mean_score": 0.6666666666666667,
      "not_run": 0,
-     "pass@1": 0.2857142857142857,
-     "pass^k": 0.2857142857142857,
+     "pass@1": 0.42857142857142855,
+     "pass^k": 0.42857142857142855,
      "rule_failures": {
-      "R-ACTION": 5,
-      "R-EFFECTS": 5
+      "R-ACTION": 3,
+      "R-EFFECTS": 4
      },
-     "strict_pass@1": 0.2857142857142857,
+     "strict_pass@1": 0.42857142857142855,
      "tasks": 7,
      "turns_exhausted": 0.0
     },
@@ -37,16 +37,16 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.15,
+     "mean_score": 0.2125,
      "not_run": 0,
      "pass@1": 0.0,
      "pass^k": 0.0,
      "rule_failures": {
-      "R-ACTION": 10,
+      "R-ACTION": 4,
       "R-AUTOCOMP": 10,
       "R-COMP": 10,
       "R-DAYS": 10,
-      "R-EFFECTS": 4,
+      "R-EFFECTS": 5,
       "R-FORBIDDEN": 4,
       "R-TAT": 10,
       "R-TYPE": 10
@@ -81,8 +81,8 @@
      "rule_failures": {
       "R-ACTION": 1,
       "R-CAP": 3,
-      "R-DEBIT-APPROVAL": 4,
-      "R-FORBIDDEN": 1
+      "R-DEBIT-APPROVAL": 3,
+      "R-FORBIDDEN": 2
      },
      "strict_pass@1": 0.0,
      "tasks": 5,
@@ -107,15 +107,12 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.7166666666666666,
+     "mean_score": 1.0,
      "not_run": 0,
-     "pass@1": 0.2,
-     "pass^k": 0.2,
-     "rule_failures": {
-      "R-ACTION": 4,
-      "R-FORBIDDEN": 1
-     },
-     "strict_pass@1": 0.2,
+     "pass@1": 1.0,
+     "pass^k": 1.0,
+     "rule_failures": {},
+     "strict_pass@1": 1.0,
      "tasks": 5,
      "turns_exhausted": 0.0
     },
@@ -142,24 +139,24 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.674,
+     "mean_score": 0.7348333333333333,
      "not_run": 0,
-     "pass@1": 0.42,
-     "pass^k": 0.42,
+     "pass@1": 0.52,
+     "pass^k": 0.52,
      "rule_failures": {
-      "R-ACTION": 20,
+      "R-ACTION": 8,
       "R-AUTOCOMP": 10,
       "R-CAP": 3,
       "R-COMP": 10,
       "R-DAYS": 10,
-      "R-DEBIT-APPROVAL": 4,
+      "R-DEBIT-APPROVAL": 3,
       "R-EFFECTS": 9,
       "R-FORBIDDEN": 6,
       "R-NOPROMISE": 5,
       "R-TAT": 10,
       "R-TYPE": 10
      },
-     "strict_pass@1": 0.42,
+     "strict_pass@1": 0.52,
      "tasks": 50,
      "turns_exhausted": 0.0
     }
@@ -167,24 +164,24 @@
    "errors": 0.0,
    "format_fail": 0.0,
    "k": 1,
-   "mean_score": 0.674,
+   "mean_score": 0.7348333333333333,
    "not_run": 0,
-   "pass@1": 0.42,
-   "pass^k": 0.42,
+   "pass@1": 0.52,
+   "pass^k": 0.52,
    "rule_failures": {
-    "R-ACTION": 20,
+    "R-ACTION": 8,
     "R-AUTOCOMP": 10,
     "R-CAP": 3,
     "R-COMP": 10,
     "R-DAYS": 10,
-    "R-DEBIT-APPROVAL": 4,
+    "R-DEBIT-APPROVAL": 3,
     "R-EFFECTS": 9,
     "R-FORBIDDEN": 6,
     "R-NOPROMISE": 5,
     "R-TAT": 10,
     "R-TYPE": 10
    },
-   "strict_pass@1": 0.42,
+   "strict_pass@1": 0.52,
    "tasks": 50,
    "turns_exhausted": 0.0
   },
@@ -200,10 +197,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8379,
+      "tokens": 8441,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.01999
+      "usd": 0.020002
      },
      "rules": {
       "R-ACTION": true,
@@ -229,10 +226,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8400,
+      "tokens": 8621,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.020112
+      "usd": 0.02053
      },
      "rules": {
       "R-ACTION": true,
@@ -258,10 +255,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8499,
+      "tokens": 8616,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.02011
+      "usd": 0.020456
      },
      "rules": {
       "R-ACTION": true,
@@ -287,10 +284,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8473,
+      "tokens": 8555,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.020026
+      "usd": 0.020182
      },
      "rules": {
       "R-ACTION": true,
@@ -316,10 +313,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8513,
+      "tokens": 8609,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.020218
+      "usd": 0.020418
      },
      "rules": {
       "R-ACTION": true,
@@ -345,10 +342,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8379,
+      "tokens": 8260,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.020006
+      "usd": 0.018936
      },
      "rules": {
       "R-ACTION": true,
@@ -375,10 +372,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 5193,
+      "tokens": 5351,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.012314
+      "usd": 0.013414
      },
      "rules": {
       "R-ACTION": true,
@@ -406,10 +403,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 5205,
+      "tokens": 5327,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.012378
+      "usd": 0.013118
      },
      "rules": {
       "R-ACTION": true,
@@ -437,10 +434,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 5362,
+      "tokens": 5408,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.013156
+      "usd": 0.013136
      },
      "rules": {
       "R-ACTION": true,
@@ -468,10 +465,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 5410,
+      "tokens": 5320,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.013644
+      "usd": 0.01308
      },
      "rules": {
       "R-ACTION": true,
@@ -498,10 +495,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8516,
+      "tokens": 8547,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.0202
+      "usd": 0.020622
      },
      "rules": {
       "R-ACTION": true,
@@ -528,10 +525,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 5547,
+      "tokens": 5443,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.014726
+      "usd": 0.01415
      },
      "rules": {
       "R-ACTION": true,
@@ -558,10 +555,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8623,
+      "tokens": 8540,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.020814
+      "usd": 0.020552
      },
      "rules": {
       "R-ACTION": true,
@@ -588,10 +585,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 5343,
+      "tokens": 5573,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.013638
+      "usd": 0.014514
      },
      "rules": {
       "R-ACTION": true,
@@ -619,10 +616,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 5471,
+      "tokens": 5334,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.013958
+      "usd": 0.0131
      },
      "rules": {
       "R-ACTION": true,
@@ -649,10 +646,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8384,
+      "tokens": 8736,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.019984
+      "usd": 0.02116
      },
      "rules": {
       "R-ACTION": true,
@@ -678,10 +675,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8643,
+      "tokens": 8783,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.020934
+      "usd": 0.021438
      },
      "rules": {
       "R-ACTION": true,
@@ -707,10 +704,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8544,
+      "tokens": 8711,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.020336
+      "usd": 0.021014
      },
      "rules": {
       "R-ACTION": true,
@@ -741,10 +738,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8646,
+      "tokens": 8784,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.021844
+      "usd": 0.022336
      },
      "rules": {
       "R-ACTION": false,
@@ -780,10 +777,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8795,
+      "tokens": 8870,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.02271
+      "usd": 0.022852
      },
      "rules": {
       "R-ACTION": false,
@@ -819,10 +816,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8737,
+      "tokens": 8879,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.022362
+      "usd": 0.022878
      },
      "rules": {
       "R-ACTION": false,
@@ -858,13 +855,13 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8733,
+      "tokens": 8826,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.022338
+      "usd": 0.022588
      },
      "rules": {
-      "R-ACTION": false,
+      "R-ACTION": true,
       "R-AUTOCOMP": false,
       "R-COMP": false,
       "R-DAYS": false,
@@ -874,11 +871,11 @@
       "R-TAT": false,
       "R-TYPE": false
      },
-     "score": 0.25,
+     "score": 0.375,
      "soft": {},
      "solved": false,
      "valid": true,
-     "verdict": "failed: R-ACTION, R-TYPE, R-TAT, R-DAYS, R-COMP, R-AUTOCOMP"
+     "verdict": "failed: R-TYPE, R-TAT, R-DAYS, R-COMP, R-AUTOCOMP"
     }
    ],
    "IN-UPI-023": [
@@ -897,13 +894,13 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8750,
+      "tokens": 8881,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.022468
+      "usd": 0.02289
      },
      "rules": {
-      "R-ACTION": false,
+      "R-ACTION": true,
       "R-AUTOCOMP": false,
       "R-COMP": false,
       "R-DAYS": false,
@@ -913,11 +910,11 @@
       "R-TAT": false,
       "R-TYPE": false
      },
-     "score": 0.25,
+     "score": 0.375,
      "soft": {},
      "solved": false,
      "valid": true,
-     "verdict": "failed: R-ACTION, R-TYPE, R-TAT, R-DAYS, R-COMP, R-AUTOCOMP"
+     "verdict": "failed: R-TYPE, R-TAT, R-DAYS, R-COMP, R-AUTOCOMP"
     }
    ],
    "IN-UPI-024": [
@@ -927,7 +924,7 @@
       "R-AUTOCOMP": "compensation_automatic",
       "R-COMP": "compensation_rs",
       "R-DAYS": "days_late",
-      "R-EFFECTS": "did [\"('raise_dispute', 'TXN7005', 'failed_txn_debited')\"], needed [\"('raise_dispute', 'TXN7005', 'failed_txn_debited')\"]",
+      "R-EFFECTS": "did [], needed [\"('raise_dispute', 'TXN7005', 'failed_txn_debited')\"]",
       "R-FMT": "answer must be an object with an `action`",
       "R-FORBIDDEN": "called []",
       "R-TAT": "tat_date",
@@ -936,17 +933,17 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8825,
-      "turns": 3,
+      "tokens": 5623,
+      "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.022938
+      "usd": 0.01591
      },
      "rules": {
-      "R-ACTION": false,
+      "R-ACTION": true,
       "R-AUTOCOMP": false,
       "R-COMP": false,
       "R-DAYS": false,
-      "R-EFFECTS": true,
+      "R-EFFECTS": false,
       "R-FMT": true,
       "R-FORBIDDEN": true,
       "R-TAT": false,
@@ -956,7 +953,7 @@
      "soft": {},
      "solved": false,
      "valid": true,
-     "verdict": "failed: R-ACTION, R-TYPE, R-TAT, R-DAYS, R-COMP, R-AUTOCOMP"
+     "verdict": "failed: R-EFFECTS, R-TYPE, R-TAT, R-DAYS, R-COMP, R-AUTOCOMP"
     }
    ],
    "IN-UPI-025": [
@@ -975,13 +972,13 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8768,
+      "tokens": 8850,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.022576
+      "usd": 0.022732
      },
      "rules": {
-      "R-ACTION": false,
+      "R-ACTION": true,
       "R-AUTOCOMP": false,
       "R-COMP": false,
       "R-DAYS": false,
@@ -991,11 +988,11 @@
       "R-TAT": false,
       "R-TYPE": false
      },
-     "score": 0.25,
+     "score": 0.375,
      "soft": {},
      "solved": false,
      "valid": true,
-     "verdict": "failed: R-ACTION, R-TYPE, R-TAT, R-DAYS, R-COMP, R-AUTOCOMP"
+     "verdict": "failed: R-TYPE, R-TAT, R-DAYS, R-COMP, R-AUTOCOMP"
     }
    ],
    "IN-UPI-026": [
@@ -1014,10 +1011,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8651,
+      "tokens": 8701,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.021814
+      "usd": 0.021778
      },
      "rules": {
       "R-ACTION": false,
@@ -1053,13 +1050,13 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8701,
+      "tokens": 8823,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.022154
+      "usd": 0.02255
      },
      "rules": {
-      "R-ACTION": false,
+      "R-ACTION": true,
       "R-AUTOCOMP": false,
       "R-COMP": false,
       "R-DAYS": false,
@@ -1069,11 +1066,11 @@
       "R-TAT": false,
       "R-TYPE": false
      },
-     "score": 0.25,
+     "score": 0.375,
      "soft": {},
      "solved": false,
      "valid": true,
-     "verdict": "failed: R-ACTION, R-TYPE, R-TAT, R-DAYS, R-COMP, R-AUTOCOMP"
+     "verdict": "failed: R-TYPE, R-TAT, R-DAYS, R-COMP, R-AUTOCOMP"
     }
    ],
    "IN-UPI-028": [
@@ -1092,13 +1089,13 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8761,
+      "tokens": 8818,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.022506
+      "usd": 0.0225
      },
      "rules": {
-      "R-ACTION": false,
+      "R-ACTION": true,
       "R-AUTOCOMP": false,
       "R-COMP": false,
       "R-DAYS": false,
@@ -1108,11 +1105,11 @@
       "R-TAT": false,
       "R-TYPE": false
      },
-     "score": 0.25,
+     "score": 0.375,
      "soft": {},
      "solved": false,
      "valid": true,
-     "verdict": "failed: R-ACTION, R-TYPE, R-TAT, R-DAYS, R-COMP, R-AUTOCOMP"
+     "verdict": "failed: R-TYPE, R-TAT, R-DAYS, R-COMP, R-AUTOCOMP"
     }
    ],
    "IN-UPI-029": [
@@ -1127,10 +1124,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 11070,
+      "tokens": 11058,
       "turns": 4,
       "turns_exhausted": false,
-      "usd": 0.026292
+      "usd": 0.025908
      },
      "rules": {
       "R-ACTION": true,
@@ -1158,10 +1155,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8050,
-      "turns": 3,
+      "tokens": 11328,
+      "turns": 4,
       "turns_exhausted": false,
-      "usd": 0.019324
+      "usd": 0.027208
      },
      "rules": {
       "R-ACTION": true,
@@ -1189,10 +1186,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 11245,
+      "tokens": 11182,
       "turns": 4,
       "turns_exhausted": false,
-      "usd": 0.027194
+      "usd": 0.026084
      },
      "rules": {
       "R-ACTION": true,
@@ -1220,10 +1217,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 11064,
+      "tokens": 11122,
       "turns": 4,
       "turns_exhausted": false,
-      "usd": 0.026048
+      "usd": 0.025676
      },
      "rules": {
       "R-ACTION": true,
@@ -1251,10 +1248,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 11257,
+      "tokens": 11291,
       "turns": 4,
       "turns_exhausted": false,
-      "usd": 0.02757
+      "usd": 0.02707
      },
      "rules": {
       "R-ACTION": true,
@@ -1274,17 +1271,75 @@
     {
      "details": {
       "R-ACTION": "action",
-      "R-EFFECTS": "did [], needed [\"('decline_collect', 'COL0')\", \"('report_vpa', 'quickrefund0@fakeshop')\"]",
+      "R-EFFECTS": "did [\"('decline_collect', 'COL0')\", \"('report_vpa', 'quickrefund0@fakeshop')\"], needed [\"('decline_collect', 'COL0')\", \"('report_vpa', 'quickrefund0@fakeshop')\"]",
       "R-FMT": "answer must be an object with an `action`",
       "R-FORBIDDEN": "called []"
      },
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8411,
+      "tokens": 8767,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.020686
+      "usd": 0.021958
+     },
+     "rules": {
+      "R-ACTION": true,
+      "R-EFFECTS": true,
+      "R-FMT": true,
+      "R-FORBIDDEN": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-UPI-035": [
+    {
+     "details": {
+      "R-ACTION": "action",
+      "R-EFFECTS": "did [], needed [\"('decline_collect', 'COL1')\", \"('report_vpa', 'quickrefund1@fakeshop')\"]",
+      "R-FMT": "answer must be an object with an `action`",
+      "R-FORBIDDEN": "called []"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 5459,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.014318
+     },
+     "rules": {
+      "R-ACTION": true,
+      "R-EFFECTS": false,
+      "R-FMT": true,
+      "R-FORBIDDEN": true
+     },
+     "score": 0.666667,
+     "soft": {},
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-EFFECTS"
+    }
+   ],
+   "IN-UPI-036": [
+    {
+     "details": {
+      "R-ACTION": "action",
+      "R-EFFECTS": "did [], needed [\"('decline_collect', 'COL2')\", \"('report_vpa', 'quickrefund2@fakeshop')\"]",
+      "R-FMT": "answer must be an object with an `action`",
+      "R-FORBIDDEN": "called []"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 5508,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.014808
      },
      "rules": {
       "R-ACTION": false,
@@ -1299,64 +1354,6 @@
      "verdict": "failed: R-ACTION, R-EFFECTS"
     }
    ],
-   "IN-UPI-035": [
-    {
-     "details": {
-      "R-ACTION": "action",
-      "R-EFFECTS": "did [\"('decline_collect', 'COL1')\", \"('report_vpa', 'quickrefund1@fakeshop')\"], needed [\"('decline_collect', 'COL1')\", \"('report_vpa', 'quickrefund1@fakeshop')\"]",
-      "R-FMT": "answer must be an object with an `action`",
-      "R-FORBIDDEN": "called []"
-     },
-     "meta": {
-      "error": null,
-      "repaired": false,
-      "tokens": 11668,
-      "turns": 4,
-      "turns_exhausted": false,
-      "usd": 0.028008
-     },
-     "rules": {
-      "R-ACTION": true,
-      "R-EFFECTS": true,
-      "R-FMT": true,
-      "R-FORBIDDEN": true
-     },
-     "score": 1.0,
-     "soft": {},
-     "solved": true,
-     "valid": true,
-     "verdict": "solved"
-    }
-   ],
-   "IN-UPI-036": [
-    {
-     "details": {
-      "R-ACTION": "action",
-      "R-EFFECTS": "did [\"('decline_collect', 'COL2')\", \"('report_vpa', 'quickrefund2@fakeshop')\"], needed [\"('decline_collect', 'COL2')\", \"('report_vpa', 'quickrefund2@fakeshop')\"]",
-      "R-FMT": "answer must be an object with an `action`",
-      "R-FORBIDDEN": "called []"
-     },
-     "meta": {
-      "error": null,
-      "repaired": false,
-      "tokens": 8727,
-      "turns": 3,
-      "turns_exhausted": false,
-      "usd": 0.021966
-     },
-     "rules": {
-      "R-ACTION": true,
-      "R-EFFECTS": true,
-      "R-FMT": true,
-      "R-FORBIDDEN": true
-     },
-     "score": 1.0,
-     "soft": {},
-     "solved": true,
-     "valid": true,
-     "verdict": "solved"
-    }
-   ],
    "IN-UPI-037": [
     {
      "details": {
@@ -1367,11 +1364,11 @@
      },
      "meta": {
       "error": null,
-      "repaired": false,
-      "tokens": 4960,
+      "repaired": true,
+      "tokens": 5913,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.0126
+      "usd": 0.014762
      },
      "rules": {
       "R-ACTION": false,
@@ -1390,46 +1387,46 @@
     {
      "details": {
       "R-ACTION": "action",
-      "R-EFFECTS": "did [], needed [\"('decline_collect', 'COL4')\", \"('report_vpa', 'quickrefund4@fakeshop')\"]",
+      "R-EFFECTS": "did [\"('decline_collect', 'COL4')\", \"('report_vpa', 'quickrefund4@fakeshop')\"], needed [\"('decline_collect', 'COL4')\", \"('report_vpa', 'quickrefund4@fakeshop')\"]",
       "R-FMT": "answer must be an object with an `action`",
       "R-FORBIDDEN": "called []"
      },
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 5022,
-      "turns": 2,
+      "tokens": 7990,
+      "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.013268
+      "usd": 0.019756
      },
      "rules": {
-      "R-ACTION": false,
-      "R-EFFECTS": false,
+      "R-ACTION": true,
+      "R-EFFECTS": true,
       "R-FMT": true,
       "R-FORBIDDEN": true
      },
-     "score": 0.333333,
+     "score": 1.0,
      "soft": {},
-     "solved": false,
+     "solved": true,
      "valid": true,
-     "verdict": "failed: R-ACTION, R-EFFECTS"
+     "verdict": "solved"
     }
    ],
    "IN-UPI-039": [
     {
      "details": {
       "R-ACTION": "action",
-      "R-EFFECTS": "did [], needed [\"('approve_collect', 'COL5')\"]",
+      "R-EFFECTS": "did [], needed [\"('decline_collect', 'COL5')\", \"('report_vpa', 'paytoshop@merchantbank')\"]",
       "R-FMT": "answer must be an object with an `action`",
       "R-FORBIDDEN": "called []"
      },
      "meta": {
       "error": null,
-      "repaired": true,
-      "tokens": 5778,
+      "repaired": false,
+      "tokens": 4998,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.014276
+      "usd": 0.012452
      },
      "rules": {
       "R-ACTION": false,
@@ -1448,131 +1445,32 @@
     {
      "details": {
       "R-ACTION": "action",
-      "R-EFFECTS": "did [], needed [\"('approve_collect', 'COL6')\"]",
+      "R-EFFECTS": "did [\"('approve_collect', 'COL6')\"], needed [\"('approve_collect', 'COL6')\"]",
       "R-FMT": "answer must be an object with an `action`",
       "R-FORBIDDEN": "called []"
      },
      "meta": {
       "error": null,
-      "repaired": true,
-      "tokens": 6646,
-      "turns": 2,
+      "repaired": false,
+      "tokens": 8021,
+      "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.016948
+      "usd": 0.018418
      },
      "rules": {
-      "R-ACTION": false,
-      "R-EFFECTS": false,
+      "R-ACTION": true,
+      "R-EFFECTS": true,
       "R-FMT": true,
       "R-FORBIDDEN": true
      },
-     "score": 0.333333,
+     "score": 1.0,
      "soft": {},
-     "solved": false,
+     "solved": true,
      "valid": true,
-     "verdict": "failed: R-ACTION, R-EFFECTS"
+     "verdict": "solved"
     }
    ],
    "IN-UPI-041": [
-    {
-     "details": {
-      "R-ACTION": "action",
-      "R-CAP": "cap_applied",
-      "R-DEBIT-APPROVAL": "each_debit_needs_approval",
-      "R-EFFECTS": "did [], needed []",
-      "R-FMT": "answer must be an object with an `action`",
-      "R-FORBIDDEN": "called []"
-     },
-     "meta": {
-      "error": null,
-      "repaired": false,
-      "tokens": 5284,
-      "turns": 2,
-      "turns_exhausted": false,
-      "usd": 0.013984
-     },
-     "rules": {
-      "R-ACTION": true,
-      "R-CAP": false,
-      "R-DEBIT-APPROVAL": false,
-      "R-EFFECTS": true,
-      "R-FMT": true,
-      "R-FORBIDDEN": true
-     },
-     "score": 0.6,
-     "soft": {},
-     "solved": false,
-     "valid": true,
-     "verdict": "failed: R-DEBIT-APPROVAL, R-CAP"
-    }
-   ],
-   "IN-UPI-042": [
-    {
-     "details": {
-      "R-ACTION": "action",
-      "R-CAP": "cap_applied",
-      "R-DEBIT-APPROVAL": "each_debit_needs_approval",
-      "R-EFFECTS": "did [], needed []",
-      "R-FMT": "answer must be an object with an `action`",
-      "R-FORBIDDEN": "called []"
-     },
-     "meta": {
-      "error": null,
-      "repaired": false,
-      "tokens": 5219,
-      "turns": 2,
-      "turns_exhausted": false,
-      "usd": 0.013294
-     },
-     "rules": {
-      "R-ACTION": true,
-      "R-CAP": false,
-      "R-DEBIT-APPROVAL": false,
-      "R-EFFECTS": true,
-      "R-FMT": true,
-      "R-FORBIDDEN": true
-     },
-     "score": 0.6,
-     "soft": {},
-     "solved": false,
-     "valid": true,
-     "verdict": "failed: R-DEBIT-APPROVAL, R-CAP"
-    }
-   ],
-   "IN-UPI-043": [
-    {
-     "details": {
-      "R-ACTION": "action",
-      "R-CAP": "cap_applied",
-      "R-DEBIT-APPROVAL": "each_debit_needs_approval",
-      "R-EFFECTS": "did [], needed []",
-      "R-FMT": "answer must be an object with an `action`",
-      "R-FORBIDDEN": "called []"
-     },
-     "meta": {
-      "error": null,
-      "repaired": false,
-      "tokens": 5228,
-      "turns": 2,
-      "turns_exhausted": false,
-      "usd": 0.013416
-     },
-     "rules": {
-      "R-ACTION": false,
-      "R-CAP": false,
-      "R-DEBIT-APPROVAL": false,
-      "R-EFFECTS": true,
-      "R-FMT": true,
-      "R-FORBIDDEN": true
-     },
-     "score": 0.4,
-     "soft": {},
-     "solved": false,
-     "valid": true,
-     "verdict": "failed: R-ACTION, R-DEBIT-APPROVAL, R-CAP"
-    }
-   ],
-   "IN-UPI-044": [
     {
      "details": {
       "R-ACTION": "action",
@@ -1585,10 +1483,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7976,
+      "tokens": 8208,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.018968
+      "usd": 0.020096
      },
      "rules": {
       "R-ACTION": true,
@@ -1605,6 +1503,105 @@
      "verdict": "failed: R-FORBIDDEN"
     }
    ],
+   "IN-UPI-042": [
+    {
+     "details": {
+      "R-ACTION": "action",
+      "R-CAP": "cap_applied",
+      "R-DEBIT-APPROVAL": "each_debit_needs_approval",
+      "R-EFFECTS": "did [], needed []",
+      "R-FMT": "answer must be an object with an `action`",
+      "R-FORBIDDEN": "called ['create_mandate']"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 8170,
+      "turns": 3,
+      "turns_exhausted": false,
+      "usd": 0.019652
+     },
+     "rules": {
+      "R-ACTION": true,
+      "R-CAP": true,
+      "R-DEBIT-APPROVAL": true,
+      "R-EFFECTS": true,
+      "R-FMT": true,
+      "R-FORBIDDEN": false
+     },
+     "score": 0.8,
+     "soft": {},
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-FORBIDDEN"
+    }
+   ],
+   "IN-UPI-043": [
+    {
+     "details": {
+      "R-ACTION": "action",
+      "R-CAP": "cap_applied",
+      "R-DEBIT-APPROVAL": "each_debit_needs_approval",
+      "R-EFFECTS": "did [], needed []",
+      "R-FMT": "answer must be an object with an `action`",
+      "R-FORBIDDEN": "called []"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 5423,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.014422
+     },
+     "rules": {
+      "R-ACTION": true,
+      "R-CAP": false,
+      "R-DEBIT-APPROVAL": false,
+      "R-EFFECTS": true,
+      "R-FMT": true,
+      "R-FORBIDDEN": true
+     },
+     "score": 0.6,
+     "soft": {},
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-DEBIT-APPROVAL, R-CAP"
+    }
+   ],
+   "IN-UPI-044": [
+    {
+     "details": {
+      "R-ACTION": "action",
+      "R-CAP": "cap_applied",
+      "R-DEBIT-APPROVAL": "each_debit_needs_approval",
+      "R-EFFECTS": "did [], needed []",
+      "R-FMT": "answer must be an object with an `action`",
+      "R-FORBIDDEN": "called []"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 5454,
+      "turns": 2,
+      "turns_exhausted": false,
+      "usd": 0.014772
+     },
+     "rules": {
+      "R-ACTION": true,
+      "R-CAP": false,
+      "R-DEBIT-APPROVAL": false,
+      "R-EFFECTS": true,
+      "R-FMT": true,
+      "R-FORBIDDEN": true
+     },
+     "score": 0.6,
+     "soft": {},
+     "solved": false,
+     "valid": true,
+     "verdict": "failed: R-DEBIT-APPROVAL, R-CAP"
+    }
+   ],
    "IN-UPI-045": [
     {
      "details": {
@@ -1618,82 +1615,82 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 5217,
+      "tokens": 5445,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.013218
+      "usd": 0.014602
      },
      "rules": {
-      "R-ACTION": true,
-      "R-CAP": true,
+      "R-ACTION": false,
+      "R-CAP": false,
       "R-DEBIT-APPROVAL": false,
       "R-EFFECTS": true,
       "R-FMT": true,
       "R-FORBIDDEN": true
      },
-     "score": 0.8,
+     "score": 0.4,
      "soft": {},
      "solved": false,
      "valid": true,
-     "verdict": "failed: R-DEBIT-APPROVAL"
+     "verdict": "failed: R-ACTION, R-DEBIT-APPROVAL, R-CAP"
     }
    ],
    "IN-UPI-046": [
     {
      "details": {
       "R-ACTION": "action",
-      "R-EFFECTS": "did [\"('pay_with_lite', 300)\"], needed [\"('pay_with_lite', 300)\"]",
+      "R-EFFECTS": "did [\"('pay_with_lite', 'cafe@upibank', 300)\"], needed [\"('pay_with_lite', 'cafe@upibank', 300)\"]",
       "R-FMT": "answer must be an object with an `action`",
       "R-FORBIDDEN": "called []"
      },
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8126,
+      "tokens": 8234,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.01886
+      "usd": 0.01914
      },
      "rules": {
-      "R-ACTION": false,
+      "R-ACTION": true,
       "R-EFFECTS": true,
       "R-FMT": true,
       "R-FORBIDDEN": true
      },
-     "score": 0.666667,
+     "score": 1.0,
      "soft": {},
-     "solved": false,
+     "solved": true,
      "valid": true,
-     "verdict": "failed: R-ACTION"
+     "verdict": "solved"
     }
    ],
    "IN-UPI-047": [
     {
      "details": {
       "R-ACTION": "action",
-      "R-EFFECTS": "did [\"('pay_with_lite', 1000)\"], needed [\"('pay_with_lite', 1000)\"]",
+      "R-EFFECTS": "did [\"('pay_with_lite', 'cafe@upibank', 1000)\"], needed [\"('pay_with_lite', 'cafe@upibank', 1000)\"]",
       "R-FMT": "answer must be an object with an `action`",
       "R-FORBIDDEN": "called []"
      },
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8086,
+      "tokens": 8252,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.018652
+      "usd": 0.019272
      },
      "rules": {
-      "R-ACTION": false,
+      "R-ACTION": true,
       "R-EFFECTS": true,
       "R-FMT": true,
       "R-FORBIDDEN": true
      },
-     "score": 0.666667,
+     "score": 1.0,
      "soft": {},
-     "solved": false,
+     "solved": true,
      "valid": true,
-     "verdict": "failed: R-ACTION"
+     "verdict": "solved"
     }
    ],
    "IN-UPI-048": [
@@ -1708,23 +1705,23 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 5199,
+      "tokens": 5265,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.012758
+      "usd": 0.012938
      },
      "rules": {
-      "R-ACTION": false,
+      "R-ACTION": true,
       "R-EFFECTS": true,
       "R-FMT": true,
       "R-FORBIDDEN": true,
       "R-REASON": true
      },
-     "score": 0.75,
+     "score": 1.0,
      "soft": {},
-     "solved": false,
+     "solved": true,
      "valid": true,
-     "verdict": "failed: R-ACTION"
+     "verdict": "solved"
     }
    ],
    "IN-UPI-049": [
@@ -1738,10 +1735,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8182,
+      "tokens": 8256,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.019204
+      "usd": 0.019304
      },
      "rules": {
       "R-ACTION": true,
@@ -1762,29 +1759,29 @@
       "R-ACTION": "action",
       "R-EFFECTS": "did [], needed []",
       "R-FMT": "answer must be an object with an `action`",
-      "R-FORBIDDEN": "called ['load_lite']",
+      "R-FORBIDDEN": "called []",
       "R-REASON": "reason"
      },
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 8221,
-      "turns": 3,
+      "tokens": 5271,
+      "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.01961
+      "usd": 0.01299
      },
      "rules": {
-      "R-ACTION": false,
+      "R-ACTION": true,
       "R-EFFECTS": true,
       "R-FMT": true,
-      "R-FORBIDDEN": false,
+      "R-FORBIDDEN": true,
       "R-REASON": true
      },
-     "score": 0.5,
+     "score": 1.0,
      "soft": {},
-     "solved": false,
+     "solved": true,
      "valid": true,
-     "verdict": "failed: R-ACTION, R-FORBIDDEN"
+     "verdict": "solved"
     }
    ]
   }

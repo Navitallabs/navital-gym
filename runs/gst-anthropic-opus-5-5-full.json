@@ -1,8 +1,8 @@
 {
  "anthropic:claude-opus-5-5": {
-  "graded_with": "ed78addcd557",
+  "graded_with": "1543b5103be5",
   "k": 1,
-  "navital_gym_commit": "ed78addcd557",
+  "navital_gym_commit": "d770b51e8362",
   "settings": {
    "json_mode_on_final": true,
    "max_tokens": 4096,
@@ -34,15 +34,12 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.9,
+     "mean_score": 1.0,
      "not_run": 0,
-     "pass@1": 0.9,
-     "pass^k": 0.9,
-     "rule_failures": {
-      "R-ITC-AMOUNT": 1,
-      "R-ITC-INVOICES": 1
-     },
-     "strict_pass@1": 0.9,
+     "pass@1": 1.0,
+     "pass^k": 1.0,
+     "rule_failures": {},
+     "strict_pass@1": 1.0,
      "tasks": 10,
      "turns_exhausted": 0.0
     },
@@ -95,15 +92,12 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.98,
+     "mean_score": 1.0,
      "not_run": 0,
-     "pass@1": 0.98,
-     "pass^k": 0.98,
-     "rule_failures": {
-      "R-ITC-AMOUNT": 1,
-      "R-ITC-INVOICES": 1
-     },
-     "strict_pass@1": 0.98,
+     "pass@1": 1.0,
+     "pass^k": 1.0,
+     "rule_failures": {},
+     "strict_pass@1": 1.0,
      "tasks": 50,
      "turns_exhausted": 0.0
     }
@@ -111,15 +105,12 @@
    "errors": 0.0,
    "format_fail": 0.0,
    "k": 1,
-   "mean_score": 0.98,
+   "mean_score": 1.0,
    "not_run": 0,
-   "pass@1": 0.98,
-   "pass^k": 0.98,
-   "rule_failures": {
-    "R-ITC-AMOUNT": 1,
-    "R-ITC-INVOICES": 1
-   },
-   "strict_pass@1": 0.98,
+   "pass@1": 1.0,
+   "pass^k": 1.0,
+   "rule_failures": {},
+   "strict_pass@1": 1.0,
    "tasks": 50,
    "turns_exhausted": 0.0
   },
@@ -970,21 +961,21 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7029,
+      "tokens": 6178,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.052676
+      "usd": 0.035496
      },
      "rules": {
       "R-FMT": true,
-      "R-ITC-AMOUNT": false,
-      "R-ITC-INVOICES": false
+      "R-ITC-AMOUNT": true,
+      "R-ITC-INVOICES": true
      },
-     "score": 0.0,
+     "score": 1.0,
      "soft": {},
-     "solved": false,
+     "solved": true,
      "valid": true,
-     "verdict": "failed: R-ITC-AMOUNT, R-ITC-INVOICES"
+     "verdict": "solved"
     }
    ],
    "IN-GST-028": [
@@ -1468,10 +1459,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 2891,
+      "tokens": 2923,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.016652
+      "usd": 0.01534
      },
      "rules": {
       "R-FMT": true,
@@ -1493,10 +1484,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 2816,
+      "tokens": 2857,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.015152
+      "usd": 0.014884
      },
      "rules": {
       "R-FMT": true,
@@ -1518,10 +1509,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 3013,
+      "tokens": 3078,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.019092
+      "usd": 0.018088
      },
      "rules": {
       "R-FMT": true,
@@ -1543,10 +1534,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 2747,
+      "tokens": 2856,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.013852
+      "usd": 0.014416
      },
      "rules": {
       "R-FMT": true,
@@ -1568,10 +1559,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 2753,
+      "tokens": 2931,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.013908
+      "usd": 0.015788
      },
      "rules": {
       "R-FMT": true,

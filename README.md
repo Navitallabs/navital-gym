@@ -62,36 +62,30 @@ Each adapter has an offline end-to-end test with a scripted model. They are writ
 
 ## Results
 <!-- RESULTS:START -->
-Pass@1 on deterministic stratified samples or whole splits (k=1, one run per cell; n = tasks, so one task is 1/n of the cell: read small-n cells as indicative). 'easy' columns are the easy tier (designed so a 7B-30B model can sometimes solve them); the others are the standard tasks. Full tables with format failures, strict (no-repair) pass@1, partial credit, spend, dates and commits: [`docs/RESULTS.md`](https://github.com/Navitallabs/navital-gym/blob/main/docs/RESULTS.md). Every row was re-graded by the same grading code (`scripts/regrade.py`); check it with `git rev-parse v1.0.1:navital_gym` (see `docs/RESULTS.md`).
+Pass@1 on deterministic stratified samples or whole splits (k=1, one run per cell; n = tasks, so one task is 1/n of the cell: read small-n cells as indicative). 'easy' columns are the easy tier (designed so a 7B-30B model can sometimes solve them); the others are the standard tasks. Full tables with format failures, strict (no-repair) pass@1, partial credit, spend, dates and commits: [`docs/RESULTS.md`](https://github.com/Navitallabs/navital-gym/blob/main/docs/RESULTS.md). Every row was re-graded by the same grading code (`scripts/regrade.py`); check it with `git rev-parse v1.1.0:navital_gym` (see `docs/RESULTS.md`).
 
 **Small and mid-size models: pass@1 (the typical user's models)**
 
-| model | trip | form | form multi-document | gst | support | upi | trip easy | gst easy | support easy | upi easy |
-|---|---|---|---|---|---|---|---|---|---|---|
-| claude-haiku-4-5 | 0.31 (n=55) | 0.82 (n=50) | 0.98 (n=40) | 0.82 (n=50) | 0.24 (n=76) | 0.42 (n=50) | 0.67 (n=18) | 1.00 (n=18) | - | 0.61 (n=18) |
-| gemini-3.1-flash-lite | 0.20 (n=15) | 0.60 (n=15) | - | - | 0.33 (n=15) | 0.60 (n=15) | - | - | - | - |
-| gpt-4o-mini | 0.05 (n=55) | 0.54 (n=50) | 0.33 (n=40) | 0.50 (n=50) | 0.09 (n=76) | 0.18 (n=50) | 0.06 (n=18) | 0.94 (n=18) | - | 0.33 (n=18) |
-| openai/gpt-oss-120b | - | - | - | - | - | - | - | 0.94 (n=18) | 0.00 (n=18) | - |
-| openai/gpt-oss-20b | - | 0.80 (n=15) | - | - | - | - | - | 1.00 (n=18) | 0.00 (n=18) | - |
-| sarvam-105b | 0.20 (n=55) | 0.82 (n=50) | 1.00 (n=40) | 0.78 (n=50) | 0.38 (n=76) | 0.52 (n=50) | - | 1.00 (n=18) | - | - |
+| model | trip | form | form multi-document | gst | support | upi |
+|---|---|---|---|---|---|---|
+| claude-haiku-4-5 | 0.35 (n=55) | 0.94 (n=50) | 0.98 (n=40) | 0.84 (n=50) | 0.42 (n=76) | 0.52 (n=50) |
+| gemini-3.1-flash-lite | - | - | - | - | - | 0.78 (n=50) |
+| sarvam-105b | - | 0.98 (n=50) | 1.00 (n=40) | 0.82 (n=50) | 0.54 (n=76) | 0.58 (n=50) |
 
 **Small and mid-size models: partial credit (mean fraction of scored rules passed; shows progress where pass@1 is near zero)**
 
-| model | trip | form | form multi-document | gst | support | upi | trip easy | gst easy | support easy | upi easy |
-|---|---|---|---|---|---|---|---|---|---|---|
-| claude-haiku-4-5 | 0.73 | 0.90 | 0.99 | 0.91 | 0.70 | 0.67 | 0.95 | 1.00 | - | 0.83 |
-| gemini-3.1-flash-lite | 0.58 | 0.82 | - | - | 0.73 | 0.87 | - | - | - | - |
-| gpt-4o-mini | 0.28 | 0.83 | 0.61 | 0.69 | 0.55 | 0.47 | 0.59 | 0.94 | - | 0.59 |
-| openai/gpt-oss-120b | - | - | - | - | - | - | - | 0.94 | 0.76 | - |
-| openai/gpt-oss-20b | - | 0.87 | - | - | - | - | - | 1.00 | 0.73 | - |
-| sarvam-105b | 0.54 | 0.95 | 1.00 | 0.87 | 0.77 | 0.77 | - | 1.00 | - | - |
+| model | trip | form | form multi-document | gst | support | upi |
+|---|---|---|---|---|---|---|
+| claude-haiku-4-5 | 0.66 | 0.97 | 0.99 | 0.93 | 0.74 | 0.73 |
+| gemini-3.1-flash-lite | - | - | - | - | - | 0.92 |
+| sarvam-105b | - | 1.00 | 1.00 | 0.91 | 0.87 | 0.75 |
 
 **Larger models, for reference (what strong models reach)**
 
-| model | trip | form | form multi-document | gst | support | upi | trip easy | gst easy | support easy | upi easy |
-|---|---|---|---|---|---|---|---|---|---|---|
-| claude-opus-5-5 | 0.58 (n=55) | 1.00 (n=50) | 1.00 (n=40) | 0.98 (n=50) | 0.71 (n=76) | 0.78 (n=50) | - | - | - | - |
-| claude-sonnet-5-5 | 0.58 (n=55) | 1.00 (n=50) | 1.00 (n=40) | 1.00 (n=50) | 0.66 (n=76) | 0.68 (n=50) | - | - | - | - |
+| model | trip | form | form multi-document | gst | support | upi |
+|---|---|---|---|---|---|---|
+| claude-opus-5-5 | 0.93 (n=55) | 1.00 (n=50) | 1.00 (n=40) | 1.00 (n=50) | 0.97 (n=76) | 1.00 (n=50) |
+| claude-sonnet-5-5 | 0.84 (n=55) | 1.00 (n=50) | 1.00 (n=40) | 1.00 (n=50) | 0.91 (n=76) | 0.94 (n=50) |
 
 Most of the models people will test are small or mid-size, so they come first. Many score low: that is the point of a hard benchmark, but a cell near zero says little, so read partial credit next to it. Samples are small and the small and mid-size models above are not the strongest agents available; these results show that the environments separate models, not a leaderboard. Task difficulty labels are designer intent, not calibrated.
 <!-- RESULTS:END -->

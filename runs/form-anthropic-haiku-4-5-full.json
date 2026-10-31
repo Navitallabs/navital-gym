@@ -1,8 +1,8 @@
 {
  "anthropic:claude-haiku-4-5": {
-  "graded_with": "ed78addcd557",
+  "graded_with": "1543b5103be5",
   "k": 1,
-  "navital_gym_commit": "0b6a64f313ec",
+  "navital_gym_commit": "d770b51e8362",
   "settings": {
    "json_mode_on_final": true,
    "max_tokens": 4096,
@@ -20,14 +20,12 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.9791666666666666,
+     "mean_score": 1.0,
      "not_run": 0,
-     "pass@1": 0.9166666666666666,
-     "pass^k": 0.9166666666666666,
-     "rule_failures": {
-      "R-PIN": 1
-     },
-     "strict_pass@1": 0.9166666666666666,
+     "pass@1": 1.0,
+     "pass^k": 1.0,
+     "rule_failures": {},
+     "strict_pass@1": 1.0,
      "tasks": 12,
      "turns_exhausted": 0.0
     },
@@ -36,16 +34,14 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.26666666666666666,
+     "mean_score": 0.95,
      "not_run": 0,
-     "pass@1": 0.0,
-     "pass^k": 0.0,
+     "pass@1": 0.8,
+     "pass^k": 0.8,
      "rule_failures": {
-      "R-ADV-TAX": 1,
-      "R-AY": 5,
-      "R-FY": 5
+      "R-ADV-TAX": 1
      },
-     "strict_pass@1": 0.0,
+     "strict_pass@1": 0.8,
      "tasks": 5,
      "turns_exhausted": 0.0
     },
@@ -54,14 +50,12 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.9777777777777777,
+     "mean_score": 0.9944444444444444,
      "not_run": 0,
-     "pass@1": 0.8666666666666667,
-     "pass^k": 0.8666666666666667,
+     "pass@1": 0.9333333333333333,
+     "pass^k": 0.9333333333333333,
      "rule_failures": {
-      "R-IFSC": 1,
-      "R-MOBILE": 1,
-      "R-PAN": 2
+      "R-PAN": 1
      },
      "strict_pass@1": 0.8666666666666667,
      "tasks": 15,
@@ -104,21 +98,16 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.895,
+     "mean_score": 0.9733333333333333,
      "not_run": 0,
-     "pass@1": 0.82,
-     "pass^k": 0.82,
+     "pass@1": 0.94,
+     "pass^k": 0.94,
      "rule_failures": {
       "R-ADV-TAX": 1,
-      "R-AY": 5,
-      "R-FY": 5,
-      "R-IFSC": 1,
-      "R-MOBILE": 1,
-      "R-PAN": 2,
-      "R-PIN": 1,
+      "R-PAN": 1,
       "R-VALUE": 1
      },
-     "strict_pass@1": 0.82,
+     "strict_pass@1": 0.92,
      "tasks": 50,
      "turns_exhausted": 0.0
     }
@@ -126,21 +115,16 @@
    "errors": 0.0,
    "format_fail": 0.0,
    "k": 1,
-   "mean_score": 0.895,
+   "mean_score": 0.9733333333333333,
    "not_run": 0,
-   "pass@1": 0.82,
-   "pass^k": 0.82,
+   "pass@1": 0.94,
+   "pass^k": 0.94,
    "rule_failures": {
     "R-ADV-TAX": 1,
-    "R-AY": 5,
-    "R-FY": 5,
-    "R-IFSC": 1,
-    "R-MOBILE": 1,
-    "R-PAN": 2,
-    "R-PIN": 1,
+    "R-PAN": 1,
     "R-VALUE": 1
    },
-   "strict_pass@1": 0.82,
+   "strict_pass@1": 0.92,
    "tasks": 50,
    "turns_exhausted": 0.0
   },
@@ -165,10 +149,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7687,
+      "tokens": 7964,
       "turns": 4,
       "turns_exhausted": false,
-      "usd": 0.020198
+      "usd": 0.021696
      },
      "rules": {
       "R-ACCOUNT": true,
@@ -212,10 +196,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 5685,
+      "tokens": 5730,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.016298
+      "usd": 0.016084
      },
      "rules": {
       "R-ACCOUNT": true,
@@ -259,10 +243,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 5641,
+      "tokens": 5734,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.015874
+      "usd": 0.01614
      },
      "rules": {
       "R-ACCOUNT": true,
@@ -306,10 +290,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 5885,
+      "tokens": 5834,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.018626
+      "usd": 0.017452
      },
      "rules": {
       "R-ACCOUNT": true,
@@ -353,10 +337,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 5691,
+      "tokens": 5771,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.016422
+      "usd": 0.016558
      },
      "rules": {
       "R-ACCOUNT": true,
@@ -400,10 +384,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 5662,
-      "turns": 3,
+      "tokens": 8772,
+      "turns": 4,
       "turns_exhausted": false,
-      "usd": 0.016132
+      "usd": 0.023328
      },
      "rules": {
       "R-ACCOUNT": true,
@@ -447,10 +431,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 5617,
+      "tokens": 5716,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.015898
+      "usd": 0.016224
      },
      "rules": {
       "R-ACCOUNT": true,
@@ -494,10 +478,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 5677,
+      "tokens": 5754,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.016306
+      "usd": 0.016412
      },
      "rules": {
       "R-ACCOUNT": true,
@@ -541,10 +525,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7935,
+      "tokens": 8027,
       "turns": 4,
       "turns_exhausted": false,
-      "usd": 0.022422
+      "usd": 0.022014
      },
      "rules": {
       "R-ACCOUNT": true,
@@ -587,11 +571,11 @@
      },
      "meta": {
       "error": null,
-      "repaired": false,
-      "tokens": 5632,
+      "repaired": true,
+      "tokens": 7450,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.016048
+      "usd": 0.019876
      },
      "rules": {
       "R-ACCOUNT": true,
@@ -635,10 +619,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 5786,
+      "tokens": 5805,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.017244
+      "usd": 0.01677
      },
      "rules": {
       "R-ACCOUNT": true,
@@ -682,10 +666,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 5731,
+      "tokens": 5877,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.016862
+      "usd": 0.017658
      },
      "rules": {
       "R-ACCOUNT": true,
@@ -729,10 +713,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7708,
+      "tokens": 7966,
       "turns": 4,
       "turns_exhausted": false,
-      "usd": 0.02036
+      "usd": 0.021668
      },
      "rules": {
       "R-ACCOUNT": true,
@@ -776,10 +760,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7987,
+      "tokens": 8182,
       "turns": 4,
       "turns_exhausted": false,
-      "usd": 0.022846
+      "usd": 0.02346
      },
      "rules": {
       "R-ACCOUNT": true,
@@ -787,20 +771,20 @@
       "R-DOB": true,
       "R-FMT": true,
       "R-GUARDIAN": true,
-      "R-IFSC": false,
+      "R-IFSC": true,
       "R-IFSC-VALID": true,
       "R-MINOR": true,
-      "R-MOBILE": false,
+      "R-MOBILE": true,
       "R-MOBILE-VALID": true,
       "R-NAME": true,
-      "R-PAN": false,
+      "R-PAN": true,
       "R-PAN-VALID": true
      },
-     "score": 0.75,
+     "score": 1.0,
      "soft": {},
-     "solved": false,
+     "solved": true,
      "valid": true,
-     "verdict": "failed: R-PAN, R-MOBILE, R-IFSC"
+     "verdict": "solved"
     }
    ],
    "IN-FORM-015": [
@@ -823,10 +807,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7877,
+      "tokens": 8052,
       "turns": 4,
       "turns_exhausted": false,
-      "usd": 0.021786
+      "usd": 0.022208
      },
      "rules": {
       "R-ACCOUNT": true,
@@ -862,10 +846,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 2914,
+      "tokens": 2950,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.007548
+      "usd": 0.007908
      },
      "rules": {
       "R-CITY": true,
@@ -955,10 +939,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 4583,
-      "turns": 3,
+      "tokens": 3100,
+      "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.011606
+      "usd": 0.008504
      },
      "rules": {
       "R-CITY": true,
@@ -1079,23 +1063,23 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 4636,
+      "tokens": 4673,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.0118
+      "usd": 0.012034
      },
      "rules": {
       "R-CITY": true,
       "R-FMT": true,
       "R-HOUSE": true,
-      "R-PIN": false,
+      "R-PIN": true,
       "R-STATE": true
      },
-     "score": 0.75,
+     "score": 1.0,
      "soft": {},
-     "solved": false,
+     "solved": true,
      "valid": true,
-     "verdict": "failed: R-PIN"
+     "verdict": "solved"
     }
    ],
    "IN-FORM-024": [
@@ -1110,10 +1094,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 3665,
+      "tokens": 3777,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.009786
+      "usd": 0.01013
      },
      "rules": {
       "R-CITY": true,
@@ -1172,10 +1156,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 2902,
+      "tokens": 2917,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.007468
+      "usd": 0.007618
      },
      "rules": {
       "R-CITY": true,
@@ -1331,10 +1315,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 2912,
+      "tokens": 2918,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.007328
+      "usd": 0.007388
      },
      "rules": {
       "R-CONSISTENT": true,
@@ -1356,10 +1340,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 2904,
+      "tokens": 2893,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.007232
+      "usd": 0.007122
      },
      "rules": {
       "R-CONSISTENT": true,
@@ -1406,10 +1390,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 2928,
+      "tokens": 2924,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.007432
+      "usd": 0.007392
      },
      "rules": {
       "R-CONSISTENT": true,
@@ -1506,10 +1490,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 1312,
+      "tokens": 1307,
       "turns": 1,
       "turns_exhausted": false,
-      "usd": 0.003768
+      "usd": 0.003718
      },
      "rules": {
       "R-FMT": true,
@@ -1675,64 +1659,69 @@
    "IN-FORM-046": [
     {
      "details": {
+      "R-ACT": "governing_act",
       "R-ADV-TAX": "next_advance_tax_date",
-      "R-AY": "assessment_year",
+      "R-AY": "assessment_year must be null",
       "R-FMT": "answer must be an object",
       "R-FY": "financial_year"
      },
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 3477,
+      "tokens": 3776,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.010194
+      "usd": 0.011424
      },
      "rules": {
+      "R-ACT": true,
       "R-ADV-TAX": true,
-      "R-AY": false,
+      "R-AY": true,
       "R-FMT": true,
-      "R-FY": false
+      "R-FY": true
      },
-     "score": 0.333333,
+     "score": 1.0,
      "soft": {},
-     "solved": false,
+     "solved": true,
      "valid": true,
-     "verdict": "failed: R-FY, R-AY"
+     "verdict": "solved"
     }
    ],
    "IN-FORM-047": [
     {
      "details": {
+      "R-ACT": "governing_act",
       "R-ADV-TAX": "next_advance_tax_date",
-      "R-AY": "assessment_year",
+      "R-AY": "assessment_year must be null",
       "R-FMT": "answer must be an object",
       "R-FY": "financial_year"
      },
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 3484,
+      "tokens": 3672,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.010264
+      "usd": 0.010392
      },
      "rules": {
+      "R-ACT": true,
       "R-ADV-TAX": true,
-      "R-AY": false,
+      "R-AY": true,
       "R-FMT": true,
-      "R-FY": false
+      "R-FY": true
      },
-     "score": 0.333333,
+     "score": 1.0,
      "soft": {},
-     "solved": false,
+     "solved": true,
      "valid": true,
-     "verdict": "failed: R-FY, R-AY"
+     "verdict": "solved"
     }
    ],
    "IN-FORM-048": [
     {
      "details": {
+      "R-ACT": "governing_act",
       "R-ADV-TAX": "next_advance_tax_date",
       "R-AY": "assessment_year",
       "R-FMT": "answer must be an object",
@@ -1741,80 +1730,85 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 3382,
+      "tokens": 3740,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.009372
+      "usd": 0.011072
      },
      "rules": {
+      "R-ACT": true,
       "R-ADV-TAX": true,
-      "R-AY": false,
+      "R-AY": true,
       "R-FMT": true,
-      "R-FY": false
+      "R-FY": true
      },
-     "score": 0.333333,
+     "score": 1.0,
      "soft": {},
-     "solved": false,
+     "solved": true,
      "valid": true,
-     "verdict": "failed: R-FY, R-AY"
+     "verdict": "solved"
     }
    ],
    "IN-FORM-049": [
     {
      "details": {
+      "R-ACT": "governing_act",
       "R-ADV-TAX": "next_advance_tax_date",
-      "R-AY": "assessment_year",
+      "R-AY": "assessment_year must be null",
       "R-FMT": "answer must be an object",
       "R-FY": "financial_year"
      },
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 3451,
+      "tokens": 3665,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.010022
+      "usd": 0.010338
      },
      "rules": {
+      "R-ACT": true,
       "R-ADV-TAX": true,
-      "R-AY": false,
+      "R-AY": true,
       "R-FMT": true,
-      "R-FY": false
+      "R-FY": true
      },
-     "score": 0.333333,
+     "score": 1.0,
      "soft": {},
-     "solved": false,
+     "solved": true,
      "valid": true,
-     "verdict": "failed: R-FY, R-AY"
+     "verdict": "solved"
     }
    ],
    "IN-FORM-050": [
     {
      "details": {
+      "R-ACT": "governing_act",
       "R-ADV-TAX": "next_advance_tax_date",
-      "R-AY": "assessment_year",
+      "R-AY": "assessment_year must be null",
       "R-FMT": "answer must be an object",
       "R-FY": "financial_year"
      },
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 3445,
+      "tokens": 3750,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.009874
+      "usd": 0.011172
      },
      "rules": {
+      "R-ACT": true,
       "R-ADV-TAX": false,
-      "R-AY": false,
+      "R-AY": true,
       "R-FMT": true,
-      "R-FY": false
+      "R-FY": true
      },
-     "score": 0.0,
+     "score": 0.75,
      "soft": {},
      "solved": false,
      "valid": true,
-     "verdict": "failed: R-FY, R-AY, R-ADV-TAX"
+     "verdict": "failed: R-ADV-TAX"
     }
    ]
   }

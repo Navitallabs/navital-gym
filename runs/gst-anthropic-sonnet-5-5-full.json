@@ -1,8 +1,8 @@
 {
  "anthropic:claude-sonnet-5-5": {
-  "graded_with": "ed78addcd557",
+  "graded_with": "1543b5103be5",
   "k": 1,
-  "navital_gym_commit": "0b6a64f313ec",
+  "navital_gym_commit": "d770b51e8362",
   "settings": {
    "json_mode_on_final": true,
    "max_tokens": 4096,
@@ -961,10 +961,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 3720,
+      "tokens": 3256,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.0305
+      "usd": 0.01876
      },
      "rules": {
       "R-FMT": true,
@@ -1459,10 +1459,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 2675,
+      "tokens": 2820,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.015415
+      "usd": 0.0166
      },
      "rules": {
       "R-FMT": true,
@@ -1484,10 +1484,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 2676,
+      "tokens": 2746,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.01544
+      "usd": 0.01583
      },
      "rules": {
       "R-FMT": true,
@@ -1509,10 +1509,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 2940,
+      "tokens": 2826,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.02204
+      "usd": 0.01631
      },
      "rules": {
       "R-FMT": true,
@@ -1534,10 +1534,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 2672,
+      "tokens": 2796,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.01544
+      "usd": 0.01652
      },
      "rules": {
       "R-FMT": true,
@@ -1559,10 +1559,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 2703,
+      "tokens": 2818,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.016135
+      "usd": 0.01691
      },
      "rules": {
       "R-FMT": true,

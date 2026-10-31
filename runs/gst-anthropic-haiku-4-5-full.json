@@ -1,8 +1,8 @@
 {
  "anthropic:claude-haiku-4-5": {
-  "graded_with": "ed78addcd557",
+  "graded_with": "1543b5103be5",
   "k": 1,
-  "navital_gym_commit": "0b6a64f313ec",
+  "navital_gym_commit": "d770b51e8362",
   "settings": {
    "json_mode_on_final": true,
    "max_tokens": 4096,
@@ -85,15 +85,14 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.7142857142857143,
+     "mean_score": 0.8571428571428571,
      "not_run": 0,
-     "pass@1": 0.7142857142857143,
-     "pass^k": 0.7142857142857143,
+     "pass@1": 0.8571428571428571,
+     "pass^k": 0.8571428571428571,
      "rule_failures": {
-      "R-ELIGIBLE": 1,
-      "R-REQUIRED": 1
+      "R-ELIGIBLE": 1
      },
-     "strict_pass@1": 0.7142857142857143,
+     "strict_pass@1": 0.8571428571428571,
      "tasks": 7,
      "turns_exhausted": 0.0
     }
@@ -104,22 +103,21 @@
      "errors": 0.0,
      "format_fail": 0.0,
      "k": 1,
-     "mean_score": 0.9142857142857143,
+     "mean_score": 0.9342857142857143,
      "not_run": 0,
-     "pass@1": 0.82,
-     "pass^k": 0.82,
+     "pass@1": 0.84,
+     "pass^k": 0.84,
      "rule_failures": {
       "R-CGST": 2,
       "R-ELIGIBLE": 1,
       "R-FEE": 2,
       "R-INTEREST": 2,
-      "R-REQUIRED": 1,
       "R-ROUNDOFF": 3,
       "R-SGST": 2,
       "R-TAXABLE": 1,
       "R-TOTAL": 1
      },
-     "strict_pass@1": 0.82,
+     "strict_pass@1": 0.84,
      "tasks": 50,
      "turns_exhausted": 0.0
     }
@@ -127,22 +125,21 @@
    "errors": 0.0,
    "format_fail": 0.0,
    "k": 1,
-   "mean_score": 0.9142857142857143,
+   "mean_score": 0.9342857142857143,
    "not_run": 0,
-   "pass@1": 0.82,
-   "pass^k": 0.82,
+   "pass@1": 0.84,
+   "pass^k": 0.84,
    "rule_failures": {
     "R-CGST": 2,
     "R-ELIGIBLE": 1,
     "R-FEE": 2,
     "R-INTEREST": 2,
-    "R-REQUIRED": 1,
     "R-ROUNDOFF": 3,
     "R-SGST": 2,
     "R-TAXABLE": 1,
     "R-TOTAL": 1
    },
-   "strict_pass@1": 0.82,
+   "strict_pass@1": 0.84,
    "tasks": 50,
    "turns_exhausted": 0.0
   },
@@ -993,10 +990,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 3587,
+      "tokens": 3508,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.01183
+      "usd": 0.010984
      },
      "rules": {
       "R-FMT": true,
@@ -1491,10 +1488,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 2714,
+      "tokens": 2983,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.00726
+      "usd": 0.008486
      },
      "rules": {
       "R-FMT": true,
@@ -1516,10 +1513,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 2705,
+      "tokens": 2734,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.00717
+      "usd": 0.007052
      },
      "rules": {
       "R-FMT": true,
@@ -1541,20 +1538,20 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 2681,
+      "tokens": 2970,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.00693
+      "usd": 0.008292
      },
      "rules": {
       "R-FMT": true,
-      "R-REQUIRED": false
+      "R-REQUIRED": true
      },
-     "score": 0.0,
+     "score": 1.0,
      "soft": {},
-     "solved": false,
+     "solved": true,
      "valid": true,
-     "verdict": "failed: R-REQUIRED"
+     "verdict": "solved"
     }
    ],
    "IN-GST-047": [
@@ -1566,10 +1563,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 2759,
+      "tokens": 2882,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.007054
+      "usd": 0.007652
      },
      "rules": {
       "R-FMT": true,
@@ -1591,10 +1588,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 2814,
+      "tokens": 2931,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.007516
+      "usd": 0.008094
      },
      "rules": {
       "R-FMT": true,

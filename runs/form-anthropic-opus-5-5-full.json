@@ -1,8 +1,8 @@
 {
  "anthropic:claude-opus-5-5": {
-  "graded_with": "ed78addcd557",
+  "graded_with": "1543b5103be5",
   "k": 1,
-  "navital_gym_commit": "ed78addcd557",
+  "navital_gym_commit": "d770b51e8362",
   "settings": {
    "json_mode_on_final": true,
    "max_tokens": 4096,
@@ -135,10 +135,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7000,
+      "tokens": 7271,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.039584
+      "usd": 0.041836
      },
      "rules": {
       "R-ACCOUNT": true,
@@ -182,10 +182,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7250,
+      "tokens": 7506,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.043656
+      "usd": 0.045608
      },
      "rules": {
       "R-ACCOUNT": true,
@@ -229,10 +229,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7146,
+      "tokens": 7303,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.041
+      "usd": 0.041036
      },
      "rules": {
       "R-ACCOUNT": true,
@@ -276,10 +276,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 6972,
+      "tokens": 7152,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.039216
+      "usd": 0.038912
      },
      "rules": {
       "R-ACCOUNT": true,
@@ -323,10 +323,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7143,
+      "tokens": 7424,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.041756
+      "usd": 0.044208
      },
      "rules": {
       "R-ACCOUNT": true,
@@ -370,10 +370,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7237,
+      "tokens": 7406,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.0437
+      "usd": 0.043912
      },
      "rules": {
       "R-ACCOUNT": true,
@@ -417,10 +417,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7076,
+      "tokens": 7216,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.04104
+      "usd": 0.040672
      },
      "rules": {
       "R-ACCOUNT": true,
@@ -464,10 +464,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7014,
+      "tokens": 7294,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.03924
+      "usd": 0.04076
      },
      "rules": {
       "R-ACCOUNT": true,
@@ -511,10 +511,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7209,
+      "tokens": 7427,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.043268
+      "usd": 0.04446
      },
      "rules": {
       "R-ACCOUNT": true,
@@ -558,10 +558,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7012,
+      "tokens": 7235,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.039696
+      "usd": 0.040988
      },
      "rules": {
       "R-ACCOUNT": true,
@@ -605,10 +605,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7234,
+      "tokens": 7394,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.04324
+      "usd": 0.043272
      },
      "rules": {
       "R-ACCOUNT": true,
@@ -652,10 +652,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7189,
+      "tokens": 7359,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.042724
+      "usd": 0.042956
      },
      "rules": {
       "R-ACCOUNT": true,
@@ -699,10 +699,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7213,
+      "tokens": 7333,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.043844
+      "usd": 0.043076
      },
      "rules": {
       "R-ACCOUNT": true,
@@ -746,10 +746,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 7338,
+      "tokens": 7518,
       "turns": 3,
       "turns_exhausted": false,
-      "usd": 0.045448
+      "usd": 0.04588
      },
      "rules": {
       "R-ACCOUNT": true,
@@ -793,10 +793,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 6975,
-      "turns": 3,
+      "tokens": 4450,
+      "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.0383
+      "usd": 0.028792
      },
      "rules": {
       "R-ACCOUNT": true,
@@ -832,10 +832,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 3265,
+      "tokens": 3286,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.019844
+      "usd": 0.020264
      },
      "rules": {
       "R-CITY": true,
@@ -863,10 +863,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 3141,
-      "turns": 2,
+      "tokens": 1633,
+      "turns": 1,
       "turns_exhausted": false,
-      "usd": 0.018004
+      "usd": 0.010996
      },
      "rules": {
       "R-CITY": true,
@@ -894,10 +894,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 1622,
+      "tokens": 1592,
       "turns": 1,
       "turns_exhausted": false,
-      "usd": 0.01084
+      "usd": 0.01024
      },
      "rules": {
       "R-CITY": true,
@@ -925,10 +925,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 3320,
+      "tokens": 3171,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.021088
+      "usd": 0.018108
      },
      "rules": {
       "R-CITY": true,
@@ -956,10 +956,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 1626,
+      "tokens": 1629,
       "turns": 1,
       "turns_exhausted": false,
-      "usd": 0.010792
+      "usd": 0.010852
      },
      "rules": {
       "R-CITY": true,
@@ -987,10 +987,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 3130,
+      "tokens": 3111,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.017496
+      "usd": 0.016876
      },
      "rules": {
       "R-CITY": true,
@@ -1018,10 +1018,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 3197,
+      "tokens": 3219,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.01882
+      "usd": 0.01926
      },
      "rules": {
       "R-CITY": true,
@@ -1049,10 +1049,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 1646,
-      "turns": 1,
+      "tokens": 3202,
+      "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.011096
+      "usd": 0.01876
      },
      "rules": {
       "R-CITY": true,
@@ -1080,10 +1080,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 1568,
+      "tokens": 1664,
       "turns": 1,
       "turns_exhausted": false,
-      "usd": 0.00944
+      "usd": 0.01136
      },
      "rules": {
       "R-CITY": true,
@@ -1111,10 +1111,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 3202,
+      "tokens": 3186,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.019
+      "usd": 0.01868
      },
      "rules": {
       "R-CITY": true,
@@ -1142,10 +1142,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 1623,
-      "turns": 1,
+      "tokens": 3159,
+      "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.010796
+      "usd": 0.01806
      },
      "rules": {
       "R-CITY": true,
@@ -1173,10 +1173,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 1723,
+      "tokens": 1636,
       "turns": 1,
       "turns_exhausted": false,
-      "usd": 0.0127
+      "usd": 0.01096
      },
      "rules": {
       "R-CITY": true,
@@ -1201,10 +1201,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 3206,
+      "tokens": 3148,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.016216
+      "usd": 0.015216
      },
      "rules": {
       "R-CONSISTENT": true,
@@ -1218,6 +1218,31 @@
     }
    ],
    "IN-FORM-029": [
+    {
+     "details": {
+      "R-CONSISTENT": "consistent",
+      "R-FMT": "answer must be an object"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 1650,
+      "turns": 1,
+      "turns_exhausted": false,
+      "usd": 0.010296
+     },
+     "rules": {
+      "R-CONSISTENT": true,
+      "R-FMT": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-FORM-030": [
     {
      "details": {
       "R-CONSISTENT": "consistent",
@@ -1242,31 +1267,6 @@
      "verdict": "solved"
     }
    ],
-   "IN-FORM-030": [
-    {
-     "details": {
-      "R-CONSISTENT": "consistent",
-      "R-FMT": "answer must be an object"
-     },
-     "meta": {
-      "error": null,
-      "repaired": false,
-      "tokens": 3200,
-      "turns": 2,
-      "turns_exhausted": false,
-      "usd": 0.01696
-     },
-     "rules": {
-      "R-CONSISTENT": true,
-      "R-FMT": true
-     },
-     "score": 1.0,
-     "soft": {},
-     "solved": true,
-     "valid": true,
-     "verdict": "solved"
-    }
-   ],
    "IN-FORM-031": [
     {
      "details": {
@@ -1276,7 +1276,7 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 3137,
+      "tokens": 3145,
       "turns": 2,
       "turns_exhausted": false,
       "usd": 0.0157
@@ -1301,10 +1301,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 1703,
+      "tokens": 1615,
       "turns": 1,
       "turns_exhausted": false,
-      "usd": 0.011324
+      "usd": 0.009564
      },
      "rules": {
       "R-CONSISTENT": true,
@@ -1326,10 +1326,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 1596,
-      "turns": 1,
+      "tokens": 3213,
+      "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.009232
+      "usd": 0.017092
      },
      "rules": {
       "R-CONSISTENT": true,
@@ -1351,10 +1351,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 3178,
+      "tokens": 3179,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.01668
+      "usd": 0.0167
      },
      "rules": {
       "R-CONSISTENT": true,
@@ -1376,10 +1376,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 3170,
-      "turns": 2,
+      "tokens": 1634,
+      "turns": 1,
       "turns_exhausted": false,
-      "usd": 0.01644
+      "usd": 0.010008
      },
      "rules": {
       "R-CONSISTENT": true,
@@ -1401,10 +1401,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 1357,
+      "tokens": 1362,
       "turns": 1,
       "turns_exhausted": false,
-      "usd": 0.00802
+      "usd": 0.00812
      },
      "rules": {
       "R-FMT": true,
@@ -1426,10 +1426,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 1311,
+      "tokens": 1306,
       "turns": 1,
       "turns_exhausted": false,
-      "usd": 0.007068
+      "usd": 0.006968
      },
      "rules": {
       "R-FMT": true,
@@ -1451,10 +1451,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 1281,
+      "tokens": 1300,
       "turns": 1,
       "turns_exhausted": false,
-      "usd": 0.006484
+      "usd": 0.006864
      },
      "rules": {
       "R-FMT": true,
@@ -1476,10 +1476,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 1379,
+      "tokens": 1337,
       "turns": 1,
       "turns_exhausted": false,
-      "usd": 0.008412
+      "usd": 0.007572
      },
      "rules": {
       "R-FMT": true,
@@ -1493,6 +1493,81 @@
     }
    ],
    "IN-FORM-040": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-VALUE": "value"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 1263,
+      "turns": 1,
+      "turns_exhausted": false,
+      "usd": 0.006156
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-VALUE": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-FORM-041": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-VALUE": "value"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 1273,
+      "turns": 1,
+      "turns_exhausted": false,
+      "usd": 0.006372
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-VALUE": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-FORM-042": [
+    {
+     "details": {
+      "R-FMT": "answer must be an object",
+      "R-VALUE": "value"
+     },
+     "meta": {
+      "error": null,
+      "repaired": false,
+      "tokens": 1293,
+      "turns": 1,
+      "turns_exhausted": false,
+      "usd": 0.006676
+     },
+     "rules": {
+      "R-FMT": true,
+      "R-VALUE": true
+     },
+     "score": 1.0,
+     "soft": {},
+     "solved": true,
+     "valid": true,
+     "verdict": "solved"
+    }
+   ],
+   "IN-FORM-043": [
     {
      "details": {
       "R-FMT": "answer must be an object",
@@ -1517,81 +1592,6 @@
      "verdict": "solved"
     }
    ],
-   "IN-FORM-041": [
-    {
-     "details": {
-      "R-FMT": "answer must be an object",
-      "R-VALUE": "value"
-     },
-     "meta": {
-      "error": null,
-      "repaired": false,
-      "tokens": 1373,
-      "turns": 1,
-      "turns_exhausted": false,
-      "usd": 0.008372
-     },
-     "rules": {
-      "R-FMT": true,
-      "R-VALUE": true
-     },
-     "score": 1.0,
-     "soft": {},
-     "solved": true,
-     "valid": true,
-     "verdict": "solved"
-    }
-   ],
-   "IN-FORM-042": [
-    {
-     "details": {
-      "R-FMT": "answer must be an object",
-      "R-VALUE": "value"
-     },
-     "meta": {
-      "error": null,
-      "repaired": false,
-      "tokens": 1289,
-      "turns": 1,
-      "turns_exhausted": false,
-      "usd": 0.006596
-     },
-     "rules": {
-      "R-FMT": true,
-      "R-VALUE": true
-     },
-     "score": 1.0,
-     "soft": {},
-     "solved": true,
-     "valid": true,
-     "verdict": "solved"
-    }
-   ],
-   "IN-FORM-043": [
-    {
-     "details": {
-      "R-FMT": "answer must be an object",
-      "R-VALUE": "value"
-     },
-     "meta": {
-      "error": null,
-      "repaired": false,
-      "tokens": 1294,
-      "turns": 1,
-      "turns_exhausted": false,
-      "usd": 0.006776
-     },
-     "rules": {
-      "R-FMT": true,
-      "R-VALUE": true
-     },
-     "score": 1.0,
-     "soft": {},
-     "solved": true,
-     "valid": true,
-     "verdict": "solved"
-    }
-   ],
    "IN-FORM-044": [
     {
      "details": {
@@ -1601,10 +1601,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 1249,
+      "tokens": 1248,
       "turns": 1,
       "turns_exhausted": false,
-      "usd": 0.005876
+      "usd": 0.005856
      },
      "rules": {
       "R-FMT": true,
@@ -1626,10 +1626,10 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 1328,
+      "tokens": 1345,
       "turns": 1,
       "turns_exhausted": false,
-      "usd": 0.007456
+      "usd": 0.007796
      },
      "rules": {
       "R-FMT": true,
@@ -1645,20 +1645,22 @@
    "IN-FORM-046": [
     {
      "details": {
+      "R-ACT": "governing_act",
       "R-ADV-TAX": "next_advance_tax_date",
-      "R-AY": "assessment_year",
+      "R-AY": "assessment_year must be null",
       "R-FMT": "answer must be an object",
       "R-FY": "financial_year"
      },
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 3670,
+      "tokens": 3985,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.020968
+      "usd": 0.022708
      },
      "rules": {
+      "R-ACT": true,
       "R-ADV-TAX": true,
       "R-AY": true,
       "R-FMT": true,
@@ -1674,20 +1676,22 @@
    "IN-FORM-047": [
     {
      "details": {
+      "R-ACT": "governing_act",
       "R-ADV-TAX": "next_advance_tax_date",
-      "R-AY": "assessment_year",
+      "R-AY": "assessment_year must be null",
       "R-FMT": "answer must be an object",
       "R-FY": "financial_year"
      },
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 3708,
+      "tokens": 4055,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.021728
+      "usd": 0.022444
      },
      "rules": {
+      "R-ACT": true,
       "R-ADV-TAX": true,
       "R-AY": true,
       "R-FMT": true,
@@ -1703,6 +1707,7 @@
    "IN-FORM-048": [
     {
      "details": {
+      "R-ACT": "governing_act",
       "R-ADV-TAX": "next_advance_tax_date",
       "R-AY": "assessment_year",
       "R-FMT": "answer must be an object",
@@ -1711,12 +1716,13 @@
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 3682,
+      "tokens": 3912,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.021208
+      "usd": 0.021104
      },
      "rules": {
+      "R-ACT": true,
       "R-ADV-TAX": true,
       "R-AY": true,
       "R-FMT": true,
@@ -1732,20 +1738,22 @@
    "IN-FORM-049": [
     {
      "details": {
+      "R-ACT": "governing_act",
       "R-ADV-TAX": "next_advance_tax_date",
-      "R-AY": "assessment_year",
+      "R-AY": "assessment_year must be null",
       "R-FMT": "answer must be an object",
       "R-FY": "financial_year"
      },
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 3610,
+      "tokens": 3957,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.019768
+      "usd": 0.021972
      },
      "rules": {
+      "R-ACT": true,
       "R-ADV-TAX": true,
       "R-AY": true,
       "R-FMT": true,
@@ -1761,20 +1769,22 @@
    "IN-FORM-050": [
     {
      "details": {
+      "R-ACT": "governing_act",
       "R-ADV-TAX": "next_advance_tax_date",
-      "R-AY": "assessment_year",
+      "R-AY": "assessment_year must be null",
       "R-FMT": "answer must be an object",
       "R-FY": "financial_year"
      },
      "meta": {
       "error": null,
       "repaired": false,
-      "tokens": 3659,
+      "tokens": 3890,
       "turns": 2,
       "turns_exhausted": false,
-      "usd": 0.020748
+      "usd": 0.020632
      },
      "rules": {
+      "R-ACT": true,
       "R-ADV-TAX": true,
       "R-AY": true,
       "R-FMT": true,
