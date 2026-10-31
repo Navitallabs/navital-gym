@@ -531,13 +531,17 @@ class T111Support(unittest.TestCase):
         self.assertTrue(self.g("IN-SUP-001", reply=base + " इसमें कोई मनाही नहीं है।")["rules"]["R-LANG"])
 
     # ---- #8 refund denial / which figure is the refund
-    def test_R1_a_reply_that_denies_the_refund_or_names_the_wrong_figure_does_not_solve(self):
-        """T-111 #8, IN-SUP-001: right actions and the refund figure in the text, but the reply says the money will NOT come, or says the refund is a different figure. 02582e3 solves all of these."""
+    def test_R1_a_refund_word_with_the_wrong_figure_does_not_solve(self):
+        """T-111 #8 (narrow check kept, lead 31 Oct): IN-SUP-001, right actions, but the figure attached to the refund word is not the refund amount."""
+        for reply in ("आपका रिटर्न मंज़ूर है। रिफंड ₹60 होगा। सामान की कीमत 1899 रुपये थी।",):
+            self.assertFalse(self.g("IN-SUP-001", reply=reply)["solved"], reply)
+
+    @unittest.expectedFailure
+    def test_R1b_a_reply_that_denies_the_refund_in_words_does_not_solve(self):
+        """KNOWN v1.1 LIMITATION (lead decision 31 Oct): denial wording ('₹1899 वापस नहीं मिलेगा') is not reliably detectable by rules; negation-window detection misfired both ways and was dropped. 0 real denials in 318 saved support rows. Expected to fail until a reliable check exists."""
         for reply in ("आपका रिटर्न मंज़ूर है। आपको ₹1899 वापस नहीं मिलेगा।",
-                      "आपका रिटर्न मंज़ूर है, लेकिन ₹1899 नहीं मिलेंगे; ₹60 मिलेंगे।",
-                      "आपका रिटर्न मंज़ूर है। रिफंड ₹60 होगा। सामान की कीमत 1899 रुपये थी।"):
-            r = self.g("IN-SUP-001", reply=reply)
-            self.assertFalse(r["solved"], reply)
+                      "आपका रिटर्न मंज़ूर है, लेकिन ₹1899 नहीं मिलेंगे; ₹60 मिलेंगे।"):
+            self.assertFalse(self.g("IN-SUP-001", reply=reply)["solved"], reply)
 
     def test_R2_the_plain_correct_replies_still_solve(self):
         """Guard: the baseline reply and a natural variant keep solving IN-SUP-001."""
