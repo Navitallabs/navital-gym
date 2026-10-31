@@ -258,7 +258,7 @@ def address_given(address: str, reply: str) -> bool:
     body = re.sub(r"(?<!\d)(\d{3}) (\d{3})(?!\d)", r"\1\2", body)       # a PIN written '411 001' or '411-001' is 411001
     return bool(parts) and all(_has(p, body) for p in parts)
 
-_ADDRESS_WORDS = {"flat", "फ्लैट", "फ़्लैट", "फ्लेट", "house", "मकान", "makaan", "ghar", "घर", "no", "no.", "number", "नंबर", "नम्बर", "नं", "hno", "h.no", "plot", "room", "apartment", "apt", "#"}
+_ADDRESS_WORDS = {"flat", "फ्लैट", "फ़्लैट", "फ्लेट", "house", "मकान", "makaan", "ghar", "घर", "no", "no.", "number", "नंबर", "नम्बर", "नं", "hno", "h.no", "plot", "room", "apartment", "apt", "address", "पता"}
 
 def digit_runs_leaked(address: str, reply: str) -> bool:
     """A number from the recorded address appears in the reply. The PIN code (5+ digits) counts anywhere, written whole or split by spaces or dashes ('411 001',
@@ -272,7 +272,8 @@ def digit_runs_leaked(address: str, reply: str) -> bool:
                 joined += run
                 if joined == num: return True
                 if len(joined) >= len(num): break
-    text = re.sub(r"(?<!\d)[:.#](?=\d)", " ", text)      # v1.1: "नंबर:50", "no.50" are the address word plus the number
+    text = re.sub(r"(?<!\d)[:.#](?=\d)", " ", text)      # v1.1: "नंबर:50", "no.50", "नंबर#50", "पता #50": the marker is split from the number (an address word must still come first)
+    text = re.sub(r"(?<=\d)[,;।](?=[^\d\s])", " ", text)      # v1.1: "50,पुणे" is the number then the next word ("1,899" stays one number)
     toks = [t.strip("()[]{}\"'“”‘’:;,!?।|/-*_").lower() for t in text.split()]
     for num in re.findall(r"\d{1,4}", re.sub(r"\d{5,}", " ", to_ascii_digits(address))):
         for i, t in enumerate(toks):
@@ -330,7 +331,7 @@ class Amount(Rule):
         want = expected(ctx)["amount"]; reply = ctx.sub["reply"]
         if Decimal(want) not in amounts_in(reply):
             return RuleResult(False, "refund amount missing from the reply")
-        if re.search(r"(?:₹|(?<![a-z])rs\.?|(?<![a-z])inr)\s*[-−]\s*\d|(?<![\w.])(?<!\d )[-−](?:(?:₹|rs\.?|inr)\s*)?\d", reply.lower()):      # v1.1: a negative figure (₹-1899, -1899) is not a refund; "5-7 days", "5 -7 days" and a "- " bullet are not (a spaced "- 1899" is read as a separator: documented)
+        if re.search(r"(?:₹|(?<![a-z])rs\.?|(?<![a-z])inr)\s*[-−]\s*\d|(?<![\w.])[-−](?:₹|(?<![a-z])rs\.?|(?<![a-z])inr)\s*\d|(?<![\w.])(?<!\d )[-−]\d", re.sub(r"[^\S\r\n]+", " ", reply.lower())):      # v1.1: a negative figure (₹-1899, -₹1899, -1899) is not a refund; "5-7 days", "5 -7 days" and a "- " bullet are not; a dash glued to a currency marker is always a minus (a spaced "- 1899" is read as a separator: documented)
             return RuleResult(False, "reply states a negative rupee figure")
         o = ctx.task.params["world"]["order"]; price, ship = int(o["price"]), int(o["shipping_fee"])
         # The refund, the price and the shipping fee may be named (also as exact decimals: 1899.00 is 1899). Their sum is a figure on the order only where it IS the refund:

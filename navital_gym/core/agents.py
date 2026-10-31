@@ -11,15 +11,32 @@ from __future__ import annotations
 import json, os, time, urllib.request, urllib.error
 from typing import Any, Callable
 
+def _objects(text: str, strings: bool):
+    """(start, end, obj) for each top-level {...} span that parses. strings=True does not count braces inside JSON strings."""
+    depth, start, in_str, esc = 0, None, False, False
+    for i, ch in enumerate(text):
+        if in_str:
+            if esc: esc = False
+            elif ch == "\\": esc = True
+            elif ch == '"': in_str = False
+        elif ch == '"' and depth and strings:
+            in_str = True
+        elif ch == "{":
+            if depth == 0: start = i
+            depth += 1
+        elif ch == "}" and depth:
+            depth -= 1
+            if depth == 0 and start is not None:
+                try: yield start, i, json.loads(text[start:i + 1])
+                except (ValueError, RecursionError): pass
+
 def extract_json(text: str) -> Any:
-    """The last top-level JSON object in a model message (models wrap it in prose or ``` fences)."""
-    dec, text, i, last = json.JSONDecoder(), text or "", 0, None      # v1.1: decode, do not count braces (a "}" inside a string split the object)
-    while (i := text.find("{", i)) != -1:
-        try: obj, end = dec.raw_decode(text, i)
-        except (ValueError, RecursionError): i += 1; continue
-        if isinstance(obj, dict): last = obj
-        i = end
-    return last
+    """The last top-level JSON object in a model message (models wrap it in prose or ``` fences).
+    v1.1: braces are counted both plainly and string-aware (a "}" inside a string must not split the object; a stray quote in prose must not
+    swallow the answer); the object that ends last wins, the outermost one on a tie."""
+    text = text or ""
+    found = list(_objects(text, False)) + list(_objects(text, True))
+    return max(found, key=lambda c: (c[1], -c[0]))[2] if found else None
 
 REPAIR = ("Your answer did not parse: {err}. Reply now with ONLY the corrected final answer as one JSON object in the required format, "
           "and nothing else. Do not call any tools.")
