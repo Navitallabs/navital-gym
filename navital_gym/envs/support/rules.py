@@ -78,6 +78,12 @@ def _strip_entities(reply: str, order: dict) -> str:
         if ent: reply = re.sub(re.escape(ent), " ", reply, flags=re.I)
     return reply
 
+_DEVA = "\u0900-\u0963\u0966-\u097f"        # Devanagari letters and vowel signs, without the danda marks that end a sentence
+
+def has_word(text: str, word: str) -> bool:
+    """`word` appears in `text` as a whole Devanagari word: 'नाही' is not in 'मनाही', 'है' is not in 'पहैली'."""
+    return re.search(rf"(?<![{_DEVA}]){re.escape(word)}(?![{_DEVA}])", text) is not None
+
 def lang_ok(reply: str, lang: str, order: dict) -> bool:
     text = _strip_entities(reply, order)
     letters = [c for c in text if c.isalpha()]
@@ -96,9 +102,9 @@ def lang_ok(reply: str, lang: str, order: dict) -> bool:
     if ratio < 0.7:
         return False
     if lang == "hi":
-        return sum(m in text for m in D.HI_MARKERS) >= 2 and not any(m in text for m in D.MR_ONLY)
+        return sum(has_word(text, m) for m in D.HI_MARKERS) >= 2 and not any(has_word(text, m) for m in D.MR_ONLY)
     if lang == "mr":
-        return sum(m in text for m in D.MR_MARKERS) >= 2 and not any(m in text for m in D.HI_ONLY)
+        return sum(has_word(text, m) for m in D.MR_MARKERS) >= 2 and not any(has_word(text, m) for m in D.HI_ONLY)
     return True
 
 def _norm(text: str) -> str:
