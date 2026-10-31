@@ -262,6 +262,7 @@ class Solver:
                 return None
             a, b = hops[i]
             base = prev_arr.date() if prev_arr else self.start
+            leh_day = next((self._plain(l)["arr"].date() for l in legs if self._plain(l)["to"] == "Leh"), None) if self.on("R-ALT") else None
             for n in range(0, self.D):
                 dep_date = base + dt.timedelta(days=n)
                 if i == 0 and n > 0:
@@ -273,6 +274,8 @@ class Solver:
                     if prev_arr is not None and L["dep"] < prev_arr + dt.timedelta(minutes=BUFFER_MIN[leg["mode"]]):
                         continue
                     if L["arr"].date() > self.horizon:
+                        continue
+                    if leh_day and L["dep"].date() == leh_day:      # v1.1 R-ALT: no onward travel on the day you reach Leh
                         continue
                     last_hop = i == len(hops) - 1
                     if last_hop and self.on("R-DATE") and L["arr"].date() != self.last and self.D > 1:

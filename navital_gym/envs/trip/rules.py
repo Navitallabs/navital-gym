@@ -563,17 +563,31 @@ class RAlt(Rule):
                     return RuleResult(False, "the day you reach Leh is rest only")
             if d["stay"] and D.CITIES[d["stay"]["hotel"]["city"]][1] > 3500 and i + 1 < 3:
                 return RuleResult(False, f"sleeping above 3500 m before day 3")
+        if first_leh:      # v1.1: rest also means no onward journey that day (an overnight bus out of Leh is not rest)
+            for lg in plan["legs"]:
+                if lg is not first_leh and lg["dep"].date() == first_leh["arr"].date() and lg["dep"] >= first_leh["arr"]:
+                    return RuleResult(False, "the day you reach Leh is rest only (no onward travel)")
         return RuleResult(True)
+
+PERMIT_CITIES = {a["city"] for a in D.ATTRACTIONS.values() if a["permit"]}
 
 class RPermit(Rule):
     id = "R-PERMIT"; description = "Ladakh protected-area places (Nubra, Pangong) need the environment and Red Cross fee paid (Indian nationals; no Inner Line Permit since 2021)"
     def check(self, ctx):
         w = ctx.world
-        for d in _plan(ctx)["days"]:
+        plan = _plan(ctx)
+        paid = set()
+        for d in plan["days"]:
             for a in d["acts"]:
                 if D.ATTRACTIONS[a["name"]]["permit"]:
                     if not a["fee_paid"]:
                         return RuleResult(False, f"{a['name']}: the Ladakh environment and Red Cross fee must be paid (fee_paid true)")
+                    paid.add(D.ATTRACTIONS[a["name"]]["city"])
+        # v1.1: a night in a protected area also needs the fee; it is paid with a visit there (fee_paid true), so a stay with no paid visit fails
+        for d in plan["days"]:
+            c = d["stay"]["hotel"]["city"] if d["stay"] else None
+            if c in PERMIT_CITIES and c not in paid:
+                return RuleResult(False, f"a night in {c} needs the Ladakh environment and Red Cross fee (pay it with a visit there, fee_paid true)")
         return RuleResult(True)
 
 class RRoute(Rule):
@@ -628,7 +642,8 @@ RULES = {r.id: r for r in (RFmt(), RDate(), RConn(), RQuota(), RAvail(), ROpen()
 
 def infeasible_check(ctx):
     task = ctx.task
-    claimed = [x for x in (ctx.sub.get("binding") or []) if isinstance(x, str)] if isinstance(ctx.sub.get("binding"), list) else []
+    b = ctx.sub.get("binding")
+    claimed = b if isinstance(b, list) and all(isinstance(x, str) for x in b) else []      # v1.1: a malformed list (any non-string entry) names nothing
     if task.expected_feasible:
         return False, "the task is feasible"
     union = set(task.binding) | {r for st in (task.meta.get("binding_sets") or []) for r in st}

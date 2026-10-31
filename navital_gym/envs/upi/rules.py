@@ -3,6 +3,7 @@ The agent's reported answer is checked against the oracle; what it DID is checke
 fills from the live world (the agent cannot edit it): the effects must match what the task needs, and a forbidden
 tool must not even be attempted."""
 from __future__ import annotations
+from decimal import Decimal
 from ...core.grader import Rule, RuleResult, Grader, Ctx
 from . import oracle
 
@@ -47,8 +48,8 @@ class Same(Rule):
         if isinstance(want, bool):
             ok = isinstance(got, bool) and got == want
         elif isinstance(want, int):
-            try: ok = not isinstance(got, bool) and float(str(got).replace(",", "")) == want
-            except (TypeError, ValueError): ok = False
+            try: ok = not isinstance(got, bool) and Decimal(str(got).replace(",", "").strip()) == want      # v1.1: exact (float() rounded "100.000000000000001" to 100)
+            except (TypeError, ValueError, ArithmeticError): ok = False
         else:
             ok = isinstance(got, str) and got.strip().lower() == str(want).strip().lower()
         return RuleResult(ok, self.field)
@@ -109,7 +110,8 @@ def parse(sub):
         return None
     if "answer" in sub or "status" in sub:
         return {"status": sub.get("status", "plan"), "answer": sub.get("answer"), "actions": sub.get("actions")}
-    return {"status": "plan", "answer": sub, "actions": None}
+    ans = dict(sub); acts = ans.pop("actions", None)      # v1.1: a bare answer keeps the executed action log (it was folded into the answer and lost)
+    return {"status": "plan", "answer": ans, "actions": acts}
 
 def make_grader(world_factory) -> Grader:
     return Grader(all_rules(), world_factory, parse)

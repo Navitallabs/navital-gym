@@ -63,6 +63,8 @@ class World:
                 out = {"error": str(e)}
             except TypeError as e:
                 out = {"error": f"bad arguments: {e}"}
+            except (ValueError, ArithmeticError) as e:      # v1.1: e.g. a date at the edge of the calendar overflows; the agent gets an error, not a crash
+                out = {"error": f"bad arguments: {e}"}
         rec["ok"] = "error" not in out
         self.calls.append(rec)
         return out

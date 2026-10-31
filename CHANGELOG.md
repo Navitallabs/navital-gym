@@ -1,6 +1,9 @@
 # Changelog
 
 ## v1.1 follow-ups noted for v1.2
+- **Support `R-AMOUNT` role of the figure.** The refund figure is checked for presence, not role: a reply that gives it only as, say, a reference number still passes `R-AMOUNT` (`R-ACTIONS` checks the actual refund). A spaced dash ("- 1899 रुपये") is read as a separator, not a minus.
+- **Assamese vs Bengali.** The experimental Bengali split is checked by script only, so an Assamese reply passes as Bengali.
+- **Tool errors.** Since v1.1 a `ValueError` or arithmetic error inside a tool (e.g. a 9999-12-31 date) is returned to the agent as an error instead of crashing the run; a bug in our own tool code would therefore show up as an agent failure, not an errored task. v1.2 will separate the two.
 - **UPI reason `over_daily_count`.** The UPI oracle now answers `insufficient_balance` and `over_daily_count` in the world's check order (balance and daily payment-count boundaries). `over_daily_count` will be listed in the UPI instructions in v1.2; the instructions are unchanged in v1.1 so that no UPI task prompt changes. No public task reaches either path.
 
 ## Results update, 30 Oct 2026 (grader unchanged, ed78addcd557)
