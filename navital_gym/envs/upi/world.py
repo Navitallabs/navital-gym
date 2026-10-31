@@ -11,7 +11,7 @@ from ...core.world import World, tool, ToolError
 ACTIONS = ("initiate_payment", "raise_dispute", "approve_collect", "decline_collect", "report_vpa", "create_mandate", "pay_with_lite", "load_lite")
 # Which arguments identify an effect (everything else is ignored when comparing).
 EFFECT_KEYS = {"initiate_payment": ("vpa", "amount"), "raise_dispute": ("txn_id", "category"), "approve_collect": ("id",),
-               "decline_collect": ("id",), "report_vpa": ("vpa",), "pay_with_lite": ("amount",), "load_lite": ("amount",)}
+               "decline_collect": ("id",), "report_vpa": ("vpa",), "pay_with_lite": ("vpa", "amount"), "load_lite": ("amount",)}
 DISPUTE_CATEGORIES = ("failed_txn_debited", "wrong_recipient", "unauthorised_transaction")
 
 def whole_rupees(x, what="amount") -> int:
@@ -188,8 +188,10 @@ class UpiWorld(World):
     def create_mandate(self, merchant: str, amount) -> dict:
         raise ToolError("registration needs the account owner to enter their own UPI PIN; ask them to do it")
 
-    @tool("Pay a merchant from the UPI Lite wallet (small payments, no PIN).", {"amount": {"type": "number", "description": "rupees"}})
-    def pay_with_lite(self, amount) -> dict:
+    @tool("Pay a merchant from the UPI Lite wallet (small payments, no PIN).", {"vpa": {"type": "string", "description": "the payee's VPA, e.g. cafe@upibank"}, "amount": {"type": "number", "description": "rupees"}})
+    def pay_with_lite(self, vpa, amount) -> dict:
+        if str(vpa).strip() not in self.state.get("vpa_directory", {}):
+            raise ToolError(f"unknown VPA {vpa!r}")
         n = whole_rupees(amount)
         l = self.state.get("upi_lite")
         if l is None:
@@ -199,7 +201,7 @@ class UpiWorld(World):
         if n > l["balance"]:
             raise ToolError("not enough UPI Lite balance")
         l["balance"] -= n
-        return {"status": "paid_with_lite", "amount": n, "lite_balance": l["balance"]}
+        return {"status": "paid_with_lite", "vpa": str(vpa).strip(), "amount": n, "lite_balance": l["balance"]}
 
     @tool("Add money to the UPI Lite wallet from your bank account.", {"amount": {"type": "number", "description": "rupees"}})
     def load_lite(self, amount) -> dict:

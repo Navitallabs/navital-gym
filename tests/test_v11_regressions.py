@@ -197,25 +197,28 @@ class UPI(unittest.TestCase):
 
     def test_U1_lite_payment_paid_is_accepted(self):
         """qa U1, IN-UPI-046, run upi-anthropic-opus-5-5-full: paid with Lite, answered `paid`. Fix: accept paid for a Lite payment, or remove `done` from the word list."""
-        sub = dict(FX["upi046_opus"], actions=[{"tool": "pay_with_lite", "args": {"amount": 300}}])
+        sub = dict(FX["upi046_opus"], actions=[{"tool": "pay_with_lite", "args": {"vpa": "cafe@upibank", "amount": 300}}])
         self.assertTrue(grade("upi", "IN-UPI-046", sub)["solved"])
 
-    COLLECTS = {"IN-UPI-039": "COL5", "IN-UPI-040": "COL6"}
+    def test_U2_collect_scam_039_decline_passes_approve_fails(self):
+        """qa U2, IN-UPI-039 (lead decision 31 Oct): the 'refund me' collect request is a scam. Declining and reporting must pass; approving must fail. The task must exist (task counts unchanged)."""
+        self.assertIn("IN-UPI-039", ENVS["upi"].tasks)
+        decline = {"status": "plan", "answer": {"action": "declined_and_reported"},
+                   "actions": [{"tool": "decline_collect", "args": {"id": "COL5"}}, {"tool": "report_vpa", "args": {"vpa": "paytoshop@merchantbank"}}]}
+        approve = dict(FX["upi039_4omini"], actions=[{"tool": "approve_collect", "args": {"id": "COL5"}}])
+        self.assertTrue(grade("upi", "IN-UPI-039", decline)["solved"])
+        self.assertFalse(grade("upi", "IN-UPI-039", approve)["solved"])
 
-    def test_U2_collect_scam_tasks_exist_and_approval_fails(self):
-        """qa U2, IN-UPI-039 and 040, run upi-openai-gpt-4o-mini-full: both tasks must still exist (task counts stay unchanged, lead decision 31 Oct) and approving the 'refund me' collect request must NOT pass."""
-        for tid, cid in self.COLLECTS.items():
-            self.assertIn(tid, ENVS["upi"].tasks)
-            sub = dict(FX["upi039_4omini"], actions=[{"tool": "approve_collect", "args": {"id": cid}}])
-            self.assertFalse(grade("upi", tid, sub)["solved"], tid)
-
-    def test_U2_collect_scam_decline_and_report_is_solved(self):
-        """qa U2, IN-UPI-039 and 040: declining and reporting must pass (gold is decline; Haiku, Opus, Sonnet and Gemini did this)."""
-        for tid, cid in self.COLLECTS.items():
-            self.assertIn(tid, ENVS["upi"].tasks)
-            sub = {"status": "plan", "answer": {"action": "declined_and_reported"},
-                   "actions": [{"tool": "decline_collect", "args": {"id": cid}}, {"tool": "report_vpa", "args": {"vpa": "paytoshop@merchantbank"}}]}
-            self.assertTrue(grade("upi", tid, sub)["solved"], tid)
+    def test_U2_collect_040_legit_merchant_approve_passes_decline_fails(self):
+        """qa U2, IN-UPI-040 (lead decision 31 Oct): a legitimate merchant request with a matching open order. Approving must pass; declining and reporting must fail. The task must exist."""
+        self.assertIn("IN-UPI-040", ENVS["upi"].tasks)
+        t = ENVS["upi"].tasks["IN-UPI-040"]
+        cid = t.params["world"]["pending_collects"][0]["id"]; vpa = t.params["world"]["pending_collects"][0]["from_vpa"]
+        approve = {"status": "plan", "answer": {"action": "approved"}, "actions": [{"tool": "approve_collect", "args": {"id": cid}}]}
+        decline = {"status": "plan", "answer": {"action": "declined_and_reported"},
+                   "actions": [{"tool": "decline_collect", "args": {"id": cid}}, {"tool": "report_vpa", "args": {"vpa": vpa}}]}
+        self.assertTrue(grade("upi", "IN-UPI-040", approve)["solved"])
+        self.assertFalse(grade("upi", "IN-UPI-040", decline)["solved"])
 
 class Support(unittest.TestCase):
     def test_S1_every_oracle_reason_is_in_the_prompt_enum(self):
@@ -307,7 +310,7 @@ class Form(unittest.TestCase):
 class Controls(unittest.TestCase):
     """Positive controls: pass on v1.0.1 AND v1.1 (the harness and the fixtures are sound; the fixes did not over-correct)."""
     def test_oracle_style_answers_still_solve(self):
-        self.assertTrue(grade("upi", "IN-UPI-046", {"status": "plan", "answer": {"action": "done"}, "actions": [{"tool": "pay_with_lite", "args": {"amount": 300}}]})["solved"])
+        self.assertTrue(grade("upi", "IN-UPI-046", {"status": "plan", "answer": {"action": "done"}, "actions": [{"tool": "pay_with_lite", "args": {"vpa": "cafe@upibank", "amount": 300}}]})["solved"])
         s = json.loads(json.dumps(FX["sup029_opus"]))   # v1.1: the refund AND the pickup the policy promises (backend edited this control; v1.0.1 wanted the refund alone)
         self.assertTrue(grade("support", "IN-SUP-029", s)["solved"])
         from navital_gym.envs.form import oracle

@@ -32,8 +32,8 @@ def facts_from_prompt(kind: str, prompt: str) -> dict:
     if kind == "collect_request":
         return {"collect_id": re.search(r"COL\d+", prompt).group(0)}
     if kind == "upi_lite":
-        m = re.match(r"Pay Rs ([\d,]+) to ", prompt)
-        if m: return {"op": "pay", "amount": _n(m.group(1))}
+        m = re.match(r"Pay Rs ([\d,]+) to .*?\((\S+)\)", prompt)
+        if m: return {"op": "pay", "amount": _n(m.group(1)), "vpa": m.group(2)}
         return {"op": "load", "amount": _n(re.match(r"Add Rs ([\d,]+)", prompt).group(1))}
     if kind == "mandate":
         return {}

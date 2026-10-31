@@ -47,7 +47,7 @@ def solve(obs, call, task):
     if (m := re.match(r"Pay Rs ([\d,]+) to ", p)):
         n = _amt(m[1])
         if n <= pol["lite_txn_max"] and n <= lite["balance"]:
-            call("pay_with_lite", {"amount": n}); return ans(action="done")
+            call("pay_with_lite", {"vpa": re.search(r"\((\S+)\)", p).group(1), "amount": n}); return ans(action="done")
         return ans(action="not_allowed", reason="above_lite_txn_max" if n > pol["lite_txn_max"] else "insufficient_lite_balance")
     n = _amt(re.match(r"Add Rs ([\d,]+)", p)[1])
     if lite["balance"] + n <= pol["lite_wallet_cap"] and n <= call("get_account")["account"]["balance"]:

@@ -16,7 +16,7 @@ request, report a VPA, UPI Lite). Creating a mandate always fails: registration 
 
 ## How it is graded (no model judge)
 Each rule checks one thing, so a submission that is wrong in one way loses one rule. `solved` means every rule passed.
-- `R-ACTION`: the reported action is the right one. `R-REASON`, `R-TYPE`, `R-TAT`, `R-DAYS`, `R-COMP`, `R-AUTOCOMP`, `R-DEBIT-APPROVAL`, `R-CAP`, `R-NOPROMISE`: the reported reason and numbers, recomputed from the world, never trusted.
+- `R-ACTION`: the reported action is the right one. Three synonym pairs are interchangeable, one way from the expected word: `dispute_raised` for `escalate`, `paid` for `done`, and `cannot_pay` / `not_allowed` for each other (the prompt lists all the words without saying which fits which case; the effects are graded separately). Any other word fails. `R-REASON`, `R-TYPE`, `R-TAT`, `R-DAYS`, `R-COMP`, `R-AUTOCOMP`, `R-DEBIT-APPROVAL`, `R-CAP`, `R-NOPROMISE`: the reported reason and numbers, recomputed from the world, never trusted.
 - `R-EFFECTS`: what the agent *did* (payments, disputes, declined requests) must be exactly what the task needs: nothing missing, nothing extra, nothing twice.
 - `R-FORBIDDEN`: the agent must not call a tool the task forbids, **even if the bank would have refused it**. Check first (`check_payment` is a safe dry run).
 

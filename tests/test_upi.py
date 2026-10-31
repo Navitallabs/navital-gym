@@ -52,7 +52,7 @@ class World(unittest.TestCase):
         for name, args in [("initiate_payment", {}), ("initiate_payment", {"vpa": "x", "amount": -5}), ("initiate_payment", {"vpa": "asha10@upibank", "amount": "lots"}),
                            ("initiate_payment", {"vpa": "asha10@upibank", "amount": True}), ("initiate_payment", {"vpa": "asha10@upibank", "amount": 1.5}),
                            ("raise_dispute", {"txn_id": "nope", "category": "x"}), ("approve_collect", {"id": "COL9"}), ("lookup_vpa", {"vpa": 5}),
-                           ("create_mandate", {"merchant": "m", "amount": 1}), ("pay_with_lite", {"amount": 1}), ("nope", {})]:
+                           ("create_mandate", {"merchant": "m", "amount": 1}), ("pay_with_lite", {"vpa": "cafe@upibank", "amount": 1}), ("nope", {})]:
             self.assertIn("error", ENV.world.call(name, args), (name, args))
 
     def test_bank_enforces_limits_and_balance(self):
@@ -175,7 +175,7 @@ class EasySplit(unittest.TestCase):
     def test_every_tool_survives_every_easy_task(self):
         """Any tool an agent may call must work on any task: a trimmed policy once crashed initiate_payment (E10-E12)."""
         samples = {"initiate_payment": {"vpa": "cafe@upibank", "amount": 100}, "check_payment": {"vpa": "cafe@upibank", "amount": 100},
-                   "pay_with_lite": {"amount": 100}, "load_lite": {"amount": 100}, "lookup_vpa": {"vpa": "cafe@upibank"},
+                   "pay_with_lite": {"vpa": "cafe@upibank", "amount": 100}, "load_lite": {"amount": 100}, "lookup_vpa": {"vpa": "cafe@upibank"},
                    "raise_dispute": {"txn_id": "TXN1", "category": "wrong_recipient"}, "approve_collect": {"id": "COL0"},
                    "decline_collect": {"id": "COL0"}, "report_vpa": {"vpa": "x@y"}, "get_transaction": {"txn_id": "TXN1"}}
         for t in self.EASY.tasks.values():

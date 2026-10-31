@@ -46,7 +46,7 @@ def expected(kind: str, p: dict) -> dict:
             tool = "load_lite"
             reason = "wallet_cap_exceeded" if l["balance"] + f["amount"] > rules["lite_wallet_cap"] else "insufficient_balance" if f["amount"] > a["balance"] else None
         if reason is None:
-            return dict(answer=dict(action="done"), effects=[(tool, f["amount"])], forbidden=[])
+            return dict(answer=dict(action="done"), effects=[(tool, f["vpa"], f["amount"]) if tool == "pay_with_lite" else (tool, f["amount"])], forbidden=[])
         return dict(answer=dict(action="not_allowed", reason=reason), effects=[], forbidden=[tool])
     raise ValueError(f"unknown kind {kind!r}")
 
