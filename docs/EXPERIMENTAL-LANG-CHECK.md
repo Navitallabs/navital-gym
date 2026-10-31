@@ -1,6 +1,6 @@
 # Experimental split: Sarvam check of the Tamil, Bengali and Marathi lines
 
-**Label:** machine-assisted, not native-reviewed. Graded on actions only; no language check on these lines.
+**Label:** machine-assisted, not native-reviewed. Graded on actions and, since v1.0.1, on reply script and marker words (R-LANG); the drafted lines themselves are not native-reviewed.
 
 - **Date:** 2026-10-25. **Tools:** Sarvam API, `sarvam-translate:v1` for drafting (English to ta/bn/mr) and back-translation (ta/bn/mr to English). No keys appear in this file.
 - **Rule:** keep a line only if its back-translation matches the intended meaning.

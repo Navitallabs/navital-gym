@@ -71,9 +71,9 @@ Scripted baseline agents (model results are in the leaderboard and docs/RESULTS.
 
 | agent | pass@1 | mean rule score | what it is |
 |---|---|---|---|
-| empty answer | 0.00 | 0.29 | floor. The nonzero mean is partial credit for a valid-format empty object (format gate counted as a passed rule) |
-| reject_only | 0.08 | 0.45 | answers false / null / 0 / [] everywhere (worth 0.08 because some answers really are "no") |
-| careless | 0.80 | 0.94 | reads the documents and does the arithmetic, but leaves freight untaxed and always applies the lowest late-fee cap: only the invoice-with-freight and late-fee tasks catch it |
+| empty answer | 0.00 | 0.00 | floor (an empty answer earns no partial credit since v1.0.0) |
+| reject_only | 0.08 | 0.21 | answers false / null / 0 / [] everywhere (worth 0.08 because some answers really are "no") |
+| careless | 0.80 | 0.93 | reads the documents and does the arithmetic, but leaves freight untaxed and always applies the lowest late-fee cap: only the invoice-with-freight and late-fee tasks catch it |
 | reference solver (oracle) | 1.00 | 1.00 | upper bound; reads hidden task data |
 
 Use `solved`/pass@1, not the mean rule score, as the headline number: partial credit rewards a well-formed but wrong answer. Nothing here claims how hard the tasks are for any model.

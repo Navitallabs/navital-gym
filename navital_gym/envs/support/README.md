@@ -20,10 +20,10 @@ Synthetic orders, addresses (`Sample Colony, Pune 411001`) and phone numbers (`9
 ## Run
 ```
 python3 -m navital_gym.envs.support.build_tasks
-python3 -m unittest tests.test_support               # 24 tests
+python3 -m unittest tests.test_support tests.test_support_v11   # 37 tests
 python3 -m navital_gym.cli --env support --agent empty --agent refund_all --agent english --agent oracle   # core split by default
 ```
-Scripted baselines on 2026-10-25 (k=1), reported by split. **Core (50 tasks):** empty 0.00, `noop_lang` 0.08 (the gaming floor: reads nothing, takes no action, one fixed sentence in the right language, one fixed decision), refund_all 0.00, english (right actions, decision and reason, English reply) 0.00, oracle 1.00. **Experimental (26 tasks, language not graded):** noop_lang 0.08, english 0.34 on all 76 combined, oracle 1.00. Scripted agents, not models. No model results yet.
+Scripted baselines on 2026-10-31 (k=1, v1.1 grader), reported by split. **Core (50 tasks):** empty 0.00, `noop_lang` 0.06 (the gaming floor: reads nothing, takes no action, one fixed sentence in the right language, one fixed decision), refund_all 0.00, english (right actions, decision and reason, English reply) 0.00, oracle 1.00. **Experimental (26 tasks; the reply language is a hard rule here too since v1.0.1):** noop_lang 0.04, english 0.00, oracle 1.00; on all 76 combined noop_lang 0.05. Scripted agents, not models. No model results yet.
 
 ## Licence
 Code Apache-2.0, task data CC-BY-4.0.

@@ -15,12 +15,12 @@ python3 -m navital_gym.envs.form.build_tasks         # rebuild tasks.jsonl from 
 python3 -m unittest tests.test_form                  # 14 tests
 python3 -m navital_gym.cli --env form --agent empty --agent shotgun --agent naive --agent oracle
 ```
-Scripted baselines on 2026-10-25 (pass@1, k=1), overall and per kind (solved / tasks). Kinds: KYC 15, address 12, PIN/state 8, numbers 10, fiscal year 5.
+Scripted baselines on 2026-10-31 (v1.1 grader) (pass@1, k=1), overall and per kind (solved / tasks). Kinds: KYC 15, address 12, PIN/state 8, numbers 10, fiscal year 5.
 | agent | overall | KYC | address | PIN/state | numbers | fiscal year |
 |---|---|---|---|---|---|---|
 | empty | 0.00 | 0 | 0 | 0 | 0 | 0 |
 | shotgun (fixed guesses) | 0.08 | 0 | 0 | 4 | 0 | 0 |
-| naive (weak: no validation, shallow parsing) | 0.32 | 2 | 5 | 4 | 3 | 2 |
+| naive (weak: no validation, shallow parsing) | 0.28 | 2 | 5 | 4 | 3 | 0 |
 | reject_only (reports every identifier and PIN as invalid or null, every amount as 0) | 0.18 | 2 | 3 | 4 | 0 | 0 |
 | oracle | 1.00 | 15 | 12 | 8 | 10 | 5 |
 
