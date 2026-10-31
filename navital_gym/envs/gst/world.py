@@ -1,10 +1,11 @@
 """GST Desk world: read-only tools over one task's synthetic documents and the env's (simplified) rules.
 The agent sees the documents and the policy through tools; it never sees gold, the oracle or `meta`."""
 from __future__ import annotations
-import copy, datetime as dt
+import copy, datetime as dt, re
 from ...core.world import World, tool, ToolError
 
 CH = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+GSTIN_BODY = re.compile(r"^[A-Z]{5}[0-9]{4}[A-Z][1-9A-Z]$")      # the 10-character PAN, then the entity number (1-9 or A-Z)
 STATE_CODES = {7: "Delhi", 9: "Uttar Pradesh", 19: "West Bengal", 24: "Gujarat", 27: "Maharashtra", 29: "Karnataka", 32: "Kerala", 33: "Tamil Nadu"}
 
 def gstin_check_char(base14: str) -> str:
@@ -50,12 +51,14 @@ class GstWorld(World):
         g = str(gstin).strip().upper()
         if len(g) != 15 or any(c not in CH for c in g):
             return {"valid": False, "reason": "must be 15 letters/digits"}
-        ok = gstin_check_char(g[:14]) == g[14]
         try:
             code = int(g[:2])
         except ValueError:
             code = -1
-        return {"valid": bool(ok), "state_code": g[:2], "state": STATE_CODES.get(code), "pan": g[2:12]}
+        shape = (1 <= code <= 38 or code in (97, 99)) and bool(GSTIN_BODY.match(g[2:13])) and g[13] == "Z"      # state code, PAN-shaped body, entity number, 'Z'
+        ok = shape and gstin_check_char(g[:14]) == g[14]
+        reason = None if ok else ("state code is not a valid GST state code" if not (1 <= code <= 38 or code in (97, 99)) else "the 10-character PAN part must look like AAAAA9999A" if not GSTIN_BODY.match(g[2:13]) else "the 14th character must be Z" if g[13] != "Z" else "wrong check character")
+        return {"valid": bool(ok), "state_code": g[:2], "state": STATE_CODES.get(code), "pan": g[2:12], **({"reason": reason} if reason else {})}
 
     @tool("Weekday and holiday status of a date (YYYY-MM-DD). The policy states whether due dates move.", {"date": {"type": "string", "description": "YYYY-MM-DD"}})
     def calendar_info(self, date: str) -> dict:

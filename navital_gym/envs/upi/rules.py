@@ -11,11 +11,14 @@ def exp(ctx: Ctx) -> dict:
         ctx.cache["exp"] = oracle.expected(ctx.task.meta["kind"], ctx.task.params)
     return ctx.cache["exp"]
 
+#: An action log longer than this is a malformed submission (R-FMT fails), never a log graded on its first N calls: a cut-off log hides what came after the cut.
+MAX_ACTIONS = 2000
+
 def actions(ctx: Ctx) -> list[dict]:
     a = ctx.sub.get("actions")
-    if not isinstance(a, list):
+    if not isinstance(a, list) or len(a) > MAX_ACTIONS:
         return []
-    return [{"tool": str(x["tool"]), "args": x.get("args") if isinstance(x.get("args"), dict) else {}} for x in a[:200] if isinstance(x, dict) and isinstance(x.get("tool"), str)]
+    return [{"tool": str(x["tool"]), "args": x.get("args") if isinstance(x.get("args"), dict) else {}} for x in a if isinstance(x, dict) and isinstance(x.get("tool"), str)]
 
 def replayed(ctx: Ctx) -> list[tuple]:
     """Effects of the action log, replayed on a fresh world (so a claim like 'I paid' proves nothing)."""
@@ -30,6 +33,9 @@ class Fmt(Rule):
     id, gate, description = "R-FMT", True, "answer is a JSON object with a text `action` (an empty answer scores 0, even where refusing is right)"
     def check(self, ctx):
         a = ctx.sub.get("answer")
+        log = ctx.sub.get("actions")
+        if isinstance(log, list) and len(log) > MAX_ACTIONS:
+            return RuleResult(False, f"action log has {len(log)} calls; more than {MAX_ACTIONS} is not a valid submission")
         return RuleResult(isinstance(a, dict) and isinstance(a.get("action"), str) and bool(a["action"].strip()), "answer must be an object with an `action`")
 
 class Same(Rule):

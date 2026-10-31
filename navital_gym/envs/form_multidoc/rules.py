@@ -19,7 +19,7 @@ class Fmt(Rule):
     id, gate, description = "R-FMT", True, "answer is a JSON object"
     def check(self, ctx): return RuleResult(isinstance(ctx.sub.get("answer"), dict), "answer must be an object")
 
-EXACT = {"pan", "ifsc", "invalid_pans", "current_account_eligible"}   # identifiers and record ids: case-sensitive (whitespace still trimmed)
+EXACT = {"pan", "ifsc", "invalid_pans", "current_account_eligible", "name"}   # identifiers, record ids and the Title Case name: case-sensitive (whitespace still trimmed)
 
 class Field(Rule):
     """answer[field] must equal the oracle's value: bools exact, integers exact, None means present and null, lists compared in the order the oracle gives (the prompts ask for alphabetical or record-number order) with no duplicates, pan, ifsc and record-id lists case-sensitive, other strings case/space-insensitive."""

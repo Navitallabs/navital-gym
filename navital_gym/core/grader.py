@@ -116,24 +116,25 @@ def _headline(results: dict) -> dict:
     """pass@1 counts the first run of each task (a format-repair retry, if the agent used one, is allowed).
     strict_pass@1 counts only first runs solved with NO repair retry. format_fail = runs whose answer was not a readable, valid-format submission
     (reported on its own so a harness/format problem is never mistaken for lack of task skill). turns_exhausted / errors come from the runner.
-    A task whose run ended in a PROVIDER error (rate limit, quota, outage, spend cap) was not answered by the model: it is NOT RUN, left out of every rate
-    (the denominator is `answered`) and counted in `not_run`; `tasks` is still every task attempted."""
-    errored = {tid for tid, runs in results.items() if any(s.meta.get("error") for s in runs)}
+    A task whose FIRST run ended in a PROVIDER error (rate limit, quota, outage, spend cap) was not answered by the model: it is NOT RUN, left out of every rate
+    (the denominator is `answered`) and counted in `not_run`; `tasks` is still every task attempted. An error in a later repetition drops only that repetition from the
+    per-run averages and the task from pass^k (whose denominator is then the tasks with every repetition answered); pass@1 still counts the task."""
+    errored = {tid for tid, runs in results.items() if runs and runs[0].meta.get("error")}      # first-run semantics: a later repetition's error does not drop the task
     ans = {tid: runs for tid, runs in results.items() if tid not in errored}
     n = len(ans)
     p1 = sum(1 for runs in ans.values() if runs and runs[0].solved)
     strict = sum(1 for runs in ans.values() if runs and runs[0].solved and not runs[0].meta.get("repaired"))
-    pk = sum(1 for runs in ans.values() if runs and all(s.solved for s in runs))
+    full = {tid: runs for tid, runs in ans.items() if not any(s.meta.get("error") for s in runs)}   # pass^k is judged only where every repetition was answered
+    pk = sum(1 for runs in full.values() if runs and all(s.solved for s in runs))
     fails: dict[str, int] = {}
-    for runs in ans.values():
-        for s in runs:
-            for r, ok in s.rules.items():
-                if not ok: fails[r] = fails.get(r, 0) + 1
-    allruns = [s for runs in ans.values() for s in runs]
+    allruns = [s for runs in ans.values() for s in runs if not s.meta.get("error")]
+    for s in allruns:
+        for r, ok in s.rules.items():
+            if not ok: fails[r] = fails.get(r, 0) + 1
     m = len(allruns) or 1
     every = [s for runs in results.values() for s in runs]
     return {"tasks": len(results), "answered": n, "not_run": len(errored),
-            "pass@1": p1 / n if n else 0.0, "strict_pass@1": strict / n if n else 0.0, "pass^k": pk / n if n else 0.0,
+            "pass@1": p1 / n if n else 0.0, "strict_pass@1": strict / n if n else 0.0, "pass^k": pk / len(full) if full else 0.0,
             "k": max((len(r) for r in results.values()), default=0),
             "mean_score": sum(s.score for s in allruns) / len(allruns) if allruns else 0.0,
             "format_fail": sum(1 for s in allruns if not s.valid) / m,
