@@ -26,6 +26,7 @@ from mcp.server.mcpserver import Context, MCPServer
 from mcp.types import CallToolResult, TextContent, Tool
 
 from ..core.runner import extract_json
+from ._trusted import grade_executed, parse_arguments
 
 MODULE = "navital_gym.adapters.verifiers_env"
 ALIAS = "navital_gym_vf"  # verifiers resolves a taskset id as a TOP-LEVEL module name (a dotted id breaks its loader)
@@ -77,6 +78,25 @@ class NavitalToolset(vf.Toolset[vf.ToolsetConfig]):
         return CallToolResult(content=[TextContent(type="text", text=json.dumps(res))], is_error="error" in res)
 
 
+def executed_calls(trace) -> list[tuple[str, dict]]:
+    """The tool calls the rollout really executed: a call counts only if the trace holds an unused tool RESULT with its id (and its tool name, when the result names
+    one), matched one to one. A call the model merely emitted (for example in its final message), a repeated id, an empty id or a forged name was never run. A trace
+    without a log gives no calls, so nothing is credited."""
+    results = [(m.tool_call_id, getattr(m, "name", None)) for m in (getattr(trace, "tool_messages", None) or []) if getattr(m, "tool_call_id", None)]
+    out = []
+    for m in (getattr(trace, "assistant_messages", None) or []):
+        for c in (m.tool_calls or []):
+            cid = getattr(c, "id", None)
+            if not cid:
+                continue
+            for i, (rid, rname) in enumerate(results):       # one result pays for ONE call: a repeated or forged id is not a second execution
+                if rid == cid and (rname is None or rname == c.name):
+                    del results[i]
+                    out.append((c.name, parse_arguments(c.arguments)))
+                    break
+    return out
+
+
 class NavitalTask(vf.Task[NavitalData]):
     @classmethod
     def toolsets(cls, config) -> list[vf.Toolset]:
@@ -84,8 +104,8 @@ class NavitalTask(vf.Task[NavitalData]):
 
     def _grade(self, trace) -> dict:
         env = _navital_env(self.data.env_name)
-        task_dict = env.tasks[self.data.id].to_dict()  # hidden fields live only here, host-side
-        return env.contract_grade(task_dict, extract_json(trace.last_reply or ""))
+        # the tool server's world lives in another process: the host replays the tool calls the model really made, on a fresh world, and grades that
+        return grade_executed(env, self.data.id, extract_json(trace.last_reply or ""), executed_calls(trace))  # hidden fields live only host-side, in env
 
     @vf.reward
     async def navital_score(self, trace) -> float:

@@ -35,7 +35,7 @@ class Solver:
         self.node_limit = node_limit
         self.rules = {k: v for k, v in R.RULES.items() if k in self.active}
         self.gtask = replace(task, rules=tuple(self.active), expected_feasible=True)   # grade candidates as if feasible: the solver is deciding that
-        self.grader = R.make_grader()
+        self.grader = R.make_grader(seed)
         self._opt_cache = {}
 
     def on(self, r):

@@ -646,8 +646,9 @@ def soft(ctx):
     return {"rail_share_km": round(sum(k for k, m in km if m == "rail") / tot, 3), "legs": len(plan["legs"]), "cost_inr": round(float(c)),
             "budget_slack": round(float(1 - c / b), 3) if b else None}
 
-def make_grader():
-    return Grader(RULES, lambda task: TripWorld(task, 0), parse, soft, infeasible_check)
+def make_grader(seed: int = 0):
+    """The grader judges a plan against the world of ITS seed (v1.1: it used seed 0 whatever the env was loaded with)."""
+    return Grader(RULES, lambda task: TripWorld(task, seed), parse, soft, infeasible_check)
 
 
 def format_problem(env, sub):
