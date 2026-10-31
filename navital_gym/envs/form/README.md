@@ -1,6 +1,6 @@
 # Form Desk (Navital Gym env #4)
 **Simplified rules, not real-world claims.** Form Desk is a small simulated setting for Indian form-filling tasks. Its rules are a documented simplification of public identifier formats and conventions; nothing here is a live system, and nothing is financial or tax advice. Not affiliated with or endorsed by NPCI, RBI, GSTN/CBIC, Indian Railways/IRCTC, India Post, UIDAI or any bank; names appear only to describe the workflow.
-**Rules last checked: 25 October 2026** (review gate 2026-10-25: PAN pattern, IFSC pattern, mobile rule (a leading +91 / 91 / 0 is stripped; any other length is invalid, never repaired), PIN-zone table, financial-year, Income-tax Act 2025 transition and advance-tax dates (review, 31 Oct 2026)).
+**Rules last checked: 31 October 2026** (review gate 2026-10-25: PAN pattern, IFSC pattern, mobile rule (a leading +91 / 91 / 0 is stripped; any other length is invalid, never repaired), PIN-zone table, financial-year and advance-tax dates; Income-tax Act 2025 transition: review, 31 Oct 2026).
 **Standard Form Desk is saturated for the strongest model we ran** (Sonnet 5.5 solved all 50 tasks after the address-field definitions were added), so it separates weaker models but not the top. A harder companion split is in `../form_multidoc/` (experimental, reported separately).
 
 ## What the agent does

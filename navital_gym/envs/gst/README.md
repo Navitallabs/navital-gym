@@ -6,7 +6,7 @@ Model results for this env are in the leaderboard and `docs/RESULTS.md`.
 > - **Not affiliated with, endorsed by, or connected to GSTN, CBIC, the GST Council or any government body.**
 > - **Not tax advice.** This is a test environment for AI agents. Do not use it, or an agent's answers on it, to file returns or make tax decisions.
 > - **Simplified rules.** The tasks use a deliberately simplified version of Indian GST, written down in full below and shipped inside every task. They are env rules, not claims about what the law says today, and they leave out much of the real law (no QRMP, no state-specific rules, no reverse charge, no cess, no 180-day or payment conditions on credit, no amendments, no composition-scheme maths).
-> - **Rules as of 25 October 2026.** GST rates, thresholds, fees and notifications change often. Where a rule mirrors public practice, the source is listed under "Sources". Anything not listed is an env choice.
+> - **Rules as of 31 October 2026** (threshold wording updated). GST rates, thresholds, fees and notifications change often. Where a rule mirrors public practice, the source is listed under "Sources". Anything not listed is an env choice.
 > - **All data is synthetic.** Businesses, GSTINs, invoices and registers are generated. GSTINs have a valid check character by the public mod-36 method on fake PAN-shaped bodies; none belongs to a real taxpayer. No customer data and no copied dataset is used.
 
 ## What it tests
@@ -86,12 +86,14 @@ Use `solved`/pass@1, not the mean rule score, as the headline number: partial cr
 - `gstr1_due_day` exists in the policy but no v0 task asks about GSTR-1.
 - Exact-match text fields (e.g. `CGST+SGST`) are strict about spelling; the instructions give the expected form.
 
-## Sources (for rules that mirror public practice; accessed 25 Oct 2026)
+## Sources (for rules that mirror public practice; accessed 25 and 31 Oct 2026)
 
 - GST rate slabs from 22 Sep 2025: Thomson Reuters, "Resetting the tax landscape: inside India GST 2.0" (Oct 2025); GST Council coverage (Sep 2025).
 - Place of supply, bill-to/ship-to, IGST Act s.10(1)(b): ClearTax and Avalara explainers on third-party delivery.
 - No automatic due-date shift; extensions only by notification: CBIC notifications on GSTR-3B extensions (e.g. Oct 2025).
 - GSTR-3B late fee and caps: CBIC Notification 19/2021-Central Tax.
+- E-invoice threshold (Rs 5 crore, any financial year from 2017-18, "exceeds"): CBIC Notification 10/2023-Central Tax (10 May 2023, from 1 Aug 2023), amending 13/2020-Central Tax (secondary: Notification 70/2020); https://gstcouncil.gov.in/node/4365.
+- E-way bill (consignment value including tax above Rs 50,000, inter-state): CGST Rules 2017, rule 138 and Explanation 2 (CBIC, primary).
 
 ## Licence
 
