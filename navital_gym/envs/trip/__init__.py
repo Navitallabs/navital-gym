@@ -45,7 +45,7 @@ R-ALT altitude pacing (the day you reach Leh is rest only; nothing higher than L
 def load_env(seed: int = 0, tasks_path: str = TASKS_PATH, splits=("core",)) -> Env:
     """splits: which task files to load: "core" (the standard 55, the default so existing samples and results never change) and/or "easy" (tasks_easy.jsonl)."""
     tasks = (load_tasks(tasks_path) if "core" in splits else []) + (load_tasks(EASY_PATH) if "easy" in splits else [])
-    env = Env(tasks, TripWorld, make_grader(), seed)
+    env = Env(tasks, TripWorld, make_grader(seed), seed)
     env.name, env.instructions = "trip", INSTRUCTIONS
     from .rules import format_problem
     env.format_check = lambda sub: format_problem(env, sub)

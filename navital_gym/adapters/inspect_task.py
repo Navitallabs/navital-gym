@@ -13,23 +13,25 @@ from inspect_ai.scorer import Score, Target, accuracy, mean, scorer, stderr, COR
 from inspect_ai.solver import Generate, TaskState, generate, solver
 from inspect_ai.tool import ToolDef, ToolParams, ToolParam
 from ..core.runner import extract_json
+from ._trusted import grade_executed
 
 def _env(env_name: str):
     return importlib.import_module(f"navital_gym.envs.{env_name}").load_env()
 
-def _runner(world, name):
+def _runner(world, name, calls):
     async def run(**kwargs: Any) -> str:
+        calls.append((name, dict(kwargs)))        # the executed log: the scorer grades this, not what the final answer claims
         return json.dumps(world.call(name, kwargs))
     return run
 
-def _tools_for(world):
+def _tools_for(world, calls):
     out = []
     for name, fn in sorted(world.tools().items()):
         spec = fn._tool
         props = {k: ToolParam(type=v.get("type", "string"), description=v.get("description") or k.replace("_", " ")) for k, v in spec["params"].items()}
         req = [k for k, v in spec["params"].items() if not v.get("optional")]
 
-        out.append(ToolDef(_runner(world, name), name=name, description=spec["description"], parameters=ToolParams(properties=props, required=req)).as_tool())
+        out.append(ToolDef(_runner(world, name, calls), name=name, description=spec["description"], parameters=ToolParams(properties=props, required=req)).as_tool())
     return out
 
 @solver
@@ -37,8 +39,10 @@ def navital_world(env_name: str):
     env = _env(env_name)
     async def solve(state: TaskState, gen: Generate):
         obs = env.reset(str(state.sample_id))
-        state.tools = _tools_for(env.world)
+        calls: list = []
+        state.tools = _tools_for(env.world, calls)
         state.metadata["_navital_obs"] = obs["prompt"]
+        state.metadata["_navital_calls"] = calls          # filled by the tools as the model calls them
         return await gen(state, tool_calls="loop")
     return solve
 
@@ -47,7 +51,7 @@ def navital_grader(env_name: str):
     env = _env(env_name)
     async def score(state: TaskState, target: Target):
         sub = extract_json(state.output.completion or "")
-        res = env.contract_grade(env.tasks[str(state.sample_id)].to_dict(), sub)
+        res = grade_executed(env, str(state.sample_id), sub, state.metadata.get("_navital_calls") or [])
         return Score(value=CORRECT if res["solved"] else INCORRECT, answer=(state.output.completion or "")[:500],
                      explanation=res.get("verdict", ""), metadata={"rule_score": res["score"], "rules": res["rules"]})
     return score

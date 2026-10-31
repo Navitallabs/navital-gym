@@ -26,6 +26,7 @@ from mcp.server.mcpserver import Context, MCPServer
 from mcp.types import CallToolResult, TextContent, Tool
 
 from ..core.runner import extract_json
+from ._trusted import grade_executed, parse_arguments
 
 MODULE = "navital_gym.adapters.verifiers_env"
 ALIAS = "navital_gym_vf"  # verifiers resolves a taskset id as a TOP-LEVEL module name (a dotted id breaks its loader)
@@ -84,8 +85,9 @@ class NavitalTask(vf.Task[NavitalData]):
 
     def _grade(self, trace) -> dict:
         env = _navital_env(self.data.env_name)
-        task_dict = env.tasks[self.data.id].to_dict()  # hidden fields live only here, host-side
-        return env.contract_grade(task_dict, extract_json(trace.last_reply or ""))
+        # the tool server's world lives in another process: the host replays the tool calls the model really made, on a fresh world, and grades that
+        calls = [(c.name, parse_arguments(c.arguments)) for m in trace.assistant_messages for c in (m.tool_calls or [])]
+        return grade_executed(env, self.data.id, extract_json(trace.last_reply or ""), calls)  # hidden fields live only host-side, in env
 
     @vf.reward
     async def navital_score(self, trace) -> float:
