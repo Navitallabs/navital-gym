@@ -434,6 +434,8 @@ class T111GstinValidator(unittest.TestCase):
         self.assertFalse(self.valid(self.with_check("19AAAPA1111A1X")))    # 14th character must be Z
         self.assertFalse(self.valid(self.with_check("19AAAPA1111A0Z")))    # entity number 0 is not allowed
         self.assertFalse(self.valid(ok[:-1] + ("A" if ok[-1] != "A" else "B")))   # wrong check character still fails
+        self.assertFalse(self.valid("000000000000000"))                    # Daksh's Codex: fifteen zeros are not a GSTIN
+        self.assertFalse(self.valid(self.with_check("00000000000000")))    # ... not even with a matching check character
 
     def test_G2_every_gstin_in_the_shipped_tasks_stays_valid_unless_it_is_meant_to_be_wrong(self):
         """Guard: the new structural check must not invalidate the generated GSTINs (all real-shaped and checksummed). Lists any 15-character GSTIN-looking string in a task that validates False."""
@@ -508,6 +510,11 @@ class T111Support(unittest.TestCase):
         for amount in (1899, 1899.0, "1899", "1,899"):
             q = json.loads(json.dumps(s)); [a for a in q["actions"] if a["tool"] == "issue_refund"][0]["args"]["amount"] = amount
             self.assertTrue(ENVS["support"].grader.grade(t, q).to_dict()["rules"]["R-ACTIONS"], amount)
+        # Daksh's Codex: IN-SUP-004 (refund 1299), amount 1299.49 must fail too
+        t4 = ENVS["support"].tasks["IN-SUP-004"]; s4 = self.good(t4)
+        q = json.loads(json.dumps(s4)); [a for a in q["actions"] if a["tool"] == "issue_refund"][0]["args"]["amount"] = 1299.49
+        self.assertFalse(ENVS["support"].grader.grade(t4, q).to_dict()["rules"]["R-ACTIONS"])
+        self.assertTrue(ENVS["support"].grader.grade(t4, s4).to_dict()["rules"]["R-ACTIONS"])
 
     # ---- #5 Marathi marker inside a Hindi word
     def test_L1_the_hindi_word_manahi_does_not_make_a_hindi_reply_marathi(self):
@@ -629,6 +636,76 @@ class T111Trip(unittest.TestCase):
         from navital_gym.envs.trip.world import TripWorld
         w = TripWorld(ENVS["trip"].tasks["IN-TRIP-001"], 0); txt = w.calendar_info("2026-12-04")["booking"]
         self.assertNotIn("2 to 60", txt); self.assertIn("1 to 60", txt)
+
+
+class T111Codex2(unittest.TestCase):
+    """Daksh's second Codex pass: verify_submission accepts an empty submission; UPI oracle reason codes; trip rest on IN-TRIP-027."""
+    def forge(self, mutate=None):
+        import json, os, shutil, tempfile
+        sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "scripts"))
+        import verify_submission
+        from navital_gym.core.grader import summarize
+        from navital_gym.core.version import code_id
+        env = form.load_env(); tmp = tempfile.mkdtemp(); self.addCleanup(shutil.rmtree, tmp, True)
+        agent = "scripted:fake"; tasks = {tid: [] for tid in env.tasks}
+        run = {agent: {"k": 0, "navital_gym_commit": code_id(), "graded_with": code_id(), "settings": {"model": "fake", "provider": "test"}, "summary": summarize({tid: [] for tid in env.tasks}, env.tasks), "tasks": tasks}}
+        tr = {agent: {}}
+        if mutate: mutate(run[agent], tr[agent])
+        name = "form-fake-full"
+        json.dump(run, open(os.path.join(tmp, name + ".json"), "w")); json.dump(tr, open(os.path.join(tmp, name + ".transcripts.json"), "w"))
+        json.dump({"model": "fake", "provider": "test", "date": "2026-10-31", "submitter": "tests"}, open(os.path.join(tmp, "submission.json"), "w"))
+        return verify_submission.verify(os.path.join(tmp, name + ".json"))
+
+    def test_V1_a_submission_with_every_task_mapped_to_no_runs_and_no_transcripts_fails(self):
+        """Daksh's Codex #1: scripts/verify_submission.py returns PASS for form tasks all mapped to [] with an empty transcripts file ('50 answered, k=0'). Every public task needs at least one attempt and a transcript."""
+        ok, reasons, notes = self.forge()
+        self.assertFalse(ok, notes)
+        self.assertTrue(any("no run" in r or "no attempt" in r or "no transcript" in r for r in reasons), reasons)
+
+    def test_V2_one_task_with_no_attempts_is_enough_to_fail(self):
+        """Same bug on a single task: the other tasks are absent too, but a submission must not skip even one (k=0 on one task)."""
+        ok, reasons, notes = self.forge(lambda run, tr: run["tasks"].update({next(iter(run["tasks"])): []}))
+        self.assertFalse(ok)
+
+    def test_U4_a_zero_balance_variant_expects_insufficient_balance(self):
+        """Daksh's Codex #2: on a zero-balance variant the world refuses with insufficient_balance and INSTRUCTIONS list that reason, but upi/oracle.py:_pay expects 'cannot_pay' (an action word, not a reason), so the reference agent fails R-REASON."""
+        from navital_gym.envs.upi import oracle
+        t = copy.deepcopy(ENVS["upi"].tasks["IN-UPI-001"]); t.params["world"]["accounts"][0]["balance"] = 0
+        e = oracle.expected(t.meta["kind"], t.params)
+        self.assertEqual(e["answer"], {"action": "cannot_pay", "reason": "insufficient_balance"})
+        r = ENVS["upi"].grader.grade(t, {"status": "plan", "answer": {"action": "cannot_pay", "reason": "insufficient_balance"}, "actions": []}).to_dict()
+        self.assertTrue(r["solved"], r)
+
+    def test_U5_every_payment_refusal_reason_matches_the_world_and_is_listed_in_the_prompt(self):
+        """Daksh's Codex #2: the oracle's reason for each boundary (per-payment limit, daily amount, daily count, balance) must equal the code the world refuses with, and be a reason INSTRUCTIONS offers. Also checks the order when two limits are hit (the world checks count before balance)."""
+        from navital_gym.envs.upi import oracle, INSTRUCTIONS
+        from navital_gym.envs.upi.world import UpiWorld
+        import re as _re
+        offered = set(_re.findall(r"[a-z_]+", INSTRUCTIONS.split('"reason":', 1)[1].split("\n", 1)[0]))
+        base = ENVS["upi"].tasks["IN-UPI-001"]; vpa, amt = "asha10@upibank", 3800
+        variants = {"balance": {"balance": 0}, "count": {"daily_count": 20, "daily_count_limit": 20}, "daily_amount": {"daily_used": 99000, "daily_limit": 100000},
+                    "count_and_balance": {"balance": 0, "daily_count": 20, "daily_count_limit": 20}, "txn_limit": {}}
+        for name, edit in variants.items():
+            t = copy.deepcopy(base); t.params["world"]["accounts"][0].update(edit)
+            if name == "txn_limit": t.params["rules"]["per_txn_limit"] = 1000
+            world = UpiWorld(t, 0); code = world._payment_problem(vpa, amt)[0]
+            got = oracle.expected(t.meta["kind"], t.params)["answer"]
+            self.assertEqual(got["reason"], code, name)
+            self.assertIn(code, offered, "%s: the prompt does not offer the reason %s" % (name, code))
+
+    def test_T15_the_oracle_plan_for_in_trip_027_has_a_genuine_rest_day(self):
+        """Daksh's Codex: IN-TRIP-027 (rest_days 1). The oracle plan's only 'rest' day is the arrival day of an overnight bus (04:58) and the departure day of a night train: R-REST counts it. An independent check: a rest day has no leg over 2 hours touching it (departing, arriving or passing through) and no ticketed sight."""
+        import datetime as dt
+        from navital_gym.envs.trip import data as D
+        from navital_gym.envs.trip.solver import Solver
+        t = ENVS["trip"].tasks["IN-TRIP-027"]; p = Solver(t).solve()
+        legs = [(dt.datetime.fromisoformat(l["dep"]), dt.datetime.fromisoformat(l["arr"])) for d in p["days"] for l in d["legs"]]
+        def is_rest(d):
+            day0 = dt.datetime.fromisoformat(d["date"] + "T00:00"); day1 = day0 + dt.timedelta(days=1)
+            if any((arr - dep) > dt.timedelta(hours=2) and dep < day1 and arr > day0 for dep, arr in legs): return False
+            return all(D.ATTRACTIONS[a["id"]]["adult_inr"] == 0 for a in d.get("activities", []))
+        self.assertGreaterEqual(sum(is_rest(d) for d in p["days"]), int(t.params["rest_days"]), "no genuine rest day in the oracle plan")
+        self.assertTrue(ENVS["trip"].grader.grade(t, copy.deepcopy(p)).to_dict()["solved"])
 
 class Controls(unittest.TestCase):
     """Positive controls: pass on v1.0.1 AND v1.1 (the harness and the fixtures are sound; the fixes did not over-correct)."""
