@@ -290,7 +290,8 @@ class GST(unittest.TestCase):
         if grade("gst", "IN-GST-027", FX["gst027_opus"])["solved"]: return
         rows = ENVS["gst"].tasks["IN-GST-027"].params["world"]["purchase_register"]
         p31 = next(r for r in rows if r["inv"] == "P31")
-        self.assertNotEqual(p31["goods_received"], False)
+        # backend (v1.1): the row is now a goods purchase (raw_material) that was not received, so "goods received" is well defined; gold stays 2,430
+        self.assertTrue(p31["goods_received"] is not False or p31["category"] != "professional_fee")
 
 class Form(unittest.TestCase):
     def test_F1_financial_year_long_form_is_accepted_or_format_given(self):

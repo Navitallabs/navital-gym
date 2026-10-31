@@ -35,7 +35,7 @@ An agent gets a short accounting question and must read the task's documents and
 - **GSTR-3B due date**: the 20th of the next month. **It does not move for weekends or holidays** (the real due date changes only by official notification).
 - **Late fee**: Rs 50 per day (Rs 20 per day for a nil return), capped by annual turnover: up to Rs 1.5 crore Rs 2,000; up to Rs 5 crore Rs 5,000; above that Rs 10,000; nil return Rs 500.
 - **Interest**: 18% a year on the net tax paid late, times days late / 365, rounded to 2 decimals.
-- **Thresholds**: e-invoice required above Rs 5 crore turnover; e-way bill required above Rs 50,000 consignment value; composition scheme allowed up to Rs 1.5 crore turnover. The tasks ask only the yes/no question stated.
+- **Thresholds**: e-invoice required if aggregate turnover exceeded Rs 5 crore in any financial year from 2017-18 (exactly Rs 5 crore does not; the e-invoice prompts state this); e-way bill required for an inter-state movement of goods worth more than Rs 50,000 including tax (intra-state thresholds are set by each state and are not modelled; the e-way prompts name the two states); composition scheme allowed up to Rs 1.5 crore turnover. The tasks ask only the yes/no question stated.
 
 ## What the agent sees
 
