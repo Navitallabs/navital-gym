@@ -54,7 +54,7 @@ The agent finishes with `{"status": "plan", "answer": {...}}` (a bare answer obj
 ## Scoring
 
 - One rule per answer field, so an answer wrong in exactly one field fails exactly one rule. A task is **solved** only if every applicable rule passes. The score is the fraction of rules passed (1.0 when solved).
-- Money, counts and tax amounts: exact decimal equality (no tolerance). Dates: exact. Text such as the tax type: case- and whitespace-insensitive but otherwise exact. Booleans must be real booleans. Invoice lists are compared as sets.
+- Money, counts and tax amounts: exact decimal equality (no tolerance). Dates: exact. Text such as the tax type: case- and whitespace-insensitive but otherwise exact. Booleans must be real booleans. Invoice lists are compared as sets. Numbers may carry commas only as digit grouping (123,456 or 1,23,456); "1,2,3" is not a number. Lists (invoice ids) must have the same members in any order; a repeated id fails.
 - A malformed answer scores 0 and never crashes the grader. Fields the agent claims about itself (score, solved, totals it computed) are ignored.
 - Reference solver: an independent implementation of the rules above (`oracle.py`). The grader checks against it, and the stored `gold_answer` of every task is cross-checked against it (`check_gold`), so a wrong gold shows up as a disagreement.
 

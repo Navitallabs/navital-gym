@@ -1,16 +1,25 @@
 """GST Desk grader rules. One rule per answer field, so a submission that is wrong in exactly one field loses
 exactly one rule. The expected value comes from the oracle (independent of the task file's gold_answer)."""
 from __future__ import annotations
+import re
 from decimal import Decimal as Dc, InvalidOperation
 from ...core.grader import Rule, RuleResult, Grader, Ctx
 from . import oracle
 
+_GROUPED = re.compile(r"^\d{1,3}(,\d{3})+(\.\d+)?$|^\d{1,2}(,\d{2})+,\d{3}(\.\d+)?$")   # 123,456 or 1,23,456 (v1.1: '1,2,3' is not 123)
+
 def num(x):
-    """Decimal from an int/str/float answer; bool and everything else is not a number."""
+    """Decimal from an int/str/float answer; bool and everything else is not a number. Commas are accepted only as digit grouping (Indian or western)."""
     if isinstance(x, bool) or x is None:
         return None
     try:
-        d = Dc(str(x).replace(",", "").strip()) if not isinstance(x, float) else Dc(repr(x))
+        if isinstance(x, float):
+            d = Dc(repr(x))
+        else:
+            t = str(x).strip()
+            if "," in t and not _GROUPED.match(t):
+                return None
+            d = Dc(t.replace(",", ""))
     except (InvalidOperation, ValueError):
         return None
     return d if d.is_finite() else None
