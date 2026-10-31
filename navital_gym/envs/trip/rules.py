@@ -572,7 +572,7 @@ class RAlt(Rule):
 PERMIT_CITIES = {a["city"] for a in D.ATTRACTIONS.values() if a["permit"]}
 
 class RPermit(Rule):
-    id = "R-PERMIT"; description = "Ladakh protected-area places (Nubra, Pangong) need the environment and Red Cross fee paid (Indian nationals; no Inner Line Permit since 2021)"
+    id = "R-PERMIT"; description = "Ladakh protected-area places (Nubra, Pangong) need the environment and Red Cross fee paid (Indian nationals; no Inner Line Permit since 2021); a night in Nubra or Pangong needs it too: one fee for the protected areas, paid with a Nubra or Pangong visit on the trip (fee_paid true)"
     def check(self, ctx):
         w = ctx.world
         plan = _plan(ctx)
@@ -583,11 +583,11 @@ class RPermit(Rule):
                     if not a["fee_paid"]:
                         return RuleResult(False, f"{a['name']}: the Ladakh environment and Red Cross fee must be paid (fee_paid true)")
                     paid.add(D.ATTRACTIONS[a["name"]]["city"])
-        # v1.1: a night in a protected area also needs the fee; it is paid with a visit there (fee_paid true), so a stay with no paid visit fails
+        # v1.1: a night in a protected area also needs the fee. It is one fee for all of Ladakh's protected areas, paid with a protected-area visit (fee_paid true) anywhere on the trip; a night there with no fee paid on the trip fails
         for d in plan["days"]:
             c = d["stay"]["hotel"]["city"] if d["stay"] else None
-            if c in PERMIT_CITIES and c not in paid:
-                return RuleResult(False, f"a night in {c} needs the Ladakh environment and Red Cross fee (pay it with a visit there, fee_paid true)")
+            if c in PERMIT_CITIES and not paid:
+                return RuleResult(False, f"a night in {c} needs the Ladakh environment and Red Cross fee (one fee for the protected areas: pay it with a Nubra or Pangong visit on the trip, fee_paid true)")
         return RuleResult(True)
 
 class RRoute(Rule):

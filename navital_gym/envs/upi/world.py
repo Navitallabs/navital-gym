@@ -4,6 +4,7 @@ Read tools look things up; action tools change this sandbox's state (a payment, 
 logged. The rules are the env's simplified policy (see README), not live NPCI/RBI rules. The agent never sees gold,
 forbidden actions or the oracle: only the prompt, these tools and the policy document."""
 from __future__ import annotations
+from decimal import Decimal
 import copy
 from ...core.world import World, tool, ToolError
 
@@ -18,10 +19,10 @@ def whole_rupees(x, what="amount") -> int:
     if isinstance(x, bool):
         raise ToolError(f"{what} must be a number of rupees")
     try:
-        f = float(str(x).replace(",", "").strip())
-    except (TypeError, ValueError):
+        f = Decimal(str(x).replace(",", "").strip())      # v1.1: exact (float() rounded "3800.000000000000001" to 3800)
+    except (TypeError, ValueError, ArithmeticError):
         raise ToolError(f"{what} must be a number of rupees")
-    if f != f or f in (float("inf"), float("-inf")) or f <= 0 or f != int(f):
+    if not f.is_finite() or f <= 0 or f != int(f):
         raise ToolError(f"{what} must be a positive whole number of rupees")
     return int(f)
 

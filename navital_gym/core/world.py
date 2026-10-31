@@ -53,7 +53,9 @@ class World:
     def call(self, name: str, args: dict | None = None) -> dict:
         args = args if isinstance(args, dict) else {}
         fn = self.tools().get(name)
-        rec = {"tool": name, "args": copy.deepcopy(args)}
+        try: rec = {"tool": name, "args": copy.deepcopy(args)}
+        except RecursionError:      # v1.1: absurdly nested arguments are an error, not a crash
+            rec = {"tool": name, "args": {}}; rec["ok"] = False; self.calls.append(rec); return {"error": "bad arguments: nested too deeply"}
         if fn is None:
             out = {"error": f"unknown tool {name!r}", "tools": sorted(self.tools())}
         else:

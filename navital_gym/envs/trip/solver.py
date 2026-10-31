@@ -399,6 +399,11 @@ class Solver:
             for c in self.p["route"]:
                 if c != self.origin and c != self.end and c not in have:
                     req.append({"name": None, "day": None, "any_of": sorted([n for n, a in D.ATTRACTIONS.items() if a["city"] == c], key=lambda n: D.ATTRACTIONS[n]["adult_inr"])})
+        if self.on("R-PERMIT"):      # v1.1: a night in a protected area needs the (one) fee, paid with a protected-area visit on the trip: if no required sight pays it, add the cheapest one in a night city
+            paid = any(D.ATTRACTIONS[n]["permit"] for r in req for n in (r.get("any_of") or [r["name"]]))
+            nights = sorted({self.w.hotel_by_id[d["stay"]["hotel_id"]]["city"] for d in plan["days"] if d.get("stay")} & R.PERMIT_CITIES)
+            if nights and not paid:
+                req.append({"name": None, "day": None, "any_of": sorted([n for n, a in D.ATTRACTIONS.items() if a["city"] in nights and a["permit"]], key=lambda n: D.ATTRACTIONS[n]["adult_inr"])})
         if not req:
             return {}
         ctx = Ctx(task=self.gtask, world=self.w, sub=plan)

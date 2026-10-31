@@ -13,16 +13,12 @@ from typing import Any, Callable
 
 def extract_json(text: str) -> Any:
     """The last top-level JSON object in a model message (models wrap it in prose or ``` fences)."""
-    depth, start, last = 0, None, None
-    for i, ch in enumerate(text or ""):
-        if ch == "{":
-            if depth == 0: start = i
-            depth += 1
-        elif ch == "}" and depth:
-            depth -= 1
-            if depth == 0 and start is not None:
-                try: last = json.loads(text[start:i + 1])
-                except ValueError: pass
+    dec, text, i, last = json.JSONDecoder(), text or "", 0, None      # v1.1: decode, do not count braces (a "}" inside a string split the object)
+    while (i := text.find("{", i)) != -1:
+        try: obj, end = dec.raw_decode(text, i)
+        except (ValueError, RecursionError): i += 1; continue
+        if isinstance(obj, dict): last = obj
+        i = end
     return last
 
 REPAIR = ("Your answer did not parse: {err}. Reply now with ONLY the corrected final answer as one JSON object in the required format, "

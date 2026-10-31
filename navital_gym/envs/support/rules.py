@@ -272,6 +272,7 @@ def digit_runs_leaked(address: str, reply: str) -> bool:
                 joined += run
                 if joined == num: return True
                 if len(joined) >= len(num): break
+    text = re.sub(r"(?<!\d)[:.#](?=\d)", " ", text)      # v1.1: "नंबर:50", "no.50" are the address word plus the number
     toks = [t.strip("()[]{}\"'“”‘’:;,!?।|/-*_").lower() for t in text.split()]
     for num in re.findall(r"\d{1,4}", re.sub(r"\d{5,}", " ", to_ascii_digits(address))):
         for i, t in enumerate(toks):
@@ -329,7 +330,7 @@ class Amount(Rule):
         want = expected(ctx)["amount"]; reply = ctx.sub["reply"]
         if Decimal(want) not in amounts_in(reply):
             return RuleResult(False, "refund amount missing from the reply")
-        if re.search(r"(?:₹|(?<![a-z])rs\.?|(?<![a-z])inr)\s*[-−]\s*\d|(?<![\w.])(?<!\d )[-−](?:₹\s*)?\d", reply.lower()):      # v1.1: a negative figure (₹-1899, -1899) is not a refund; "5-7 days", "5 -7 days" and a "- " bullet are not (a spaced "- 1899" is read as a separator: documented)
+        if re.search(r"(?:₹|(?<![a-z])rs\.?|(?<![a-z])inr)\s*[-−]\s*\d|(?<![\w.])(?<!\d )[-−](?:(?:₹|rs\.?|inr)\s*)?\d", reply.lower()):      # v1.1: a negative figure (₹-1899, -1899) is not a refund; "5-7 days", "5 -7 days" and a "- " bullet are not (a spaced "- 1899" is read as a separator: documented)
             return RuleResult(False, "reply states a negative rupee figure")
         o = ctx.task.params["world"]["order"]; price, ship = int(o["price"]), int(o["shipping_fee"])
         # The refund, the price and the shipping fee may be named (also as exact decimals: 1899.00 is 1899). Their sum is a figure on the order only where it IS the refund:
