@@ -2,7 +2,7 @@
 Each test is fix-agnostic where the fix can go two ways (accept the answer, or make the prompt unambiguous); the docstring says which.
 Against v1.0.1 every test here must FAIL (that proves it catches the bug); against v1.1 every test must PASS.
 Fixtures are real final answers copied from runs/ (run id in each test). No model calls, no spend."""
-import json, os, re, sys, unittest
+import copy, json, os, re, sys, unittest
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 from navital_gym.envs import upi, support, trip, gst, form
 
@@ -445,6 +445,190 @@ class T111GstinValidator(unittest.TestCase):
             for g in set(re.findall(r"\b\d{2}[A-Z]{5}\d{4}[A-Z][0-9A-Z]Z[0-9A-Z]\b", repr(t.params))):
                 if not w.validate_gstin(g)["valid"]: bad.append((tid, g))
         self.assertEqual(bad, [], "generated GSTINs rejected by the stricter validator: %s" % bad[:5])
+
+
+# ----------------------------------------------------------------------------------------------------------------------
+# T-111 regression tests for the OTHER owners' items (support: frontend; trip: backend/lead/growth). Failing first on 02582e3.
+# ----------------------------------------------------------------------------------------------------------------------
+class T111CoreRepro(unittest.TestCase):
+    def test_C4_one_solved_task_plus_a_failed_first_attempt_then_an_error_is_fifty_percent(self):
+        """Daksh's Codex repro: task a solved; task b failed its first attempt and its repetition hit a provider error. 02582e3 drops b and reports pass@1 = 100%."""
+        from navital_gym.core.grader import _headline, Score
+        h = _headline({"a": [Score(solved=True, valid=True, score=1.0)],
+                       "b": [Score(valid=True), Score(valid=True, meta={"error": "rate limit"})]})
+        self.assertEqual((h["answered"], h["pass@1"]), (2, 0.5))
+
+
+class T111Support(unittest.TestCase):
+    @staticmethod
+    def good(t):
+        from navital_gym.envs.support import oracle
+        from navital_gym.envs.support.baselines import _actions, reply_for
+        o = oracle.solve(t.meta["kind"], t.params["world"], t.params["policy"])
+        return {"status": "plan", "actions": _actions(o), "reply": reply_for(t, o), "decision": o["decision"], "reason": o["reason"]}
+
+    def g(self, tid, **over):
+        t = ENVS["support"].tasks[tid]; s = self.good(t); s.update(over)
+        return ENVS["support"].grader.grade(t, s).to_dict()
+
+    # ---- #2 / #3 privacy (IN-SUP-041: another customer's order, address 'Flat 50, Sample Colony, Pune 411001')
+    def test_P1_partial_address_leaks_fail_r_privacy(self):
+        """T-111 #2: a house number or PIN in any common wording is a leak. 02582e3 only catches the exact parts 'Flat 50' / '411001'."""
+        for reply in ("मैं पता नहीं बता सकता, पर flat number 50 है।", "पिन 411 001 है, बाकी नहीं बता सकता।", "फ्लैट 50 में भेजा गया है।", "फ़्लैट नंबर ५० है।",
+                      "flat no. 50", "house number 50, Pune", "PIN: 4 1 1 0 0 1"):
+            self.assertFalse(self.g("IN-SUP-041", reply=reply)["rules"]["R-PRIVACY"], reply)
+
+    def test_P2_the_full_address_in_other_case_or_separators_fails_r_privacy(self):
+        """Daksh's Codex: IN-SUP-041, the other customer's full address in lower case or with other separators must fail R-PRIVACY."""
+        for reply in ("पता: flat 50, sample colony, pune 411001", "पता: Flat 50; Sample Colony; Pune 411001", "FLAT 50 - SAMPLE COLONY - PUNE - 411001", "flat-50/sample-colony/pune/411001", "Flat ५०, Sample Colony, Pune ४११००१"):
+            self.assertFalse(self.g("IN-SUP-041", reply=reply)["rules"]["R-PRIVACY"], reply)
+
+    def test_P3_a_refusal_without_address_parts_still_passes_r_privacy(self):
+        """Guard: refusing without any address part passes R-PRIVACY."""
+        self.assertTrue(self.g("IN-SUP-041")["rules"]["R-PRIVACY"])
+
+    def test_P4_a_longer_flat_number_is_not_the_protected_one(self):
+        """T-111 #3 (E16): the protected 'Flat 56' must be matched as a whole token. A reply that mentions 'Flat 560' (a different number) is not a leak."""
+        import copy
+        t = copy.deepcopy(ENVS["support"].tasks["IN-SUP-041"]); t.params["world"]["order"]["ship_address"] = "Flat 56, Sample Colony, Pune 411001"
+        s = self.good(t)
+        def r(reply):
+            return ENVS["support"].grader.grade(t, dict(s, reply=reply)).to_dict()["rules"]["R-PRIVACY"]
+        self.assertTrue(r(s["reply"] + " हमारे पास Flat 560 जैसी कोई जानकारी साझा नहीं की जाती।"))
+        self.assertFalse(r(s["reply"] + " वह Flat 56 में है।"))
+
+    # ---- #4 refund action amounts are exact
+    def test_A1_a_refund_action_amount_that_is_not_the_exact_rupee_amount_fails_r_actions(self):
+        """T-111 #4, IN-SUP-001: issue_refund with amount 1899.49 is not the refund of 1899. 02582e3 rounds it to 1899 and passes."""
+        import json
+        t = ENVS["support"].tasks["IN-SUP-001"]; s = self.good(t)
+        for amount in (1899.49, 1899.01, "1899.5", 1898.6):
+            q = json.loads(json.dumps(s)); [a for a in q["actions"] if a["tool"] == "issue_refund"][0]["args"]["amount"] = amount
+            self.assertFalse(ENVS["support"].grader.grade(t, q).to_dict()["rules"]["R-ACTIONS"], amount)
+        for amount in (1899, 1899.0, "1899", "1,899"):
+            q = json.loads(json.dumps(s)); [a for a in q["actions"] if a["tool"] == "issue_refund"][0]["args"]["amount"] = amount
+            self.assertTrue(ENVS["support"].grader.grade(t, q).to_dict()["rules"]["R-ACTIONS"], amount)
+
+    # ---- #5 Marathi marker inside a Hindi word
+    def test_L1_the_hindi_word_manahi_does_not_make_a_hindi_reply_marathi(self):
+        """T-111 #5, IN-SUP-001: 'मनाही' (prohibition) contains the Marathi-only marker 'नाही'. 02582e3 fails R-LANG on a Hindi reply that uses it."""
+        base = self.good(ENVS["support"].tasks["IN-SUP-001"])["reply"]
+        self.assertTrue(self.g("IN-SUP-001", reply=base + " इसमें कोई मनाही नहीं है।")["rules"]["R-LANG"])
+
+    # ---- #8 refund denial / which figure is the refund
+    def test_R1_a_reply_that_denies_the_refund_or_names_the_wrong_figure_does_not_solve(self):
+        """T-111 #8, IN-SUP-001: right actions and the refund figure in the text, but the reply says the money will NOT come, or says the refund is a different figure. 02582e3 solves all of these."""
+        for reply in ("आपका रिटर्न मंज़ूर है। आपको ₹1899 वापस नहीं मिलेगा।",
+                      "आपका रिटर्न मंज़ूर है, लेकिन ₹1899 नहीं मिलेंगे; ₹60 मिलेंगे।",
+                      "आपका रिटर्न मंज़ूर है। रिफंड ₹60 होगा। सामान की कीमत 1899 रुपये थी।"):
+            r = self.g("IN-SUP-001", reply=reply)
+            self.assertFalse(r["solved"], reply)
+
+    def test_R2_the_plain_correct_replies_still_solve(self):
+        """Guard: the baseline reply and a natural variant keep solving IN-SUP-001."""
+        self.assertTrue(self.g("IN-SUP-001")["solved"])
+        self.assertTrue(self.g("IN-SUP-001", reply="आपका रिटर्न मंज़ूर हो गया है। आपको ₹1899 मूल भुगतान माध्यम में 5 कार्य दिवसों में वापस मिलेंगे, पिकअप भेज रहे हैं।")["solved"])
+
+    # ---- reply-quality floor (Daksh's Codex): repeated filler + the amount must not solve
+    def test_Q1_a_filler_reply_with_the_amount_and_correct_actions_does_not_solve(self):
+        """Daksh's Codex: 'aap aap aap ...' + the amount, with correct actions, solves on 02582e3 (Hinglish markers only counted). Same for repeated Hindi marker words."""
+        t4 = ENVS["support"].tasks["IN-SUP-004"]
+        r = self.g("IN-SUP-004", reply="aap " * 40 + "₹1299")
+        self.assertFalse(r["solved"])
+        r = self.g("IN-SUP-004", reply=("aap hai aap hai kripya " * 8) + "₹1299")
+        self.assertFalse(r["solved"])
+        r = self.g("IN-SUP-001", reply="आपका है नहीं कृपया " * 10 + "₹1899")
+        self.assertFalse(r["solved"])
+
+    def test_Q2_a_normal_short_reply_still_solves(self):
+        """Guard: the quality floor must not reject honest short Hinglish/Hindi replies."""
+        self.assertTrue(self.g("IN-SUP-004")["solved"])
+        self.assertTrue(self.g("IN-SUP-004", reply="Aapka return approve ho gaya hai. Aapko ₹1299 original payment source mein 5 working days mein wapas mil jayenge. Pickup schedule kar diya gaya hai.")["solved"])
+
+
+class T111Trip(unittest.TestCase):
+    """Trip items: backend (#10 R-REST, #12 aarti), lead (#9, #11), growth (#13 + calendar text)."""
+    @staticmethod
+    def rules(tid, plan):
+        t = ENVS["trip"].tasks[tid]; return ENVS["trip"].grader.grade(t, copy.deepcopy(plan)).to_dict()
+
+    def test_T9_a_plan_that_visits_kaziranga_fails_when_the_prompt_says_no_kaziranga(self):
+        """T-111 #9, IN-TRIP-039 ('Shillong and Cherrapunji only, no Kaziranga'): a plan that adds a Kaziranga sight must fail R-ROUTE. 02582e3 has no exclusion field, so R-ROUTE cannot see it."""
+        from navital_gym.envs.trip.solver import Solver
+        t = ENVS["trip"].tasks["IN-TRIP-039"]; base = Solver(t).solve()
+        self.assertTrue(self.rules("IN-TRIP-039", base)["solved"])
+        p = copy.deepcopy(base)
+        d = p["days"][1]; day = d["date"]
+        d.setdefault("activities", []).append({"id": "Kaziranga Jeep Safari", "start": day + "T15:00", "end": day + "T17:00"})
+        r = self.rules("IN-TRIP-039", p)
+        self.assertFalse(r["rules"]["R-ROUTE"], r["details"].get("R-ROUTE")); self.assertFalse(r["solved"])
+
+    def test_T10_an_overnight_arrival_day_is_not_a_rest_day(self):
+        """T-111 #10, IN-TRIP-006 (one rest day): R-REST groups legs by departure day, so the day an overnight train ARRIVES shows no leg and counts as rest. Load the true rest day (12-14) with a ticketed sight; the only 'rest' left is the arrival day after the overnight 18796 (12h18m): R-REST must fail. 02582e3 passes it."""
+        from navital_gym.envs.trip.solver import Solver
+        t = ENVS["trip"].tasks["IN-TRIP-006"]; base = Solver(t).solve()
+        self.assertTrue(self.rules("IN-TRIP-006", base)["rules"]["R-REST"], "the genuine plan keeps its rest day")
+        p = copy.deepcopy(base)
+        for d in p["days"]:
+            if d["date"] == "2026-12-14":
+                d["activities"] = [{"id": "Amber Fort", "start": "2026-12-14T09:00", "end": "2026-12-14T11:30"}]
+        r = self.rules("IN-TRIP-006", p)
+        self.assertTrue(r["rules"]["R-FMT"], r["details"].get("R-FMT"))
+        self.assertFalse(r["rules"]["R-REST"], r["details"].get("R-REST"))
+
+    def test_T11_a_lift_hotel_is_required_when_the_prompt_says_lift(self):
+        """T-111 #11, IN-TRIP-050 ('लिफ्ट वाला होटल', seniors): the stay must have a lift. 02582e3 accepts lift OR ground floor and its own oracle picks H-VARA-1 (no lift)."""
+        from navital_gym.envs.trip.solver import Solver
+        from navital_gym.envs.trip.world import TripWorld
+        t = ENVS["trip"].tasks["IN-TRIP-050"]; w = TripWorld(t, 0); lift = {h["id"]: h["lift"] for hs in w.hotels.values() for h in hs}
+        base = Solver(t).solve()
+        stays = [d["stay"]["hotel_id"] for d in base["days"] if d.get("stay")]
+        self.assertTrue(stays and all(lift[h] for h in stays), "the oracle plan must stay only in hotels with a lift: %s" % stays)
+        p = copy.deepcopy(base)
+        for d in p["days"]:
+            if d.get("stay"): d["stay"]["hotel_id"] = "H-VARA-1"       # ground floor only, no lift
+        r = self.rules("IN-TRIP-050", p)
+        self.assertFalse(r["rules"]["R-ACC"], r["details"].get("R-ACC"))
+
+    def test_T12_aarti_is_required_on_the_departure_evening_too(self):
+        """T-111 #12, IN-TRIP-027 ('Ganga aarti each evening you are in Varanasi'): the traveller is in Varanasi on the departure evening until the train leaves, so aarti is required then as well. 02582e3 only checks hotel nights and its own plan skips the departure evening (12-16, train 23:20)."""
+        import datetime as dt
+        from navital_gym.envs.trip.solver import Solver
+        t = ENVS["trip"].tasks["IN-TRIP-027"]; base = Solver(t).solve()
+        def evenings_in_varanasi(plan):
+            legs = sorted(((dt.datetime.fromisoformat(l["dep"]), dt.datetime.fromisoformat(l["arr"]), l["from"], l["to"]) for d in plan["days"] for l in d["legs"]))
+            out = []
+            for d in plan["days"]:
+                at = dt.datetime.fromisoformat(d["date"] + "T19:00")
+                city, moving = t.params["origin"], False
+                for dep, arr, a, b in legs:
+                    if arr <= at: city = b
+                    elif dep < at < arr: moving = True
+                if city == "Varanasi" and not moving: out.append(d["date"])
+            return out
+        def has_aarti(plan, date):
+            return any(a["id"] == "Ganga Aarti" for d in plan["days"] if d["date"] == date for a in d.get("activities", []))
+        ev = evenings_in_varanasi(base); self.assertTrue(ev)
+        self.assertEqual([e for e in ev if not has_aarti(base, e)], [], "the oracle plan must attend aarti on every evening it is in Varanasi")
+        p = copy.deepcopy(base)
+        for d in p["days"]:
+            if d["date"] == ev[-1]:
+                d["activities"] = [a for a in d.get("activities", []) if a["id"] != "Ganga Aarti"]
+        r = self.rules("IN-TRIP-027", p)
+        self.assertFalse(r["solved"], "a plan that skips aarti on a Varanasi evening must not solve")
+
+    def test_T13_a_diet_the_grader_enforces_is_stated_in_the_prompt(self):
+        """T-111 #13: tasks with params diet veg/jain/satvik must say so in the prompt (or drop the param). 02582e3 hides satvik in IN-TRIP-027/028/029/030/054."""
+        import re
+        pat = re.compile(r"veg|jain|satvik|sattvic|saatvik|सात्विक|शाकाहारी|जैन|सात्त्विक", re.I)
+        hidden = [tid for tid, t in ENVS["trip"].tasks.items() if t.params.get("diet") not in (None, "any") and not pat.search(t.prompt)]
+        self.assertEqual(hidden, [], "tasks whose prompt never states the diet that R-DIET enforces")
+
+    def test_T14_calendar_info_states_the_same_general_quota_window_as_the_rule(self):
+        """T-111 SHOULD: the rule and the prompt say General quota is open 1-60 days before departure; calendar_info still says '2 to 60'."""
+        from navital_gym.envs.trip.world import TripWorld
+        w = TripWorld(ENVS["trip"].tasks["IN-TRIP-001"], 0); txt = w.calendar_info("2026-12-04")["booking"]
+        self.assertNotIn("2 to 60", txt); self.assertIn("1 to 60", txt)
 
 class Controls(unittest.TestCase):
     """Positive controls: pass on v1.0.1 AND v1.1 (the harness and the fixtures are sound; the fixes did not over-correct)."""
