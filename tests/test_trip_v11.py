@@ -82,3 +82,21 @@ class Labels(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TaskIntent(unittest.TestCase):
+    """v1.1 full audit (Codex, review-confirmed): 039 excludes Kaziranga; 050 asks for a hotel with a lift."""
+    def test_039_a_kaziranga_visit_fails_r_route(self):
+        t = ENV.tasks["IN-TRIP-039"]; plan = solved_plan("IN-TRIP-039")
+        self.assertTrue(grade(t.to_dict(), plan)["solved"])
+        day = plan["days"][1]
+        day["activities"] = day.get("activities", []) + [{"id": "Kaziranga Jeep Safari", "start": day["date"] + "T09:00", "end": day["date"] + "T12:00"}]
+        self.assertFalse(grade(t.to_dict(), plan)["rules"]["R-ROUTE"])
+
+    def test_050_a_ground_floor_hotel_without_a_lift_fails_r_acc(self):
+        t = ENV.tasks["IN-TRIP-050"]; plan = solved_plan("IN-TRIP-050")
+        self.assertTrue(grade(t.to_dict(), plan)["solved"])
+        for d in plan["days"]:
+            if d.get("stay"):
+                d["stay"]["hotel_id"] = "H-VARA-1"      # ground-floor rooms, no lift (the hotel the v1.1.0 oracle chose)
+        self.assertFalse(grade(t.to_dict(), plan)["rules"]["R-ACC"])
