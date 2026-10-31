@@ -155,6 +155,23 @@ def timeline(ctx):
     ctx.cache["tl"] = (ivs, mids, loc, problems)
     return ctx.cache["tl"]
 
+def evening_possible(ivs, city, att, date) -> bool:
+    """Can the traveller attend the whole of `att` (an evening session such as the Ganga Aarti) in `city` on `date`? True when some stay in the city, shortened by the 30-minute
+    arrival buffer and the buffer before the next leg, holds a slot of the activity's length inside its opening hours on an open weekday and in season."""
+    if D.WEEKDAYS[date.weekday()] in att["closed"] or (att["season"] and not D.in_window(date, att["season"])):
+        return False
+    o = dt.datetime.combine(date, dt.datetime.strptime(att["open"], "%H:%M").time())
+    c = dt.datetime.combine(date, dt.datetime.strptime(att["close"], "%H:%M").time())
+    need = dt.timedelta(minutes=att["minutes"])
+    for ccity, t_in, t_out, arrived, nxt in ivs:
+        if ccity != city:
+            continue
+        lo = t_in + (dt.timedelta(minutes=30) if arrived else dt.timedelta())
+        hi = t_out - (dt.timedelta(minutes=BUFFER_MIN[nxt["mode"]]) if nxt else dt.timedelta())
+        if max(lo, o) + need <= min(hi, c):
+            return True
+    return False
+
 # ----------------------------------------------------------------------------------------------- rules
 class RFmt(Rule):
     id, gate = "R-FMT", True
@@ -350,12 +367,14 @@ class RSeason(Rule):
         return RuleResult(True)
 
 class RRest(Rule):
-    id = "R-REST"; description = "A rest day: no leg over 2 hours, no ticketed activity"
+    id = "R-REST"; description = "A rest day: no leg over 2 hours touching the day (departing, arriving or passing through it), no ticketed activity"
     def check(self, ctx):
         need, plan = int(ctx.task.params.get("rest_days", 0)), _plan(ctx)
         n = 0
         for d in plan["days"]:
-            if all((l["arr"] - l["dep"]) <= dt.timedelta(hours=2) for l in d["legs"]) and all(D.ATTRACTIONS[a["name"]]["adult_inr"] == 0 for a in d["acts"]):
+            # v1.1: a leg counts on every calendar day it touches, so an overnight arrival is travel on the arrival day (v1.0.1 looked only at legs departing that day)
+            touching = [l for l in plan["legs"] if l["dep"].date() <= d["date"] <= l["arr"].date()]
+            if all((l["arr"] - l["dep"]) <= dt.timedelta(hours=2) for l in touching) and all(D.ATTRACTIONS[a["name"]]["adult_inr"] == 0 for a in d["acts"]):
                 n += 1
         return RuleResult(n >= need, f"{n} rest day(s), need {need}")
 
@@ -584,10 +603,11 @@ class RRoute(Rule):
         for hb in p.get("stay_kind", []):
             if not any(d["stay"] and d["stay"]["hotel"]["kind"] == hb["kind"] and d["stay"]["hotel"]["city"] == hb["city"] for d in plan["days"]):
                 return RuleResult(False, f"needs a {hb['kind']} night in {hb['city']}")
-        for dc in p.get("daily_in_city", []):    # an activity every day that has a night in the city
-            for i, d in enumerate(plan["days"][:-1]):
-                if d["stay"] and d["stay"]["hotel"]["city"] == dc["city"] and not any(a["name"] == dc["name"] for a in d["acts"]):
-                    return RuleResult(False, f"{dc['name']} is needed on every night in {dc['city']}")
+        for dc in p.get("daily_in_city", []):    # v1.1: the activity on every evening the traveller can attend it in the city, the evening of the day they leave included
+            ivs = timeline(ctx)[0]; att = D.ATTRACTIONS[dc["name"]]
+            for d in plan["days"]:
+                if evening_possible(ivs, dc["city"], att, d["date"]) and not any(a["name"] == dc["name"] for a in d["acts"]):
+                    return RuleResult(False, f"{dc['name']} is needed on every evening you can attend it in {dc['city']} ({d['date']})")
         if p.get("classes_only") and any(l["mode"] == "rail" and l["cls"] not in p["classes_only"] for l in plan["legs"]):
             return RuleResult(False, "the task limits rail classes to " + ",".join(p["classes_only"]))
         if p.get("rail_dep_before"):

@@ -377,10 +377,17 @@ class Solver:
     def _place(self, plan):
         """Earliest feasible slot for every required activity (must_visit, day_visit, daily_in_city)."""
         req = list(self.required())
-        if self.on("R-ROUTE"):
-            for dc in self.p.get("daily_in_city", []):
-                for i, d in enumerate(plan["days"][:-1]):
-                    if d.get("stay") and self.w.hotel_by_id[d["stay"]["hotel_id"]]["city"] == dc["city"]:
+        if self.on("R-ROUTE") and self.p.get("daily_in_city"):
+            # v1.1: the daily activity on every evening it can be attended in the city (same test as the rule), the day of departure included
+            ctx0 = Ctx(task=self.gtask, world=self.w, sub=plan)
+            np0, _ = R.normalize(ctx0)
+            if np0 is None:
+                return None
+            ivs0 = R.timeline(ctx0)[0]
+            for dc in self.p["daily_in_city"]:
+                att0 = D.ATTRACTIONS[dc["name"]]
+                for i in range(len(plan["days"])):
+                    if R.evening_possible(ivs0, dc["city"], att0, self.start + dt.timedelta(days=i)):
                         req.append({"name": dc["name"], "day": i + 1})
         if self.on("R-ROUTE"):      # every named city needs a night or a sight: add the first workable sight for cities that have neither
             have = {self.w.hotel_by_id[d["stay"]["hotel_id"]]["city"] for d in plan["days"] if d.get("stay")} | {D.ATTRACTIONS[r["name"]]["city"] for r in req}
