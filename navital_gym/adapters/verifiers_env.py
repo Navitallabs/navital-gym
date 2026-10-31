@@ -79,10 +79,22 @@ class NavitalToolset(vf.Toolset[vf.ToolsetConfig]):
 
 
 def executed_calls(trace) -> list[tuple[str, dict]]:
-    """The tool calls the rollout really executed: a call counts only if the trace holds a tool RESULT with the same call id (a call the model merely
-    emitted, for example in its final message, was never run). A trace without a log gives no calls, so nothing is credited."""
-    done = {m.tool_call_id for m in (getattr(trace, "tool_messages", None) or [])}
-    return [(c.name, parse_arguments(c.arguments)) for m in (getattr(trace, "assistant_messages", None) or []) for c in (m.tool_calls or []) if getattr(c, "id", None) in done]
+    """The tool calls the rollout really executed: a call counts only if the trace holds an unused tool RESULT with its id (and its tool name, when the result names
+    one), matched one to one. A call the model merely emitted (for example in its final message), a repeated id, an empty id or a forged name was never run. A trace
+    without a log gives no calls, so nothing is credited."""
+    results = [(m.tool_call_id, getattr(m, "name", None)) for m in (getattr(trace, "tool_messages", None) or []) if getattr(m, "tool_call_id", None)]
+    out = []
+    for m in (getattr(trace, "assistant_messages", None) or []):
+        for c in (m.tool_calls or []):
+            cid = getattr(c, "id", None)
+            if not cid:
+                continue
+            for i, (rid, rname) in enumerate(results):       # one result pays for ONE call: a repeated or forged id is not a second execution
+                if rid == cid and (rname is None or rname == c.name):
+                    del results[i]
+                    out.append((c.name, parse_arguments(c.arguments)))
+                    break
+    return out
 
 
 class NavitalTask(vf.Task[NavitalData]):

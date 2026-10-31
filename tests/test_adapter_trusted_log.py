@@ -44,6 +44,15 @@ class Verifiers(unittest.TestCase):
         trace = types.SimpleNamespace(last_reply=final, assistant_messages=msgs, tool_messages=results)
         return NavitalTask._grade(types.SimpleNamespace(data=types.SimpleNamespace(env_name="upi", id="IN-UPI-001")), trace)
 
+    def test_one_result_pays_for_one_call_only(self):
+        """Security review: a second call that reuses an executed call's id, or names another tool, is not a second execution."""
+        from navital_gym.adapters.verifiers_env import executed_calls
+        call = lambda i, n: types.SimpleNamespace(id=i, name=n, arguments=json.dumps(PAY))
+        a1 = types.SimpleNamespace(tool_calls=[call("c0", "get_today")], content="")
+        a2 = types.SimpleNamespace(tool_calls=[call("c0", "initiate_payment"), call("", "initiate_payment"), call("c0", "get_today")], content=HONEST)
+        trace = types.SimpleNamespace(assistant_messages=[a1, a2], tool_messages=[types.SimpleNamespace(tool_call_id="c0", name="get_today")])
+        self.assertEqual([n for n, _ in executed_calls(trace)], ["get_today"])
+
     def test_a_call_without_a_tool_result_was_never_executed(self):
         """Security review: only calls with a matching tool result count; a call emitted in the final message, never run, earns nothing."""
         from navital_gym.adapters.verifiers_env import NavitalTask
