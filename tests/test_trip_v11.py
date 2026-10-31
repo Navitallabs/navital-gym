@@ -80,5 +80,22 @@ class Labels(unittest.TestCase):
             self.assertEqual(v["feasible"], t.expected_feasible, tid)
             if not v["feasible"]: self.assertEqual(sorted(v["binding"]), sorted(t.binding), tid)
 
+
+
+class TripDataFixes(unittest.TestCase):
+    """fix/trip-data: no hidden diet requirement on 028/029/030/054; the calendar tool states the grader's 1-60 day GN window."""
+    def test_pilgrimage_prompts_that_never_ask_for_satvik_carry_no_diet_param(self):
+        from navital_gym.envs.trip import build_tasks
+        rows = {r["id"]: r for r in build_tasks.build()}      # tasks.jsonl is generated from tasks_source.jsonl; check the source of truth
+        for tid in ("IN-TRIP-027", "IN-TRIP-028", "IN-TRIP-029", "IN-TRIP-030", "IN-TRIP-054"):
+            r = rows[tid]
+            self.assertNotIn("satvik", r["prompt"].lower())
+            self.assertEqual(r["params"]["diet"], "any", tid)
+            self.assertNotIn("R-DIET", r["rules"], tid)
+
+    def test_calendar_info_states_the_one_to_sixty_day_gn_window(self):
+        info = TripWorld(ENV.tasks["IN-TRIP-001"]).calendar_info()
+        self.assertIn("1 to 60 days", info["booking"]); self.assertNotIn("2 to 60", info["booking"])
+
 if __name__ == "__main__":
     unittest.main()
