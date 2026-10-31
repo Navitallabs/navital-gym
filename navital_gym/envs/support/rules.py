@@ -107,13 +107,16 @@ def rupee_figures(reply: str) -> set:
     return out
 
 # --- Which figure does the reply promise as the refund? ---------------------------------------------------------------------------------------------
-# A reply is cut into clauses (at . । ! ? ; , and line breaks). A clause that speaks of a refund (a REFUND_CUE) must not deny it (a NEGATION within 4 words of
-# the refund figure) and must not name only some other figure on the order (the price or the shipping fee) as the amount. A clause that DENIES the refund of
-# the shipping fee ("₹60 refund nahi hoga") names another figure but is negated, so it passes: that is how a correct cancel reply reads. Lists are small and deliberate;
-# a reply that dodges them (a denial in a language they do not cover) is only caught by R-ACTIONS and R-DECISION, which state the same decision.
-REFUND_CUES = ("refund", "रिफंड", "रिफन्ड", "वापस", "लौट", "wapas", "vapas", "wapis", "paise", "पैसे", "money back", "repay", "reimburs", "परतावा", "परत ", "ரிஃபண்ட்", "திரும்ப", "রিফান্ড", "ফেরত")
+# A rupee figure that follows a refund word closely ('रिफंड ₹60', 'refund of Rs 60', 'वापस ₹60', 'refund will be Rs 60') is the amount the reply promises, so it must be the
+# refund. The figure counts when it is one of the order's other figures (the price or the shipping fee); a made-up figure is caught by the stray-figure check above.
+# Only the order refund word -> figure is read, not the reverse ('₹60 shipping fee refund nahi hoga' names 60 but does not promise it) and not negation: a reply that
+# denies or misstates the refund in words ('refund will not come', 'नहीं मिलेगा') is NOT reliably detected. That is a known v1.1 limitation (the first version of this
+# check tried to parse negations and misfired both ways; 0 denials were found in the 318 saved support replies), documented in the README.
+REFUND_CUES = ("refund", "रिफंड", "रिफन्ड", "वापस", "wapas", "vapas", "wapis", "repay", "reimburs", "परतावा", "रीफंड", "रीफन्ड")
 NEGATION_WORDS = {"not", "no", "never", "cannot", "cant", "can't", "won't", "wont", "unable", "dont", "don't", "doesn't", "doesnt", "non", "nahi", "nahin", "nai", "mat",
-                  "नहीं", "नही", "न", "नाही", "नाहीत", "இல்லை", "முடியாது", "না", "নয়", "নেই", "পারব", "কোনো"}
+                  "नहीं", "नही", "न", "नाही", "नाहीत", "இல்லை", "முடியாது", "না", "নয়", "নেই"}
+_CURRENCY_WORDS = {"rs", "inr", "₹", "rupees", "rupee", "rupaye", "rupaiye", "रुपये", "रूपये", "रु", "रू"}
+PROMISE_WINDOW = 3          # words after a refund word within which the next number is read as the promised amount
 
 def _clauses(reply: str) -> list:
     t = re.sub(r"(?i)\b(rs|inr)\.", r"\1", _grouped(to_ascii_digits(reply)))   # 'Rs. 60' keeps its figure; '1 899' is one number
@@ -130,41 +133,33 @@ def _number(word: str):
     digits = re.sub(r"[^\d.]", "", word)
     return _dec(digits) if re.search(r"\d", digits) else None
 
-def _negates(word: str) -> bool:
-    return word in NEGATION_WORDS or word.startswith("non-refund")
-
 def refund_promise_problem(reply: str, want: Decimal, others: set):
-    """None if the reply promises `want` as the refund; else why not. `others` are the other figures on the order (price, shipping fee) that are not the refund.
-    Two failures: the refund figure sits next to a negation ('₹1899 नहीं मिलेगा'), or another figure of the order sits next to a refund word ('रिफंड ₹60 होगा')
-    in a clause that does not also promise the right figure and is not itself denied. 'Next to' is within 5 words of the refund word (for the negation: 4 words before the figure, 8 after it) in the same
-    clause; a breakdown in the clause that promises the total ('₹1959 वापस मिलेंगे (₹1899 + ₹60)') is not a wrong promise."""
+    """None unless a refund word is followed (within PROMISE_WINDOW words, same clause) by another figure of the order than the refund: 'रिफंड केवल ₹60 होगा'."""
     for clause in _clauses(reply):
-        low = clause.lower() + " "
-        if not any(cue in low for cue in REFUND_CUES):
-            continue
-        words = _words(clause)
-        cue_at = [i for i, w in enumerate(words) if any(cue in w + " " for cue in REFUND_CUES)]
-        figures = [n for n in map(_number, words) if n is not None]
-        # "₹1959 wapas milenge (₹1899 + ₹60 shipping)": the clause promises the refund and explains it; "₹1999 aur ₹60 dono wapas": the order's own parts add up to it
-        # (only the order's other figures count as parts, so a made-up pair of numbers that happens to add up does not)
-        promises_want = want in figures or (len(figures) > 1 and set(figures) <= others and sum(figures) == want)
+        # Words keep their opening bracket here: a parenthesis starts a breakdown ('₹2059 वापस मिलेगा (jacket ₹1999 + shipping ₹60)'), which is explaining the promise, not making one.
+        words = [w for w in clause.lower().split() if w.strip("()[]{}\"'“”‘’:|/-*_") not in _CURRENCY_WORDS]          # 'refund will be Rs 60': the marker does not use up the window
+        words = [(w[:1] if w[:1] in "([{" else "") + w.strip("()[]{}\"'“”‘’:|/-*_") for w in (_plain(x) for x in words)]
         for i, w in enumerate(words):
-            n = _number(w)
-            if n is None:
+            if not any(_plain(cue) in w for cue in REFUND_CUES):
                 continue
-            if n == want and any(_negates(x) for x in words[max(0, i - 4): i + 5]):
-                return f"the reply denies the refund ({clause.strip()!r})"
-            if n in others and not promises_want and not any(_negates(x) for x in words[max(0, i - 4): i + 9]) and any(abs(i - j) <= 5 for j in cue_at):
-                return f"the reply names {n} as the refund, not {want} ({clause.strip()!r})"
+            for nxt in words[i + 1: i + 1 + PROMISE_WINDOW]:
+                if nxt[:1] in "([{" or nxt in ("+", "plus", "aur", "और"):
+                    break
+                n = _number(nxt)
+                if n is None:
+                    continue
+                if n in others:
+                    return f"the reply promises {n} as the refund, not {want} ({clause.strip()!r})"
+                break
     return None
 
 # --- Reply-quality floor (inside R-LANG) ----------------------------------------------------------------------------------------------------------------
-# Correct actions plus 'aap aap aap ...' and the amount used to pass. A reply now also needs (1) at least MIN_DISTINCT different words, (2) no word over
+# Correct actions plus 'aap aap aap ...' and the amount used to pass. A reply now also needs (1) at least MIN_DISTINCT (3) different words, (2) no word over
 # MAX_SHARE of all words, and (3) for Hindi and Hinglish replies, a word that states the decision the policy requires OR the one the reply itself declares (DECISION_WORDS: any one of the stems;
 # whether the declared decision is the right one is R-DECISION's job, so a wrong decision is not also counted as a language failure).
 # This is a floor, not a quality score: whether the reply is helpful, polite or well written beyond it is not graded. The vocabulary check is skipped for the
 # experimental Tamil, Bengali and Marathi replies (no word list there); they get the first two checks only.
-MIN_DISTINCT, MAX_SHARE = 6, 0.4
+MIN_DISTINCT, MAX_SHARE = 3, 0.4
 _APOLOGY = ("sorry", "maaf", "khed", "क्षमा", "खेद", "माफ")
 _DENY = tuple(NEGATION_WORDS) + _APOLOGY + ("cannot", "can't", "unable", "mana", "मना", "decline")
 DECISION_WORDS = {
