@@ -99,6 +99,10 @@ class RefundFigureIsThePromise(unittest.TestCase):
     def test_a_far_away_negation_does_not_excuse_a_wrong_promise(self):
         self.assertFalse(self.amount("आपका रिफंड ₹60 होगा और आपके साथ सब कुछ ठीक रहेगा तथा आपको कोई चिंता की बात नहीं है।"))
 
+    def test_a_spaced_figure_is_read_whole_by_the_promise_check(self):
+        self.assertFalse(self.amount("आपका रिफंड 1 899 रुपये नहीं मिलेगा।"))
+        self.assertTrue(self.amount("आपका रिफंड 1 899 रुपये आपके खाते में आएगा। हम पिकअप भेज रहे हैं।"))
+
     def test_denying_the_shipping_refund_is_fine(self):
         self.assertTrue(self.amount("आपका ऑर्डर रद्द है। ₹420 वापस आएँगे; ₹60 शिपिंग वापस नहीं होगा।", "IN-SUP-020"))
         self.assertTrue(self.amount("Order cancel ho gaya. Refund Rs 420 milega. Shipping fee Rs 60 refund nahi hogi.", "IN-SUP-020"))

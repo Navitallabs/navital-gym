@@ -59,16 +59,28 @@ def _dec(tok: str):
     try: return Decimal(tok.replace(",", "").rstrip(","))
     except InvalidOperation: return None
 
+def _grouped(text: str) -> str:
+    """Digits written with spaces between groups of three are one number: '1 899' is 1899, '12 50 000' is not touched."""
+    return re.sub(r"(?<![\d.,])(\d{1,3})((?: \d{3})+)(?![\d])", lambda m: m.group(1) + m.group(2).replace(" ", ""), text)
+
 def amounts_in(text: str) -> set:
     """Every number in the text as an exact Decimal (1899.00 equals 1899, 1899.99 does not)."""
-    return {d for d in (_dec(t) for t in re.findall(_AMOUNT, to_ascii_digits(text))) if d is not None}
+    return {d for d in (_dec(t) for t in re.findall(_AMOUNT, _grouped(to_ascii_digits(text)))) if d is not None}
 
 def rupee_figures(reply: str) -> set:
     """Exact (Decimal) numbers the reply attaches to a rupee marker, before or after it: 'Rs 480', '₹480', '480 रुपये', '1899.00 रुपये'; for a range ('₹1899-2500',
     '2500 से 1899 रुपये') both ends count. Dates, days and order ids are not figures."""
-    t = to_ascii_digits(reply).lower(); out = set()
-    for m in re.finditer(_RUPEE + r"\s*" + _AMOUNT, t): out.add(_dec(m.group(1)))
+    t = _grouped(to_ascii_digits(reply).lower()); out = set()
+    # A word marker that follows a number belongs to that number ('1899 रुपये 5 दिन में' states 1899; the 5 is a day count). The symbols and abbreviations
+    # (₹, Rs, INR, रु) always lead their number, so a second ₹5 is still a figure.
+    suffix_of = [m.span() for m in re.finditer(_AMOUNT + r"\s*" + _RUPEE, t)]
     for m in re.finditer(_AMOUNT + r"\s*" + _RUPEE, t): out.add(_dec(m.group(1)))
+    for m in re.finditer(_RUPEE + r"\s*" + _AMOUNT, t):
+        marker = m.group(0)[: m.start(1) - m.start()].strip()
+        shared = any(a < m.start() < b for a, b in suffix_of)          # this marker was already the suffix of the number before it
+        if shared and marker not in ("₹", "rs", "rs.", "inr", "रु", "रु.", "रू", "रू.", "ரூ", "ரூ."):
+            continue
+        out.add(_dec(m.group(1)))
     for m in re.finditer(_RUPEE + r"\s*" + _AMOUNT + r"\s*" + _SEP + r"\s*" + _AMOUNT, t): out.update((_dec(m.group(1)), _dec(m.group(2))))
     for m in re.finditer(_AMOUNT + r"\s*" + _SEP + r"\s*" + _AMOUNT + r"\s*" + _RUPEE, t): out.update((_dec(m.group(1)), _dec(m.group(2))))
     out.discard(None)
@@ -84,7 +96,7 @@ NEGATION_WORDS = {"not", "no", "never", "cannot", "cant", "can't", "won't", "won
                   "नहीं", "नही", "न", "नाही", "नाहीत", "இல்லை", "முடியாது", "না", "নয়", "নেই", "পারব", "কোনো"}
 
 def _clauses(reply: str) -> list:
-    t = re.sub(r"(?i)\b(rs|inr)\.", r"\1", to_ascii_digits(reply))          # 'Rs. 60' keeps its figure
+    t = re.sub(r"(?i)\b(rs|inr)\.", r"\1", _grouped(to_ascii_digits(reply)))   # 'Rs. 60' keeps its figure; '1 899' is one number
     t = re.sub(r"(?<=\d),(?=\d)", "", t)                                       # 1,899 is 1899
     t = re.sub(r"(?<=\d)\.(?=\d)", "\x00", t)                                  # 1899.50 is not cut at the point
     return [c.replace("\x00", ".") for c in re.split(r"[.।!?;,\n]+", t) if c.strip()]
