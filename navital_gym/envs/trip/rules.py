@@ -3,6 +3,7 @@
 Rule ids match the task authors' domain rules; the semantics below are the documented simplification."""
 from __future__ import annotations
 import datetime as dt, math
+from fractions import Fraction
 from ...core.grader import Rule, RuleResult, Grader, Ctx
 from . import data as D
 from .world import TripWorld, FOOD_PER_DAY, BERTH_CLASSES, AC_CLASSES, TATKAL_PCT, BUFFER_MIN, iso
@@ -387,35 +388,50 @@ class ROcc(Rule):
                 return RuleResult(False, f"{m} {lg['id']}: wrong passenger count (rail: pax+half = travellers aged 5+, half only for ages 5-11; air: aged 2+; taxi: vehicles = ceil(everyone/4); bus: aged 5+)")
         return RuleResult(True)
 
+def _q(x) -> Fraction:
+    """Exact money: floats are read through their decimal text (0.3 means 3/10, not the nearest binary fraction)."""
+    return Fraction(str(x)) if isinstance(x, float) else Fraction(x)
+
+HALF = Fraction(1, 2)
+
 def leg_cost(w, lg):
+    """Exact (Fraction) cost of one leg: no binary floating point, so a plan that costs exactly the budget is within it."""
     d = lg["dep"].date()
     if lg["mode"] == "rail":
         tr = w.train(lg["id"])
-        base = tr["fares"][lg["cls"]]
-        sur = TATKAL_PCT[lg["cls"]] if lg["quota"] == "TQ" else 0
-        return base * (1 + sur) * (lg["pax"] + 0.5 * lg["half"])
+        if tr is None or lg["cls"] not in tr["fares"]:
+            return None          # not a real service: R-CONN / R-QUOTA report it; the cost of a leg that does not exist is unknown
+        base = _q(tr["fares"][lg["cls"]])
+        sur = _q(TATKAL_PCT[lg["cls"]]) if lg["quota"] == "TQ" else Fraction(0)
+        return base * (1 + sur) * (lg["pax"] + HALF * lg["half"])
     if lg["mode"] == "air":
-        return w.flight(lg["id"], lg["frm"], lg["to"], d)["price_pp"] * lg["pax"]
+        f = w.flight(lg["id"], lg["frm"], lg["to"], d)
+        return None if f is None else f["price_pp"] * lg["pax"]
     t = w.transfer(lg["id"], lg["frm"], lg["to"], d)
+    if t is None:
+        return None
     return t["price_vehicle"] * lg["vehicles"] if t["kind"] == "taxi" else t["price_pp"] * lg["pax"]
 
-def recompute_cost(ctx) -> float:
+def recompute_cost(ctx) -> Fraction:
     w, t, plan, tv = ctx.world, ctx.task, _plan(ctx), travelers(ctx.task)
-    total = sum(leg_cost(w, lg) for lg in plan["legs"])
+    costs = [leg_cost(w, lg) for lg in plan["legs"]]
+    if any(c is None for c in costs):
+        return None              # a leg is not a real service: no total exists (R-BUD fails by name, R-CONN says which leg)
+    total = sum(costs, Fraction(0))
     prev_tier = None
     n = len(plan["days"])
     for i, d in enumerate(plan["days"]):
         if d["stay"]:
             h = d["stay"]["hotel"]
-            total += w.hotel_rate(h["id"], d["date"]) * len(d["stay"]["guests"])
+            total += _q(w.hotel_rate(h["id"], d["date"])) * len(d["stay"]["guests"])
         h = d["stay"]["hotel"] if d["stay"] else None
         tier = h["tier"] if h else prev_tier
         if h:
             prev_tier = h["tier"]
-        total += (FOOD_PER_DAY.get(tier if tier is not None else 1)) * (tv["full"] + 0.5 * tv["half"])
+        total += _q(FOOD_PER_DAY.get(tier if tier is not None else 1)) * (tv["full"] + HALF * tv["half"])
         for a in d["acts"]:
             att = D.ATTRACTIONS[a["name"]]
-            total += att["adult_inr"] * (tv["full"] + 0.5 * tv["half"])
+            total += _q(att["adult_inr"]) * (tv["full"] + HALF * tv["half"])
             if att["permit"]:
                 total += 400 * tv["n5"]
     return total
@@ -427,7 +443,9 @@ class RBud(Rule):
         if b is None:
             return RuleResult(True, "no budget")
         c = recompute_cost(ctx)
-        return RuleResult(c <= b, f"cost {c:.0f} vs budget {b}")
+        if c is None:
+            return RuleResult(False, "cost cannot be computed: a leg is not a real service (R-CONN says which)")
+        return RuleResult(c <= b, f"cost {float(c):.0f} vs budget {b}")
 
 def food_hotels(plan):
     out, prev = [], None
@@ -598,8 +616,10 @@ def soft(ctx):
     km = [(w.km(l["frm"], l["to"]) or 0, l["mode"]) for l in plan["legs"]]
     tot = sum(k for k, _ in km) or 1
     c, b = recompute_cost(ctx), ctx.task.params.get("budget_inr")
-    return {"rail_share_km": round(sum(k for k, m in km if m == "rail") / tot, 3), "legs": len(plan["legs"]), "cost_inr": round(c),
-            "budget_slack": round(1 - c / b, 3) if b else None}
+    if c is None:
+        return {"rail_share_km": round(sum(k for k, m in km if m == "rail") / tot, 3), "legs": len(plan["legs"]), "cost_inr": None, "budget_slack": None}
+    return {"rail_share_km": round(sum(k for k, m in km if m == "rail") / tot, 3), "legs": len(plan["legs"]), "cost_inr": round(float(c)),
+            "budget_slack": round(float(1 - c / b), 3) if b else None}
 
 def make_grader():
     return Grader(RULES, lambda task: TripWorld(task, 0), parse, soft, infeasible_check)
