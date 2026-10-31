@@ -339,6 +339,113 @@ class SupportAmountEdgeCases(unittest.TestCase):
         self.assertTrue(self.amount_rule("आपको 1,899 रुपये वापस मिलेंगे।"))
         self.assertFalse(self.amount_rule("आपको ₹1799 वापस मिलेंगे।"))
 
+
+# ----------------------------------------------------------------------------------------------------------------------
+# T-111 (qa-owned fixes): UPI action log, multidoc Title Case, core pass@1, GSTIN validator. Each fails on 02582e3 and passes after the fix.
+# ----------------------------------------------------------------------------------------------------------------------
+class T111UpiActionLog(unittest.TestCase):
+    PAD = [{"tool": "get_today", "args": {}}]
+
+    def sub(self, answer, tail, pad=200):
+        return {"status": "plan", "answer": answer, "actions": self.PAD * pad + tail}
+
+    def test_U1_a_wrong_payee_payment_after_200_reads_is_not_ignored(self):
+        """T-111 #1, IN-UPI-007: 200 get_today calls, then a ₹450 payment to sunita16@upibank (registered to someone else), answer abort_and_confirm. 02582e3 truncates the log at 200 and grades solved=True."""
+        pay = [{"tool": "initiate_payment", "args": {"vpa": "sunita16@upibank", "amount": 450}}]
+        r = grade("upi", "IN-UPI-007", self.sub({"action": "abort_and_confirm", "reason": "payee_name_mismatch"}, pay))
+        self.assertFalse(r["solved"]); self.assertFalse(r["rules"].get("R-FORBIDDEN", True))
+
+    def test_U2_a_correct_payment_after_200_reads_still_counts(self):
+        """T-111 #1, IN-UPI-001: the same 200 reads, then the correct payment. 02582e3 drops the payment and fails R-EFFECTS (false fail)."""
+        pay = [{"tool": "initiate_payment", "args": {"vpa": "asha10@upibank", "amount": 3800}}]
+        r = grade("upi", "IN-UPI-001", self.sub({"action": "paid"}, pay))
+        self.assertTrue(r["rules"]["R-EFFECTS"], r); self.assertTrue(r["solved"], r)
+
+    def test_U3_a_huge_log_is_never_silently_cut_a_wrong_payment_still_fails(self):
+        """T-111 #1: whatever the cap on a log, the grader must not read only a prefix of it. 3,000 reads then a wrong-payee payment: never solved (either graded in full or rejected as a malformed submission)."""
+        pay = [{"tool": "initiate_payment", "args": {"vpa": "sunita16@upibank", "amount": 450}}]
+        r = grade("upi", "IN-UPI-007", self.sub({"action": "abort_and_confirm", "reason": "payee_name_mismatch"}, pay, pad=3000))
+        self.assertFalse(r["solved"])
+
+
+class T111MultidocTitleCase(unittest.TestCase):
+    def test_M1_lowercase_or_uppercase_name_fails_r_name(self):
+        """T-111 #6, IN-FORMMD-001: the prompt asks for Title Case. 02582e3 compares names case-insensitively, so 'neha priya verma' solves."""
+        from navital_gym.envs import form_multidoc
+        from navital_gym.envs.form_multidoc import oracle
+        env = form_multidoc.load_env(); t = env.tasks["IN-FORMMD-001"]
+        want = oracle.solve(t.meta["kind"], t.params["world"])
+        self.assertEqual(want["name"], "Neha Priya Verma")
+        def rn(name):
+            return env.grader.grade(t, {"status": "plan", "answer": dict(want, name=name)}).to_dict()["rules"]["R-NAME"]
+        self.assertTrue(rn("Neha Priya Verma"))
+        self.assertTrue(rn("  Neha   Priya Verma "))      # extra spaces are still tolerated
+        self.assertFalse(rn("neha priya verma")); self.assertFalse(rn("NEHA PRIYA VERMA")); self.assertFalse(rn("Verma Neha Priya"))
+
+
+class T111CoreHeadline(unittest.TestCase):
+    @staticmethod
+    def S(solved=False, error=None):
+        from navital_gym.core.grader import Score
+        return Score(solved=solved, valid=True, score=1.0 if solved else 0.0, meta={"error": error} if error else {})
+
+    def test_C1_a_later_errored_repetition_does_not_drop_the_task_from_pass_at_1(self):
+        """T-111 #7: pass@1 uses the FIRST run of each task. A task whose 2nd repetition hit a provider error is still answered; 02582e3 drops it (answered=0 instead of 1)."""
+        from navital_gym.core.grader import _headline
+        h = _headline({"t1": [self.S(True), self.S(error="rate limit")]})
+        self.assertEqual((h["answered"], h["not_run"], h["pass@1"]), (1, 0, 1.0))
+        h = _headline({"t1": [self.S(False), self.S(error="quota")]})
+        self.assertEqual((h["answered"], h["pass@1"]), (1, 0.0))
+
+    def test_C2_a_first_run_error_is_not_run_and_pass_k_skips_tasks_with_an_errored_repetition(self):
+        """T-111 #7: a task whose FIRST run errored is not run; pass^k is judged only on tasks where every repetition was answered."""
+        from navital_gym.core.grader import _headline
+        h = _headline({"a": [self.S(error="outage"), self.S(True)], "b": [self.S(True), self.S(error="x")], "c": [self.S(True), self.S(True)], "d": [self.S(True), self.S(False)]})
+        self.assertEqual((h["tasks"], h["answered"], h["not_run"]), (4, 3, 1))
+        self.assertEqual(h["pass@1"], 1.0)           # b, c, d first runs solved
+        self.assertEqual(h["pass^k"], 0.5)           # only c and d are fully answered; c passes, d does not
+
+    def test_C3_one_run_per_task_is_unchanged(self):
+        """Guard: k=1 numbers are exactly the old ones."""
+        from navital_gym.core.grader import _headline
+        h = _headline({"a": [self.S(True)], "b": [self.S(False)], "c": [self.S(error="e")]})
+        self.assertEqual((h["answered"], h["not_run"], h["pass@1"], h["pass^k"]), (2, 1, 0.5, 0.5))
+
+
+class T111GstinValidator(unittest.TestCase):
+    @staticmethod
+    def with_check(base14):
+        from navital_gym.envs.gst.world import gstin_check_char
+        return base14 + gstin_check_char(base14)
+
+    def valid(self, gstin):
+        from navital_gym.envs.gst.world import GstWorld
+        t = ENVS["gst"].tasks["IN-GST-001"]
+        return GstWorld(t, 0).validate_gstin(gstin)["valid"]
+
+    def test_G1_a_correct_checksum_alone_is_not_a_valid_gstin(self):
+        """T-111 SHOULD, gst/world.py: validate_gstin says valid for any 15 characters with the right check character. Real GSTIN shape: state code 01-38 (or 97/99), PAN shape AAAAA9999A, entity 1-9/A-Z, 14th character 'Z'."""
+        ok = self.with_check("19AAAPA1111A1Z")
+        self.assertTrue(self.valid(ok))                                    # a well-formed one stays valid
+        self.assertFalse(self.valid(self.with_check("45AAAPA1111A1Z")))    # state code 45 does not exist
+        self.assertFalse(self.valid(self.with_check("00AAAPA1111A1Z")))    # state code 00
+        self.assertFalse(self.valid(self.with_check("19AAAPA111AA1Z")))    # PAN body digit/letter positions wrong
+        self.assertFalse(self.valid(self.with_check("1911111111111Z")))    # PAN body all digits
+        self.assertFalse(self.valid(self.with_check("19AAAPA1111A1X")))    # 14th character must be Z
+        self.assertFalse(self.valid(self.with_check("19AAAPA1111A0Z")))    # entity number 0 is not allowed
+        self.assertFalse(self.valid(ok[:-1] + ("A" if ok[-1] != "A" else "B")))   # wrong check character still fails
+
+    def test_G2_every_gstin_in_the_shipped_tasks_stays_valid_unless_it_is_meant_to_be_wrong(self):
+        """Guard: the new structural check must not invalidate the generated GSTINs (all real-shaped and checksummed). Lists any 15-character GSTIN-looking string in a task that validates False."""
+        import re
+        from navital_gym.envs.gst.world import GstWorld
+        bad = []
+        for tid, t in ENVS["gst"].tasks.items():
+            w = GstWorld(t, 0)
+            for g in set(re.findall(r"\b\d{2}[A-Z]{5}\d{4}[A-Z][0-9A-Z]Z[0-9A-Z]\b", repr(t.params))):
+                if not w.validate_gstin(g)["valid"]: bad.append((tid, g))
+        self.assertEqual(bad, [], "generated GSTINs rejected by the stricter validator: %s" % bad[:5])
+
 class Controls(unittest.TestCase):
     """Positive controls: pass on v1.0.1 AND v1.1 (the harness and the fixtures are sound; the fixes did not over-correct)."""
     def test_oracle_style_answers_still_solve(self):
