@@ -108,13 +108,15 @@ def refund_promise_problem(reply: str, want: Decimal, others: set):
             continue
         words = _words(clause)
         cue_at = [i for i, w in enumerate(words) if any(cue in w + " " for cue in REFUND_CUES)]
-        negated = any(w in NEGATION_WORDS for w in words)
-        promises_want = any(_number(w) == want for w in words)      # "₹1959 wapas milenge (₹1899 + ₹60 shipping)": the clause promises the refund and explains it
+        negated = any(w in NEGATION_WORDS or w.startswith("non-") for w in words)
+        figures = [n for n in map(_number, words) if n is not None]
+        # "₹1959 wapas milenge (₹1899 + ₹60 shipping)": the clause promises the refund and explains it; "₹1999 aur ₹60 dono wapas": the parts add up to it
+        promises_want = want in figures or (len(figures) > 1 and sum(figures) == want)
         for i, w in enumerate(words):
             n = _number(w)
             if n is None:
                 continue
-            if n == want and any(x in NEGATION_WORDS for x in words[max(0, i - 4): i + 5]):
+            if n == want and any(x in NEGATION_WORDS or x.startswith("non-") for x in words[max(0, i - 4): i + 5]):
                 return f"the reply denies the refund ({clause.strip()!r})"
             if n in others and not negated and not promises_want and any(abs(i - j) <= 5 for j in cue_at):
                 return f"the reply names {n} as the refund, not {want} ({clause.strip()!r})"
