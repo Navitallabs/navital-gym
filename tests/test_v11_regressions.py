@@ -267,10 +267,10 @@ class Support(unittest.TestCase):
 class Trip(unittest.TestCase):
     def test_T1_return_is_in_the_prompt_when_end_is_origin(self):
         """qa T1, IN-TRIP-003 and 49 more: params end == origin on a one-way-looking route needs the prompt to say return/back. Fix: edit prompts, or set end to the last city."""
-        bad = []
+        bad = []   # backend (v1.1): Hindi/Hinglish prompts say the return as वापस / wapas
         for t in ENVS["trip"].tasks.values():
             p = t.params; r = p.get("route") or []
-            if t.expected_feasible and p.get("end") == p.get("origin") and r and r[-1] != p["origin"] and not re.search(r"\b(return|back|round|from %s|and home)\b" % re.escape(p["origin"].lower()), t.prompt.lower()):
+            if t.expected_feasible and p.get("end") == p.get("origin") and r and r[-1] != p["origin"] and not re.search(r"\b(return|back|round|from %s|and home|wapas)\b|वापस" % re.escape(p["origin"].lower()), t.prompt.lower()):
                 bad.append(t.id)
         self.assertEqual(bad, [], "%d tasks demand a return the prompt does not state" % len(bad))
 

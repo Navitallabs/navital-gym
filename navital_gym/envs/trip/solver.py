@@ -92,7 +92,7 @@ class Solver:
         half = tv["k5_11"]
         if "rail" in modes:
             gap = (date - w.today).days
-            quotas = [q for q, ok in (("GN", 2 <= gap <= 60), ("TQ", gap == 1), ("CUR", gap == 0)) if ok]
+            quotas = [q for q, ok in (("GN", 1 <= gap <= 60), ("TQ", gap == 1), ("CUR", gap == 0)) if ok]
             if not self.on("R-QUOTA") and "GN" not in quotas:
                 quotas = ["GN"] + quotas           # relaxed: as if the advance (general) window were open; Tatkal/Current only when truly open
             for t in w.trains_between(a, b, date):
@@ -118,7 +118,7 @@ class Solver:
                         leg = {"mode": "rail", "id": t["id"], "from": a, "to": b, "dep": iso(date, t["dep_min"]), "arr": iso(date, t["dep_min"] + t["dur_min"]),
                                "class": cls, "quota": q, "pax": pax, "half": half}
                         if q == "TQ":
-                            leg["book_at"] = "10:00" if cls in AC_CLASSES else "11:00"
+                            leg["book_at"] = "10:00" if cls in AC_CLASSES else "11:00"; leg["traveller_otp"] = True
                         c = R.leg_cost(w, self._plain(leg))
                         if best is None or c < best[0]:
                             best = (c, leg)
@@ -442,7 +442,7 @@ class Solver:
             i, s, e = hit
             a = {"id": rq["name"], "start": s.strftime(R.DT_FMT), "end": e.strftime(R.DT_FMT)}
             if att["permit"]:
-                a["permit_booked"] = self.w.today.isoformat()
+                a["fee_paid"] = True
             return i, s, e, a
 
     def _open_ok(self, att, day, i, first_leh):

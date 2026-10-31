@@ -21,9 +21,10 @@ If a valid plan exists, answer:
             "legs": [ {"mode": "rail"|"road"|"air", "id": train_id | transfer_id | flight_id, "from": city, "to": city,
                        "dep": "YYYY-MM-DDTHH:MM", "arr": "YYYY-MM-DDTHH:MM",
                        "class": "SL|3A|2A|CC|2S" (rail), "quota": "GN|TQ|CUR" (rail), "book_at": "10:00" or "11:00" (Tatkal only: AC / non-AC),
+                       "traveller_otp": true (Tatkal only: the traveller must be present to enter their Aadhaar OTP at booking time),
                        "pax": n, "half": n (rail only: children 5-11 on half fare, no berth), "vehicles": n (taxi only)} ],
             "stay": {"hotel_id": id, "rooms": [{"guests": n}, ...]}   (the hotel for the NIGHT that starts on this date; omit on the last day and when you are on a train at midnight)
-            "activities": [ {"id": attraction name, "start": "YYYY-MM-DDTHH:MM", "end": "YYYY-MM-DDTHH:MM", "permit_booked": "YYYY-MM-DD" (permit places only)} ] } ... one entry per day ] }
+            "activities": [ {"id": attraction name, "start": "YYYY-MM-DDTHH:MM", "end": "YYYY-MM-DDTHH:MM", "fee_paid": true (Ladakh protected-area places only)} ] } ... one entry per day ] }
 Shape of a plan (made-up ids and dates, only to show the format; look up real ids with the tools):
 {"status": "plan", "booking_date": "2026-11-15", "days": [
   {"date": "2026-12-05", "legs": [{"mode": "rail", "id": "12345", "from": "Delhi", "to": "Agra", "dep": "2026-12-05T06:15", "arr": "2026-12-05T10:05", "class": "CC", "quota": "GN", "pax": 2, "half": 0}],
@@ -33,13 +34,13 @@ If no plan can satisfy every request, answer {"status": "infeasible", "binding":
 
 The rules we check (the same for every task; each only if the task makes it relevant):
 R-FMT valid JSON with real ids. R-DATE exactly the requested days, start at the origin, be back (or at the end city) on the last date.
-R-CONN real services, no teleporting, buffers between legs (rail 60, road 30, air 120 min), a hotel in the right city every night.
-R-QUOTA booking_date is today; General quota 2-60 days before departure; Tatkal only the day before; Current only on the day.
+R-CONN real services, no teleporting, buffers between legs (rail 60, road 30, air 120 min), a hotel in the right city every night. A sight cannot start until 30 minutes after you arrive in its city, and must end before the buffer of your next leg begins.
+R-QUOTA booking_date is today; General quota from 60 days to 1 day before departure; Tatkal only the day before, opening 10:00 (AC) / 11:00 (non-AC), and it needs the traveller's Aadhaar OTP at booking (set traveller_otp true; you cannot complete it alone); Current only on the day of departure.
 R-AVAIL every train leg is confirmed (AVL with enough seats); RAC and waitlist do not count. R-OPEN sights on open days, within hours, for their full visit length.
 R-SEASON sights in season and seasonal roads open. R-REST rest days (no leg over 2 hours, no ticketed sight). R-OCC rooms hold at most 3 guests and cover everyone; every leg is ticketed for exactly the right people.
 R-BUD total cost within budget (the grader recomputes it from the tool prices; food allowance per person per day is 300 / 600 / 1000 by hotel tier, 800 on a houseboat).
-R-DIET veg/jain/satvik hotels. R-ACC no_stairs hotels and sights; seniors need a free lower berth in sleeper/3A/2A. R-NIGHT no road legs in the night window. R-HRS travel hours per day.
-R-ALT altitude pacing (the day you reach Leh is rest only; nothing higher than Leh, here above 3,500 m, before day 3). R-PERMIT permits booked at least a day ahead. R-ROUTE the trip does what was asked: every named city gets a night or a sight there (arriving is enough in the city where the trip ends)."""
+R-DIET veg/jain/satvik hotels. R-ACC no_stairs hotels and sights; seniors need a free lower berth in sleeper/3A/2A. R-NIGHT no road legs in the night window (the task may set one; hill roads also close 20:00-05:00 from November to March). R-HRS travel hours per day.
+R-ALT altitude pacing (the day you reach Leh is rest only; nothing higher than Leh, here above 3,500 m, before day 3). R-PERMIT Nubra and Pangong need the Ladakh environment + Red Cross fee paid (fee_paid true). R-ROUTE the trip does what was asked: every named city gets a night or a sight there (arriving is enough in the city where the trip ends)."""
 
 def load_env(seed: int = 0, tasks_path: str = TASKS_PATH, splits=("core",)) -> Env:
     """splits: which task files to load: "core" (the standard 55, the default so existing samples and results never change) and/or "easy" (tasks_easy.jsonl)."""

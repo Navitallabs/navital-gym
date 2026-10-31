@@ -45,7 +45,7 @@ EDGES = [
 ROAD_SEASON = {("Manali", "Leh"): ("06-01", "10-31")}
 
 # Explicit sold-out train corridors (every train and class shows WL on these dates for general quota).
-SOLD_OUT = {("Mumbai", "Goa"): ["2026-12-30", "2026-12-31", "2027-01-01"], ("Goa", "Mumbai"): ["2027-01-01", "2027-01-02"]}
+SOLD_OUT = {("Mumbai", "Goa"): ["2026-11-16", "2026-12-30", "2026-12-31", "2027-01-01"], ("Goa", "Mumbai"): ["2027-01-01", "2027-01-02"], ("Mumbai", "Pune"): ["2026-12-04"]}
 
 WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
 
@@ -85,7 +85,7 @@ ATTRACTIONS = {a["name"]: a for a in [
     A("Kaziranga", "Kaziranga Elephant Safari", open="05:30", close="07:30", adult=1300, minutes=60, season=("11-01", "04-30"), kind="safari", wheelchair=False),
     A("Leh", "Leh Palace", open="08:00", close="17:00", adult=200, minutes=90, wheelchair=False), A("Leh", "Shanti Stupa", open="05:00", close="21:00", adult=0, minutes=60, wheelchair=False),
     A("Nubra", "Diskit Monastery and Hunder dunes", open="08:00", close="17:00", adult=300, minutes=240, permit=True, wheelchair=False),
-    A("Pangong", "Pangong Lake", open="07:00", close="17:00", adult=400, minutes=240, permit=True, wheelchair=False),
+    A("Pangong", "Pangong Lake", open="07:00", close="17:00", adult=0, minutes=240, permit=True, wheelchair=False),
 ]}
 
 def city_of(attraction: str) -> str:

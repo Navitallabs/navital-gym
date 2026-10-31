@@ -129,7 +129,7 @@ class TripWorld(World):
                 return "CLOSED", 0
             if quota == "GN":
                 if gap > 60: return "NOT_OPEN", 0
-                if gap <= 1: return "CLOSED", 0           # general quota shuts a day before departure: Tatkal, or Current on the day
+                if gap < 1: return "CLOSED", 0            # general quota is open up to the day before departure (env simplification: in reality until the chart is prepared); on the day itself, Current
             elif quota == "TQ":
                 if gap != 1: return "NOT_OPEN", 0
             elif quota == "CUR":
@@ -244,6 +244,7 @@ class TripWorld(World):
         if quota == "TQ":
             out["tatkal_surcharge_pct"] = int(TATKAL_PCT[cls] * 100)
             out["booking_opens"] = "10:00" if cls in AC_CLASSES else "11:00"
+            out["booking_requires"] = "traveller's Aadhaar OTP (IRCTC, since July 2025); the agent cannot complete this alone"
         return out
 
     @tool("Flights between two cities on a date (price per person; every traveller aged 2 or more pays).",
@@ -298,12 +299,12 @@ class TripWorld(World):
         self._city(city)
         return {"attractions": [n for n, a in D.ATTRACTIONS.items() if a["city"] == city]}
 
-    @tool("Permit rules: places that need a permit booked at least one day before the visit, and its price.", {"place": {"type": "string", "description": "attraction name"}})
+    @tool("Ladakh protected-area fees: which places need them and the price per person.", {"place": {"type": "string", "description": "attraction name"}})
     def permit_info(self, place):
         a = self.attraction(place)
         if a is None:
             raise ToolError("unknown place")
-        return {"place": place, "permit_required": a["permit"], "book_at_least_days_before": 1 if a["permit"] else None, "price_pp": 400 if a["permit"] else 0}
+        return {"place": place, "fee_required": a["permit"], "fee_pp": 400 if a["permit"] else 0, "what": "Ladakh environment fee and Red Cross fee, paid with registration before the visit (Indian nationals; no Inner Line Permit needed since Aug 2021; env figure, 2021 reports Rs 300 + Rs 100, check the LAHDC portal). Foreign nationals need a Protected Area Permit (not modelled)." if a["permit"] else None}
 
     @tool("Submit the final plan (same as ending your turn with the plan JSON).", {"plan": {"type": "object"}})
     def finalize_plan(self, plan):

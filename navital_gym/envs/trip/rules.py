@@ -68,7 +68,7 @@ def normalize(ctx: Ctx):
                     raise ValueError(f"days[{di}].legs[{li}].mode must be rail, road or air")
                 L = {"mode": mode, "id": _s(lg.get("id"), 40, f"days[{di}].legs[{li}].id"), "frm": _s(lg.get("from"), 40, f"days[{di}].legs[{li}].from"), "to": _s(lg.get("to"), 40, f"days[{di}].legs[{li}].to"),
                      "dep": _dt(lg.get("dep"), f"days[{di}].legs[{li}].dep"), "arr": _dt(lg.get("arr"), f"days[{di}].legs[{li}].arr"), "pax": _i(lg.get("pax"), 0, 100, f"days[{di}].legs[{li}].pax"), "half": _i(lg.get("half", 0), 0, 100, f"days[{di}].legs[{li}].half"),
-                     "vehicles": _i(lg.get("vehicles", 0), 0, 50, f"days[{di}].legs[{li}].vehicles"), "cls": lg.get("class"), "quota": lg.get("quota"), "book_at": lg.get("book_at"), "day": di}
+                     "vehicles": _i(lg.get("vehicles", 0), 0, 50, f"days[{di}].legs[{li}].vehicles"), "cls": lg.get("class"), "quota": lg.get("quota"), "book_at": lg.get("book_at"), "otp": lg.get("traveller_otp"), "day": di}
                 if L["frm"] not in D.CITIES or L["to"] not in D.CITIES:
                     raise ValueError(f"days[{di}].legs[{li}]: unknown city (use names such as Delhi, Agra)")
                 if mode == "rail":
@@ -76,6 +76,8 @@ def normalize(ctx: Ctx):
                         raise ValueError(f"days[{di}].legs[{li}].id: unknown train id {L['id']!r} (use a train_id from search_trains)")
                     L["cls"] = _s(L["cls"], 4, f"days[{di}].legs[{li}].class"); L["quota"] = _s(L["quota"], 4, f"days[{di}].legs[{li}].quota")
                     if L["book_at"] is not None: L["book_at"] = _s(L["book_at"], 5, f"days[{di}].legs[{li}].book_at")
+                    if L["otp"] is not None and not isinstance(L["otp"], bool):
+                        raise ValueError(f"days[{di}].legs[{li}].traveller_otp must be true or false")
                 dd["legs"].append(L); plan["legs"].append(L)
             st = day.get("stay")
             if isinstance(st, dict) and not st.get("hotel_id") and not st.get("rooms"):
@@ -99,8 +101,10 @@ def normalize(ctx: Ctx):
                 name = _s(a.get("id"), 80, f"days[{di}].activities[].id")
                 if name not in D.ATTRACTIONS:
                     raise ValueError(f"days[{di}].activities[].id: unknown attraction {name!r} (use a name from list_attractions)")
-                pb = a.get("permit_booked")
-                dd["acts"].append({"name": name, "start": _dt(a.get("start"), f"days[{di}].activities[].start"), "end": _dt(a.get("end"), f"days[{di}].activities[].end"), "permit": _d(pb, f"days[{di}].activities[].permit_booked") if pb else None, "day": di})
+                pb = a.get("fee_paid")
+                if pb is not None and not isinstance(pb, bool):
+                    raise ValueError(f"days[{di}].activities[].fee_paid must be true or false")
+                dd["acts"].append({"name": name, "start": _dt(a.get("start"), f"days[{di}].activities[].start"), "end": _dt(a.get("end"), f"days[{di}].activities[].end"), "fee_paid": pb is True, "day": di})
             plan["days"].append(dd)
         b = sub.get("binding", [])
         plan["binding"] = [x for x in b if isinstance(x, str) and len(x) < 16][:8] if isinstance(b, list) else []
@@ -269,7 +273,7 @@ def _quota_open(w, today, lg):
     gap = (lg["dep"].date() - today).days
     q = lg["quota"]
     if q == "GN":
-        return (2 <= gap <= 60), f"general quota opens 2 to 60 days before departure; this is {gap}"
+        return (1 <= gap <= 60), f"general quota is open 60 days to 1 day before departure; this is {gap}"
     if q == "TQ":
         return gap == 1, f"Tatkal is only the day before departure; this is {gap}"
     if q == "CUR":
@@ -277,7 +281,7 @@ def _quota_open(w, today, lg):
     return False, "quota must be GN, TQ or CUR"
 
 class RQuota(Rule):
-    id = "R-QUOTA"; description = "booking_date is today; quota window open (GN 2-60 days, TQ day before with 10:00 AC / 11:00 non-AC, CUR same day)"
+    id = "R-QUOTA"; description = "booking_date is today; quota window open (GN 1-60 days before departure, TQ the day before at 10:00 AC / 11:00 non-AC with the traveller's Aadhaar OTP, CUR on the day of departure)"
     def check(self, ctx):
         w, plan = ctx.world, _plan(ctx)
         if plan["booking_date"] != w.today:
@@ -292,6 +296,8 @@ class RQuota(Rule):
                 return RuleResult(False, f"{lg['id']}: {why}")
             if lg["quota"] == "TQ" and lg["book_at"] != ("10:00" if lg["cls"] in AC_CLASSES else "11:00"):
                 return RuleResult(False, f"{lg['id']}: Tatkal book_at must be 10:00 (AC) or 11:00 (non-AC)")
+            if lg["quota"] == "TQ" and lg["otp"] is not True:
+                return RuleResult(False, f"{lg['id']}: Tatkal needs the traveller's Aadhaar OTP: mark traveller_otp true (you cannot complete it alone)")
         return RuleResult(True)
 
 class RAvail(Rule):
@@ -521,15 +527,14 @@ class RAlt(Rule):
         return RuleResult(True)
 
 class RPermit(Rule):
-    id = "R-PERMIT"; description = "Permit places need permit_booked between today and the day before the visit"
+    id = "R-PERMIT"; description = "Ladakh protected-area places (Nubra, Pangong) need the environment and Red Cross fee paid (Indian nationals; no Inner Line Permit since 2021)"
     def check(self, ctx):
         w = ctx.world
         for d in _plan(ctx)["days"]:
             for a in d["acts"]:
                 if D.ATTRACTIONS[a["name"]]["permit"]:
-                    p = a["permit"]
-                    if p is None or p < w.today or p > d["date"] - dt.timedelta(days=1):
-                        return RuleResult(False, f"{a['name']}: permit must be booked at least a day before the visit")
+                    if not a["fee_paid"]:
+                        return RuleResult(False, f"{a['name']}: the Ladakh environment and Red Cross fee must be paid (fee_paid true)")
         return RuleResult(True)
 
 class RRoute(Rule):

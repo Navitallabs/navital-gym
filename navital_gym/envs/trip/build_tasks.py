@@ -34,9 +34,19 @@ STRUCT = {
     50: {"no_stairs": True},
 }
 # hill/Ladakh tasks whose designer prompt does not say "by train" but whose intent needs it
-PROMPT_APPEND = {24: " Travel by train.", 25: " Travel by train."}
+PROMPT_APPEND = {24: " Travel by train.", 25: " Travel by train.",
+                 # v1.1: Nubra is a required city in these tasks (R-ROUTE) but the prompt never said so
+                 32: " Include Leh, Nubra and Pangong.", 33: " Include Leh, Nubra and Pangong.", 34: " Include Leh, Nubra and Pangong.", 35: " Include Leh, Nubra and Pangong."}
+# v1.1: the grader needs the trip to start at the origin and end back there (params end defaults to origin), so the prompt says so, in the task's language.
+RETURN_SENTENCE = {"en": " Start from {o} and be back in {o} on the last day.",
+                   "hi": " {o} से शुरू करें और आख़िरी दिन {o} वापस आना है।",
+                   "hinglish": " {o} se shuru karo aur aakhri din {o} wapas aana hai."}
+HI_CITY = {"Delhi": "दिल्ली", "Kochi": "कोच्चि"}
 # 001: a sunrise visit on day 1 is unreachable from Delhi whatever day it is (first train 05:30), which would hide the Friday closure the task is about.
-PROMPT_REPLACE = {1: ("Taj visit at sunrise on the first day", "Taj visit on the first day")}
+PROMPT_REPLACE = {1: ("Taj visit at sunrise on the first day", "Taj visit on the first day"),
+                  27: ("Ganga aarti every evening", "Ganga aarti each evening you are in Varanasi"),      # v1.1: the daily rule is graded for Varanasi nights only
+                  31: ("Pangong and Nubra permitted", "include Pangong and Nubra"),                       # v1.1: no Inner Line Permit for Indians since 2021; the fee is the rule now
+                  39: ("Guwahati -> Shillong -> Kaziranga", "Guwahati -> Shillong")}                      # v1.1: the prompt named Kaziranga and then excluded it
 # Impossible-budget variants. The authors intended 005/009/015/029/040 as R-BUD-infeasible; in this world they are feasible (the cheapest plans cost
 # 4,090 / 13,280 / 13,960 / 7,740 / 13,240, see calibrate.py), so those keep their rows and these NEW tasks use about half the cheapest cost.
 # solver.verdict() then PROVES each infeasible (the budget lower bound prunes the whole search); the flags are never set by hand.
@@ -72,6 +82,10 @@ def build(src=None):
             assert PROMPT_REPLACE[n][0] in prompt
             prompt = prompt.replace(*PROMPT_REPLACE[n])
         prompt += PROMPT_APPEND.get(n, "")
+        if p["end"] == p["origin"] and p.get("route") and p["route"][-1] != p["origin"]:
+            o = HI_CITY.get(p["origin"], p["origin"]) if row["lang"] == "hi" else p["origin"]
+            if not prompt.rstrip().endswith((".", "।", "!", "?")): prompt = prompt.rstrip() + "."
+            prompt += RETURN_SENTENCE[row["lang"]].format(o=o)
         out.append({"id": row["id"], "family": row["family"], "difficulty": row["difficulty"], "lang": row["lang"], "prompt": prompt,
                     "params": p, "rules": rules_for(p), "expected_feasible": row["expected_feasible"],
                     "binding_constraint": row["binding_constraint"], "traps": [t for t in row["traps"] if TELLS.search(t) or t.lower().startswith("designer note")],   # only genuinely hidden hints; prompt asks are not secrets
