@@ -720,6 +720,19 @@ class T111Codex2(unittest.TestCase):
         self.assertGreaterEqual(sum(is_rest(d) for d in p["days"]), int(t.params["rest_days"]), "no genuine rest day in the oracle plan")
         self.assertTrue(ENVS["trip"].grader.grade(t, copy.deepcopy(p)).to_dict()["solved"])
 
+class T111AltSleeping(unittest.TestCase):
+    """QA (31 Oct): R-ALT 'sleeping above 3500 m before day 3' had no test; review's probe (REVIEW-echo.md #1) showed a refactor of the first-Leh block silently stopped checking it."""
+    def test_stays_leh_pangong_none_fail_r_alt_on_sleeping_above_3500_m(self):
+        from navital_gym.envs.trip.solver import Solver
+        t = ENVS["trip"].tasks["IN-TRIP-033"]; p = Solver(t).solve()
+        for d in p["days"]: d["stay"] = None
+        p["days"][0]["stay"] = {"hotel_id": "H-LEH-1", "rooms": [{"guests": 3}]}
+        p["days"][1]["stay"] = {"hotel_id": "H-PANG-1", "rooms": [{"guests": 3}]}      # Pangong (4250 m) on day 2
+        r = ENVS["trip"].grader.grade(t, p).to_dict()
+        self.assertFalse(r["rules"]["R-ALT"])
+        self.assertIn("sleeping above 3500 m", str(r["details"].get("R-ALT")))
+
+
 class Controls(unittest.TestCase):
     """Positive controls: pass on v1.0.1 AND v1.1 (the harness and the fixtures are sound; the fixes did not over-correct)."""
     def test_oracle_style_answers_still_solve(self):
