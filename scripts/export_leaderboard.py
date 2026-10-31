@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """leaderboard.json for the website, built ONLY from the saved (regraded) run files. One entry per model x env x split x sample.
 Fields: model, provider, tier (small|large), env, split, sample ("stratified-15", "stratified-5", "full"), n (tasks), pass_at_1, strict_pass_at_1, pass_pow_k (+ k), format_fail,
-errors, partial_credit, harness_commit (id of the grading code: git tree id of navital_gym/, verify with `git rev-parse v1.0.1:navital_gym`), date, source (run file), origin (navital = our own runs, community = a verified outside submission under submissions/<model-slug>/, with submitter and self_reported=true). Rows where at least half the tasks hit provider errors are
+errors, partial_credit, harness_commit (id of the grading code: git tree id of navital_gym/, verify with `git rev-parse v1.1.0:navital_gym`), date, source (run file), origin (navital = our own runs, community = a verified outside submission under submissions/<model-slug>/, with submitter and self_reported=true). Rows where at least half the tasks hit provider errors are
 left out and listed under `excluded`; so are incomplete runs (fewer tasks than their sample size) and, with --commit, runs graded at another commit.
 usage: python3 scripts/export_leaderboard.py [out.json] [--runs DIR] [--submissions DIR] [--commit SHA] [--require-single-commit]
   out.json   default docs/leaderboard.json            --runs DIR   default <repo>/runs (read only)     --submissions DIR   default <repo>/submissions; each */*.json is verified (scripts/verify_submission.py) before it is counted
@@ -9,7 +9,7 @@ usage: python3 scripts/export_leaderboard.py [out.json] [--runs DIR] [--submissi
   --require-single-commit exit 2 unless every published row was graded by ONE commit (the site says so; this makes it true)
 Each entry carries rule_failures ({rule id: count}, per task at k=1; a task can fail several rules; answered tasks only; null when k>1, where counts would be runs, not tasks); top level rule_names maps env -> rule id -> the rule's `description` from rules.py verbatim ("" if it has none).
 Top level also carries grader_commits, ungraded (run files with no graded_with), single_grader_commit, and task_counts (tasks per env and split) so the site need not hand-keep them.
-`date` is the run file's modification time (date_basis says so): scripts/regrade.py rewrites files, so after a regrade it is the regrade date, not the day the model ran."""
+`date` is null for our own runs (v1.1): a run file records no run date and its modification time is the regrade day; community submissions keep the date in their submission.json. A run parameter that changes behaviour (reasoning_effort) is appended to the model name."""
 import glob, importlib, json, os, sys, time
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, ROOT)
@@ -39,7 +39,7 @@ for path, origin in [(p, "navital") for p in ours] + [(p, "community") for p in 
     sample = "full" if name.endswith("-full") else "easy" if easy else ("stratified-" + name.rsplit("-s", 1)[1]) if "-s" in name and name.rsplit("-s", 1)[1].isdigit() else None
     if sample is None:
         continue
-    date = time.strftime("%Y-%m-%d", time.gmtime(os.path.getmtime(path)))
+    date = None      # v1.1: a run file records no run date, and its modification time is the regrade day, so no date is published (the site shows the export date)
     extra = {"origin": origin}
     if origin == "community":        # only a submission that scripts/verify_submission.py passes reaches the table; its verdicts were replayed at the CURRENT grader
         ok, reasons, _, recomputed = verify_submission.check(path)
@@ -59,8 +59,11 @@ for path, origin in [(p, "navital") for p in ours] + [(p, "community") for p in 
             d["summary"] = recomputed          # published numbers come from the replay, never from the submitter's own summary
         st, s = d.get("settings", {}), d["summary"]
         model, provider = st.get("model", agent), st.get("provider", "unknown")
+        for knob in ("reasoning_effort",):      # run parameters that change what the model does are part of the row's name, so two settings of one model never share a key
+            if st.get(knob) is not None:
+                model = f"{model} ({knob}={st[knob]})"
         base = {"model": model, "provider": provider, "tier": "large" if any(x in model.lower() for x in LARGE) else "small", "env": env, "sample": sample,
-                "harness_commit": d.get("graded_with"), "date": date, "date_basis": "submission.json" if origin == "community" else "file-modified", "source": os.path.basename(path), **extra}
+                "harness_commit": d.get("graded_with"), "date": date, "date_basis": "submission.json" if origin == "community" else "not recorded in the run file", "source": os.path.basename(path), **extra}
         if easy and s.get("answered", s["tasks"]) < len(runfiles.env_tasks(env, easy=True)):
             excluded.append({**base, "reason": f"incomplete run: {s.get('answered', s['tasks'])} answered of {len(runfiles.env_tasks(env, easy=True))} easy tasks", "n": s["tasks"]})
             continue

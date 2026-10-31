@@ -37,6 +37,7 @@ configs:
 
 Task prompts and structured parameters for the environments in https://github.com/Navitallabs/navital-gym (code: Apache-2.0; this data: CC BY 4.0, attribution "Navital Labs, Navital Gym").
 Environments: {envs}.
+**Version.** These are the v1.1 task files (they match `navital-gym` 1.1.0; v1.1 corrected prompts, policies and worlds of several tasks, see CHANGELOG.md in the repository). The v1.0.1 task files are in the repository at git tag `v1.0.1`.
 Languages: English, Hindi and Hinglish are the core set; Tamil, Bengali and Marathi customer-support tasks are experimental. No support language is native-reviewed yet: Hindi lines are machine-checked, Hinglish lines await a founder read, and the experimental lines are machine-assisted drafts.
 
 Links: [GitHub](https://github.com/Navitallabs/navital-gym) · [PyPI](https://pypi.org/project/navital-gym/) · [report](https://navitallabs.com/labs/navital-gym/report) · [leaderboard](https://navitallabs.com/labs/navital-gym/leaderboard)

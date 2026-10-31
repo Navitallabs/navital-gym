@@ -59,7 +59,8 @@ def rows(root=ROOT, runs_dir=None):
             else: need = len(env_tasks(env, easy=(kind == "easy")))
             yield {"env": env, "kind": kind, "tier": "easy" if kind == "easy" else "standard", "model": st.get("model", agent), "provider": st.get("provider", "scripted"),
                    "summary": s, "n": s.get("answered", s["tasks"]), "need": need, "complete": (not d.get("partial")) and s.get("answered", s["tasks"]) >= need, "commit": d.get("navital_gym_commit"), "graded": d.get("graded_with"),
-                   "usd": sum(sc.get("meta", {}).get("usd", 0) for r in d["tasks"].values() for sc in r), "date": time.strftime("%Y-%m-%d", time.gmtime(os.path.getmtime(path))),
+                   "usd": sum(sc.get("meta", {}).get("usd", 0) for r in d["tasks"].values() for sc in r), "date": None,       # v1.1: not recorded in the run file (the modification time is the regrade day)
+                   
                    "file": os.path.basename(path), "tasks": d["tasks"]}
 
 
