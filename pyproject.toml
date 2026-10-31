@@ -1,6 +1,6 @@
 [project]
 name = "navital-gym"
-version = "1.0.1"
+version = "1.1.0"
 description = "Navital Gym: deterministic, auto-graded environments for AI agents doing Indian-reality tasks (Navital Labs)."
 readme = "README.md"
 requires-python = ">=3.10"

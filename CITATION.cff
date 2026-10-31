@@ -4,7 +4,7 @@ title: "Navital Gym: deterministic, auto-graded environments for AI agents doing
 type: software
 authors:
   - name: "Navital Labs"
-version: "1.0.1"
+version: "1.1.0"
 license: Apache-2.0
 repository-code: "https://github.com/Navitallabs/navital-gym"
 url: "https://huggingface.co/NavitalLabs"
