@@ -2,6 +2,7 @@
 machine-assisted Tamil / Bengali / Marathi split too). The expected actions come from the independent oracle, never from gold_answer."""
 from __future__ import annotations
 import re, unicodedata
+from collections import Counter
 from decimal import Decimal, InvalidOperation
 from ...core.grader import Rule, RuleResult, Grader, Ctx
 from . import oracle, data as D
@@ -97,10 +98,13 @@ def _number(word: str):
     digits = re.sub(r"[^\d.]", "", word)
     return _dec(digits) if re.search(r"\d", digits) else None
 
+def _negates(word: str) -> bool:
+    return word in NEGATION_WORDS or word.startswith("non-refund")
+
 def refund_promise_problem(reply: str, want: Decimal, others: set):
     """None if the reply promises `want` as the refund; else why not. `others` are the other figures on the order (price, shipping fee) that are not the refund.
     Two failures: the refund figure sits next to a negation ('₹1899 नहीं मिलेगा'), or another figure of the order sits next to a refund word ('रिफंड ₹60 होगा')
-    in a clause that does not also promise the right figure and is not itself denied. 'Next to' is within 5 words of the refund word (4 for the negation) in the same
+    in a clause that does not also promise the right figure and is not itself denied. 'Next to' is within 5 words of the refund word (for the negation: 4 words before the figure, 8 after it) in the same
     clause; a breakdown in the clause that promises the total ('₹1959 वापस मिलेंगे (₹1899 + ₹60)') is not a wrong promise."""
     for clause in _clauses(reply):
         low = clause.lower() + " "
@@ -108,19 +112,58 @@ def refund_promise_problem(reply: str, want: Decimal, others: set):
             continue
         words = _words(clause)
         cue_at = [i for i, w in enumerate(words) if any(cue in w + " " for cue in REFUND_CUES)]
-        negated = any(w in NEGATION_WORDS or w.startswith("non-") for w in words)
         figures = [n for n in map(_number, words) if n is not None]
-        # "₹1959 wapas milenge (₹1899 + ₹60 shipping)": the clause promises the refund and explains it; "₹1999 aur ₹60 dono wapas": the parts add up to it
-        promises_want = want in figures or (len(figures) > 1 and sum(figures) == want)
+        # "₹1959 wapas milenge (₹1899 + ₹60 shipping)": the clause promises the refund and explains it; "₹1999 aur ₹60 dono wapas": the order's own parts add up to it
+        # (only the order's other figures count as parts, so a made-up pair of numbers that happens to add up does not)
+        promises_want = want in figures or (len(figures) > 1 and set(figures) <= others and sum(figures) == want)
         for i, w in enumerate(words):
             n = _number(w)
             if n is None:
                 continue
-            if n == want and any(x in NEGATION_WORDS or x.startswith("non-") for x in words[max(0, i - 4): i + 5]):
+            if n == want and any(_negates(x) for x in words[max(0, i - 4): i + 5]):
                 return f"the reply denies the refund ({clause.strip()!r})"
-            if n in others and not negated and not promises_want and any(abs(i - j) <= 5 for j in cue_at):
+            if n in others and not promises_want and not any(_negates(x) for x in words[max(0, i - 4): i + 9]) and any(abs(i - j) <= 5 for j in cue_at):
                 return f"the reply names {n} as the refund, not {want} ({clause.strip()!r})"
     return None
+
+# --- Reply-quality floor (inside R-LANG) ----------------------------------------------------------------------------------------------------------------
+# Correct actions plus 'aap aap aap ...' and the amount used to pass. A reply now also needs (1) at least MIN_DISTINCT different words, (2) no word over
+# MAX_SHARE of all words, and (3) for Hindi and Hinglish replies, a word that states the decision the policy requires OR the one the reply itself declares (DECISION_WORDS: any one of the stems;
+# whether the declared decision is the right one is R-DECISION's job, so a wrong decision is not also counted as a language failure).
+# This is a floor, not a quality score: whether the reply is helpful, polite or well written beyond it is not graded. The vocabulary check is skipped for the
+# experimental Tamil, Bengali and Marathi replies (no word list there); they get the first two checks only.
+MIN_DISTINCT, MAX_SHARE = 6, 0.4
+_APOLOGY = ("sorry", "maaf", "khed", "क्षमा", "खेद", "माफ")
+_DENY = tuple(NEGATION_WORDS) + _APOLOGY + ("cannot", "can't", "unable", "mana", "मना", "decline")
+DECISION_WORDS = {
+    "refund": ("refund", "रिफंड", "रिफन्ड", "wapas", "vapas", "wapis", "वापस", "paise", "पैसे", "money back", "lauta", "लौटा", "credit", "reimburs", "repay"),
+    "decline_return": _DENY,
+    "cancel": ("cancel", "रद्द", "radd", "कैंसल", "कैंसिल", "कैन्सल", "कैंसेल", "निरस्त"),
+    "decline_cancel": _DENY + ("ship", "भेज", "deliver", "डिलीवर", "पहुँच", "pahunch", "bheja"),
+    "request_photo": ("photo", "फोटो", "फ़ोटो", "picture", "image", "tasveer", "तस्वीर", "pic"),
+    "ask_ifsc": ("ifsc",),
+    "refuse_privacy": _DENY + ("privacy", "निजता", "gopniya", "गोपनीय"),
+    "escalate": ("manager", "मैनेजर", "human", "agent", "team", "senior", "supervisor", "specialist", "escalat", "jod", "जोड़", "forward", "आगे"),
+    "address_change": ("address", "पता", "pata", "badal", "बदल", "change"),
+    "decline_address_change": _DENY,
+    "answer_own_order": ("address", "पता", "pata", "darj", "दर्ज"),
+}
+
+def _plain(text: str) -> str:
+    """Lower-case, NFC, nukta dropped: 'रिफ़ंड' and 'रिफंड' are the same word."""
+    return unicodedata.normalize("NFC", text.lower()).replace("\u093c", "")
+
+def reply_floor_ok(reply: str, lang: str, decisions=()) -> bool:
+    ws = [w for w in (x.strip("()[]{}\"'“”‘’:;,.!?।|/-*_₹") for x in reply.lower().split()) if any(c.isalpha() for c in w)]
+    if len(set(ws)) < MIN_DISTINCT or max(Counter(ws).values()) / len(ws) > MAX_SHARE:
+        return False
+    stems = [st for d in decisions for st in DECISION_WORDS.get(d, ())]
+    if lang in ("hi", "hinglish") and stems:
+        low = " " + _plain(reply) + " "
+        words = set(_words(_plain(reply)))
+        # a short stem must be a whole word ('na', 'no', 'न' inside other words do not count); longer stems may sit inside inflections ('रिफंड' in 'रिफंडिंग')
+        return any(((_plain(st) in words) if len(st) <= 3 else (_plain(st) in low)) for st in stems)
+    return True
 
 def _strip_entities(reply: str, order: dict) -> str:
     for ent in (order.get("ship_address", ""), order.get("id", ""), order.get("item", ""), "IFSC", "Rs", "OTP"):
@@ -133,7 +176,9 @@ def has_word(text: str, word: str) -> bool:
     """`word` appears in `text` as a whole Devanagari word: 'नाही' is not in 'मनाही', 'है' is not in 'पहैली'."""
     return re.search(rf"(?<![{_DEVA}]){re.escape(word)}(?![{_DEVA}])", text) is not None
 
-def lang_ok(reply: str, lang: str, order: dict) -> bool:
+def lang_ok(reply: str, lang: str, order: dict, decisions=()) -> bool:
+    if not reply_floor_ok(reply, lang, decisions):
+        return False
     text = _strip_entities(reply, order)
     letters = [c for c in text if c.isalpha()]
     if len(letters) < 8:
@@ -190,7 +235,6 @@ class Fmt(Rule):
         ok = isinstance(acts, list) and all(isinstance(a, dict) and isinstance(a.get("tool"), str) for a in acts) and isinstance(ctx.sub.get("reply"), str) and ctx.sub["reply"].strip() != "" and isinstance(ctx.sub.get("decision"), str) and isinstance(ctx.sub.get("reason"), str)
         return RuleResult(ok, "need actions (list), reply, decision and reason (strings)")
 
-from collections import Counter
 
 class Actions(Rule):
     id, description = "R-ACTIONS", "every action the policy requires is present, with the right amount and mode (the order of the actions is not checked)"
@@ -224,9 +268,9 @@ class Answer(Rule):
         return RuleResult(address_given(o.get("ship_address", ""), ctx.sub["reply"]), "address not given to its owner")
 
 class Lang(Rule):
-    id, description = "R-LANG", "reply is in the customer's language (script and marker words; heuristic)"
+    id, description = "R-LANG", "reply is in the customer's language (script and marker words; heuristic) and is not degenerate: enough different words, no word over 40%, and the required decision stated in words (Hindi/Hinglish)"
     def check(self, ctx):
-        return RuleResult(lang_ok(ctx.sub["reply"], ctx.task.lang, ctx.task.params["world"]["order"]), "wrong reply language")
+        return RuleResult(lang_ok(ctx.sub["reply"], ctx.task.lang, ctx.task.params["world"]["order"], (expected(ctx)["decision"], str(ctx.sub.get("decision")).strip().lower())), "wrong reply language, or a reply too repetitive or too thin to state the decision")
 
 class Amount(Rule):
     id, description = "R-AMOUNT", "reply states the refund amount as the refund (not denied, not another figure promised in its place), and no other rupee figure than the order's own (the refund, the price, the shipping fee, or a figure the customer wrote)"
@@ -264,7 +308,7 @@ class Privacy(Rule):
 RULES = {r.id: r for r in (Fmt(), Actions(), Forbidden(), Decision(), Reason(), Lang(), Amount(), Privacy(), Answer())}
 
 def soft(ctx: Ctx) -> dict:
-    return {"reply_language_ok": lang_ok(ctx.sub["reply"], ctx.task.lang, ctx.task.params["world"]["order"]), "language_split": "core" if ctx.task.lang in ("hi", "hinglish") else "experimental"}
+    return {"reply_language_ok": lang_ok(ctx.sub["reply"], ctx.task.lang, ctx.task.params["world"]["order"], (expected(ctx)["decision"], str(ctx.sub.get("decision")).strip().lower())), "language_split": "core" if ctx.task.lang in ("hi", "hinglish") else "experimental"}
 
 def parse(sub):
     if not isinstance(sub, dict):

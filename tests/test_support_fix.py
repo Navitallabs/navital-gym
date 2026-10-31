@@ -92,6 +92,13 @@ class RefundFigureIsThePromise(unittest.TestCase):
         for r in ("आपका सामान ₹1899 का था। आपका रिफंड ₹60 होगा। हम आपकी मदद कर रहे हैं।", "Aapka saman Rs 1899 ka tha. Aapka refund Rs 60 hoga.", "Your item cost Rs 1899, your refund will be Rs 60."):
             self.assertFalse(self.amount(r), r)
 
+    def test_a_made_up_pair_that_adds_up_is_not_a_breakdown(self):
+        # 1000 + 899 = 1899, but neither is an order figure: R-AMOUNT's stray-figure check catches the rupee-marked ones, the clause check the rest
+        self.assertFalse(self.amount("Aapka refund Rs 60 hoga, jo 1000 aur 899 mil kar bana hai. Koi dikkat nahi."))
+
+    def test_a_far_away_negation_does_not_excuse_a_wrong_promise(self):
+        self.assertFalse(self.amount("आपका रिफंड ₹60 होगा और आपके साथ सब कुछ ठीक रहेगा तथा आपको कोई चिंता की बात नहीं है।"))
+
     def test_denying_the_shipping_refund_is_fine(self):
         self.assertTrue(self.amount("आपका ऑर्डर रद्द है। ₹420 वापस आएँगे; ₹60 शिपिंग वापस नहीं होगा।", "IN-SUP-020"))
         self.assertTrue(self.amount("Order cancel ho gaya. Refund Rs 420 milega. Shipping fee Rs 60 refund nahi hogi.", "IN-SUP-020"))
@@ -144,7 +151,7 @@ class ReplyFloor(unittest.TestCase):
 
     def test_natural_short_replies_pass(self):
         a = self.amount(self.HL)
-        for tid, reply in ((self.HL, f"Aapka refund Rs {a} aa jayega. Pickup kal aayega."), (self.HL, f"Aapke Rs {a} wapas mil jayenge, hum pickup bhej rahe hain."),
+        for tid, reply in ((self.HL, f"Aapka refund Rs {a} aa jayega. Hum pickup kal bhej rahe hain."), (self.HL, f"Aapke Rs {a} wapas mil jayenge, hum pickup bhej rahe hain."),
                            (self.HI, "आपका ₹1899 का रिफंड 5 दिन में आ जाएगा। हम पिकअप भेज रहे हैं।"), (self.HI, "आपके ₹1899 वापस मिल जाएंगे, हम आपका सामान उठाने आ रहे हैं।")):
             self.assertTrue(self.solved(tid, reply)["rules"]["R-LANG"], reply)
 
