@@ -117,3 +117,14 @@ class TaskIntent(unittest.TestCase):
             if d.get("stay"):
                 d["stay"]["hotel_id"] = "H-VARA-1"      # ground-floor rooms, no lift (the hotel the v1.1.0 oracle chose)
         self.assertFalse(grade(t.to_dict(), plan)["rules"]["R-ACC"])
+
+
+class ToolInputs(unittest.TestCase):
+    """v1.1 full audit (Codex): malformed tool arguments are tool errors, never crashes."""
+    def test_search_hotels_rejects_bad_nights_without_crashing(self):
+        from navital_gym.core.world import ToolError
+        w = TripWorld(ENV.tasks["IN-TRIP-023"])
+        for bad in ("oops", float("inf"), float("nan"), [3], 2.5, None):
+            with self.assertRaises(ToolError):
+                w.search_hotels("Goa", "2026-11-16", bad)
+        self.assertTrue(w.search_hotels("Goa", "2026-11-16", 2))
