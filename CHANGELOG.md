@@ -68,6 +68,20 @@ Also not re-run: Sarvam 105B (reasoning_effort=low), Trip, full set, 13/55 (v1.0
 ### Known issues (to be fixed in v1.1.1)
 - **R-AMOUNT (support).** Some ways of stating a refund are not checked yet: ranges joined by words ("₹1899 से लेकर 2500 तक", "between ₹1899 and 2500") check only the end next to the rupee sign; the spelling "rupaiya" is not recognised; a minus glued to the word before it ("रिफंड-₹1899") is read as a hyphen, and the minus check knows only the ₹, Rs and INR markers. For the experimental Tamil, Bengali and Marathi replies, and for a figure given in another role (such as a reference number), the rule checks which rupee figures appear, not which one the reply calls the refund. A number right after a suffix marker ("1899 रुपये 5 दिनों में") is read as a rupee figure, which can fail a correct reply. None of these spellings occurs in the saved v1.0.1 or v1.1 support replies. To be fixed in v1.1.1.
 
+### Known issues (fixed in v1.2)
+
+**UPI Desk: some answers were scored as wrong only because of their layout.**
+The UPI instructions list the detail fields under labels, for example `failed-but-debited money: "type", "tat_date", …` and `wrong recipient: "reversal_guaranteed"`. They never say that the answer must be flat. Some models copied a label as a key and put the fields inside it, for example `{"action": …, "failed-but-debited money": {"type": …}}`. The grader reads those fields only at the top level of the answer, so it marked them missing even when the values were right.
+
+The official v1.1 scores are unchanged. To show the size of the effect, we re-graded every published v1.1 run with one level of nesting accepted, and changed nothing else:
+- Claude Haiku 4.5, UPI: 26 → 32 of 50 (IN-UPI-022, 023, 025, 027, 028, 033). Total: 205 → 211 of 321.
+- Sarvam 105B, UPI: 29 → 30 of 50 (IN-UPI-033). Total: 216 → 217 of 321.
+- Every other model, and every other world: no change. The order of the models does not change.
+
+The nested answers are in the public transcripts (`runs/upi-*-full.transcripts.json`). For example, IN-UPI-033 nests `"reversal_guaranteed": false` (right, but unread), while IN-UPI-029 nests `"reversal_guaranteed": true` (a real error, still failed).
+
+**Fix in v1.2:** the UPI instructions will state the answer schema as one flat object. The grader stays strict, and every model is re-run on v1.2. v1.1 scores stay as published.
+
 ## v1.1 follow-ups noted for v1.2
 - **Support `R-AMOUNT` role of the figure.** The refund figure is checked for presence, not role: a reply that gives it only as, say, a reference number still passes `R-AMOUNT` (`R-ACTIONS` checks the actual refund). A spaced dash ("- 1899 रुपये") is read as a separator, not a minus.
 - **Assamese vs Bengali.** The experimental Bengali split is checked by script only, so an Assamese reply passes as Bengali.
