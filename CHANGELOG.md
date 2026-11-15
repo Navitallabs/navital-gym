@@ -78,7 +78,7 @@ The official v1.1 scores are unchanged. To show the size of the effect, we re-gr
 - Sarvam 105B, UPI: 29 → 30 of 50 (IN-UPI-033). Total: 216 → 217 of 321.
 - Every other model, and every other world: no change. The order of the models does not change.
 
-The nested answers are in the public transcripts (`runs/upi-*-full.transcripts.json`). For example, IN-UPI-033 nests `"reversal_guaranteed": false` (right, but unread), while IN-UPI-029 nests `"reversal_guaranteed": true` (a real error, still failed).
+The nested answers are in the public transcripts in the navital-gym repository on GitHub, at tag v1.1.0 (`runs/upi-*-full.transcripts.json`). For example, in Claude Haiku 4.5's transcript, IN-UPI-033 nests `"reversal_guaranteed": false` (right, but unread), while IN-UPI-029 nests `"reversal_guaranteed": true` (a real error, still failed).
 
 **Fix in v1.2:** the UPI instructions will state the answer schema as one flat object. The grader stays strict, and every model is re-run on v1.2. v1.1 scores stay as published.
 
