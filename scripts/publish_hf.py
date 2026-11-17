@@ -42,6 +42,8 @@ Languages: English, Hindi and Hinglish are the core set; Tamil, Bengali and Mara
 
 Links: [GitHub](https://github.com/Navitallabs/navital-gym) · [PyPI](https://pypi.org/project/navital-gym/) · [report](https://navitallabs.com/labs/navital-gym/report) · [leaderboard](https://navitallabs.com/labs/navital-gym/leaderboard)
 
+Follow: [X](https://x.com/NAVITALLABS) · [Instagram](https://www.instagram.com/navitallabs/) · [LinkedIn](https://www.linkedin.com/company/navitallabs) · [Navital Labs on Hugging Face](https://huggingface.co/NavitalLabs)
+
 **Simplified rules, synthetic data.** Every task uses a documented, simplified version of Indian practice and synthetic data; nothing here states current law, railway, bank or tax rules. Not affiliated with or endorsed by NPCI, RBI, GSTN / CBIC, IRCTC / Indian Railways or any bank or government body. Not financial or tax advice.
 **No answers here.** Gold answers, expected actions, expected feasibility and solver notes are not part of this dataset; grade with the graders in the repository (`navital-gym run`). The full task files, answers included, are public in the GitHub repository.
 Each env's README in the repository states its rules, sources and "as of" date. Load one environment at a time, e.g. `load_dataset("NavitalLabs/navital-gym-tasks", "trip")`: each environment has its own columns, so there is no single combined table. Run the tasks with `pip install navital-gym` and `navital-gym run --env <name> --agent <agent>`.

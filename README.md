@@ -7,6 +7,7 @@ Deterministic, auto-graded environments for AI agents doing tasks set in India: 
 - **What:** six sets of sandboxed tasks (trip planning, UPI, GST, forms, multi-document forms, customer support in Hindi and Hinglish), each graded by written rules, never by an AI judge.
 - **Why:** to measure whether an agent gets Indian-reality tasks right, with results anyone can reproduce and verify.
 - **Try it:** `pip install navital-gym && navital-gym run --env trip --agent oracle` (prints 1.00), then see the [live leaderboard](https://navitallabs.com/labs/navital-gym) or [docs/RESULTS.md](https://github.com/Navitallabs/navital-gym/blob/main/docs/RESULTS.md).
+- **Follow:** [X](https://x.com/NAVITALLABS) · [Instagram](https://www.instagram.com/navitallabs/) · [LinkedIn](https://www.linkedin.com/company/navitallabs) · [Hugging Face](https://huggingface.co/NavitalLabs)
 
 > **Read this first.** Every environment uses a *simplified, documented* version of Indian practice and **synthetic data**. These are tests for AI agents, not statements about current law, railway, bank or tax rules. Not affiliated with or endorsed by NPCI, RBI, GSTN / CBIC, IRCTC / Indian Railways, any bank or any government body; names are used only to describe the workflow. Not financial or tax advice. Each env README states its own rules and an "as of" date.
 
